@@ -364,9 +364,12 @@ let W, TIER_NAMES, TS, NT, KEY;
 function applyWorld() {
   W = WORLD_WORK && window.NANI_DECK ? window.NANI_DECK("fr") : (window.DECK || []);
   TIER_NAMES = WORLD_WORK ? ["Survive", "Production"] : (window.TIER_NAMES || []);
-  TS = WORLD_WORK ? 50 : 100; NT = Math.max(1, Math.ceil(W.length / TS));
+  TS = WORLD_WORK ? 50 : 200; NT = Math.max(1, Math.ceil(W.length / TS)); // 200 words per level (A1-C2)
   KEY = (WORLD_WORK ? "nani-fr-v1" : "vocab-fr-v1") + SUF;
 }
+// Migration: tierFloor values saved under the old 100-word levels snap onto the current grid.
+// Floor, never round: rounding a saved floor of 100 up to 200 would skip 100 words the fighter has never seen.
+function snapFloor(v) { const n = Math.max(0, Math.floor(v || 0)); return Math.min(NT - 1, Math.floor(n / TS)) * TS; }
 function setWorld(w) { try { localStorage.setItem("bl-world:fr", w); } catch (e) {} WORLD_WORK = w === "work"; applyWorld(); }
 function segStyle(on) { return on ? { flex: "1", textAlign: "center", background: "#fff", borderRadius: "999px", padding: "9px 0", fontSize: "12.5px", fontWeight: "700", boxShadow: "0 1px 2px rgba(23,24,29,0.08)" } : { flex: "1", textAlign: "center", background: "transparent", borderRadius: "999px", padding: "9px 0", fontSize: "12.5px", fontWeight: "600", color: "#8a857a" }; }
 const MIN = 60000, DAY = 86400000;
@@ -437,7 +440,7 @@ class Component extends DCLogic {
     this.setState({
       cards: (saved && saved.cards) || {}, stats: stats, days: (saved && saved.days) || {},
       badges: (saved && saved.badges) || {}, xp: (saved && saved.xp) || 0,
-      pace: (saved && saved.pace) || 6, tierFloor: (saved && saved.tierFloor) || 0, queue: [], revealed: false, view: (this.state.view === "study" || this.state.view === "done") ? "home" : this.state.view, loaded: true
+      pace: (saved && saved.pace) || 6, tierFloor: snapFloor(saved && saved.tierFloor), queue: [], revealed: false, view: (this.state.view === "study" || this.state.view === "done") ? "home" : this.state.view, loaded: true
     });
     idbGet().then((m) => { if (m && tok === KEY) this.mergeIn(m, true); });
     if (!SUF && !WORLD_WORK) fetch("memoire.csv", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : null; })
@@ -665,14 +668,14 @@ class Component extends DCLogic {
       if (r.length >= 24 && acc >= 0.92 && tierFloor < (NT - 1) * TS) {
         tierFloor = (Math.floor(tierFloor / TS) + 1) * TS;
         pace = Math.min(24, pace + 4);
-        note = pct + "% accuracy — too easy. Jumped ahead to tier « " + TIER_NAMES[tierFloor / TS] + " », intake raised to " + pace + " new words per session.";
+        note = pct + "% accuracy — too easy. Jumped ahead to tier « " + (TIER_NAMES[tierFloor / TS] || "Tier " + (tierFloor / TS + 1)) + " », intake raised to " + pace + " new words per session.";
         this.recent = []; jumped = true;
       } else if (r.length >= 15 && acc >= 0.9 && pace < 24) {
         pace = Math.min(24, pace + 3);
         note = pct + "% accuracy — intake raised to " + pace + " new words per session.";
       } else if (r.length >= 15 && acc < 0.65) {
         pace = Math.max(3, pace - 2);
-        if (tierFloor > 0) { tierFloor = tierFloor - TS; note = pct + "% accuracy — easing off: " + pace + " new words per session, backfilling tier « " + TIER_NAMES[tierFloor / TS] + " »."; }
+        if (tierFloor > 0) { tierFloor = Math.max(0, tierFloor - TS); note = pct + "% accuracy — easing off: " + pace + " new words per session, backfilling tier « " + (TIER_NAMES[tierFloor / TS] || "Tier " + (tierFloor / TS + 1)) + " »."; }
         else note = pct + "% accuracy — easing off to " + pace + " new words per session.";
         this.recent = r.slice(-10);
       }
@@ -738,7 +741,7 @@ class Component extends DCLogic {
       const act = t === activeTier, full = kn >= size;
       tierKn.push(kn); tierSize.push(size);
       tiers.push({
-        name: TIER_NAMES[t], count: kn + "/" + size,
+        name: TIER_NAMES[t] || ("Tier " + (t + 1)), count: kn + "/" + size,
         cefr: CEFR[t],
         cefrStyle: { fontSize: "11px", fontWeight: "800", letterSpacing: "0.04em", color: full ? "#b08d3f" : act ? "#d62828" : "#c9c3b5" },
         trackStyle: { width: "100%", height: act ? "9px" : "6px", background: "#efece5", borderRadius: "999px", overflow: "hidden", boxShadow: act ? "0 0 0 1.5px #d62828" : "none" },

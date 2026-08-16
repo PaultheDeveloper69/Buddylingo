@@ -1,12 +1,14 @@
 {
  "language": "fr",
  "sourceLanguage": "en",
+ "tierSize": 200,
  "tierNames": [
   "Recrue",
   "Soldat",
   "Officier",
   "Général",
-  "Empereur"
+  "Empereur",
+  "Immortel"
  ],
  "words": [
   {
@@ -3010,9 +3012,2049 @@
    "cat": "B"
   },
   {
+   "source": "happiness",
+   "target": "le bonheur",
+   "pron": "luh bo-NUHR",
+   "cat": "N"
+  },
+  {
+   "source": "sadness",
+   "target": "la tristesse",
+   "pron": "lah tree-STESS",
+   "cat": "N"
+  },
+  {
+   "source": "anger",
+   "target": "la colère",
+   "pron": "lah koh-LEHR",
+   "cat": "N"
+  },
+  {
+   "source": "surprise",
+   "target": "la surprise",
+   "pron": "lah sewr-PREEZ",
+   "cat": "N"
+  },
+  {
+   "source": "love (noun)",
+   "target": "l'amour (m)",
+   "pron": "lah-MOOR",
+   "cat": "N"
+  },
+  {
+   "source": "feeling",
+   "target": "le sentiment",
+   "pron": "luh sahn-tee-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "memory (recollection)",
+   "target": "le souvenir",
+   "pron": "luh soov-NEER",
+   "cat": "N"
+  },
+  {
+   "source": "decision",
+   "target": "la décision",
+   "pron": "lah day-see-ZYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "result",
+   "target": "le résultat",
+   "pron": "luh ray-zewl-TAH",
+   "cat": "N"
+  },
+  {
+   "source": "possibility",
+   "target": "la possibilité",
+   "pron": "lah poh-see-bee-lee-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "difference",
+   "target": "la différence",
+   "pron": "lah dee-fay-RAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "situation",
+   "target": "la situation",
+   "pron": "lah see-tew-ah-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "moment",
+   "target": "le moment",
+   "pron": "luh moh-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "story / history",
+   "target": "l'histoire (f)",
+   "pron": "lees-TWAHR",
+   "cat": "N"
+  },
+  {
+   "source": "lie (untruth)",
+   "target": "le mensonge",
+   "pron": "luh mahn-SOHNZH",
+   "cat": "N"
+  },
+  {
+   "source": "danger",
+   "target": "le danger",
+   "pron": "luh dahn-ZHAY",
+   "cat": "N"
+  },
+  {
+   "source": "noise",
+   "target": "le bruit",
+   "pron": "luh BRWEE",
+   "cat": "N"
+  },
+  {
+   "source": "silence",
+   "target": "le silence",
+   "pron": "luh see-LAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "to smile",
+   "target": "sourire",
+   "pron": "soo-REER",
+   "cat": "V"
+  },
+  {
+   "source": "to continue",
+   "target": "continuer",
+   "pron": "kohn-tee-new-AY",
+   "cat": "V"
+  },
+  {
+   "source": "to stop",
+   "target": "arrêter",
+   "pron": "ah-reh-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to meet (someone)",
+   "target": "rencontrer",
+   "pron": "rahn-kohn-TRAY",
+   "cat": "V"
+  },
+  {
+   "source": "to visit",
+   "target": "visiter",
+   "pron": "vee-zee-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to call (name/phone)",
+   "target": "appeler",
+   "pron": "ahp-LAY",
+   "cat": "V"
+  },
+  {
+   "source": "to carry / to wear",
+   "target": "porter",
+   "pron": "por-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to win / to earn",
+   "target": "gagner",
+   "pron": "gah-NYAY",
+   "cat": "V"
+  },
+  {
+   "source": "to hate",
+   "target": "détester",
+   "pron": "day-tess-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "sometimes",
+   "target": "parfois",
+   "pron": "par-FWAH",
+   "cat": "A"
+  },
+  {
+   "source": "still / again",
+   "target": "encore",
+   "pron": "ahn-KOR",
+   "cat": "A"
+  },
+  {
+   "source": "soon",
+   "target": "bientôt",
+   "pron": "byan-TOH",
+   "cat": "A"
+  },
+  {
+   "source": "really",
+   "target": "vraiment",
+   "pron": "vreh-MAHN",
+   "cat": "A"
+  },
+  {
+   "source": "suddenly",
+   "target": "soudain",
+   "pron": "soo-DAN",
+   "cat": "A"
+  },
+  {
+   "source": "first (of all)",
+   "target": "d'abord",
+   "pron": "dah-BOR",
+   "cat": "A"
+  },
+  {
+   "source": "then / next",
+   "target": "ensuite",
+   "pron": "ahn-SWEET",
+   "cat": "A"
+  },
+  {
+   "source": "if",
+   "target": "si",
+   "pron": "SEE",
+   "cat": "B"
+  },
+  {
+   "source": "against",
+   "target": "contre",
+   "pron": "KOHNTR",
+   "cat": "B"
+  },
+  {
+   "source": "several",
+   "target": "plusieurs",
+   "pron": "plew-ZYUHR",
+   "cat": "B"
+  },
+  {
+   "source": "nothing",
+   "target": "rien",
+   "pron": "RYAN",
+   "cat": "B"
+  },
+  {
+   "source": "something",
+   "target": "quelque chose",
+   "pron": "kel-kuh-SHOHZ",
+   "cat": "B"
+  },
+  {
+   "source": "someone",
+   "target": "quelqu'un",
+   "pron": "kel-KUHN",
+   "cat": "B"
+  },
+  {
+   "source": "nobody",
+   "target": "personne (négation)",
+   "pron": "pehr-SUN",
+   "cat": "B"
+  },
+  {
+   "source": "everywhere",
+   "target": "partout",
+   "pron": "par-TOO",
+   "cat": "B"
+  },
+  {
+   "source": "somewhere",
+   "target": "quelque part",
+   "pron": "kel-kuh-PAR",
+   "cat": "B"
+  },
+  {
+   "source": "tooth",
+   "target": "la dent",
+   "pron": "lah DAHN",
+   "cat": "N"
+  },
+  {
+   "source": "skin",
+   "target": "la peau",
+   "pron": "lah POH",
+   "cat": "N"
+  },
+  {
+   "source": "blood",
+   "target": "le sang",
+   "pron": "luh SAHN",
+   "cat": "N"
+  },
+  {
+   "source": "bone",
+   "target": "l'os (m)",
+   "pron": "LOSS",
+   "cat": "N"
+  },
+  {
+   "source": "back (body)",
+   "target": "le dos",
+   "pron": "luh DOH",
+   "cat": "N"
+  },
+  {
+   "source": "shoulder",
+   "target": "l'épaule (f)",
+   "pron": "lay-POHL",
+   "cat": "N"
+  },
+  {
+   "source": "knee",
+   "target": "le genou",
+   "pron": "luh zhuh-NOO",
+   "cat": "N"
+  },
+  {
+   "source": "finger",
+   "target": "le doigt",
+   "pron": "luh DWAH",
+   "cat": "N"
+  },
+  {
+   "source": "hair",
+   "target": "les cheveux (m)",
+   "pron": "lay shuh-VUH",
+   "cat": "N"
+  },
+  {
+   "source": "face",
+   "target": "le visage",
+   "pron": "luh vee-ZAHZH",
+   "cat": "N"
+  },
+  {
+   "source": "living room",
+   "target": "le salon",
+   "pron": "luh sah-LOHN",
+   "cat": "N"
+  },
+  {
+   "source": "bedroom",
+   "target": "la chambre à coucher",
+   "pron": "lah shahnbr ah koo-SHAY",
+   "cat": "N"
+  },
+  {
+   "source": "roof",
+   "target": "le toit",
+   "pron": "luh TWAH",
+   "cat": "N"
+  },
+  {
+   "source": "stairs",
+   "target": "l'escalier (m)",
+   "pron": "les-kah-LYAY",
+   "cat": "N"
+  },
+  {
+   "source": "elevator",
+   "target": "l'ascenseur (m)",
+   "pron": "lah-sahn-SUR",
+   "cat": "N"
+  },
+  {
+   "source": "neighbour",
+   "target": "le voisin",
+   "pron": "luh vwah-ZAN",
+   "cat": "N"
+  },
+  {
+   "source": "rent",
+   "target": "le loyer",
+   "pron": "luh lwah-YAY",
+   "cat": "N"
+  },
+  {
+   "source": "building",
+   "target": "l'immeuble (m)",
+   "pron": "lee-MUHBL",
+   "cat": "N"
+  },
+  {
+   "source": "district",
+   "target": "le quartier",
+   "pron": "luh kar-TYAY",
+   "cat": "N"
+  },
+  {
+   "source": "square (place)",
+   "target": "la place",
+   "pron": "lah PLAHSS",
+   "cat": "N"
+  },
+  {
+   "source": "bridge",
+   "target": "le pont",
+   "pron": "luh POHN",
+   "cat": "N"
+  },
+  {
+   "source": "park",
+   "target": "le parc",
+   "pron": "luh PARK",
+   "cat": "N"
+  },
+  {
+   "source": "subway",
+   "target": "le métro",
+   "pron": "luh may-TROH",
+   "cat": "N"
+  },
+  {
+   "source": "bike",
+   "target": "le vélo",
+   "pron": "luh vay-LOH",
+   "cat": "N"
+  },
+  {
+   "source": "luggage",
+   "target": "les bagages (m)",
+   "pron": "lay bah-GAHZH",
+   "cat": "N"
+  },
+  {
+   "source": "suitcase",
+   "target": "la valise",
+   "pron": "lah vah-LEEZ",
+   "cat": "N"
+  },
+  {
+   "source": "passport",
+   "target": "le passeport",
+   "pron": "luh pahss-POR",
+   "cat": "N"
+  },
+  {
+   "source": "border",
+   "target": "la frontière",
+   "pron": "lah frohn-TYEHR",
+   "cat": "N"
+  },
+  {
+   "source": "map",
+   "target": "la carte (plan)",
+   "pron": "lah KART",
+   "cat": "N"
+  },
+  {
+   "source": "traffic",
+   "target": "la circulation",
+   "pron": "lah seer-kew-lah-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "delay",
+   "target": "le retard",
+   "pron": "luh ruh-TAR",
+   "cat": "N"
+  },
+  {
+   "source": "cloud",
+   "target": "le nuage",
+   "pron": "luh new-AHZH",
+   "cat": "N"
+  },
+  {
+   "source": "storm",
+   "target": "l'orage (m)",
+   "pron": "loh-RAHZH",
+   "cat": "N"
+  },
+  {
+   "source": "forest",
+   "target": "la forêt",
+   "pron": "lah foh-REH",
+   "cat": "N"
+  },
+  {
+   "source": "river",
+   "target": "la rivière",
+   "pron": "lah ree-VYEHR",
+   "cat": "N"
+  },
+  {
+   "source": "teacher",
+   "target": "le professeur",
+   "pron": "luh proh-feh-SUR",
+   "cat": "N"
+  },
+  {
+   "source": "student",
+   "target": "l'étudiant (m)",
+   "pron": "lay-tew-DYAHN",
+   "cat": "N"
+  },
+  {
+   "source": "class",
+   "target": "le cours",
+   "pron": "luh KOOR",
+   "cat": "N"
+  },
+  {
+   "source": "exam",
+   "target": "l'examen (m)",
+   "pron": "leg-zah-MAN",
+   "cat": "N"
+  },
+  {
+   "source": "homework",
+   "target": "les devoirs (m)",
+   "pron": "lay duh-VWAHR",
+   "cat": "N"
+  },
+  {
+   "source": "sentence",
+   "target": "la phrase",
+   "pron": "lah FRAHZ",
+   "cat": "N"
+  },
+  {
+   "source": "phone",
+   "target": "le téléphone",
+   "pron": "luh tay-lay-FOHN",
+   "cat": "N"
+  },
+  {
+   "source": "screen",
+   "target": "l'écran (m)",
+   "pron": "lay-KRAHN",
+   "cat": "N"
+  },
+  {
+   "source": "file",
+   "target": "le fichier",
+   "pron": "luh fee-SHYAY",
+   "cat": "N"
+  },
+  {
+   "source": "password",
+   "target": "le mot de passe",
+   "pron": "luh moh duh PAHSS",
+   "cat": "N"
+  },
+  {
+   "source": "to lend",
+   "target": "prêter",
+   "pron": "preh-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to borrow",
+   "target": "emprunter",
+   "pron": "ahn-prun-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to repeat",
+   "target": "répéter",
+   "pron": "ray-pay-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to count",
+   "target": "compter",
+   "pron": "kohn-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to measure",
+   "target": "mesurer",
+   "pron": "muh-zew-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to weigh",
+   "target": "peser",
+   "pron": "puh-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to fill",
+   "target": "remplir",
+   "pron": "rahn-PLEER",
+   "cat": "V"
+  },
+  {
+   "source": "to empty",
+   "target": "vider",
+   "pron": "vee-DAY",
+   "cat": "V"
+  },
+  {
+   "source": "to cut",
+   "target": "couper",
+   "pron": "koo-PAY",
+   "cat": "V"
+  },
+  {
+   "source": "to add",
+   "target": "ajouter",
+   "pron": "ah-zhoo-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to remove",
+   "target": "enlever",
+   "pron": "ahnl-VAY",
+   "cat": "V"
+  },
+  {
+   "source": "to keep",
+   "target": "garder",
+   "pron": "gar-DAY",
+   "cat": "V"
+  },
+  {
+   "source": "to throw",
+   "target": "jeter",
+   "pron": "zhuh-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to catch",
+   "target": "attraper",
+   "pron": "ah-trah-PAY",
+   "cat": "V"
+  },
+  {
+   "source": "to touch",
+   "target": "toucher",
+   "pron": "too-SHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to smell",
+   "target": "sentir (odeur)",
+   "pron": "sahn-TEER",
+   "cat": "V"
+  },
+  {
+   "source": "to taste",
+   "target": "goûter",
+   "pron": "goo-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to rest",
+   "target": "se reposer",
+   "pron": "suh ruh-poh-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to hurry",
+   "target": "se dépêcher",
+   "pron": "suh day-peh-SHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to relax",
+   "target": "se détendre",
+   "pron": "suh day-TAHNDR",
+   "cat": "V"
+  },
+  {
+   "source": "hungry",
+   "target": "affamé",
+   "pron": "ah-fah-MAY",
+   "cat": "A"
+  },
+  {
+   "source": "thirsty",
+   "target": "assoiffé",
+   "pron": "ah-swah-FAY",
+   "cat": "A"
+  },
+  {
+   "source": "open",
+   "target": "ouvert",
+   "pron": "oo-VEHR",
+   "cat": "A"
+  },
+  {
+   "source": "old (aged)",
+   "target": "vieux / vieille",
+   "pron": "vyuh",
+   "cat": "A"
+  },
+  {
+   "source": "ready",
+   "target": "prêt",
+   "pron": "preh",
+   "cat": "A"
+  },
+  {
+   "source": "busy",
+   "target": "occupé",
+   "pron": "oh-kew-PAY",
+   "cat": "A"
+  },
+  {
+   "source": "free (available)",
+   "target": "libre",
+   "pron": "LEEBR",
+   "cat": "A"
+  },
+  {
+   "source": "quiet",
+   "target": "calme",
+   "pron": "kahlm",
+   "cat": "A"
+  },
+  {
+   "source": "society",
+   "target": "la société",
+   "pron": "lah soh-syay-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "citizen",
+   "target": "le citoyen",
+   "pron": "luh see-twah-YAN",
+   "cat": "N"
+  },
+  {
+   "source": "election",
+   "target": "l'élection (f)",
+   "pron": "lay-lek-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "vote",
+   "target": "le vote",
+   "pron": "luh VOHT",
+   "cat": "N"
+  },
+  {
+   "source": "political party",
+   "target": "le parti",
+   "pron": "luh par-TEE",
+   "cat": "N"
+  },
+  {
+   "source": "president",
+   "target": "le président",
+   "pron": "luh pray-zee-DAHN",
+   "cat": "N"
+  },
+  {
+   "source": "minister",
+   "target": "le ministre",
+   "pron": "luh mee-NEESTR",
+   "cat": "N"
+  },
+  {
+   "source": "state (nation)",
+   "target": "l'État (m)",
+   "pron": "lay-TAH",
+   "cat": "N"
+  },
+  {
+   "source": "power",
+   "target": "le pouvoir",
+   "pron": "luh poo-VWAHR",
+   "cat": "N"
+  },
+  {
+   "source": "right (entitlement)",
+   "target": "le droit",
+   "pron": "luh DRWAH",
+   "cat": "N"
+  },
+  {
+   "source": "duty",
+   "target": "le devoir",
+   "pron": "luh duh-VWAHR",
+   "cat": "N"
+  },
+  {
+   "source": "freedom",
+   "target": "la liberté",
+   "pron": "lah lee-behr-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "equality",
+   "target": "l'égalité (f)",
+   "pron": "lay-gah-lee-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "justice",
+   "target": "la justice",
+   "pron": "lah zhews-TEESS",
+   "cat": "N"
+  },
+  {
+   "source": "court",
+   "target": "le tribunal",
+   "pron": "luh tree-bew-NAHL",
+   "cat": "N"
+  },
+  {
+   "source": "judge",
+   "target": "le juge",
+   "pron": "luh ZHEWZH",
+   "cat": "N"
+  },
+  {
+   "source": "lawyer",
+   "target": "l'avocat (m)",
+   "pron": "lah-voh-KAH",
+   "cat": "N"
+  },
+  {
+   "source": "crime",
+   "target": "le crime",
+   "pron": "luh KREEM",
+   "cat": "N"
+  },
+  {
+   "source": "prison",
+   "target": "la prison",
+   "pron": "lah pree-ZOHN",
+   "cat": "N"
+  },
+  {
+   "source": "tax",
+   "target": "l'impôt (m)",
+   "pron": "lan-POH",
+   "cat": "N"
+  },
+  {
+   "source": "debt",
+   "target": "la dette",
+   "pron": "lah DET",
+   "cat": "N"
+  },
+  {
+   "source": "loan",
+   "target": "le prêt",
+   "pron": "luh PREH",
+   "cat": "N"
+  },
+  {
+   "source": "bank account",
+   "target": "le compte bancaire",
+   "pron": "luh kohnt bahn-KEHR",
+   "cat": "N"
+  },
+  {
+   "source": "invoice",
+   "target": "la facture",
+   "pron": "lah fahk-TEWR",
+   "cat": "N"
+  },
+  {
+   "source": "cost",
+   "target": "le coût",
+   "pron": "luh KOO",
+   "cat": "N"
+  },
+  {
+   "source": "profit",
+   "target": "le bénéfice",
+   "pron": "luh bay-nay-FEESS",
+   "cat": "N"
+  },
+  {
+   "source": "loss",
+   "target": "la perte",
+   "pron": "lah PEHRT",
+   "cat": "N"
+  },
+  {
+   "source": "market (economy)",
+   "target": "le marché (économie)",
+   "pron": "luh mar-SHAY",
+   "cat": "N"
+  },
+  {
+   "source": "economy",
+   "target": "l'économie (f)",
+   "pron": "lay-koh-noh-MEE",
+   "cat": "N"
+  },
+  {
+   "source": "industry",
+   "target": "l'industrie (f)",
+   "pron": "lan-dews-TREE",
+   "cat": "N"
+  },
+  {
+   "source": "factory",
+   "target": "l'usine (f)",
+   "pron": "lew-ZEEN",
+   "cat": "N"
+  },
+  {
+   "source": "worker",
+   "target": "l'ouvrier (m)",
+   "pron": "loo-vree-AY",
+   "cat": "N"
+  },
+  {
+   "source": "employee",
+   "target": "l'employé (m)",
+   "pron": "lahn-plwah-YAY",
+   "cat": "N"
+  },
+  {
+   "source": "employer",
+   "target": "l'employeur (m)",
+   "pron": "lahn-plwah-YUR",
+   "cat": "N"
+  },
+  {
+   "source": "contract",
+   "target": "le contrat",
+   "pron": "luh kohn-TRAH",
+   "cat": "N"
+  },
+  {
+   "source": "job interview",
+   "target": "l'entretien (m)",
+   "pron": "lahn-truh-TYAN",
+   "cat": "N"
+  },
+  {
+   "source": "application",
+   "target": "la candidature",
+   "pron": "lah kahn-dee-dah-TEWR",
+   "cat": "N"
+  },
+  {
+   "source": "career",
+   "target": "la carrière",
+   "pron": "lah kah-RYEHR",
+   "cat": "N"
+  },
+  {
+   "source": "skill",
+   "target": "la compétence",
+   "pron": "lah kohn-pay-TAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "experience",
+   "target": "l'expérience (f)",
+   "pron": "lex-pay-RYAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "training",
+   "target": "la formation",
+   "pron": "lah for-mah-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "deadline",
+   "target": "le délai",
+   "pron": "luh day-LEH",
+   "cat": "N"
+  },
+  {
+   "source": "project",
+   "target": "le projet",
+   "pron": "luh proh-ZHEH",
+   "cat": "N"
+  },
+  {
+   "source": "team",
+   "target": "l'équipe (f)",
+   "pron": "lay-KEEP",
+   "cat": "N"
+  },
+  {
+   "source": "report",
+   "target": "le rapport",
+   "pron": "luh rah-POR",
+   "cat": "N"
+  },
+  {
+   "source": "presentation",
+   "target": "la présentation",
+   "pron": "lah pray-zahn-tah-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "office",
+   "target": "le bureau",
+   "pron": "luh bew-ROH",
+   "cat": "N"
+  },
+  {
+   "source": "magazine",
+   "target": "le magazine",
+   "pron": "luh mah-gah-ZEEN",
+   "cat": "N"
+  },
+  {
+   "source": "article",
+   "target": "l'article (m)",
+   "pron": "lar-TEEKL",
+   "cat": "N"
+  },
+  {
+   "source": "headline",
+   "target": "le titre",
+   "pron": "luh TEETR",
+   "cat": "N"
+  },
+  {
+   "source": "journalist",
+   "target": "le journaliste",
+   "pron": "luh zhoor-nah-LEEST",
+   "cat": "N"
+  },
+  {
+   "source": "television",
+   "target": "la télévision",
+   "pron": "lah tay-lay-vee-ZYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "radio",
+   "target": "la radio",
+   "pron": "lah rah-DYOH",
+   "cat": "N"
+  },
+  {
+   "source": "advertisement",
+   "target": "la publicité",
+   "pron": "lah pew-blee-see-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "audience",
+   "target": "le public",
+   "pron": "luh pew-BLEEK",
+   "cat": "N"
+  },
+  {
+   "source": "debate",
+   "target": "le débat",
+   "pron": "luh day-BAH",
+   "cat": "N"
+  },
+  {
+   "source": "argument (reasoning)",
+   "target": "l'argument (m)",
+   "pron": "lar-gew-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "proof",
+   "target": "la preuve",
+   "pron": "lah PRUHV",
+   "cat": "N"
+  },
+  {
+   "source": "source",
+   "target": "la source",
+   "pron": "lah SOORSS",
+   "cat": "N"
+  },
+  {
+   "source": "research",
+   "target": "la recherche",
+   "pron": "lah ruh-SHEHRSH",
+   "cat": "N"
+  },
+  {
+   "source": "study (survey)",
+   "target": "l'étude (f)",
+   "pron": "lay-TEWD",
+   "cat": "N"
+  },
+  {
+   "source": "figure (number)",
+   "target": "le chiffre",
+   "pron": "luh SHEEFR",
+   "cat": "N"
+  },
+  {
+   "source": "percentage",
+   "target": "le pourcentage",
+   "pron": "luh poor-sahn-TAHZH",
+   "cat": "N"
+  },
+  {
+   "source": "average",
+   "target": "la moyenne",
+   "pron": "lah mwah-YEN",
+   "cat": "N"
+  },
+  {
+   "source": "growth",
+   "target": "la croissance",
+   "pron": "lah krwah-SAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "operation (surgery)",
+   "target": "l'opération (f)",
+   "pron": "loh-pay-rah-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "treatment",
+   "target": "le traitement",
+   "pron": "luh tret-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "disease",
+   "target": "la maladie",
+   "pron": "lah mah-lah-DEE",
+   "cat": "N"
+  },
+  {
+   "source": "symptom",
+   "target": "le symptôme",
+   "pron": "luh sanp-TOHM",
+   "cat": "N"
+  },
+  {
+   "source": "fever",
+   "target": "la fièvre",
+   "pron": "lah FYEVR",
+   "cat": "N"
+  },
+  {
+   "source": "wound",
+   "target": "la blessure",
+   "pron": "lah bleh-SEWR",
+   "cat": "N"
+  },
+  {
+   "source": "nurse",
+   "target": "l'infirmier (m)",
+   "pron": "lan-feer-MYAY",
+   "cat": "N"
+  },
+  {
+   "source": "insurance",
+   "target": "l'assurance (f)",
+   "pron": "lah-sew-RAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "diet",
+   "target": "le régime",
+   "pron": "luh ray-ZHEEM",
+   "cat": "N"
+  },
+  {
+   "source": "sleep",
+   "target": "le sommeil",
+   "pron": "luh soh-MAY",
+   "cat": "N"
+  },
+  {
+   "source": "exercise",
+   "target": "l'exercice (m)",
+   "pron": "leg-zehr-SEESS",
+   "cat": "N"
+  },
+  {
+   "source": "stress",
+   "target": "le stress",
+   "pron": "luh STRESS",
+   "cat": "N"
+  },
+  {
+   "source": "care",
+   "target": "le soin",
+   "pron": "luh SWAN",
+   "cat": "N"
+  },
+  {
+   "source": "recovery",
+   "target": "la guérison",
+   "pron": "lah gay-ree-ZOHN",
+   "cat": "N"
+  },
+  {
+   "source": "climate",
+   "target": "le climat",
+   "pron": "luh klee-MAH",
+   "cat": "N"
+  },
+  {
+   "source": "pollution",
+   "target": "la pollution",
+   "pron": "lah poh-lew-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "waste",
+   "target": "les déchets (m)",
+   "pron": "lay day-SHEH",
+   "cat": "N"
+  },
+  {
+   "source": "energy",
+   "target": "l'énergie (f)",
+   "pron": "lay-nehr-ZHEE",
+   "cat": "N"
+  },
+  {
+   "source": "fuel",
+   "target": "le carburant",
+   "pron": "luh kar-bew-RAHN",
+   "cat": "N"
+  },
+  {
+   "source": "electricity",
+   "target": "l'électricité (f)",
+   "pron": "lay-lek-tree-see-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "harvest",
+   "target": "la récolte",
+   "pron": "lah ray-KOHLT",
+   "cat": "N"
+  },
+  {
+   "source": "field (farm)",
+   "target": "le champ",
+   "pron": "luh SHAHN",
+   "cat": "N"
+  },
+  {
+   "source": "species",
+   "target": "l'espèce (f)",
+   "pron": "les-PESS",
+   "cat": "N"
+  },
+  {
+   "source": "nature",
+   "target": "la nature",
+   "pron": "lah nah-TEWR",
+   "cat": "N"
+  },
+  {
+   "source": "coast",
+   "target": "la côte",
+   "pron": "lah KOHT",
+   "cat": "N"
+  },
+  {
+   "source": "desert",
+   "target": "le désert",
+   "pron": "luh day-ZEHR",
+   "cat": "N"
+  },
+  {
+   "source": "lake",
+   "target": "le lac",
+   "pron": "luh LAHK",
+   "cat": "N"
+  },
+  {
+   "source": "patience",
+   "target": "la patience",
+   "pron": "lah pah-SYAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "courage",
+   "target": "le courage",
+   "pron": "luh koo-RAHZH",
+   "cat": "N"
+  },
+  {
+   "source": "pride",
+   "target": "la fierté",
+   "pron": "lah fyehr-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "shame",
+   "target": "la honte",
+   "pron": "lah OHNT",
+   "cat": "N"
+  },
+  {
+   "source": "guilt",
+   "target": "la culpabilité",
+   "pron": "lah kewl-pah-bee-lee-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "jealousy",
+   "target": "la jalousie",
+   "pron": "lah zhah-loo-ZEE",
+   "cat": "N"
+  },
+  {
+   "source": "trust",
+   "target": "la confiance",
+   "pron": "lah kohn-FYAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "doubt",
+   "target": "le doute",
+   "pron": "luh DOOT",
+   "cat": "N"
+  },
+  {
+   "source": "curiosity",
+   "target": "la curiosité",
+   "pron": "lah kew-ryoh-zee-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "boredom",
+   "target": "l'ennui (m)",
+   "pron": "lahn-NWEE",
+   "cat": "N"
+  },
+  {
+   "source": "relief",
+   "target": "le soulagement",
+   "pron": "luh soo-lahzh-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "regret",
+   "target": "le regret",
+   "pron": "luh ruh-GREH",
+   "cat": "N"
+  },
+  {
+   "source": "habit",
+   "target": "l'habitude (f)",
+   "pron": "lah-bee-TEWD",
+   "cat": "N"
+  },
+  {
+   "source": "behaviour",
+   "target": "le comportement",
+   "pron": "luh kohn-por-tuh-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "character",
+   "target": "le caractère",
+   "pron": "luh kah-rahk-TEHR",
+   "cat": "N"
+  },
+  {
+   "source": "mood",
+   "target": "l'humeur (f)",
+   "pron": "lew-MUR",
+   "cat": "N"
+  },
+  {
+   "source": "attitude",
+   "target": "l'attitude (f)",
+   "pron": "lah-tee-TEWD",
+   "cat": "N"
+  },
+  {
+   "source": "reason (cause)",
+   "target": "la raison",
+   "pron": "lah reh-ZOHN",
+   "cat": "N"
+  },
+  {
+   "source": "purpose",
+   "target": "l'objectif (m)",
+   "pron": "lob-zhek-TEEF",
+   "cat": "N"
+  },
+  {
+   "source": "effort",
+   "target": "l'effort (m)",
+   "pron": "leh-FOR",
+   "cat": "N"
+  },
+  {
+   "source": "progress",
+   "target": "le progrès",
+   "pron": "luh proh-GREH",
+   "cat": "N"
+  },
+  {
+   "source": "to admit",
+   "target": "admettre",
+   "pron": "ahd-METR",
+   "cat": "V"
+  },
+  {
+   "source": "to deny",
+   "target": "nier",
+   "pron": "nee-AY",
+   "cat": "V"
+  },
+  {
+   "source": "to complain",
+   "target": "se plaindre",
+   "pron": "suh PLANDR",
+   "cat": "V"
+  },
+  {
+   "source": "to apologize",
+   "target": "s'excuser",
+   "pron": "sex-kew-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to warn",
+   "target": "avertir",
+   "pron": "ah-vehr-TEER",
+   "cat": "V"
+  },
+  {
+   "source": "to threaten",
+   "target": "menacer",
+   "pron": "muh-nah-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to convince",
+   "target": "convaincre",
+   "pron": "kohn-VANKR",
+   "cat": "V"
+  },
+  {
+   "source": "to persuade",
+   "target": "persuader",
+   "pron": "pehr-swah-DAY",
+   "cat": "V"
+  },
+  {
+   "source": "to negotiate",
+   "target": "négocier",
+   "pron": "nay-goh-SYAY",
+   "cat": "V"
+  },
+  {
+   "source": "to agree (on)",
+   "target": "se mettre d'accord",
+   "pron": "suh METR dah-KOR",
+   "cat": "V"
+  },
+  {
+   "source": "to argue",
+   "target": "se disputer",
+   "pron": "suh dees-pew-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to solve",
+   "target": "résoudre",
+   "pron": "ray-ZOODR",
+   "cat": "V"
+  },
+  {
+   "source": "to avoid",
+   "target": "éviter",
+   "pron": "ay-vee-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to reduce",
+   "target": "réduire",
+   "pron": "ray-DWEER",
+   "cat": "V"
+  },
+  {
+   "source": "to increase",
+   "target": "augmenter",
+   "pron": "ohg-mahn-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to replace",
+   "target": "remplacer",
+   "pron": "rahn-plah-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to depend on",
+   "target": "dépendre de",
+   "pron": "day-PAHNDR duh",
+   "cat": "V"
+  },
+  {
+   "source": "to belong to",
+   "target": "appartenir à",
+   "pron": "ah-par-tuh-NEER ah",
+   "cat": "V"
+  },
+  {
+   "source": "to concern",
+   "target": "concerner",
+   "pron": "kohn-sehr-NAY",
+   "cat": "V"
+  },
+  {
+   "source": "to influence",
+   "target": "influencer",
+   "pron": "an-flew-ahn-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to affect",
+   "target": "affecter",
+   "pron": "ah-fek-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to expect",
+   "target": "s'attendre à",
+   "pron": "sah-TAHNDR ah",
+   "cat": "V"
+  },
+  {
+   "source": "to assume",
+   "target": "supposer",
+   "pron": "sew-poh-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to doubt",
+   "target": "douter",
+   "pron": "doo-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to realize",
+   "target": "se rendre compte",
+   "pron": "suh rahndr KOHNT",
+   "cat": "V"
+  },
+  {
+   "source": "to recognize",
+   "target": "reconnaître",
+   "pron": "ruh-koh-NETR",
+   "cat": "V"
+  },
+  {
+   "source": "to consider",
+   "target": "considérer",
+   "pron": "kohn-see-day-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to judge",
+   "target": "juger",
+   "pron": "zhew-ZHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to criticize",
+   "target": "critiquer",
+   "pron": "kree-tee-KAY",
+   "cat": "V"
+  },
+  {
+   "source": "to congratulate",
+   "target": "féliciter",
+   "pron": "fay-lee-see-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to encourage",
+   "target": "encourager",
+   "pron": "ahn-koo-rah-ZHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to support",
+   "target": "soutenir",
+   "pron": "soot-NEER",
+   "cat": "V"
+  },
+  {
+   "source": "to rely on",
+   "target": "compter sur",
+   "pron": "kohn-TAY sewr",
+   "cat": "V"
+  },
+  {
+   "source": "to trust (someone)",
+   "target": "faire confiance à",
+   "pron": "fehr kohn-FYAHNSS ah",
+   "cat": "V"
+  },
+  {
+   "source": "to manage (cope)",
+   "target": "se débrouiller",
+   "pron": "suh day-broo-YAY",
+   "cat": "V"
+  },
+  {
+   "source": "to give up",
+   "target": "abandonner",
+   "pron": "ah-bahn-doh-NAY",
+   "cat": "V"
+  },
+  {
+   "source": "to insist",
+   "target": "insister",
+   "pron": "an-sees-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to hesitate",
+   "target": "hésiter",
+   "pron": "ay-zee-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to dare",
+   "target": "oser",
+   "pron": "oh-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to risk",
+   "target": "risquer",
+   "pron": "rees-KAY",
+   "cat": "V"
+  },
+  {
+   "source": "to earn a living",
+   "target": "gagner sa vie",
+   "pron": "gah-NYAY sah VEE",
+   "cat": "V"
+  },
+  {
+   "source": "to save (money)",
+   "target": "économiser",
+   "pron": "ay-koh-noh-mee-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to spend",
+   "target": "dépenser",
+   "pron": "day-pahn-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to invest",
+   "target": "investir",
+   "pron": "an-ves-TEER",
+   "cat": "V"
+  },
+  {
+   "source": "to hire",
+   "target": "embaucher",
+   "pron": "ahn-boh-SHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to fire (dismiss)",
+   "target": "licencier",
+   "pron": "lee-sahn-SYAY",
+   "cat": "V"
+  },
+  {
+   "source": "to resign",
+   "target": "démissionner",
+   "pron": "day-mee-syoh-NAY",
+   "cat": "V"
+  },
+  {
+   "source": "to apply (for a job)",
+   "target": "postuler",
+   "pron": "poss-tew-LAY",
+   "cat": "V"
+  },
+  {
+   "source": "to lead",
+   "target": "diriger",
+   "pron": "dee-ree-ZHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to obey",
+   "target": "obéir",
+   "pron": "oh-bay-EER",
+   "cat": "V"
+  },
+  {
+   "source": "to forbid",
+   "target": "interdire",
+   "pron": "an-tehr-DEER",
+   "cat": "V"
+  },
+  {
+   "source": "responsible",
+   "target": "responsable",
+   "pron": "res-pohn-SAHBL",
+   "cat": "A"
+  },
+  {
+   "source": "reliable",
+   "target": "fiable",
+   "pron": "fee-AHBL",
+   "cat": "A"
+  },
+  {
+   "source": "honest",
+   "target": "honnête",
+   "pron": "oh-NET",
+   "cat": "A"
+  },
+  {
+   "source": "generous",
+   "target": "généreux",
+   "pron": "zhay-nay-RUH",
+   "cat": "A"
+  },
+  {
+   "source": "selfish",
+   "target": "égoïste",
+   "pron": "ay-goh-EEST",
+   "cat": "A"
+  },
+  {
+   "source": "shy",
+   "target": "timide",
+   "pron": "tee-MEED",
+   "cat": "A"
+  },
+  {
+   "source": "confident",
+   "target": "confiant",
+   "pron": "kohn-FYAHN",
+   "cat": "A"
+  },
+  {
+   "source": "ambitious",
+   "target": "ambitieux",
+   "pron": "ahn-bee-SYUH",
+   "cat": "A"
+  },
+  {
+   "source": "lazy",
+   "target": "paresseux",
+   "pron": "pah-reh-SUH",
+   "cat": "A"
+  },
+  {
+   "source": "hard-working",
+   "target": "travailleur",
+   "pron": "trah-vie-YUR",
+   "cat": "A"
+  },
+  {
+   "source": "patient",
+   "target": "patient",
+   "pron": "pah-SYAHN",
+   "cat": "A"
+  },
+  {
+   "source": "impatient",
+   "target": "impatient",
+   "pron": "an-pah-SYAHN",
+   "cat": "A"
+  },
+  {
+   "source": "calm (tranquil)",
+   "target": "tranquille",
+   "pron": "trahn-KEEL",
+   "cat": "A"
+  },
+  {
+   "source": "nervous",
+   "target": "nerveux",
+   "pron": "nehr-VUH",
+   "cat": "A"
+  },
+  {
+   "source": "worried",
+   "target": "inquiet",
+   "pron": "an-KYEH",
+   "cat": "A"
+  },
+  {
+   "source": "disappointed",
+   "target": "déçu",
+   "pron": "day-SEW",
+   "cat": "A"
+  },
+  {
+   "source": "satisfied",
+   "target": "satisfait",
+   "pron": "sah-tees-FEH",
+   "cat": "A"
+  },
+  {
+   "source": "grateful",
+   "target": "reconnaissant",
+   "pron": "ruh-koh-neh-SAHN",
+   "cat": "A"
+  },
+  {
+   "source": "curious",
+   "target": "curieux",
+   "pron": "kew-RYUH",
+   "cat": "A"
+  },
+  {
+   "source": "stubborn",
+   "target": "têtu",
+   "pron": "teh-TEW",
+   "cat": "A"
+  },
+  {
+   "source": "clever",
+   "target": "intelligent",
+   "pron": "an-teh-lee-ZHAHN",
+   "cat": "A"
+  },
+  {
+   "source": "kind",
+   "target": "gentil",
+   "pron": "zhahn-TEE",
+   "cat": "A"
+  },
+  {
+   "source": "mean",
+   "target": "méchant",
+   "pron": "may-SHAHN",
+   "cat": "A"
+  },
+  {
+   "source": "discreet",
+   "target": "discret",
+   "pron": "dees-KREH",
+   "cat": "A"
+  },
+  {
+   "source": "talkative",
+   "target": "bavard",
+   "pron": "bah-VAR",
+   "cat": "A"
+  },
+  {
+   "source": "sensitive",
+   "target": "sensible",
+   "pron": "sahn-SEEBL",
+   "cat": "A"
+  },
+  {
+   "source": "reasonable",
+   "target": "raisonnable",
+   "pron": "reh-zoh-NAHBL",
+   "cat": "A"
+  },
+  {
+   "source": "fair",
+   "target": "juste",
+   "pron": "zhewst",
+   "cat": "A"
+  },
+  {
+   "source": "unfair",
+   "target": "injuste",
+   "pron": "an-ZHEWST",
+   "cat": "A"
+  },
+  {
+   "source": "necessary",
+   "target": "nécessaire",
+   "pron": "nay-seh-SEHR",
+   "cat": "A"
+  },
+  {
+   "source": "sufficient",
+   "target": "suffisant",
+   "pron": "sew-fee-ZAHN",
+   "cat": "A"
+  },
+  {
+   "source": "obvious",
+   "target": "évident",
+   "pron": "ay-vee-DAHN",
+   "cat": "A"
+  },
+  {
+   "source": "complicated",
+   "target": "compliqué",
+   "pron": "kohn-plee-KAY",
+   "cat": "A"
+  },
+  {
+   "source": "simple",
+   "target": "simple",
+   "pron": "SANPL",
+   "cat": "A"
+  },
+  {
+   "source": "common",
+   "target": "courant",
+   "pron": "koo-RAHN",
+   "cat": "A"
+  },
+  {
+   "source": "rare",
+   "target": "rare",
+   "pron": "rar",
+   "cat": "A"
+  },
+  {
+   "source": "recent",
+   "target": "récent",
+   "pron": "ray-SAHN",
+   "cat": "A"
+  },
+  {
+   "source": "current",
+   "target": "actuel",
+   "pron": "ahk-tew-EL",
+   "cat": "A"
+  },
+  {
+   "source": "ancient",
+   "target": "ancien",
+   "pron": "ahn-SYAN",
+   "cat": "A"
+  },
+  {
+   "source": "modern",
+   "target": "moderne",
+   "pron": "moh-DEHRN",
+   "cat": "A"
+  },
+  {
+   "source": "local",
+   "target": "local",
+   "pron": "loh-KAHL",
+   "cat": "A"
+  },
+  {
+   "source": "national",
+   "target": "national",
+   "pron": "nah-syoh-NAHL",
+   "cat": "A"
+  },
+  {
+   "source": "foreign",
+   "target": "étranger",
+   "pron": "ay-trahn-ZHAY",
+   "cat": "A"
+  },
+  {
+   "source": "public",
+   "target": "public",
+   "pron": "pew-BLEEK",
+   "cat": "A"
+  },
+  {
+   "source": "private",
+   "target": "privé",
+   "pron": "pree-VAY",
+   "cat": "A"
+  },
+  {
+   "source": "available",
+   "target": "disponible",
+   "pron": "dees-poh-NEEBL",
+   "cat": "A"
+  },
+  {
+   "source": "costly",
+   "target": "coûteux",
+   "pron": "koo-TUH",
+   "cat": "A"
+  },
+  {
+   "source": "although",
+   "target": "bien que",
+   "pron": "byan kuh",
+   "cat": "B"
+  },
+  {
+   "source": "as soon as",
+   "target": "dès que",
+   "pron": "deh kuh",
+   "cat": "B"
+  },
+  {
+   "source": "until",
+   "target": "jusqu'à ce que",
+   "pron": "zhews-KAH suh kuh",
+   "cat": "B"
+  },
+  {
+   "source": "as long as",
+   "target": "tant que",
+   "pron": "tahn kuh",
+   "cat": "B"
+  },
+  {
+   "source": "in order to",
+   "target": "afin de",
+   "pron": "ah-FAN duh",
+   "cat": "B"
+  },
+  {
+   "source": "so that",
+   "target": "pour que",
+   "pron": "poor kuh",
+   "cat": "B"
+  },
+  {
+   "source": "instead of",
+   "target": "au lieu de",
+   "pron": "oh LYUH duh",
+   "cat": "B"
+  },
+  {
    "source": "thanks to",
    "target": "grâce à",
    "pron": "grahss AH",
+   "cat": "B"
+  },
+  {
+   "source": "because of",
+   "target": "à cause de",
+   "pron": "ah KOHZ duh",
+   "cat": "B"
+  },
+  {
+   "source": "on the other hand",
+   "target": "en revanche",
+   "pron": "ahn ruh-VAHNSH",
+   "cat": "B"
+  },
+  {
+   "source": "moreover",
+   "target": "de plus",
+   "pron": "duh PLEWSS",
+   "cat": "B"
+  },
+  {
+   "source": "in fact",
+   "target": "en fait",
+   "pron": "ahn FET",
+   "cat": "B"
+  },
+  {
+   "source": "in short",
+   "target": "bref",
+   "pron": "bref",
+   "cat": "B"
+  },
+  {
+   "source": "for example",
+   "target": "par exemple",
+   "pron": "par eg-ZAHNPL",
    "cat": "B"
   },
   {
@@ -3022,9 +5064,1287 @@
    "cat": "B"
   },
   {
+   "source": "above all",
+   "target": "surtout",
+   "pron": "sewr-TOO",
+   "cat": "B"
+  },
+  {
+   "source": "at least",
+   "target": "au moins",
+   "pron": "oh MWAN",
+   "cat": "B"
+  },
+  {
+   "source": "at most",
+   "target": "au plus",
+   "pron": "oh PLEWSS",
+   "cat": "B"
+  },
+  {
    "source": "by the way",
-   "target": "d'ailleurs",
-   "pron": "dah-YUR",
+   "target": "au fait",
+   "pron": "oh FET",
+   "cat": "B"
+  },
+  {
+   "source": "in my opinion",
+   "target": "à mon avis",
+   "pron": "ah moh-nah-VEE",
+   "cat": "B"
+  },
+  {
+   "source": "on time",
+   "target": "à l'heure",
+   "pron": "ah LUR",
+   "cat": "B"
+  },
+  {
+   "source": "as usual",
+   "target": "comme d'habitude",
+   "pron": "kohm dah-bee-TEWD",
+   "cat": "B"
+  },
+  {
+   "source": "little by little",
+   "target": "peu à peu",
+   "pron": "puh ah PUH",
+   "cat": "B"
+  },
+  {
+   "source": "from time to time",
+   "target": "de temps en temps",
+   "pron": "duh tahn-zahn-TAHN",
+   "cat": "B"
+  },
+  {
+   "source": "consequence",
+   "target": "la conséquence",
+   "pron": "lah kohn-say-KAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "cause",
+   "target": "la cause",
+   "pron": "lah KOHZ",
+   "cat": "N"
+  },
+  {
+   "source": "condition",
+   "target": "la condition",
+   "pron": "lah kohn-dee-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "hypothesis",
+   "target": "l'hypothèse (f)",
+   "pron": "lee-poh-TEZ",
+   "cat": "N"
+  },
+  {
+   "source": "conclusion",
+   "target": "la conclusion",
+   "pron": "lah kohn-klew-ZYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "approach",
+   "target": "l'approche (f)",
+   "pron": "lah-PROSH",
+   "cat": "N"
+  },
+  {
+   "source": "method",
+   "target": "la méthode",
+   "pron": "lah may-TOHD",
+   "cat": "N"
+  },
+  {
+   "source": "framework",
+   "target": "le cadre",
+   "pron": "luh KAHDR",
+   "cat": "N"
+  },
+  {
+   "source": "stake (issue)",
+   "target": "l'enjeu (m)",
+   "pron": "lahn-ZHUH",
+   "cat": "N"
+  },
+  {
+   "source": "challenge",
+   "target": "le défi",
+   "pron": "luh day-FEE",
+   "cat": "N"
+  },
+  {
+   "source": "constraint",
+   "target": "la contrainte",
+   "pron": "lah kohn-TRANT",
+   "cat": "N"
+  },
+  {
+   "source": "gap (shortcoming)",
+   "target": "la lacune",
+   "pron": "lah lah-KEWN",
+   "cat": "N"
+  },
+  {
+   "source": "asset (strength)",
+   "target": "l'atout (m)",
+   "pron": "lah-TOO",
+   "cat": "N"
+  },
+  {
+   "source": "weakness",
+   "target": "la faiblesse",
+   "pron": "lah feh-BLESS",
+   "cat": "N"
+  },
+  {
+   "source": "scope",
+   "target": "la portée",
+   "pron": "lah por-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "trend",
+   "target": "la tendance",
+   "pron": "lah tahn-DAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "turning point",
+   "target": "le tournant",
+   "pron": "luh toor-NAHN",
+   "cat": "N"
+  },
+  {
+   "source": "outcome",
+   "target": "l'issue (f)",
+   "pron": "lee-SEW",
+   "cat": "N"
+  },
+  {
+   "source": "nuance",
+   "target": "la nuance",
+   "pron": "lah new-AHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "ambiguity",
+   "target": "l'ambiguïté (f)",
+   "pron": "lahn-bee-gwee-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "contradiction",
+   "target": "la contradiction",
+   "pron": "lah kohn-trah-deek-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "paradox",
+   "target": "le paradoxe",
+   "pron": "luh pah-rah-DOX",
+   "cat": "N"
+  },
+  {
+   "source": "prejudice",
+   "target": "le préjugé",
+   "pron": "luh pray-zhew-ZHAY",
+   "cat": "N"
+  },
+  {
+   "source": "consensus",
+   "target": "le consensus",
+   "pron": "luh kohn-sahn-SEWSS",
+   "cat": "N"
+  },
+  {
+   "source": "compromise",
+   "target": "le compromis",
+   "pron": "luh kohn-proh-MEE",
+   "cat": "N"
+  },
+  {
+   "source": "negotiation",
+   "target": "la négociation",
+   "pron": "lah nay-goh-syah-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "agreement",
+   "target": "l'accord (m)",
+   "pron": "lah-KOR",
+   "cat": "N"
+  },
+  {
+   "source": "dispute",
+   "target": "le litige",
+   "pron": "luh lee-TEEZH",
+   "cat": "N"
+  },
+  {
+   "source": "interest (stake)",
+   "target": "l'intérêt (m)",
+   "pron": "lan-tay-REH",
+   "cat": "N"
+  },
+  {
+   "source": "responsibility",
+   "target": "la responsabilité",
+   "pron": "lah res-pohn-sah-bee-lee-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "oversight (monitoring)",
+   "target": "la surveillance",
+   "pron": "lah sewr-vay-YAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "procedure",
+   "target": "la procédure",
+   "pron": "lah proh-say-DEWR",
+   "cat": "N"
+  },
+  {
+   "source": "regulation",
+   "target": "le règlement",
+   "pron": "luh reh-gluh-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "standard",
+   "target": "la norme",
+   "pron": "lah NORM",
+   "cat": "N"
+  },
+  {
+   "source": "requirement",
+   "target": "l'exigence (f)",
+   "pron": "leg-zee-ZHAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "guideline",
+   "target": "la directive",
+   "pron": "lah dee-rek-TEEV",
+   "cat": "N"
+  },
+  {
+   "source": "reform",
+   "target": "la réforme",
+   "pron": "lah ray-FORM",
+   "cat": "N"
+  },
+  {
+   "source": "measure (policy)",
+   "target": "la mesure",
+   "pron": "lah muh-ZEWR",
+   "cat": "N"
+  },
+  {
+   "source": "policy",
+   "target": "la politique",
+   "pron": "lah poh-lee-TEEK",
+   "cat": "N"
+  },
+  {
+   "source": "budget",
+   "target": "le budget",
+   "pron": "luh bewd-ZHEH",
+   "cat": "N"
+  },
+  {
+   "source": "funding",
+   "target": "le financement",
+   "pron": "luh fee-nahnss-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "investment",
+   "target": "l'investissement (m)",
+   "pron": "lan-ves-teess-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "shareholder",
+   "target": "l'actionnaire (m)",
+   "pron": "lahk-syoh-NEHR",
+   "cat": "N"
+  },
+  {
+   "source": "merger",
+   "target": "la fusion",
+   "pron": "lah few-ZYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "bankruptcy",
+   "target": "la faillite",
+   "pron": "lah fie-YEET",
+   "cat": "N"
+  },
+  {
+   "source": "supply",
+   "target": "l'offre (f)",
+   "pron": "LOFR",
+   "cat": "N"
+  },
+  {
+   "source": "demand",
+   "target": "la demande",
+   "pron": "lah duh-MAHND",
+   "cat": "N"
+  },
+  {
+   "source": "competition",
+   "target": "la concurrence",
+   "pron": "lah kohn-kew-RAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "customer",
+   "target": "le client",
+   "pron": "luh klee-AHN",
+   "cat": "N"
+  },
+  {
+   "source": "supplier",
+   "target": "le fournisseur",
+   "pron": "luh foor-nee-SUR",
+   "cat": "N"
+  },
+  {
+   "source": "quality",
+   "target": "la qualité",
+   "pron": "lah kah-lee-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "postponement",
+   "target": "le report",
+   "pron": "luh ruh-POR",
+   "cat": "N"
+  },
+  {
+   "source": "schedule",
+   "target": "le calendrier",
+   "pron": "luh kah-lahn-dree-AY",
+   "cat": "N"
+  },
+  {
+   "source": "priority",
+   "target": "la priorité",
+   "pron": "lah pree-oh-ree-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "know-how",
+   "target": "le savoir-faire",
+   "pron": "luh sah-vwahr-FEHR",
+   "cat": "N"
+  },
+  {
+   "source": "awareness",
+   "target": "la prise de conscience",
+   "pron": "lah preez duh kohn-SYAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "mindset",
+   "target": "l'état d'esprit (m)",
+   "pron": "lay-TAH des-PREE",
+   "cat": "N"
+  },
+  {
+   "source": "education (upbringing)",
+   "target": "l'éducation (f)",
+   "pron": "lay-dew-kah-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "heritage",
+   "target": "le patrimoine",
+   "pron": "luh pah-tree-MWAHN",
+   "cat": "N"
+  },
+  {
+   "source": "identity",
+   "target": "l'identité (f)",
+   "pron": "lee-dahn-tee-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "belonging",
+   "target": "l'appartenance (f)",
+   "pron": "lah-par-tuh-NAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "community",
+   "target": "la communauté",
+   "pron": "lah koh-mew-noh-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "generation",
+   "target": "la génération",
+   "pron": "lah zhay-nay-rah-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "inequality",
+   "target": "l'inégalité (f)",
+   "pron": "lee-nay-gah-lee-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "poverty",
+   "target": "la pauvreté",
+   "pron": "lah poh-vruh-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "wealth",
+   "target": "la richesse",
+   "pron": "lah ree-SHESS",
+   "cat": "N"
+  },
+  {
+   "source": "migration",
+   "target": "la migration",
+   "pron": "lah mee-grah-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "integration",
+   "target": "l'intégration (f)",
+   "pron": "lan-tay-grah-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "solidarity",
+   "target": "la solidarité",
+   "pron": "lah soh-lee-dah-ree-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "influence",
+   "target": "l'influence (f)",
+   "pron": "lan-flew-AHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "reputation",
+   "target": "la réputation",
+   "pron": "lah ray-pew-tah-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "credibility",
+   "target": "la crédibilité",
+   "pron": "lah kray-dee-bee-lee-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "rumour",
+   "target": "la rumeur",
+   "pron": "lah rew-MUR",
+   "cat": "N"
+  },
+  {
+   "source": "scandal",
+   "target": "le scandale",
+   "pron": "luh skahn-DAHL",
+   "cat": "N"
+  },
+  {
+   "source": "censorship",
+   "target": "la censure",
+   "pron": "lah sahn-SEWR",
+   "cat": "N"
+  },
+  {
+   "source": "privacy",
+   "target": "la vie privée",
+   "pron": "lah vee pree-VAY",
+   "cat": "N"
+  },
+  {
+   "source": "algorithm",
+   "target": "l'algorithme (m)",
+   "pron": "lahl-goh-REETM",
+   "cat": "N"
+  },
+  {
+   "source": "data",
+   "target": "les données (f)",
+   "pron": "lay doh-NAY",
+   "cat": "N"
+  },
+  {
+   "source": "network",
+   "target": "le réseau",
+   "pron": "luh ray-ZOH",
+   "cat": "N"
+  },
+  {
+   "source": "software",
+   "target": "le logiciel",
+   "pron": "luh loh-zhee-SYEL",
+   "cat": "N"
+  },
+  {
+   "source": "device",
+   "target": "l'appareil (m)",
+   "pron": "lah-pah-RAY",
+   "cat": "N"
+  },
+  {
+   "source": "update",
+   "target": "la mise à jour",
+   "pron": "lah meez ah ZHOOR",
+   "cat": "N"
+  },
+  {
+   "source": "backup",
+   "target": "la sauvegarde",
+   "pron": "lah sohv-GARD",
+   "cat": "N"
+  },
+  {
+   "source": "to point out",
+   "target": "souligner",
+   "pron": "soo-lee-NYAY",
+   "cat": "V"
+  },
+  {
+   "source": "to highlight",
+   "target": "mettre en avant",
+   "pron": "METR ahn ah-VAHN",
+   "cat": "V"
+  },
+  {
+   "source": "to imply",
+   "target": "sous-entendre",
+   "pron": "soo-zahn-TAHNDR",
+   "cat": "V"
+  },
+  {
+   "source": "to state",
+   "target": "affirmer",
+   "pron": "ah-feer-MAY",
+   "cat": "V"
+  },
+  {
+   "source": "to claim",
+   "target": "prétendre",
+   "pron": "pray-TAHNDR",
+   "cat": "V"
+  },
+  {
+   "source": "to specify",
+   "target": "préciser",
+   "pron": "pray-see-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to clarify",
+   "target": "clarifier",
+   "pron": "klah-ree-FYAY",
+   "cat": "V"
+  },
+  {
+   "source": "to summarize",
+   "target": "résumer",
+   "pron": "ray-zew-MAY",
+   "cat": "V"
+  },
+  {
+   "source": "to set out",
+   "target": "exposer",
+   "pron": "ex-poh-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to assess",
+   "target": "évaluer",
+   "pron": "ay-vah-lew-AY",
+   "cat": "V"
+  },
+  {
+   "source": "to estimate",
+   "target": "estimer",
+   "pron": "es-tee-MAY",
+   "cat": "V"
+  },
+  {
+   "source": "to foresee",
+   "target": "prévoir",
+   "pron": "pray-VWAHR",
+   "cat": "V"
+  },
+  {
+   "source": "to plan",
+   "target": "planifier",
+   "pron": "plah-nee-FYAY",
+   "cat": "V"
+  },
+  {
+   "source": "to implement",
+   "target": "mettre en œuvre",
+   "pron": "METR ahn UVR",
+   "cat": "V"
+  },
+  {
+   "source": "to carry out",
+   "target": "effectuer",
+   "pron": "ay-fek-tew-AY",
+   "cat": "V"
+  },
+  {
+   "source": "to achieve",
+   "target": "atteindre",
+   "pron": "ah-TANDR",
+   "cat": "V"
+  },
+  {
+   "source": "to exceed",
+   "target": "dépasser",
+   "pron": "day-pah-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to strengthen",
+   "target": "renforcer",
+   "pron": "rahn-for-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to weaken",
+   "target": "affaiblir",
+   "pron": "ah-feh-BLEER",
+   "cat": "V"
+  },
+  {
+   "source": "to maintain",
+   "target": "maintenir",
+   "pron": "mant-NEER",
+   "cat": "V"
+  },
+  {
+   "source": "to preserve",
+   "target": "préserver",
+   "pron": "pray-zehr-VAY",
+   "cat": "V"
+  },
+  {
+   "source": "to restore",
+   "target": "rétablir",
+   "pron": "ray-tah-BLEER",
+   "cat": "V"
+  },
+  {
+   "source": "to adapt",
+   "target": "adapter",
+   "pron": "ah-dahp-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to adjust",
+   "target": "ajuster",
+   "pron": "ah-zhews-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to reconsider",
+   "target": "reconsidérer",
+   "pron": "ruh-kohn-see-day-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to postpone",
+   "target": "reporter",
+   "pron": "ruh-por-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to cancel",
+   "target": "annuler",
+   "pron": "ah-new-LAY",
+   "cat": "V"
+  },
+  {
+   "source": "to confirm",
+   "target": "confirmer",
+   "pron": "kohn-feer-MAY",
+   "cat": "V"
+  },
+  {
+   "source": "to approve",
+   "target": "approuver",
+   "pron": "ah-proo-VAY",
+   "cat": "V"
+  },
+  {
+   "source": "to reject",
+   "target": "rejeter",
+   "pron": "ruh-zhuh-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to require",
+   "target": "exiger",
+   "pron": "eg-zee-ZHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to grant",
+   "target": "accorder",
+   "pron": "ah-kor-DAY",
+   "cat": "V"
+  },
+  {
+   "source": "to entrust",
+   "target": "confier",
+   "pron": "kohn-FYAY",
+   "cat": "V"
+  },
+  {
+   "source": "to delegate",
+   "target": "déléguer",
+   "pron": "day-lay-GAY",
+   "cat": "V"
+  },
+  {
+   "source": "to supervise",
+   "target": "superviser",
+   "pron": "sew-pehr-vee-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to report (inform)",
+   "target": "signaler",
+   "pron": "see-nyah-LAY",
+   "cat": "V"
+  },
+  {
+   "source": "to disclose",
+   "target": "divulguer",
+   "pron": "dee-vewl-GAY",
+   "cat": "V"
+  },
+  {
+   "source": "to conceal",
+   "target": "dissimuler",
+   "pron": "dee-see-mew-LAY",
+   "cat": "V"
+  },
+  {
+   "source": "to accuse",
+   "target": "accuser",
+   "pron": "ah-kew-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to blame",
+   "target": "reprocher",
+   "pron": "ruh-proh-SHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to prove",
+   "target": "prouver",
+   "pron": "proo-VAY",
+   "cat": "V"
+  },
+  {
+   "source": "to demonstrate",
+   "target": "démontrer",
+   "pron": "day-mohn-TRAY",
+   "cat": "V"
+  },
+  {
+   "source": "to contradict",
+   "target": "contredire",
+   "pron": "kohn-truh-DEER",
+   "cat": "V"
+  },
+  {
+   "source": "to question (challenge)",
+   "target": "remettre en question",
+   "pron": "ruh-METR ahn kes-TYOHN",
+   "cat": "V"
+  },
+  {
+   "source": "to undermine",
+   "target": "miner",
+   "pron": "mee-NAY",
+   "cat": "V"
+  },
+  {
+   "source": "to overcome",
+   "target": "surmonter",
+   "pron": "sewr-mohn-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to cope with",
+   "target": "faire face à",
+   "pron": "fehr FAHSS ah",
+   "cat": "V"
+  },
+  {
+   "source": "to endure",
+   "target": "supporter",
+   "pron": "sew-por-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to give in",
+   "target": "céder",
+   "pron": "say-DAY",
+   "cat": "V"
+  },
+  {
+   "source": "to resist",
+   "target": "résister",
+   "pron": "ray-zees-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to persevere",
+   "target": "persévérer",
+   "pron": "pehr-say-vay-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to commit oneself",
+   "target": "s'engager",
+   "pron": "sahn-gah-ZHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to get involved",
+   "target": "s'impliquer",
+   "pron": "sanp-lee-KAY",
+   "cat": "V"
+  },
+  {
+   "source": "to withdraw",
+   "target": "se retirer",
+   "pron": "suh ruh-tee-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to take part",
+   "target": "participer",
+   "pron": "par-tee-see-PAY",
+   "cat": "V"
+  },
+  {
+   "source": "to contribute",
+   "target": "contribuer",
+   "pron": "kohn-tree-bew-AY",
+   "cat": "V"
+  },
+  {
+   "source": "to benefit from",
+   "target": "bénéficier de",
+   "pron": "bay-nay-fee-SYAY duh",
+   "cat": "V"
+  },
+  {
+   "source": "to take advantage of",
+   "target": "profiter de",
+   "pron": "proh-fee-TAY duh",
+   "cat": "V"
+  },
+  {
+   "source": "to make the most of",
+   "target": "tirer parti de",
+   "pron": "tee-RAY par-TEE duh",
+   "cat": "V"
+  },
+  {
+   "source": "to be worth",
+   "target": "valoir",
+   "pron": "vah-LWAHR",
+   "cat": "V"
+  },
+  {
+   "source": "to matter",
+   "target": "importer",
+   "pron": "an-por-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to be about",
+   "target": "s'agir de",
+   "pron": "sah-ZHEER duh",
+   "cat": "V"
+  },
+  {
+   "source": "to turn out",
+   "target": "s'avérer",
+   "pron": "sah-vay-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "thorough",
+   "target": "approfondi",
+   "pron": "ah-proh-fohn-DEE",
+   "cat": "A"
+  },
+  {
+   "source": "accurate",
+   "target": "exact",
+   "pron": "eg-ZAHKT",
+   "cat": "A"
+  },
+  {
+   "source": "relevant",
+   "target": "pertinent",
+   "pron": "pehr-tee-NAHN",
+   "cat": "A"
+  },
+  {
+   "source": "off-topic",
+   "target": "hors sujet",
+   "pron": "or sew-ZHEH",
+   "cat": "A"
+  },
+  {
+   "source": "significant",
+   "target": "significatif",
+   "pron": "see-nyee-fee-kah-TEEF",
+   "cat": "A"
+  },
+  {
+   "source": "negligible",
+   "target": "négligeable",
+   "pron": "nay-glee-ZHAHBL",
+   "cat": "A"
+  },
+  {
+   "source": "substantial",
+   "target": "considérable",
+   "pron": "kohn-see-day-RAHBL",
+   "cat": "A"
+  },
+  {
+   "source": "moderate",
+   "target": "modéré",
+   "pron": "moh-day-RAY",
+   "cat": "A"
+  },
+  {
+   "source": "excessive",
+   "target": "excessif",
+   "pron": "ek-seh-SEEF",
+   "cat": "A"
+  },
+  {
+   "source": "reluctant",
+   "target": "réticent",
+   "pron": "ray-tee-SAHN",
+   "cat": "A"
+  },
+  {
+   "source": "willing",
+   "target": "disposé",
+   "pron": "dees-poh-ZAY",
+   "cat": "A"
+  },
+  {
+   "source": "cautious",
+   "target": "prudent",
+   "pron": "prew-DAHN",
+   "cat": "A"
+  },
+  {
+   "source": "reckless",
+   "target": "imprudent",
+   "pron": "an-prew-DAHN",
+   "cat": "A"
+  },
+  {
+   "source": "deliberate",
+   "target": "délibéré",
+   "pron": "day-lee-bay-RAY",
+   "cat": "A"
+  },
+  {
+   "source": "unexpected",
+   "target": "inattendu",
+   "pron": "ee-nah-tahn-DEW",
+   "cat": "A"
+  },
+  {
+   "source": "inevitable",
+   "target": "inévitable",
+   "pron": "ee-nay-vee-TAHBL",
+   "cat": "A"
+  },
+  {
+   "source": "sustainable",
+   "target": "durable",
+   "pron": "dew-RAHBL",
+   "cat": "A"
+  },
+  {
+   "source": "harmful",
+   "target": "nuisible",
+   "pron": "nwee-ZEEBL",
+   "cat": "A"
+  },
+  {
+   "source": "beneficial",
+   "target": "bénéfique",
+   "pron": "bay-nay-FEEK",
+   "cat": "A"
+  },
+  {
+   "source": "demanding",
+   "target": "exigeant",
+   "pron": "eg-zee-ZHAHN",
+   "cat": "A"
+  },
+  {
+   "source": "arduous",
+   "target": "ardu",
+   "pron": "ar-DEW",
+   "cat": "A"
+  },
+  {
+   "source": "ambiguous",
+   "target": "ambigu",
+   "pron": "ahn-bee-GEW",
+   "cat": "A"
+  },
+  {
+   "source": "misleading",
+   "target": "trompeur",
+   "pron": "trohn-PUR",
+   "cat": "A"
+  },
+  {
+   "source": "convincing",
+   "target": "convaincant",
+   "pron": "kohn-van-KAHN",
+   "cat": "A"
+  },
+  {
+   "source": "outstanding",
+   "target": "remarquable",
+   "pron": "ruh-mar-KAHBL",
+   "cat": "A"
+  },
+  {
+   "source": "mediocre",
+   "target": "médiocre",
+   "pron": "may-dee-OKR",
+   "cat": "A"
+  },
+  {
+   "source": "widespread",
+   "target": "répandu",
+   "pron": "ray-pahn-DEW",
+   "cat": "A"
+  },
+  {
+   "source": "thoughtful",
+   "target": "attentionné",
+   "pron": "ah-tahn-syoh-NAY",
+   "cat": "A"
+  },
+  {
+   "source": "ruthless",
+   "target": "impitoyable",
+   "pron": "an-pee-twah-YAHBL",
+   "cat": "A"
+  },
+  {
+   "source": "humble",
+   "target": "modeste",
+   "pron": "moh-DEST",
+   "cat": "A"
+  },
+  {
+   "source": "arrogant",
+   "target": "arrogant",
+   "pron": "ah-roh-GAHN",
+   "cat": "A"
+  },
+  {
+   "source": "indifferent",
+   "target": "indifférent",
+   "pron": "an-dee-fay-RAHN",
+   "cat": "A"
+  },
+  {
+   "source": "enthusiastic",
+   "target": "enthousiaste",
+   "pron": "ahn-too-ZYAHST",
+   "cat": "A"
+  },
+  {
+   "source": "as far as I know",
+   "target": "à ma connaissance",
+   "pron": "ah mah koh-neh-SAHNSS",
+   "cat": "B"
+  },
+  {
+   "source": "in reality",
+   "target": "en réalité",
+   "pron": "ahn ray-ah-lee-TAY",
+   "cat": "B"
+  },
+  {
+   "source": "all things considered",
+   "target": "tout compte fait",
+   "pron": "too kohnt FEH",
+   "cat": "B"
+  },
+  {
+   "source": "that said",
+   "target": "cela dit",
+   "pron": "suh-lah DEE",
+   "cat": "B"
+  },
+  {
+   "source": "on the contrary",
+   "target": "au contraire",
+   "pron": "oh kohn-TREHR",
+   "cat": "B"
+  },
+  {
+   "source": "in any case",
+   "target": "en tout cas",
+   "pron": "ahn too KAH",
+   "cat": "B"
+  },
+  {
+   "source": "as a result",
+   "target": "par conséquent",
+   "pron": "par kohn-say-KAHN",
+   "cat": "B"
+  },
+  {
+   "source": "for the time being",
+   "target": "pour l'instant",
+   "pron": "poor lan-STAHN",
+   "cat": "B"
+  },
+  {
+   "source": "from now on",
+   "target": "désormais",
+   "pron": "day-zor-MEH",
+   "cat": "B"
+  },
+  {
+   "source": "sooner or later",
+   "target": "tôt ou tard",
+   "pron": "toh oo TAR",
+   "cat": "B"
+  },
+  {
+   "source": "on purpose",
+   "target": "exprès",
+   "pron": "ex-PREH",
+   "cat": "B"
+  },
+  {
+   "source": "by chance",
+   "target": "par hasard",
+   "pron": "par ah-ZAR",
+   "cat": "B"
+  },
+  {
+   "source": "at first sight",
+   "target": "à première vue",
+   "pron": "ah pruh-MYEHR VEW",
+   "cat": "B"
+  },
+  {
+   "source": "in the long run",
+   "target": "à long terme",
+   "pron": "ah lohn TEHRM",
+   "cat": "B"
+  },
+  {
+   "source": "in the short term",
+   "target": "à court terme",
+   "pron": "ah koor TEHRM",
+   "cat": "B"
+  },
+  {
+   "source": "broadly speaking",
+   "target": "dans l'ensemble",
+   "pron": "dahn lahn-SAHNBL",
+   "cat": "B"
+  },
+  {
+   "source": "roughly / about",
+   "target": "environ",
+   "pron": "ahn-vee-ROHN",
+   "cat": "B"
+  },
+  {
+   "source": "precisely",
+   "target": "précisément",
+   "pron": "pray-see-zay-MAHN",
+   "cat": "B"
+  },
+  {
+   "source": "hardly",
+   "target": "à peine",
+   "pron": "ah PEN",
+   "cat": "B"
+  },
+  {
+   "source": "just barely",
+   "target": "tout juste",
+   "pron": "too ZHEWST",
+   "cat": "B"
+  },
+  {
+   "source": "no wonder",
+   "target": "pas étonnant",
+   "pron": "pah ay-toh-NAHN",
+   "cat": "B"
+  },
+  {
+   "source": "it's worth it",
+   "target": "ça vaut le coup",
+   "pron": "sah voh luh KOO",
+   "cat": "B"
+  },
+  {
+   "source": "it doesn't matter",
+   "target": "ça n'a pas d'importance",
+   "pron": "sah nah pah dan-por-TAHNSS",
+   "cat": "B"
+  },
+  {
+   "source": "to be honest",
+   "target": "pour être honnête",
+   "pron": "poor ETR oh-NET",
+   "cat": "B"
+  },
+  {
+   "source": "as expected",
+   "target": "comme prévu",
+   "pron": "kohm pray-VEW",
+   "cat": "B"
+  },
+  {
+   "source": "against all odds",
+   "target": "contre toute attente",
+   "pron": "KOHNTR toot ah-TAHNT",
    "cat": "B"
   },
   {
@@ -3034,21 +6354,15 @@
    "cat": "B"
   },
   {
-   "source": "so much the better",
-   "target": "tant mieux",
-   "pron": "tahn MYUH",
+   "source": "step by step",
+   "target": "étape par étape",
+   "pron": "ay-TAHP par ay-TAHP",
    "cat": "B"
   },
   {
-   "source": "too bad",
-   "target": "tant pis",
-   "pron": "tahn PEE",
-   "cat": "B"
-  },
-  {
-   "source": "long live France!",
-   "target": "vive la France !",
-   "pron": "veev lah FRAHNSS",
+   "source": "on second thought",
+   "target": "à la réflexion",
+   "pron": "ah lah ray-flek-SYOHN",
    "cat": "B"
   }
  ]

@@ -1,11 +1,13 @@
 {
  "language": "el",
  "sourceLanguage": "de",
+ "tierSize": 200,
  "tierNames": [
   "Ilote",
   "Hoplite",
   "Stratège",
-  "Philosophe"
+  "Philosophe",
+  "Olympien"
  ],
  "words": [
   {
@@ -2209,6 +2211,4524 @@
    "target": "με συγχωρείτε",
    "pron": "me synchoríte",
    "cat": "B"
+  },
+  {
+   "source": "Freude",
+   "target": "η χαρά",
+   "pron": "i chará",
+   "cat": "N"
+  },
+  {
+   "source": "Angst",
+   "target": "ο φόβος",
+   "pron": "o fóvos",
+   "cat": "N"
+  },
+  {
+   "source": "Liebe",
+   "target": "η αγάπη",
+   "pron": "i agápi",
+   "cat": "N"
+  },
+  {
+   "source": "Traum",
+   "target": "το όνειρο",
+   "pron": "to óniro",
+   "cat": "N"
+  },
+  {
+   "source": "Lüge",
+   "target": "το ψέμα",
+   "pron": "to pséma",
+   "cat": "N"
+  },
+  {
+   "source": "Fehler",
+   "target": "το λάθος",
+   "pron": "to láthos",
+   "cat": "N"
+  },
+  {
+   "source": "Ratschlag",
+   "target": "η συμβουλή",
+   "pron": "i symvoulí",
+   "cat": "N"
+  },
+  {
+   "source": "Gefühl",
+   "target": "το συναίσθημα",
+   "pron": "to synésthima",
+   "cat": "N"
+  },
+  {
+   "source": "Erinnerung",
+   "target": "η ανάμνηση",
+   "pron": "i anámnisi",
+   "cat": "N"
+  },
+  {
+   "source": "Beispiel",
+   "target": "το παράδειγμα",
+   "pron": "to parádigma",
+   "cat": "N"
+  },
+  {
+   "source": "Geschichte",
+   "target": "η ιστορία",
+   "pron": "i istoría",
+   "cat": "N"
+  },
+  {
+   "source": "Ergebnis",
+   "target": "το αποτέλεσμα",
+   "pron": "to apotélesma",
+   "cat": "N"
+  },
+  {
+   "source": "Möglichkeit",
+   "target": "η δυνατότητα",
+   "pron": "i dynatótita",
+   "cat": "N"
+  },
+  {
+   "source": "Unterschied",
+   "target": "η διαφορά",
+   "pron": "i diaforá",
+   "cat": "N"
+  },
+  {
+   "source": "Situation",
+   "target": "η κατάσταση",
+   "pron": "i katástasi",
+   "cat": "N"
+  },
+  {
+   "source": "Moment / Augenblick",
+   "target": "η στιγμή",
+   "pron": "i stigmí",
+   "cat": "N"
+  },
+  {
+   "source": "Wahl / Auswahl",
+   "target": "η επιλογή",
+   "pron": "i epilogí",
+   "cat": "N"
+  },
+  {
+   "source": "Entscheidung",
+   "target": "η απόφαση",
+   "pron": "i apófasi",
+   "cat": "N"
+  },
+  {
+   "source": "Gefahr",
+   "target": "ο κίνδυνος",
+   "pron": "o kíndynos",
+   "cat": "N"
+  },
+  {
+   "source": "Frieden",
+   "target": "η ειρήνη",
+   "pron": "i iríni",
+   "cat": "N"
+  },
+  {
+   "source": "Lärm",
+   "target": "ο θόρυβος",
+   "pron": "o thóryvos",
+   "cat": "N"
+  },
+  {
+   "source": "Ruhe / Stille",
+   "target": "η ησυχία",
+   "pron": "i isychía",
+   "cat": "N"
+  },
+  {
+   "source": "Glück (Chance)",
+   "target": "η τύχη",
+   "pron": "i týchi",
+   "cat": "N"
+  },
+  {
+   "source": "Hoffnung",
+   "target": "η ελπίδα",
+   "pron": "i elpída",
+   "cat": "N"
+  },
+  {
+   "source": "Trauer / Kummer",
+   "target": "η λύπη",
+   "pron": "i lýpi",
+   "cat": "N"
+  },
+  {
+   "source": "Wut / Zorn",
+   "target": "ο θυμός",
+   "pron": "o thymós",
+   "cat": "N"
+  },
+  {
+   "source": "Überraschung",
+   "target": "η έκπληξη",
+   "pron": "i ékplixi",
+   "cat": "N"
+  },
+  {
+   "source": "Nachbar",
+   "target": "ο γείτονας",
+   "pron": "o gítonas",
+   "cat": "N"
+  },
+  {
+   "source": "Gast / Besucher",
+   "target": "ο επισκέπτης",
+   "pron": "o episképtis",
+   "cat": "N"
+  },
+  {
+   "source": "Fest / Feier",
+   "target": "η γιορτή",
+   "pron": "i giortí",
+   "cat": "N"
+  },
+  {
+   "source": "Lied",
+   "target": "το τραγούδι",
+   "pron": "to tragoúdi",
+   "cat": "N"
+  },
+  {
+   "source": "Spiel / Spielzeug",
+   "target": "το παιχνίδι",
+   "pron": "to pechnídi",
+   "cat": "N"
+  },
+  {
+   "source": "Hilfe",
+   "target": "η βοήθεια",
+   "pron": "i voíthia",
+   "cat": "N"
+  },
+  {
+   "source": "Beruf",
+   "target": "το επάγγελμα",
+   "pron": "to epángelma",
+   "cat": "N"
+  },
+  {
+   "source": "Chef",
+   "target": "το αφεντικό",
+   "pron": "to afentikó",
+   "cat": "N"
+  },
+  {
+   "source": "Kollege",
+   "target": "ο συνάδελφος",
+   "pron": "o synádelfos",
+   "cat": "N"
+  },
+  {
+   "source": "Termin / Verabredung",
+   "target": "το ραντεβού",
+   "pron": "to rantevoú",
+   "cat": "N"
+  },
+  {
+   "source": "Urlaub / Ferien",
+   "target": "οι διακοπές",
+   "pron": "i diakopés",
+   "cat": "N"
+  },
+  {
+   "source": "Erde / Boden",
+   "target": "η γη",
+   "pron": "i gi",
+   "cat": "N"
+  },
+  {
+   "source": "Licht",
+   "target": "το φως",
+   "pron": "to fos",
+   "cat": "N"
+  },
+  {
+   "source": "Schatten",
+   "target": "η σκιά",
+   "pron": "i skiá",
+   "cat": "N"
+  },
+  {
+   "source": "Stimme",
+   "target": "η φωνή",
+   "pron": "i foní",
+   "cat": "N"
+  },
+  {
+   "source": "lächeln",
+   "target": "χαμογελάω",
+   "pron": "chamogeláo",
+   "cat": "V"
+  },
+  {
+   "source": "fühlen",
+   "target": "νιώθω",
+   "pron": "niótho",
+   "cat": "V"
+  },
+  {
+   "source": "werden",
+   "target": "γίνομαι",
+   "pron": "gínome",
+   "cat": "V"
+  },
+  {
+   "source": "aufhören",
+   "target": "σταματάω",
+   "pron": "stamatáo",
+   "cat": "V"
+  },
+  {
+   "source": "weitermachen",
+   "target": "συνεχίζω",
+   "pron": "synechízo",
+   "cat": "V"
+  },
+  {
+   "source": "auswählen",
+   "target": "διαλέγω",
+   "pron": "dialégo",
+   "cat": "V"
+  },
+  {
+   "source": "schaffen / erreichen",
+   "target": "καταφέρνω",
+   "pron": "kataférno",
+   "cat": "V"
+  },
+  {
+   "source": "treffen (jemanden)",
+   "target": "συναντάω",
+   "pron": "synantáo",
+   "cat": "V"
+  },
+  {
+   "source": "einladen",
+   "target": "προσκαλώ",
+   "pron": "proskaló",
+   "cat": "V"
+  },
+  {
+   "source": "besuchen",
+   "target": "επισκέπτομαι",
+   "pron": "episképtome",
+   "cat": "V"
+  },
+  {
+   "source": "bekommen / erhalten",
+   "target": "λαμβάνω",
+   "pron": "lamváno",
+   "cat": "V"
+  },
+  {
+   "source": "tragen (schleppen)",
+   "target": "κουβαλάω",
+   "pron": "kouvaláo",
+   "cat": "V"
+  },
+  {
+   "source": "folgen",
+   "target": "ακολουθώ",
+   "pron": "akolouthó",
+   "cat": "V"
+  },
+  {
+   "source": "gewinnen / verdienen",
+   "target": "κερδίζω",
+   "pron": "kerdízo",
+   "cat": "V"
+  },
+  {
+   "source": "zu Fuß gehen",
+   "target": "περπατάω",
+   "pron": "perpatáo",
+   "cat": "V"
+  },
+  {
+   "source": "wirklich",
+   "target": "πραγματικά",
+   "pron": "pragmatiká",
+   "cat": "B"
+  },
+  {
+   "source": "plötzlich",
+   "target": "ξαφνικά",
+   "pron": "xafniká",
+   "cat": "B"
+  },
+  {
+   "source": "zuerst",
+   "target": "πρώτα",
+   "pron": "próta",
+   "cat": "B"
+  },
+  {
+   "source": "danach",
+   "target": "μετά",
+   "pron": "metá",
+   "cat": "B"
+  },
+  {
+   "source": "oder",
+   "target": "ή",
+   "pron": "i",
+   "cat": "B"
+  },
+  {
+   "source": "wenn / falls",
+   "target": "αν",
+   "pron": "an",
+   "cat": "B"
+  },
+  {
+   "source": "gegen",
+   "target": "κατά",
+   "pron": "katá",
+   "cat": "B"
+  },
+  {
+   "source": "jeder / jede",
+   "target": "κάθε",
+   "pron": "káthe",
+   "cat": "B"
+  },
+  {
+   "source": "etwas",
+   "target": "κάτι",
+   "pron": "káti",
+   "cat": "B"
+  },
+  {
+   "source": "jemand",
+   "target": "κάποιος",
+   "pron": "kápios",
+   "cat": "B"
+  },
+  {
+   "source": "niemand",
+   "target": "κανείς",
+   "pron": "kanís",
+   "cat": "B"
+  },
+  {
+   "source": "nichts",
+   "target": "τίποτα",
+   "pron": "típota",
+   "cat": "B"
+  },
+  {
+   "source": "überall",
+   "target": "παντού",
+   "pron": "pantoú",
+   "cat": "B"
+  },
+  {
+   "source": "irgendwo",
+   "target": "κάπου",
+   "pron": "kápou",
+   "cat": "B"
+  },
+  {
+   "source": "bald",
+   "target": "σύντομα",
+   "pron": "sýntoma",
+   "cat": "B"
+  },
+  {
+   "source": "Magen",
+   "target": "το στομάχι",
+   "pron": "to stomáchi",
+   "cat": "N"
+  },
+  {
+   "source": "Hals",
+   "target": "ο λαιμός",
+   "pron": "o lemós",
+   "cat": "N"
+  },
+  {
+   "source": "Nase",
+   "target": "η μύτη",
+   "pron": "i míti",
+   "cat": "N"
+  },
+  {
+   "source": "Zahn",
+   "target": "το δόντι",
+   "pron": "to dónti",
+   "cat": "N"
+  },
+  {
+   "source": "Finger",
+   "target": "το δάχτυλο",
+   "pron": "to dáchtylo",
+   "cat": "N"
+  },
+  {
+   "source": "Haare",
+   "target": "τα μαλλιά",
+   "pron": "ta malliá",
+   "cat": "N"
+  },
+  {
+   "source": "Gesicht",
+   "target": "το πρόσωπο",
+   "pron": "to prósopo",
+   "cat": "N"
+  },
+  {
+   "source": "Schulter",
+   "target": "ο ώμος",
+   "pron": "o ómos",
+   "cat": "N"
+  },
+  {
+   "source": "Knie",
+   "target": "το γόνατο",
+   "pron": "to gónato",
+   "cat": "N"
+  },
+  {
+   "source": "Blut",
+   "target": "το αίμα",
+   "pron": "to éma",
+   "cat": "N"
+  },
+  {
+   "source": "Knochen",
+   "target": "το κόκαλο",
+   "pron": "to kókalo",
+   "cat": "N"
+  },
+  {
+   "source": "Haut",
+   "target": "το δέρμα",
+   "pron": "to dérma",
+   "cat": "N"
+  },
+  {
+   "source": "Rücken",
+   "target": "η πλάτη",
+   "pron": "i pláti",
+   "cat": "N"
+  },
+  {
+   "source": "Gehirn",
+   "target": "το μυαλό",
+   "pron": "to mialó",
+   "cat": "N"
+  },
+  {
+   "source": "Brust",
+   "target": "το στήθος",
+   "pron": "to stíthos",
+   "cat": "N"
+  },
+  {
+   "source": "Zunge",
+   "target": "η γλώσσα (στόμα)",
+   "pron": "i glóssa",
+   "cat": "N"
+  },
+  {
+   "source": "Fieber",
+   "target": "ο πυρετός",
+   "pron": "o pyretós",
+   "cat": "N"
+  },
+  {
+   "source": "Medikament",
+   "target": "το φάρμακο",
+   "pron": "to fármako",
+   "cat": "N"
+  },
+  {
+   "source": "Behandlung",
+   "target": "η θεραπεία",
+   "pron": "i therapía",
+   "cat": "N"
+  },
+  {
+   "source": "Operation",
+   "target": "η εγχείρηση",
+   "pron": "i enchírisi",
+   "cat": "N"
+  },
+  {
+   "source": "Wunde",
+   "target": "το τραύμα",
+   "pron": "to trávma",
+   "cat": "N"
+  },
+  {
+   "source": "Krankheit",
+   "target": "η αρρώστια",
+   "pron": "i arróstia",
+   "cat": "N"
+  },
+  {
+   "source": "Symptom",
+   "target": "το σύμπτωμα",
+   "pron": "to sýmptoma",
+   "cat": "N"
+  },
+  {
+   "source": "Krankenschwester",
+   "target": "η νοσοκόμα",
+   "pron": "i nosokóma",
+   "cat": "N"
+  },
+  {
+   "source": "Versicherung",
+   "target": "η ασφάλεια",
+   "pron": "i asfália",
+   "cat": "N"
+  },
+  {
+   "source": "Diät",
+   "target": "η δίαιτα",
+   "pron": "i díeta",
+   "cat": "N"
+  },
+  {
+   "source": "Schlaf",
+   "target": "ο ύπνος",
+   "pron": "o ýpnos",
+   "cat": "N"
+  },
+  {
+   "source": "Übung",
+   "target": "η άσκηση",
+   "pron": "i áskisi",
+   "cat": "N"
+  },
+  {
+   "source": "Stress",
+   "target": "το άγχος",
+   "pron": "to ánchos",
+   "cat": "N"
+  },
+  {
+   "source": "Gesundheit",
+   "target": "η υγεία",
+   "pron": "i ygía",
+   "cat": "N"
+  },
+  {
+   "source": "Schmerz",
+   "target": "ο πόνος",
+   "pron": "o pónos",
+   "cat": "N"
+  },
+  {
+   "source": "Erholung",
+   "target": "η ανάρρωση",
+   "pron": "i anárrosi",
+   "cat": "N"
+  },
+  {
+   "source": "Zahnarzt",
+   "target": "ο οδοντίατρος",
+   "pron": "o odontíatros",
+   "cat": "N"
+  },
+  {
+   "source": "Apotheker",
+   "target": "ο φαρμακοποιός",
+   "pron": "o farmakopiós",
+   "cat": "N"
+  },
+  {
+   "source": "Notfall",
+   "target": "η επείγουσα ανάγκη",
+   "pron": "i epígousa anángi",
+   "cat": "N"
+  },
+  {
+   "source": "Krankenwagen",
+   "target": "το ασθενοφόρο",
+   "pron": "to asthenofóro",
+   "cat": "N"
+  },
+  {
+   "source": "Aufzug",
+   "target": "το ασανσέρ",
+   "pron": "to asansér",
+   "cat": "N"
+  },
+  {
+   "source": "Treppe",
+   "target": "η σκάλα",
+   "pron": "i skála",
+   "cat": "N"
+  },
+  {
+   "source": "Dach",
+   "target": "η στέγη",
+   "pron": "i stégi",
+   "cat": "N"
+  },
+  {
+   "source": "Miete",
+   "target": "το ενοίκιο",
+   "pron": "to eníkio",
+   "cat": "N"
+  },
+  {
+   "source": "Gebäude",
+   "target": "το κτίριο",
+   "pron": "to ktírio",
+   "cat": "N"
+  },
+  {
+   "source": "Viertel (Stadtteil)",
+   "target": "η γειτονιά",
+   "pron": "i gitoniá",
+   "cat": "N"
+  },
+  {
+   "source": "Brücke",
+   "target": "η γέφυρα",
+   "pron": "i géfyra",
+   "cat": "N"
+  },
+  {
+   "source": "Park",
+   "target": "το πάρκο",
+   "pron": "to párko",
+   "cat": "N"
+  },
+  {
+   "source": "Bürgersteig",
+   "target": "το πεζοδρόμιο",
+   "pron": "to pezodrómio",
+   "cat": "N"
+  },
+  {
+   "source": "Verkehr",
+   "target": "η κίνηση",
+   "pron": "i kínisi",
+   "cat": "N"
+  },
+  {
+   "source": "Ampel",
+   "target": "το φανάρι",
+   "pron": "to fanári",
+   "cat": "N"
+  },
+  {
+   "source": "Parkplatz",
+   "target": "το πάρκινγκ",
+   "pron": "to párking",
+   "cat": "N"
+  },
+  {
+   "source": "Fahrrad",
+   "target": "το ποδήλατο",
+   "pron": "to podílato",
+   "cat": "N"
+  },
+  {
+   "source": "Motorrad",
+   "target": "η μοτοσικλέτα",
+   "pron": "i motosikléta",
+   "cat": "N"
+  },
+  {
+   "source": "Taxi",
+   "target": "το ταξί",
+   "pron": "to taxí",
+   "cat": "N"
+  },
+  {
+   "source": "U-Bahn",
+   "target": "το μετρό",
+   "pron": "to metró",
+   "cat": "N"
+  },
+  {
+   "source": "Fähre",
+   "target": "το πλοίο",
+   "pron": "to plío",
+   "cat": "N"
+  },
+  {
+   "source": "Gepäck",
+   "target": "οι αποσκευές",
+   "pron": "i aposkevés",
+   "cat": "N"
+  },
+  {
+   "source": "Koffer",
+   "target": "η βαλίτσα",
+   "pron": "i valítsa",
+   "cat": "N"
+  },
+  {
+   "source": "Pass",
+   "target": "το πασαπόρτο",
+   "pron": "to pasapórto",
+   "cat": "N"
+  },
+  {
+   "source": "Grenze",
+   "target": "τα σύνορα",
+   "pron": "ta sýnora",
+   "cat": "N"
+  },
+  {
+   "source": "Verspätung",
+   "target": "η καθυστέρηση",
+   "pron": "i kathystérisi",
+   "cat": "N"
+  },
+  {
+   "source": "Karte (Plan)",
+   "target": "ο χάρτης",
+   "pron": "o chártis",
+   "cat": "N"
+  },
+  {
+   "source": "Ausgang",
+   "target": "η έξοδος",
+   "pron": "i éxodos",
+   "cat": "N"
+  },
+  {
+   "source": "Eingang",
+   "target": "η είσοδος",
+   "pron": "i ísodos",
+   "cat": "N"
+  },
+  {
+   "source": "Sturm",
+   "target": "η καταιγίδα",
+   "pron": "i kategída",
+   "cat": "N"
+  },
+  {
+   "source": "Wolke",
+   "target": "το σύννεφο",
+   "pron": "to sýnnefo",
+   "cat": "N"
+  },
+  {
+   "source": "Nebel",
+   "target": "η ομίχλη",
+   "pron": "i omíchli",
+   "cat": "N"
+  },
+  {
+   "source": "Wald",
+   "target": "το δάσος",
+   "pron": "to dásos",
+   "cat": "N"
+  },
+  {
+   "source": "Fluss",
+   "target": "το ποτάμι",
+   "pron": "to potámi",
+   "cat": "N"
+  },
+  {
+   "source": "See (Gewässer)",
+   "target": "η λίμνη",
+   "pron": "i límni",
+   "cat": "N"
+  },
+  {
+   "source": "Wüste",
+   "target": "η έρημος",
+   "pron": "i érimos",
+   "cat": "N"
+  },
+  {
+   "source": "Küste",
+   "target": "η ακτή",
+   "pron": "i aktí",
+   "cat": "N"
+  },
+  {
+   "source": "Umwelt",
+   "target": "το περιβάλλον",
+   "pron": "to perivállon",
+   "cat": "N"
+  },
+  {
+   "source": "Verschmutzung",
+   "target": "η μόλυνση",
+   "pron": "i mólynsi",
+   "cat": "N"
+  },
+  {
+   "source": "Müll",
+   "target": "τα σκουπίδια",
+   "pron": "ta skoupídia",
+   "cat": "N"
+  },
+  {
+   "source": "Energie",
+   "target": "η ενέργεια",
+   "pron": "i enérgia",
+   "cat": "N"
+  },
+  {
+   "source": "Strom",
+   "target": "το ρεύμα",
+   "pron": "to révma",
+   "cat": "N"
+  },
+  {
+   "source": "Klima",
+   "target": "το κλίμα",
+   "pron": "to klíma",
+   "cat": "N"
+  },
+  {
+   "source": "Ernte",
+   "target": "η σοδειά",
+   "pron": "i sodiá",
+   "cat": "N"
+  },
+  {
+   "source": "Feld",
+   "target": "το χωράφι",
+   "pron": "to choráfi",
+   "cat": "N"
+  },
+  {
+   "source": "Art (Spezies)",
+   "target": "το είδος",
+   "pron": "to ídos",
+   "cat": "N"
+  },
+  {
+   "source": "Natur",
+   "target": "η φύση",
+   "pron": "i fýsi",
+   "cat": "N"
+  },
+  {
+   "source": "Insekt",
+   "target": "το έντομο",
+   "pron": "to éntomo",
+   "cat": "N"
+  },
+  {
+   "source": "Fischer",
+   "target": "ο ψαράς",
+   "pron": "o psarás",
+   "cat": "N"
+  },
+  {
+   "source": "Bauer",
+   "target": "ο αγρότης",
+   "pron": "o agrótis",
+   "cat": "N"
+  },
+  {
+   "source": "Lehrer",
+   "target": "ο καθηγητής",
+   "pron": "o kathigitís",
+   "cat": "N"
+  },
+  {
+   "source": "Schüler",
+   "target": "ο μαθητής",
+   "pron": "o mathitís",
+   "cat": "N"
+  },
+  {
+   "source": "Student",
+   "target": "ο φοιτητής",
+   "pron": "o fititís",
+   "cat": "N"
+  },
+  {
+   "source": "Universität",
+   "target": "το πανεπιστήμιο",
+   "pron": "to panepistímio",
+   "cat": "N"
+  },
+  {
+   "source": "Prüfung",
+   "target": "οι εξετάσεις",
+   "pron": "i exetásis",
+   "cat": "N"
+  },
+  {
+   "source": "Hausaufgabe",
+   "target": "τα μαθήματα",
+   "pron": "ta mathímata",
+   "cat": "N"
+  },
+  {
+   "source": "Note (Schule)",
+   "target": "ο βαθμός",
+   "pron": "o vathmós",
+   "cat": "N"
+  },
+  {
+   "source": "Klasse (Kurs)",
+   "target": "η τάξη",
+   "pron": "i táxi",
+   "cat": "N"
+  },
+  {
+   "source": "Bibliothek",
+   "target": "η βιβλιοθήκη",
+   "pron": "i vivliothíki",
+   "cat": "N"
+  },
+  {
+   "source": "Wörterbuch",
+   "target": "το λεξικό",
+   "pron": "to lexikó",
+   "cat": "N"
+  },
+  {
+   "source": "Satz",
+   "target": "η πρόταση",
+   "pron": "i prótasi",
+   "cat": "N"
+  },
+  {
+   "source": "Übersetzung",
+   "target": "η μετάφραση",
+   "pron": "i metáfrasi",
+   "cat": "N"
+  },
+  {
+   "source": "Aussprache",
+   "target": "η προφορά",
+   "pron": "i proforá",
+   "cat": "N"
+  },
+  {
+   "source": "Grammatik",
+   "target": "η γραμματική",
+   "pron": "i grammatikí",
+   "cat": "N"
+  },
+  {
+   "source": "Bildschirm",
+   "target": "η οθόνη",
+   "pron": "i othóni",
+   "cat": "N"
+  },
+  {
+   "source": "Datei",
+   "target": "το αρχείο",
+   "pron": "to archío",
+   "cat": "N"
+  },
+  {
+   "source": "Passwort",
+   "target": "ο κωδικός",
+   "pron": "o kodikós",
+   "cat": "N"
+  },
+  {
+   "source": "Internet",
+   "target": "το διαδίκτυο",
+   "pron": "to diadíktyo",
+   "cat": "N"
+  },
+  {
+   "source": "Netzwerk",
+   "target": "το δίκτυο",
+   "pron": "to díktyo",
+   "cat": "N"
+  },
+  {
+   "source": "Programm",
+   "target": "το πρόγραμμα",
+   "pron": "to prógramma",
+   "cat": "N"
+  },
+  {
+   "source": "Daten",
+   "target": "τα δεδομένα",
+   "pron": "ta dedoména",
+   "cat": "N"
+  },
+  {
+   "source": "Gerät",
+   "target": "η συσκευή",
+   "pron": "i syskeví",
+   "cat": "N"
+  },
+  {
+   "source": "Anwendung / App",
+   "target": "η εφαρμογή",
+   "pron": "i efarmogí",
+   "cat": "N"
+  },
+  {
+   "source": "Firma",
+   "target": "η εταιρεία",
+   "pron": "i etería",
+   "cat": "N"
+  },
+  {
+   "source": "Büro",
+   "target": "το γραφείο",
+   "pron": "to grafío",
+   "cat": "N"
+  },
+  {
+   "source": "Mitarbeiter",
+   "target": "ο υπάλληλος",
+   "pron": "o ypállilos",
+   "cat": "N"
+  },
+  {
+   "source": "Arbeitgeber",
+   "target": "ο εργοδότης",
+   "pron": "o ergodótis",
+   "cat": "N"
+  },
+  {
+   "source": "Vertrag",
+   "target": "το συμβόλαιο",
+   "pron": "to symvóleo",
+   "cat": "N"
+  },
+  {
+   "source": "Gehalt",
+   "target": "ο μισθός",
+   "pron": "o misthós",
+   "cat": "N"
+  },
+  {
+   "source": "Lohn (Bezahlung)",
+   "target": "η πληρωμή",
+   "pron": "i pliromí",
+   "cat": "N"
+  },
+  {
+   "source": "Rechnung (Faktura)",
+   "target": "το τιμολόγιο",
+   "pron": "to timológio",
+   "cat": "N"
+  },
+  {
+   "source": "Steuer",
+   "target": "ο φόρος",
+   "pron": "o fóros",
+   "cat": "N"
+  },
+  {
+   "source": "Schulden",
+   "target": "τα χρέη",
+   "pron": "ta chréi",
+   "cat": "N"
+  },
+  {
+   "source": "Kredit",
+   "target": "το δάνειο",
+   "pron": "to dánio",
+   "cat": "N"
+  },
+  {
+   "source": "Konto",
+   "target": "ο λογαριασμός (τράπεζα)",
+   "pron": "o logariasmós",
+   "cat": "N"
+  },
+  {
+   "source": "Gewinn",
+   "target": "το κέρδος",
+   "pron": "to kérdos",
+   "cat": "N"
+  },
+  {
+   "source": "Verlust",
+   "target": "η ζημιά",
+   "pron": "i zimiá",
+   "cat": "N"
+  },
+  {
+   "source": "Wirtschaft",
+   "target": "η οικονομία",
+   "pron": "i ikonomía",
+   "cat": "N"
+  },
+  {
+   "source": "Industrie",
+   "target": "η βιομηχανία",
+   "pron": "i viomichanía",
+   "cat": "N"
+  },
+  {
+   "source": "Fabrik",
+   "target": "το εργοστάσιο",
+   "pron": "to ergostásio",
+   "cat": "N"
+  },
+  {
+   "source": "Arbeitslosigkeit",
+   "target": "η ανεργία",
+   "pron": "i anergía",
+   "cat": "N"
+  },
+  {
+   "source": "Bewerbung",
+   "target": "η αίτηση",
+   "pron": "i étisi",
+   "cat": "N"
+  },
+  {
+   "source": "Vorstellungsgespräch",
+   "target": "η συνέντευξη",
+   "pron": "i synénteyxi",
+   "cat": "N"
+  },
+  {
+   "source": "Erfahrung",
+   "target": "η εμπειρία",
+   "pron": "i empiría",
+   "cat": "N"
+  },
+  {
+   "source": "Ausbildung",
+   "target": "η εκπαίδευση",
+   "pron": "i ekpédefsi",
+   "cat": "N"
+  },
+  {
+   "source": "Fähigkeit",
+   "target": "η ικανότητα",
+   "pron": "i ikanótita",
+   "cat": "N"
+  },
+  {
+   "source": "Frist",
+   "target": "η προθεσμία",
+   "pron": "i prothesmía",
+   "cat": "N"
+  },
+  {
+   "source": "Projekt",
+   "target": "το έργο",
+   "pron": "to érgo",
+   "cat": "N"
+  },
+  {
+   "source": "Team / Mannschaft",
+   "target": "η ομάδα",
+   "pron": "i omáda",
+   "cat": "N"
+  },
+  {
+   "source": "Bericht",
+   "target": "η αναφορά",
+   "pron": "i anaforá",
+   "cat": "N"
+  },
+  {
+   "source": "Sitzung",
+   "target": "η συνάντηση",
+   "pron": "i synántisi",
+   "cat": "N"
+  },
+  {
+   "source": "Kunde",
+   "target": "ο πελάτης",
+   "pron": "o pelátis",
+   "cat": "N"
+  },
+  {
+   "source": "Lieferant",
+   "target": "ο προμηθευτής",
+   "pron": "o promitheftís",
+   "cat": "N"
+  },
+  {
+   "source": "Angebot",
+   "target": "η προσφορά",
+   "pron": "i prosforá",
+   "cat": "N"
+  },
+  {
+   "source": "Nachfrage",
+   "target": "η ζήτηση",
+   "pron": "i zítisi",
+   "cat": "N"
+  },
+  {
+   "source": "Konkurrenz",
+   "target": "ο ανταγωνισμός",
+   "pron": "o antagonismós",
+   "cat": "N"
+  },
+  {
+   "source": "Qualität",
+   "target": "η ποιότητα",
+   "pron": "i piótita",
+   "cat": "N"
+  },
+  {
+   "source": "Menge",
+   "target": "η ποσότητα",
+   "pron": "i posótita",
+   "cat": "N"
+  },
+  {
+   "source": "Rabatt",
+   "target": "η έκπτωση",
+   "pron": "i ékptosi",
+   "cat": "N"
+  },
+  {
+   "source": "Quittung",
+   "target": "η απόδειξη",
+   "pron": "i apódixi",
+   "cat": "N"
+  },
+  {
+   "source": "Gesellschaft",
+   "target": "η κοινωνία",
+   "pron": "i kinonía",
+   "cat": "N"
+  },
+  {
+   "source": "Bürger",
+   "target": "ο πολίτης",
+   "pron": "o polítis",
+   "cat": "N"
+  },
+  {
+   "source": "Regierung",
+   "target": "η κυβέρνηση",
+   "pron": "i kyvérnisi",
+   "cat": "N"
+  },
+  {
+   "source": "Wahl (Abstimmung)",
+   "target": "οι εκλογές",
+   "pron": "i eklogés",
+   "cat": "N"
+  },
+  {
+   "source": "Stimme (Wahl)",
+   "target": "η ψήφος",
+   "pron": "i psífos",
+   "cat": "N"
+  },
+  {
+   "source": "Partei",
+   "target": "το κόμμα",
+   "pron": "to kómma",
+   "cat": "N"
+  },
+  {
+   "source": "Präsident",
+   "target": "ο πρόεδρος",
+   "pron": "o próedros",
+   "cat": "N"
+  },
+  {
+   "source": "Minister",
+   "target": "ο υπουργός",
+   "pron": "o ypourgós",
+   "cat": "N"
+  },
+  {
+   "source": "Staat",
+   "target": "το κράτος",
+   "pron": "to krátos",
+   "cat": "N"
+  },
+  {
+   "source": "Macht",
+   "target": "η εξουσία",
+   "pron": "i exousía",
+   "cat": "N"
+  },
+  {
+   "source": "Recht (Anspruch)",
+   "target": "το δικαίωμα",
+   "pron": "to dikéoma",
+   "cat": "N"
+  },
+  {
+   "source": "Pflicht",
+   "target": "το καθήκον",
+   "pron": "to kathíkon",
+   "cat": "N"
+  },
+  {
+   "source": "Freiheit",
+   "target": "η ελευθερία",
+   "pron": "i elefthería",
+   "cat": "N"
+  },
+  {
+   "source": "Gleichheit",
+   "target": "η ισότητα",
+   "pron": "i isótita",
+   "cat": "N"
+  },
+  {
+   "source": "Gerechtigkeit",
+   "target": "η δικαιοσύνη",
+   "pron": "i dikeosýni",
+   "cat": "N"
+  },
+  {
+   "source": "Gesetz",
+   "target": "ο νόμος",
+   "pron": "o nómos",
+   "cat": "N"
+  },
+  {
+   "source": "Gericht",
+   "target": "το δικαστήριο",
+   "pron": "to dikastírio",
+   "cat": "N"
+  },
+  {
+   "source": "Richter",
+   "target": "ο δικαστής",
+   "pron": "o dikastís",
+   "cat": "N"
+  },
+  {
+   "source": "Anwalt",
+   "target": "ο δικηγόρος",
+   "pron": "o dikigóros",
+   "cat": "N"
+  },
+  {
+   "source": "Verbrechen",
+   "target": "το έγκλημα",
+   "pron": "to énklima",
+   "cat": "N"
+  },
+  {
+   "source": "Gefängnis",
+   "target": "η φυλακή",
+   "pron": "i fylakí",
+   "cat": "N"
+  },
+  {
+   "source": "Krieg",
+   "target": "ο πόλεμος",
+   "pron": "o pólemos",
+   "cat": "N"
+  },
+  {
+   "source": "Armee",
+   "target": "ο στρατός",
+   "pron": "o stratós",
+   "cat": "N"
+  },
+  {
+   "source": "Sieg",
+   "target": "η νίκη",
+   "pron": "i níki",
+   "cat": "N"
+  },
+  {
+   "source": "Niederlage",
+   "target": "η ήττα",
+   "pron": "i ítta",
+   "cat": "N"
+  },
+  {
+   "source": "Grenze (Limit)",
+   "target": "το όριο",
+   "pron": "to ório",
+   "cat": "N"
+  },
+  {
+   "source": "Bevölkerung",
+   "target": "ο πληθυσμός",
+   "pron": "o plithysmós",
+   "cat": "N"
+  },
+  {
+   "source": "Gemeinschaft",
+   "target": "η κοινότητα",
+   "pron": "i kinótita",
+   "cat": "N"
+  },
+  {
+   "source": "Generation",
+   "target": "η γενιά",
+   "pron": "i geniá",
+   "cat": "N"
+  },
+  {
+   "source": "Armut",
+   "target": "η φτώχεια",
+   "pron": "i ftóchia",
+   "cat": "N"
+  },
+  {
+   "source": "Reichtum",
+   "target": "ο πλούτος",
+   "pron": "o ploútos",
+   "cat": "N"
+  },
+  {
+   "source": "Ungleichheit",
+   "target": "η ανισότητα",
+   "pron": "i anisótita",
+   "cat": "N"
+  },
+  {
+   "source": "Migration",
+   "target": "η μετανάστευση",
+   "pron": "i metanástefsi",
+   "cat": "N"
+  },
+  {
+   "source": "Identität",
+   "target": "η ταυτότητα",
+   "pron": "i taftótita",
+   "cat": "N"
+  },
+  {
+   "source": "Kultur",
+   "target": "ο πολιτισμός",
+   "pron": "o politismós",
+   "cat": "N"
+  },
+  {
+   "source": "Tradition",
+   "target": "η παράδοση",
+   "pron": "i parádosi",
+   "cat": "N"
+  },
+  {
+   "source": "Religion",
+   "target": "η θρησκεία",
+   "pron": "i thriskía",
+   "cat": "N"
+  },
+  {
+   "source": "Kunst",
+   "target": "η τέχνη",
+   "pron": "i téchni",
+   "cat": "N"
+  },
+  {
+   "source": "Theater",
+   "target": "το θέατρο",
+   "pron": "to théatro",
+   "cat": "N"
+  },
+  {
+   "source": "Museum",
+   "target": "το μουσείο",
+   "pron": "to musío",
+   "cat": "N"
+  },
+  {
+   "source": "Jahrhundert",
+   "target": "ο αιώνας",
+   "pron": "o eónas",
+   "cat": "N"
+  },
+  {
+   "source": "Zeitschrift",
+   "target": "το περιοδικό",
+   "pron": "to periodikó",
+   "cat": "N"
+  },
+  {
+   "source": "Artikel",
+   "target": "το άρθρο",
+   "pron": "to árthro",
+   "cat": "N"
+  },
+  {
+   "source": "Titel",
+   "target": "ο τίτλος",
+   "pron": "o títlos",
+   "cat": "N"
+  },
+  {
+   "source": "Journalist",
+   "target": "ο δημοσιογράφος",
+   "pron": "o dimosiográfos",
+   "cat": "N"
+  },
+  {
+   "source": "Fernsehen",
+   "target": "η τηλεόραση",
+   "pron": "i tileórasi",
+   "cat": "N"
+  },
+  {
+   "source": "Radio",
+   "target": "το ραδιόφωνο",
+   "pron": "to radiófono",
+   "cat": "N"
+  },
+  {
+   "source": "Werbung",
+   "target": "η διαφήμιση",
+   "pron": "i diafímisi",
+   "cat": "N"
+  },
+  {
+   "source": "Publikum",
+   "target": "το κοινό",
+   "pron": "to kinó",
+   "cat": "N"
+  },
+  {
+   "source": "Interview",
+   "target": "η συνέντευξη (τύπου)",
+   "pron": "i synénteyxi",
+   "cat": "N"
+  },
+  {
+   "source": "Diskussion",
+   "target": "η συζήτηση",
+   "pron": "i syzítisi",
+   "cat": "N"
+  },
+  {
+   "source": "Beweis",
+   "target": "η απόδειξη (τεκμήριο)",
+   "pron": "i apódixi",
+   "cat": "N"
+  },
+  {
+   "source": "Quelle",
+   "target": "η πηγή",
+   "pron": "i pigí",
+   "cat": "N"
+  },
+  {
+   "source": "Forschung",
+   "target": "η έρευνα",
+   "pron": "i érevna",
+   "cat": "N"
+  },
+  {
+   "source": "Studie",
+   "target": "η μελέτη",
+   "pron": "i meléti",
+   "cat": "N"
+  },
+  {
+   "source": "Zahl (Ziffer)",
+   "target": "το νούμερο",
+   "pron": "to noúmero",
+   "cat": "N"
+  },
+  {
+   "source": "Prozent",
+   "target": "το ποσοστό",
+   "pron": "to posostó",
+   "cat": "N"
+  },
+  {
+   "source": "Durchschnitt",
+   "target": "ο μέσος όρος",
+   "pron": "o mésos óros",
+   "cat": "N"
+  },
+  {
+   "source": "Wachstum",
+   "target": "η ανάπτυξη",
+   "pron": "i anáptyxi",
+   "cat": "N"
+  },
+  {
+   "source": "Gerücht",
+   "target": "η φήμη",
+   "pron": "i fími",
+   "cat": "N"
+  },
+  {
+   "source": "Skandal",
+   "target": "το σκάνδαλο",
+   "pron": "to skándalo",
+   "cat": "N"
+  },
+  {
+   "source": "Ruf (Reputation)",
+   "target": "η υπόληψη",
+   "pron": "i ypólipsi",
+   "cat": "N"
+  },
+  {
+   "source": "Ursache",
+   "target": "η αιτία",
+   "pron": "i etía",
+   "cat": "N"
+  },
+  {
+   "source": "Folge",
+   "target": "η συνέπεια",
+   "pron": "i synépia",
+   "cat": "N"
+  },
+  {
+   "source": "Bedingung",
+   "target": "η προϋπόθεση",
+   "pron": "i proipóthesi",
+   "cat": "N"
+  },
+  {
+   "source": "Schlussfolgerung",
+   "target": "το συμπέρασμα",
+   "pron": "to sympérasma",
+   "cat": "N"
+  },
+  {
+   "source": "Methode",
+   "target": "η μέθοδος",
+   "pron": "i méthodos",
+   "cat": "N"
+  },
+  {
+   "source": "Zweck / Ziel",
+   "target": "ο σκοπός",
+   "pron": "o skopós",
+   "cat": "N"
+  },
+  {
+   "source": "Herausforderung",
+   "target": "η πρόκληση",
+   "pron": "i próklisi",
+   "cat": "N"
+  },
+  {
+   "source": "Vorteil",
+   "target": "το πλεονέκτημα",
+   "pron": "to pleonéktima",
+   "cat": "N"
+  },
+  {
+   "source": "Nachteil",
+   "target": "το μειονέκτημα",
+   "pron": "to mionéktima",
+   "cat": "N"
+  },
+  {
+   "source": "Schwäche",
+   "target": "η αδυναμία",
+   "pron": "i adynamía",
+   "cat": "N"
+  },
+  {
+   "source": "Tendenz",
+   "target": "η τάση",
+   "pron": "i tási",
+   "cat": "N"
+  },
+  {
+   "source": "Wendepunkt",
+   "target": "η καμπή",
+   "pron": "i kampí",
+   "cat": "N"
+  },
+  {
+   "source": "Widerspruch",
+   "target": "η αντίφαση",
+   "pron": "i antífasi",
+   "cat": "N"
+  },
+  {
+   "source": "Vorurteil",
+   "target": "η προκατάληψη",
+   "pron": "i prokatálipsi",
+   "cat": "N"
+  },
+  {
+   "source": "Kompromiss",
+   "target": "ο συμβιβασμός",
+   "pron": "o symvivasmós",
+   "cat": "N"
+  },
+  {
+   "source": "Vereinbarung",
+   "target": "η συμφωνία",
+   "pron": "i symfonía",
+   "cat": "N"
+  },
+  {
+   "source": "Streit",
+   "target": "η διαμάχη",
+   "pron": "i diamáchi",
+   "cat": "N"
+  },
+  {
+   "source": "Verantwortung",
+   "target": "η ευθύνη",
+   "pron": "i efthýni",
+   "cat": "N"
+  },
+  {
+   "source": "Regel",
+   "target": "ο κανόνας",
+   "pron": "o kanónas",
+   "cat": "N"
+  },
+  {
+   "source": "Vorschrift",
+   "target": "ο κανονισμός",
+   "pron": "o kanonismós",
+   "cat": "N"
+  },
+  {
+   "source": "Verfahren",
+   "target": "η διαδικασία",
+   "pron": "i diadikasía",
+   "cat": "N"
+  },
+  {
+   "source": "Anforderung",
+   "target": "η απαίτηση",
+   "pron": "i apétisi",
+   "cat": "N"
+  },
+  {
+   "source": "Reform",
+   "target": "η μεταρρύθμιση",
+   "pron": "i metarrýthmisi",
+   "cat": "N"
+  },
+  {
+   "source": "Maßnahme",
+   "target": "το μέτρο",
+   "pron": "to métro",
+   "cat": "N"
+  },
+  {
+   "source": "Politik (Konzept)",
+   "target": "η πολιτική",
+   "pron": "i politikí",
+   "cat": "N"
+  },
+  {
+   "source": "Haushalt (Budget)",
+   "target": "ο προϋπολογισμός",
+   "pron": "o proipologismós",
+   "cat": "N"
+  },
+  {
+   "source": "Finanzierung",
+   "target": "η χρηματοδότηση",
+   "pron": "i chrimatodótisi",
+   "cat": "N"
+  },
+  {
+   "source": "Investition",
+   "target": "η επένδυση",
+   "pron": "i epéndysi",
+   "cat": "N"
+  },
+  {
+   "source": "Absicht",
+   "target": "η πρόθεση",
+   "pron": "i próthesi",
+   "cat": "N"
+  },
+  {
+   "source": "Bewusstsein",
+   "target": "η συνείδηση",
+   "pron": "i synídisi",
+   "cat": "N"
+  },
+  {
+   "source": "Einstellung (Haltung)",
+   "target": "η στάση",
+   "pron": "i stási",
+   "cat": "N"
+  },
+  {
+   "source": "Charakter",
+   "target": "ο χαρακτήρας",
+   "pron": "o charaktíras",
+   "cat": "N"
+  },
+  {
+   "source": "Gewohnheit",
+   "target": "η συνήθεια",
+   "pron": "i syníthia",
+   "cat": "N"
+  },
+  {
+   "source": "Verhalten",
+   "target": "η συμπεριφορά",
+   "pron": "i symperiforá",
+   "cat": "N"
+  },
+  {
+   "source": "Laune",
+   "target": "η διάθεση",
+   "pron": "i diáthesi",
+   "cat": "N"
+  },
+  {
+   "source": "Geduld",
+   "target": "η υπομονή",
+   "pron": "i ypomoní",
+   "cat": "N"
+  },
+  {
+   "source": "Mut",
+   "target": "το κουράγιο",
+   "pron": "to kourágio",
+   "cat": "N"
+  },
+  {
+   "source": "Stolz",
+   "target": "η περηφάνια",
+   "pron": "i perifánia",
+   "cat": "N"
+  },
+  {
+   "source": "Scham",
+   "target": "η ντροπή",
+   "pron": "i dropí",
+   "cat": "N"
+  },
+  {
+   "source": "Schuld (Verschulden)",
+   "target": "η ενοχή",
+   "pron": "i enochí",
+   "cat": "N"
+  },
+  {
+   "source": "Eifersucht",
+   "target": "η ζήλια",
+   "pron": "i zília",
+   "cat": "N"
+  },
+  {
+   "source": "Vertrauen",
+   "target": "η εμπιστοσύνη",
+   "pron": "i empistosýni",
+   "cat": "N"
+  },
+  {
+   "source": "Zweifel",
+   "target": "η αμφιβολία",
+   "pron": "i amfivolía",
+   "cat": "N"
+  },
+  {
+   "source": "Neugier",
+   "target": "η περιέργεια",
+   "pron": "i periérgia",
+   "cat": "N"
+  },
+  {
+   "source": "Langeweile",
+   "target": "η πλήξη",
+   "pron": "i plíxi",
+   "cat": "N"
+  },
+  {
+   "source": "Erleichterung",
+   "target": "η ανακούφιση",
+   "pron": "i anakoúfisi",
+   "cat": "N"
+  },
+  {
+   "source": "Bedauern",
+   "target": "η μετάνοια",
+   "pron": "i metánia",
+   "cat": "N"
+  },
+  {
+   "source": "Anstrengung",
+   "target": "η προσπάθεια",
+   "pron": "i prospáthia",
+   "cat": "N"
+  },
+  {
+   "source": "Fortschritt",
+   "target": "η πρόοδος",
+   "pron": "i próodos",
+   "cat": "N"
+  },
+  {
+   "source": "Erfolg",
+   "target": "η επιτυχία",
+   "pron": "i epitychía",
+   "cat": "N"
+  },
+  {
+   "source": "Misserfolg",
+   "target": "η αποτυχία",
+   "pron": "i apotychía",
+   "cat": "N"
+  },
+  {
+   "source": "zugeben",
+   "target": "παραδέχομαι",
+   "pron": "paradéchome",
+   "cat": "V"
+  },
+  {
+   "source": "leugnen",
+   "target": "αρνούμαι",
+   "pron": "arnoúme",
+   "cat": "V"
+  },
+  {
+   "source": "sich beschweren",
+   "target": "διαμαρτύρομαι",
+   "pron": "diamartýrome",
+   "cat": "V"
+  },
+  {
+   "source": "sich entschuldigen",
+   "target": "ζητάω συγγνώμη",
+   "pron": "zitáo signómi",
+   "cat": "V"
+  },
+  {
+   "source": "warnen",
+   "target": "προειδοποιώ",
+   "pron": "proidopió",
+   "cat": "V"
+  },
+  {
+   "source": "drohen",
+   "target": "απειλώ",
+   "pron": "apiló",
+   "cat": "V"
+  },
+  {
+   "source": "überzeugen",
+   "target": "πείθω",
+   "pron": "pítho",
+   "cat": "V"
+  },
+  {
+   "source": "verhandeln",
+   "target": "διαπραγματεύομαι",
+   "pron": "diapragmatévome",
+   "cat": "V"
+  },
+  {
+   "source": "streiten",
+   "target": "μαλώνω",
+   "pron": "malóno",
+   "cat": "V"
+  },
+  {
+   "source": "lösen",
+   "target": "λύνω",
+   "pron": "lýno",
+   "cat": "V"
+  },
+  {
+   "source": "vermeiden",
+   "target": "αποφεύγω",
+   "pron": "apofévgo",
+   "cat": "V"
+  },
+  {
+   "source": "verringern",
+   "target": "μειώνω",
+   "pron": "mióno",
+   "cat": "V"
+  },
+  {
+   "source": "erhöhen",
+   "target": "αυξάνω",
+   "pron": "afxáno",
+   "cat": "V"
+  },
+  {
+   "source": "ersetzen",
+   "target": "αντικαθιστώ",
+   "pron": "antikathistó",
+   "cat": "V"
+  },
+  {
+   "source": "abhängen von",
+   "target": "εξαρτώμαι από",
+   "pron": "exartóme apó",
+   "cat": "V"
+  },
+  {
+   "source": "gehören",
+   "target": "ανήκω",
+   "pron": "aníko",
+   "cat": "V"
+  },
+  {
+   "source": "betreffen",
+   "target": "αφορά",
+   "pron": "aforá",
+   "cat": "V"
+  },
+  {
+   "source": "beeinflussen",
+   "target": "επηρεάζω",
+   "pron": "epireázo",
+   "cat": "V"
+  },
+  {
+   "source": "erwarten",
+   "target": "περιμένω (προσδοκώ)",
+   "pron": "periméno",
+   "cat": "V"
+  },
+  {
+   "source": "annehmen (vermuten)",
+   "target": "υποθέτω",
+   "pron": "ypothéto",
+   "cat": "V"
+  },
+  {
+   "source": "zweifeln",
+   "target": "αμφιβάλλω",
+   "pron": "amfivállo",
+   "cat": "V"
+  },
+  {
+   "source": "merken (bemerken)",
+   "target": "παρατηρώ",
+   "pron": "paratiró",
+   "cat": "V"
+  },
+  {
+   "source": "erkennen",
+   "target": "αναγνωρίζω",
+   "pron": "anagnorízo",
+   "cat": "V"
+  },
+  {
+   "source": "vergleichen",
+   "target": "συγκρίνω",
+   "pron": "synkríno",
+   "cat": "V"
+  },
+  {
+   "source": "berücksichtigen",
+   "target": "λαμβάνω υπόψη",
+   "pron": "lamváno ypópsi",
+   "cat": "V"
+  },
+  {
+   "source": "beurteilen",
+   "target": "κρίνω",
+   "pron": "kríno",
+   "cat": "V"
+  },
+  {
+   "source": "kritisieren",
+   "target": "επικρίνω",
+   "pron": "epikríno",
+   "cat": "V"
+  },
+  {
+   "source": "gratulieren",
+   "target": "συγχαίρω",
+   "pron": "synchéro",
+   "cat": "V"
+  },
+  {
+   "source": "ermutigen",
+   "target": "ενθαρρύνω",
+   "pron": "entharrýno",
+   "cat": "V"
+  },
+  {
+   "source": "unterstützen",
+   "target": "υποστηρίζω",
+   "pron": "ypostirízo",
+   "cat": "V"
+  },
+  {
+   "source": "sich verlassen auf",
+   "target": "βασίζομαι σε",
+   "pron": "vasízome se",
+   "cat": "V"
+  },
+  {
+   "source": "vertrauen",
+   "target": "εμπιστεύομαι",
+   "pron": "empistévome",
+   "cat": "V"
+  },
+  {
+   "source": "aufgeben",
+   "target": "παραιτούμαι",
+   "pron": "paretoúme",
+   "cat": "V"
+  },
+  {
+   "source": "beharren",
+   "target": "επιμένω",
+   "pron": "epiméno",
+   "cat": "V"
+  },
+  {
+   "source": "zögern",
+   "target": "διστάζω",
+   "pron": "distázo",
+   "cat": "V"
+  },
+  {
+   "source": "wagen",
+   "target": "τολμάω",
+   "pron": "tolmáo",
+   "cat": "V"
+  },
+  {
+   "source": "riskieren",
+   "target": "ρισκάρω",
+   "pron": "riskáro",
+   "cat": "V"
+  },
+  {
+   "source": "sparen",
+   "target": "αποταμιεύω",
+   "pron": "apotamiévo",
+   "cat": "V"
+  },
+  {
+   "source": "ausgeben (Geld)",
+   "target": "ξοδεύω",
+   "pron": "xodévo",
+   "cat": "V"
+  },
+  {
+   "source": "investieren",
+   "target": "επενδύω",
+   "pron": "ependýo",
+   "cat": "V"
+  },
+  {
+   "source": "einstellen (anheuern)",
+   "target": "προσλαμβάνω",
+   "pron": "proslamváno",
+   "cat": "V"
+  },
+  {
+   "source": "entlassen",
+   "target": "απολύω",
+   "pron": "apolýo",
+   "cat": "V"
+  },
+  {
+   "source": "kündigen",
+   "target": "παραιτούμαι από τη δουλειά",
+   "pron": "paretoúme apó ti douliá",
+   "cat": "V"
+  },
+  {
+   "source": "sich bewerben",
+   "target": "κάνω αίτηση",
+   "pron": "káno étisi",
+   "cat": "V"
+  },
+  {
+   "source": "leiten",
+   "target": "διοικώ",
+   "pron": "diikó",
+   "cat": "V"
+  },
+  {
+   "source": "gehorchen",
+   "target": "υπακούω",
+   "pron": "ypakoúo",
+   "cat": "V"
+  },
+  {
+   "source": "verbieten",
+   "target": "απαγορεύω",
+   "pron": "apagorévo",
+   "cat": "V"
+  },
+  {
+   "source": "erlauben (genehmigen)",
+   "target": "εγκρίνω",
+   "pron": "enkríno",
+   "cat": "V"
+  },
+  {
+   "source": "ablehnen",
+   "target": "απορρίπτω",
+   "pron": "aporrípto",
+   "cat": "V"
+  },
+  {
+   "source": "verlangen",
+   "target": "απαιτώ",
+   "pron": "apetó",
+   "cat": "V"
+  },
+  {
+   "source": "gewähren",
+   "target": "παραχωρώ",
+   "pron": "parachoró",
+   "cat": "V"
+  },
+  {
+   "source": "anvertrauen",
+   "target": "εμπιστεύομαι κάτι",
+   "pron": "empistévome káti",
+   "cat": "V"
+  },
+  {
+   "source": "beaufsichtigen",
+   "target": "επιβλέπω",
+   "pron": "epivlépo",
+   "cat": "V"
+  },
+  {
+   "source": "melden",
+   "target": "αναφέρω",
+   "pron": "anaféro",
+   "cat": "V"
+  },
+  {
+   "source": "verbergen",
+   "target": "κρύβω",
+   "pron": "krývo",
+   "cat": "V"
+  },
+  {
+   "source": "beschuldigen",
+   "target": "κατηγορώ",
+   "pron": "katigoró",
+   "cat": "V"
+  },
+  {
+   "source": "beweisen",
+   "target": "αποδεικνύω",
+   "pron": "apodiknýo",
+   "cat": "V"
+  },
+  {
+   "source": "widersprechen",
+   "target": "αντιλέγω",
+   "pron": "antilégo",
+   "cat": "V"
+  },
+  {
+   "source": "untergraben",
+   "target": "υπονομεύω",
+   "pron": "yponomévo",
+   "cat": "V"
+  },
+  {
+   "source": "überwinden",
+   "target": "ξεπερνάω",
+   "pron": "xepernáo",
+   "cat": "V"
+  },
+  {
+   "source": "aushalten",
+   "target": "αντέχω",
+   "pron": "antécho",
+   "cat": "V"
+  },
+  {
+   "source": "nachgeben",
+   "target": "υποχωρώ",
+   "pron": "ypochoró",
+   "cat": "V"
+  },
+  {
+   "source": "widerstehen",
+   "target": "αντιστέκομαι",
+   "pron": "antistékome",
+   "cat": "V"
+  },
+  {
+   "source": "sich verpflichten",
+   "target": "δεσμεύομαι",
+   "pron": "desmévome",
+   "cat": "V"
+  },
+  {
+   "source": "teilnehmen",
+   "target": "συμμετέχω",
+   "pron": "symmetécho",
+   "cat": "V"
+  },
+  {
+   "source": "beitragen",
+   "target": "συμβάλλω",
+   "pron": "symvállo",
+   "cat": "V"
+  },
+  {
+   "source": "profitieren",
+   "target": "επωφελούμαι",
+   "pron": "epofeloúme",
+   "cat": "V"
+  },
+  {
+   "source": "ausnutzen",
+   "target": "εκμεταλλεύομαι",
+   "pron": "ekmetallévome",
+   "cat": "V"
+  },
+  {
+   "source": "wert sein",
+   "target": "αξίζω",
+   "pron": "axízo",
+   "cat": "V"
+  },
+  {
+   "source": "betonen",
+   "target": "τονίζω",
+   "pron": "tonízo",
+   "cat": "V"
+  },
+  {
+   "source": "andeuten",
+   "target": "υπονοώ",
+   "pron": "yponoó",
+   "cat": "V"
+  },
+  {
+   "source": "behaupten",
+   "target": "ισχυρίζομαι",
+   "pron": "ischyrízome",
+   "cat": "V"
+  },
+  {
+   "source": "klarstellen",
+   "target": "ξεκαθαρίζω",
+   "pron": "xekatharízo",
+   "cat": "V"
+  },
+  {
+   "source": "zusammenfassen",
+   "target": "συνοψίζω",
+   "pron": "synopsízo",
+   "cat": "V"
+  },
+  {
+   "source": "einschätzen",
+   "target": "εκτιμώ",
+   "pron": "ektimó",
+   "cat": "V"
+  },
+  {
+   "source": "voraussehen",
+   "target": "προβλέπω",
+   "pron": "provlépo",
+   "cat": "V"
+  },
+  {
+   "source": "planen",
+   "target": "σχεδιάζω",
+   "pron": "schediázo",
+   "cat": "V"
+  },
+  {
+   "source": "durchführen",
+   "target": "υλοποιώ",
+   "pron": "ylopió",
+   "cat": "V"
+  },
+  {
+   "source": "erreichen (Ziel)",
+   "target": "επιτυγχάνω",
+   "pron": "epityncháno",
+   "cat": "V"
+  },
+  {
+   "source": "übertreffen",
+   "target": "υπερβαίνω",
+   "pron": "ypervéno",
+   "cat": "V"
+  },
+  {
+   "source": "stärken",
+   "target": "ενισχύω",
+   "pron": "enischýo",
+   "cat": "V"
+  },
+  {
+   "source": "schwächen",
+   "target": "αδυνατίζω",
+   "pron": "adynatízo",
+   "cat": "V"
+  },
+  {
+   "source": "bewahren",
+   "target": "διατηρώ",
+   "pron": "diatiró",
+   "cat": "V"
+  },
+  {
+   "source": "wiederherstellen",
+   "target": "αποκαθιστώ",
+   "pron": "apokathistó",
+   "cat": "V"
+  },
+  {
+   "source": "anpassen",
+   "target": "προσαρμόζω",
+   "pron": "prosarmózo",
+   "cat": "V"
+  },
+  {
+   "source": "überdenken",
+   "target": "επανεξετάζω",
+   "pron": "epanexetázo",
+   "cat": "V"
+  },
+  {
+   "source": "verschieben",
+   "target": "αναβάλλω",
+   "pron": "anavállo",
+   "cat": "V"
+  },
+  {
+   "source": "absagen",
+   "target": "ακυρώνω",
+   "pron": "akyróno",
+   "cat": "V"
+  },
+  {
+   "source": "bestätigen",
+   "target": "επιβεβαιώνω",
+   "pron": "epivevaióno",
+   "cat": "V"
+  },
+  {
+   "source": "übersetzen",
+   "target": "μεταφράζω",
+   "pron": "metafrázo",
+   "cat": "V"
+  },
+  {
+   "source": "aussprechen",
+   "target": "προφέρω",
+   "pron": "proféro",
+   "cat": "V"
+  },
+  {
+   "source": "unterrichten",
+   "target": "διδάσκω",
+   "pron": "didásko",
+   "cat": "V"
+  },
+  {
+   "source": "scheinen (wirken)",
+   "target": "φαίνομαι",
+   "pron": "fénome",
+   "cat": "V"
+  },
+  {
+   "source": "passieren",
+   "target": "συμβαίνω",
+   "pron": "symvéno",
+   "cat": "V"
+  },
+  {
+   "source": "prüfen",
+   "target": "ελέγχω",
+   "pron": "eléncho",
+   "cat": "V"
+  },
+  {
+   "source": "vorbereiten",
+   "target": "προετοιμάζω",
+   "pron": "proetimázo",
+   "cat": "V"
+  },
+  {
+   "source": "organisieren",
+   "target": "οργανώνω",
+   "pron": "organóno",
+   "cat": "V"
+  },
+  {
+   "source": "mieten",
+   "target": "νοικιάζω",
+   "pron": "nikiázo",
+   "cat": "V"
+  },
+  {
+   "source": "verkaufen",
+   "target": "πουλάω",
+   "pron": "pouláo",
+   "cat": "V"
+  },
+  {
+   "source": "liefern",
+   "target": "παραδίδω",
+   "pron": "paradído",
+   "cat": "V"
+  },
+  {
+   "source": "bestellen",
+   "target": "παραγγέλνω",
+   "pron": "parangélno",
+   "cat": "V"
+  },
+  {
+   "source": "wiegen",
+   "target": "ζυγίζω",
+   "pron": "zygízo",
+   "cat": "V"
+  },
+  {
+   "source": "messen",
+   "target": "μετράω",
+   "pron": "metráo",
+   "cat": "V"
+  },
+  {
+   "source": "zählen",
+   "target": "αριθμώ",
+   "pron": "arithmó",
+   "cat": "V"
+  },
+  {
+   "source": "füllen",
+   "target": "γεμίζω",
+   "pron": "gemízo",
+   "cat": "V"
+  },
+  {
+   "source": "leeren",
+   "target": "αδειάζω",
+   "pron": "adiázo",
+   "cat": "V"
+  },
+  {
+   "source": "schneiden",
+   "target": "κόβω",
+   "pron": "kóvo",
+   "cat": "V"
+  },
+  {
+   "source": "hinzufügen",
+   "target": "προσθέτω",
+   "pron": "prosthéto",
+   "cat": "V"
+  },
+  {
+   "source": "entfernen",
+   "target": "αφαιρώ",
+   "pron": "aferó",
+   "cat": "V"
+  },
+  {
+   "source": "behalten",
+   "target": "κρατάω",
+   "pron": "kratáo",
+   "cat": "V"
+  },
+  {
+   "source": "werfen",
+   "target": "πετάω",
+   "pron": "petáo",
+   "cat": "V"
+  },
+  {
+   "source": "fangen",
+   "target": "πιάνω",
+   "pron": "piáno",
+   "cat": "V"
+  },
+  {
+   "source": "berühren",
+   "target": "αγγίζω",
+   "pron": "angízo",
+   "cat": "V"
+  },
+  {
+   "source": "riechen",
+   "target": "μυρίζω",
+   "pron": "myrízo",
+   "cat": "V"
+  },
+  {
+   "source": "probieren (kosten)",
+   "target": "δοκιμάζω",
+   "pron": "dokimázo",
+   "cat": "V"
+  },
+  {
+   "source": "sich ausruhen",
+   "target": "ξεκουράζομαι",
+   "pron": "xekourázome",
+   "cat": "V"
+  },
+  {
+   "source": "sich beeilen",
+   "target": "βιάζομαι",
+   "pron": "viázome",
+   "cat": "V"
+  },
+  {
+   "source": "leihen (geben)",
+   "target": "δανείζω",
+   "pron": "danízo",
+   "cat": "V"
+  },
+  {
+   "source": "ausleihen (nehmen)",
+   "target": "δανείζομαι",
+   "pron": "danízome",
+   "cat": "V"
+  },
+  {
+   "source": "wiederholen",
+   "target": "επαναλαμβάνω",
+   "pron": "epanalamváno",
+   "cat": "V"
+  },
+  {
+   "source": "verantwortlich",
+   "target": "υπεύθυνος",
+   "pron": "ypéfthynos",
+   "cat": "B"
+  },
+  {
+   "source": "zuverlässig",
+   "target": "αξιόπιστος",
+   "pron": "axiópistos",
+   "cat": "B"
+  },
+  {
+   "source": "ehrlich",
+   "target": "ειλικρινής",
+   "pron": "ilikrinís",
+   "cat": "B"
+  },
+  {
+   "source": "großzügig",
+   "target": "γενναιόδωρος",
+   "pron": "genneódoros",
+   "cat": "B"
+  },
+  {
+   "source": "egoistisch",
+   "target": "εγωιστής",
+   "pron": "egoistís",
+   "cat": "B"
+  },
+  {
+   "source": "schüchtern",
+   "target": "ντροπαλός",
+   "pron": "dropalós",
+   "cat": "B"
+  },
+  {
+   "source": "selbstsicher",
+   "target": "σίγουρος",
+   "pron": "sígouros",
+   "cat": "B"
+  },
+  {
+   "source": "ehrgeizig",
+   "target": "φιλόδοξος",
+   "pron": "filódoxos",
+   "cat": "B"
+  },
+  {
+   "source": "faul",
+   "target": "τεμπέλης",
+   "pron": "tempélis",
+   "cat": "B"
+  },
+  {
+   "source": "fleißig",
+   "target": "εργατικός",
+   "pron": "ergatikós",
+   "cat": "B"
+  },
+  {
+   "source": "geduldig",
+   "target": "υπομονετικός",
+   "pron": "ypomonetikós",
+   "cat": "B"
+  },
+  {
+   "source": "ungeduldig",
+   "target": "ανυπόμονος",
+   "pron": "anypómonos",
+   "cat": "B"
+  },
+  {
+   "source": "nervös",
+   "target": "νευρικός",
+   "pron": "nevrikós",
+   "cat": "B"
+  },
+  {
+   "source": "besorgt",
+   "target": "ανήσυχος",
+   "pron": "anísychos",
+   "cat": "B"
+  },
+  {
+   "source": "enttäuscht",
+   "target": "απογοητευμένος",
+   "pron": "apogoitevménos",
+   "cat": "B"
+  },
+  {
+   "source": "zufrieden",
+   "target": "ευχαριστημένος",
+   "pron": "efcharistiménos",
+   "cat": "B"
+  },
+  {
+   "source": "dankbar",
+   "target": "ευγνώμων",
+   "pron": "evgnómon",
+   "cat": "B"
+  },
+  {
+   "source": "neugierig",
+   "target": "περίεργος",
+   "pron": "periergos",
+   "cat": "B"
+  },
+  {
+   "source": "stur",
+   "target": "πεισματάρης",
+   "pron": "pismatáris",
+   "cat": "B"
+  },
+  {
+   "source": "klug",
+   "target": "έξυπνος",
+   "pron": "éxypnos",
+   "cat": "B"
+  },
+  {
+   "source": "freundlich",
+   "target": "φιλικός",
+   "pron": "filikós",
+   "cat": "B"
+  },
+  {
+   "source": "böse (gemein)",
+   "target": "κακός (μοχθηρός)",
+   "pron": "kakós",
+   "cat": "B"
+  },
+  {
+   "source": "gesprächig",
+   "target": "ομιλητικός",
+   "pron": "omilitikós",
+   "cat": "B"
+  },
+  {
+   "source": "empfindlich",
+   "target": "ευαίσθητος",
+   "pron": "evésthitos",
+   "cat": "B"
+  },
+  {
+   "source": "vernünftig",
+   "target": "λογικός",
+   "pron": "logikós",
+   "cat": "B"
+  },
+  {
+   "source": "gerecht",
+   "target": "δίκαιος",
+   "pron": "díkeos",
+   "cat": "B"
+  },
+  {
+   "source": "ungerecht",
+   "target": "άδικος",
+   "pron": "ádikos",
+   "cat": "B"
+  },
+  {
+   "source": "notwendig",
+   "target": "απαραίτητος",
+   "pron": "aparétitos",
+   "cat": "B"
+  },
+  {
+   "source": "ausreichend",
+   "target": "αρκετός",
+   "pron": "arketós",
+   "cat": "B"
+  },
+  {
+   "source": "offensichtlich",
+   "target": "φανερός",
+   "pron": "fanerós",
+   "cat": "B"
+  },
+  {
+   "source": "kompliziert",
+   "target": "περίπλοκος",
+   "pron": "períplokos",
+   "cat": "B"
+  },
+  {
+   "source": "einfach (schlicht)",
+   "target": "απλός",
+   "pron": "aplós",
+   "cat": "B"
+  },
+  {
+   "source": "häufig",
+   "target": "συνηθισμένος",
+   "pron": "synithisménos",
+   "cat": "B"
+  },
+  {
+   "source": "selten",
+   "target": "σπάνιος",
+   "pron": "spánios",
+   "cat": "B"
+  },
+  {
+   "source": "neuerlich (kürzlich)",
+   "target": "πρόσφατος",
+   "pron": "prósfatos",
+   "cat": "B"
+  },
+  {
+   "source": "aktuell",
+   "target": "τρέχων",
+   "pron": "tréchon",
+   "cat": "B"
+  },
+  {
+   "source": "modern",
+   "target": "μοντέρνος",
+   "pron": "modérnos",
+   "cat": "B"
+  },
+  {
+   "source": "örtlich",
+   "target": "τοπικός",
+   "pron": "topikós",
+   "cat": "B"
+  },
+  {
+   "source": "national",
+   "target": "εθνικός",
+   "pron": "ethnikós",
+   "cat": "B"
+  },
+  {
+   "source": "ausländisch",
+   "target": "ξένος",
+   "pron": "xénos",
+   "cat": "B"
+  },
+  {
+   "source": "öffentlich",
+   "target": "δημόσιος",
+   "pron": "dimósios",
+   "cat": "B"
+  },
+  {
+   "source": "privat",
+   "target": "ιδιωτικός",
+   "pron": "idiotikós",
+   "cat": "B"
+  },
+  {
+   "source": "verfügbar",
+   "target": "διαθέσιμος",
+   "pron": "diathésimos",
+   "cat": "B"
+  },
+  {
+   "source": "gründlich",
+   "target": "διεξοδικός",
+   "pron": "diexodikós",
+   "cat": "B"
+  },
+  {
+   "source": "genau",
+   "target": "ακριβής",
+   "pron": "akrivís",
+   "cat": "B"
+  },
+  {
+   "source": "relevant",
+   "target": "σχετικός",
+   "pron": "schetikós",
+   "cat": "B"
+  },
+  {
+   "source": "bedeutend",
+   "target": "σημαντικότερος",
+   "pron": "simantikóteros",
+   "cat": "B"
+  },
+  {
+   "source": "unbedeutend",
+   "target": "ασήμαντος",
+   "pron": "asímantos",
+   "cat": "B"
+  },
+  {
+   "source": "erheblich",
+   "target": "αξιοσημείωτος",
+   "pron": "axiosimíotos",
+   "cat": "B"
+  },
+  {
+   "source": "mäßig",
+   "target": "μέτριος",
+   "pron": "métrios",
+   "cat": "B"
+  },
+  {
+   "source": "übermäßig",
+   "target": "υπερβολικός",
+   "pron": "ypervolikós",
+   "cat": "B"
+  },
+  {
+   "source": "zurückhaltend",
+   "target": "διακριτικός",
+   "pron": "diakritikós",
+   "cat": "B"
+  },
+  {
+   "source": "vorsichtig",
+   "target": "προσεκτικός",
+   "pron": "prosektikós",
+   "cat": "B"
+  },
+  {
+   "source": "unvorsichtig",
+   "target": "απρόσεκτος",
+   "pron": "aprósektos",
+   "cat": "B"
+  },
+  {
+   "source": "absichtlich",
+   "target": "σκόπιμος",
+   "pron": "skópimos",
+   "cat": "B"
+  },
+  {
+   "source": "unerwartet",
+   "target": "απροσδόκητος",
+   "pron": "aprosdókitos",
+   "cat": "B"
+  },
+  {
+   "source": "unvermeidlich",
+   "target": "αναπόφευκτος",
+   "pron": "anapófefktos",
+   "cat": "B"
+  },
+  {
+   "source": "nachhaltig",
+   "target": "βιώσιμος",
+   "pron": "viósimos",
+   "cat": "B"
+  },
+  {
+   "source": "schädlich",
+   "target": "βλαβερός",
+   "pron": "vlaverós",
+   "cat": "B"
+  },
+  {
+   "source": "nützlich",
+   "target": "χρήσιμος",
+   "pron": "chrísimos",
+   "cat": "B"
+  },
+  {
+   "source": "unnütz",
+   "target": "άχρηστος",
+   "pron": "áchristos",
+   "cat": "B"
+  },
+  {
+   "source": "anspruchsvoll",
+   "target": "απαιτητικός",
+   "pron": "apetitikós",
+   "cat": "B"
+  },
+  {
+   "source": "mühsam",
+   "target": "κοπιαστικός",
+   "pron": "kopiastikós",
+   "cat": "B"
+  },
+  {
+   "source": "zweideutig",
+   "target": "διφορούμενος",
+   "pron": "diforoúmenos",
+   "cat": "B"
+  },
+  {
+   "source": "irreführend",
+   "target": "παραπλανητικός",
+   "pron": "paraplanitikós",
+   "cat": "B"
+  },
+  {
+   "source": "überzeugend",
+   "target": "πειστικός",
+   "pron": "pistikós",
+   "cat": "B"
+  },
+  {
+   "source": "ausgezeichnet",
+   "target": "εξαιρετικός",
+   "pron": "exeretikós",
+   "cat": "B"
+  },
+  {
+   "source": "mittelmäßig",
+   "target": "μέτριος (κακός)",
+   "pron": "métrios",
+   "cat": "B"
+  },
+  {
+   "source": "verbreitet",
+   "target": "διαδεδομένος",
+   "pron": "diadedoménos",
+   "cat": "B"
+  },
+  {
+   "source": "bescheiden",
+   "target": "μετριόφρων",
+   "pron": "metriófron",
+   "cat": "B"
+  },
+  {
+   "source": "arrogant",
+   "target": "αλαζόνας",
+   "pron": "alazónas",
+   "cat": "B"
+  },
+  {
+   "source": "gleichgültig",
+   "target": "αδιάφορος",
+   "pron": "adiáforos",
+   "cat": "B"
+  },
+  {
+   "source": "begeistert",
+   "target": "ενθουσιασμένος",
+   "pron": "enthousiasménos",
+   "cat": "B"
+  },
+  {
+   "source": "berühmt",
+   "target": "διάσημος",
+   "pron": "diásimos",
+   "cat": "B"
+  },
+  {
+   "source": "gefährlich",
+   "target": "επικίνδυνος",
+   "pron": "epikíndynos",
+   "cat": "B"
+  },
+  {
+   "source": "sicher (gefahrlos)",
+   "target": "ασφαλής",
+   "pron": "asfalís",
+   "cat": "B"
+  },
+  {
+   "source": "stark",
+   "target": "δυνατός (ισχυρός)",
+   "pron": "dynatós",
+   "cat": "B"
+  },
+  {
+   "source": "schwach",
+   "target": "αδύναμος",
+   "pron": "adýnamos",
+   "cat": "B"
+  },
+  {
+   "source": "schwer (Gewicht)",
+   "target": "βαρύς",
+   "pron": "varýs",
+   "cat": "B"
+  },
+  {
+   "source": "leicht (Gewicht)",
+   "target": "ελαφρύς",
+   "pron": "elafrýs",
+   "cat": "B"
+  },
+  {
+   "source": "tief",
+   "target": "βαθύς",
+   "pron": "vathýs",
+   "cat": "B"
+  },
+  {
+   "source": "breit",
+   "target": "φαρδύς",
+   "pron": "fardýs",
+   "cat": "B"
+  },
+  {
+   "source": "eng",
+   "target": "στενός",
+   "pron": "stenós",
+   "cat": "B"
+  },
+  {
+   "source": "wahr",
+   "target": "αληθινός",
+   "pron": "alithinós",
+   "cat": "B"
+  },
+  {
+   "source": "falsch",
+   "target": "λάθος (ψεύτικος)",
+   "pron": "láthos",
+   "cat": "B"
+  },
+  {
+   "source": "stolz",
+   "target": "περήφανος",
+   "pron": "perífanos",
+   "cat": "B"
+  },
+  {
+   "source": "höflich",
+   "target": "ευγενικός",
+   "pron": "evgenikós",
+   "cat": "B"
+  },
+  {
+   "source": "unhöflich",
+   "target": "αγενής",
+   "pron": "agenís",
+   "cat": "B"
+  },
+  {
+   "source": "lustig",
+   "target": "αστείος",
+   "pron": "astíos",
+   "cat": "B"
+  },
+  {
+   "source": "ernst",
+   "target": "σοβαρός",
+   "pron": "sovarós",
+   "cat": "B"
+  },
+  {
+   "source": "seltsam",
+   "target": "παράξενος",
+   "pron": "paráxenos",
+   "cat": "B"
+  },
+  {
+   "source": "obwohl",
+   "target": "παρόλο που",
+   "pron": "parólo pou",
+   "cat": "B"
+  },
+  {
+   "source": "sobald",
+   "target": "μόλις",
+   "pron": "mólis",
+   "cat": "B"
+  },
+  {
+   "source": "bis (zeitlich)",
+   "target": "μέχρι",
+   "pron": "méchri",
+   "cat": "B"
+  },
+  {
+   "source": "solange",
+   "target": "όσο",
+   "pron": "óso",
+   "cat": "B"
+  },
+  {
+   "source": "damit",
+   "target": "για να",
+   "pron": "ya na",
+   "cat": "B"
+  },
+  {
+   "source": "anstatt",
+   "target": "αντί",
+   "pron": "antí",
+   "cat": "B"
+  },
+  {
+   "source": "dank",
+   "target": "χάρη σε",
+   "pron": "chári se",
+   "cat": "B"
+  },
+  {
+   "source": "wegen",
+   "target": "λόγω",
+   "pron": "lógo",
+   "cat": "B"
+  },
+  {
+   "source": "dagegen (andererseits)",
+   "target": "αντίθετα",
+   "pron": "antítheta",
+   "cat": "B"
+  },
+  {
+   "source": "außerdem",
+   "target": "επιπλέον",
+   "pron": "epipléon",
+   "cat": "B"
+  },
+  {
+   "source": "tatsächlich",
+   "target": "πράγματι",
+   "pron": "prágmati",
+   "cat": "B"
+  },
+  {
+   "source": "kurz gesagt",
+   "target": "με λίγα λόγια",
+   "pron": "me líga lógia",
+   "cat": "B"
+  },
+  {
+   "source": "zum Beispiel",
+   "target": "για παράδειγμα",
+   "pron": "ya parádigma",
+   "cat": "B"
+  },
+  {
+   "source": "das heißt",
+   "target": "δηλαδή",
+   "pron": "diladí",
+   "cat": "B"
+  },
+  {
+   "source": "vor allem",
+   "target": "κυρίως",
+   "pron": "kyríos",
+   "cat": "B"
+  },
+  {
+   "source": "mindestens",
+   "target": "τουλάχιστον",
+   "pron": "touláchiston",
+   "cat": "B"
+  },
+  {
+   "source": "höchstens",
+   "target": "το πολύ",
+   "pron": "to polý",
+   "cat": "B"
+  },
+  {
+   "source": "übrigens",
+   "target": "παρεμπιπτόντως",
+   "pron": "parempiptóntos",
+   "cat": "B"
+  },
+  {
+   "source": "meiner Meinung nach",
+   "target": "κατά τη γνώμη μου",
+   "pron": "katá ti gnómi mou",
+   "cat": "B"
+  },
+  {
+   "source": "rechtzeitig",
+   "target": "στην ώρα",
+   "pron": "stin óra",
+   "cat": "B"
+  },
+  {
+   "source": "wie üblich",
+   "target": "ως συνήθως",
+   "pron": "os syníthos",
+   "cat": "B"
+  },
+  {
+   "source": "nach und nach",
+   "target": "σιγά σιγά",
+   "pron": "sigá sigá",
+   "cat": "B"
+  },
+  {
+   "source": "von Zeit zu Zeit",
+   "target": "πότε πότε",
+   "pron": "póte póte",
+   "cat": "B"
+  },
+  {
+   "source": "soweit ich weiß",
+   "target": "απ' όσο ξέρω",
+   "pron": "ap' óso xéro",
+   "cat": "B"
+  },
+  {
+   "source": "in Wirklichkeit",
+   "target": "στην πραγματικότητα",
+   "pron": "stin pragmatikótita",
+   "cat": "B"
+  },
+  {
+   "source": "alles in allem",
+   "target": "συνολικά",
+   "pron": "synoliká",
+   "cat": "B"
+  },
+  {
+   "source": "allerdings",
+   "target": "πάντως",
+   "pron": "pántos",
+   "cat": "B"
+  },
+  {
+   "source": "im Gegenteil",
+   "target": "αντιθέτως",
+   "pron": "antithétos",
+   "cat": "B"
+  },
+  {
+   "source": "auf jeden Fall",
+   "target": "σε κάθε περίπτωση",
+   "pron": "se káthe períptosi",
+   "cat": "B"
+  },
+  {
+   "source": "deshalb",
+   "target": "γι' αυτό",
+   "pron": "gi' aftó",
+   "cat": "B"
+  },
+  {
+   "source": "vorläufig",
+   "target": "προς το παρόν",
+   "pron": "pros to parón",
+   "cat": "B"
+  },
+  {
+   "source": "ab jetzt",
+   "target": "από τώρα",
+   "pron": "apó tóra",
+   "cat": "B"
+  },
+  {
+   "source": "früher oder später",
+   "target": "αργά ή γρήγορα",
+   "pron": "argá i grígora",
+   "cat": "B"
+  },
+  {
+   "source": "absichtlich (Adv.)",
+   "target": "επίτηδες",
+   "pron": "epítides",
+   "cat": "B"
+  },
+  {
+   "source": "zufällig",
+   "target": "τυχαία",
+   "pron": "tychéa",
+   "cat": "B"
+  },
+  {
+   "source": "auf den ersten Blick",
+   "target": "με την πρώτη ματιά",
+   "pron": "me tin próti matiá",
+   "cat": "B"
+  },
+  {
+   "source": "langfristig",
+   "target": "μακροπρόθεσμα",
+   "pron": "makropróthesma",
+   "cat": "B"
+  },
+  {
+   "source": "kurzfristig",
+   "target": "βραχυπρόθεσμα",
+   "pron": "vrachypróthesma",
+   "cat": "B"
+  },
+  {
+   "source": "im Allgemeinen",
+   "target": "γενικά",
+   "pron": "geniká",
+   "cat": "B"
+  },
+  {
+   "source": "ungefähr",
+   "target": "περίπου",
+   "pron": "perípou",
+   "cat": "B"
+  },
+  {
+   "source": "genau (Adv.)",
+   "target": "ακριβώς",
+   "pron": "akrivós",
+   "cat": "B"
+  },
+  {
+   "source": "kaum",
+   "target": "μόλις και μετά βίας",
+   "pron": "mólis ke metá vías",
+   "cat": "B"
+  },
+  {
+   "source": "kein Wunder",
+   "target": "δεν είναι περίεργο",
+   "pron": "den íne periergo",
+   "cat": "B"
+  },
+  {
+   "source": "es lohnt sich",
+   "target": "αξίζει τον κόπο",
+   "pron": "axízi ton kópo",
+   "cat": "B"
+  },
+  {
+   "source": "es macht nichts",
+   "target": "δεν πειράζει",
+   "pron": "den pirázi",
+   "cat": "B"
+  },
+  {
+   "source": "um ehrlich zu sein",
+   "target": "για να είμαι ειλικρινής",
+   "pron": "ya na íme ilikrinís",
+   "cat": "B"
+  },
+  {
+   "source": "wie erwartet",
+   "target": "όπως αναμενόταν",
+   "pron": "ópos anamenótan",
+   "cat": "B"
+  },
+  {
+   "source": "auf jeden Fall (sowieso)",
+   "target": "έτσι κι αλλιώς",
+   "pron": "étsi ki alliós",
+   "cat": "B"
+  },
+  {
+   "source": "Schritt für Schritt",
+   "target": "βήμα βήμα",
+   "pron": "víma víma",
+   "cat": "B"
+  },
+  {
+   "source": "bei näherem Nachdenken",
+   "target": "αν το σκεφτείς καλύτερα",
+   "pron": "an to skeftís kalýtera",
+   "cat": "B"
+  },
+  {
+   "source": "Glückwunsch",
+   "target": "συγχαρητήρια",
+   "pron": "syncharitíria",
+   "cat": "B"
+  },
+  {
+   "source": "viel Erfolg",
+   "target": "καλή επιτυχία",
+   "pron": "kalí epitychía",
+   "cat": "B"
+  },
+  {
+   "source": "gute Reise",
+   "target": "καλό ταξίδι",
+   "pron": "kaló taxídi",
+   "cat": "B"
+  },
+  {
+   "source": "herzlich willkommen",
+   "target": "καλώς όρισες",
+   "pron": "kalós órises",
+   "cat": "B"
+  },
+  {
+   "source": "zum Wohl",
+   "target": "στην υγειά σου",
+   "pron": "stin ygiá sou",
+   "cat": "B"
+  },
+  {
+   "source": "guten Appetit",
+   "target": "καλή όρεξη",
+   "pron": "kalí órexi",
+   "cat": "B"
+  },
+  {
+   "source": "Vorsicht!",
+   "target": "πρόσεχε!",
+   "pron": "prósexe",
+   "cat": "B"
+  },
+  {
+   "source": "keine Sorge",
+   "target": "μην ανησυχείς",
+   "pron": "min anisychís",
+   "cat": "B"
+  },
+  {
+   "source": "ich bin einverstanden",
+   "target": "συμφωνώ",
+   "pron": "symfonó",
+   "cat": "B"
+  },
+  {
+   "source": "ich bin anderer Meinung",
+   "target": "διαφωνώ",
+   "pron": "diafonó",
+   "cat": "B"
+  },
+  {
+   "source": "es hängt davon ab",
+   "target": "εξαρτάται",
+   "pron": "exartáte",
+   "cat": "B"
+  },
+  {
+   "source": "natürlich (selbstverständlich)",
+   "target": "φυσικά",
+   "pron": "fysiká",
+   "cat": "B"
   }
- ]
+ ],
+ "cypriot": {
+  "βουνό": [
+   "βουνόν",
+   "vounón"
+  ],
+  "πρωί": [
+   "πρωίν",
+   "proín"
+  ],
+  "βράδυ": [
+   "βράδυν",
+   "vrádin"
+  ],
+  "όνομα": [
+   "όνομαν",
+   "ónoman"
+  ],
+  "σχολείο": [
+   "σχολείον",
+   "scholíon"
+  ],
+  "βιβλίο": [
+   "βιβλίον",
+   "vivlíon"
+  ],
+  "λεωφορείο": [
+   "λεωφορείον",
+   "leoforíon"
+  ],
+  "αεροπλάνο": [
+   "αεροπλάνον",
+   "aeroplánon"
+  ],
+  "τρένο": [
+   "τρένον",
+   "trénon"
+  ],
+  "εισιτήριο": [
+   "εισιτήριον",
+   "isitírion"
+  ],
+  "ξενοδοχείο": [
+   "ξενοδοχείον",
+   "xenodochíon"
+  ],
+  "δωμάτιο": [
+   "δωμάτιον",
+   "domátion"
+  ],
+  "εστιατόριο": [
+   "εστιατόριον",
+   "estiatórion"
+  ],
+  "μαγαζί": [
+   "μαγαζίν",
+   "magazín"
+  ],
+  "φαρμακείο": [
+   "φαρμακείον",
+   "farmakíon"
+  ],
+  "νοσοκομείο": [
+   "νοσοκομείον",
+   "nosokomíon"
+  ],
+  "τηλέφωνο": [
+   "τηλέφωνον",
+   "tiléfonon"
+  ],
+  "παράθυρο": [
+   "παράθυρον",
+   "paráthyron"
+  ],
+  "ψάρι": [
+   "ψάριν",
+   "psárin"
+  ],
+  "αλάτι": [
+   "αλάτιν",
+   "alátin"
+  ],
+  "λάδι": [
+   "λάδιν",
+   "ládin"
+  ],
+  "αυγό": [
+   "αυγόν",
+   "avgón"
+  ],
+  "γλυκό": [
+   "γλυκόν",
+   "glykón"
+  ],
+  "έρχομαι": [
+   "έρχουμαι",
+   "érchoume"
+  ],
+  "κοιμάμαι": [
+   "κοιμούμαι",
+   "kimoúme"
+  ],
+  "σηκώνομαι": [
+   "σηκώνουμαι",
+   "sikónoume"
+  ],
+  "θυμάμαι": [
+   "θυμούμαι",
+   "thymoúme"
+  ],
+  "σκέφτομαι": [
+   "σκέφτουμαι",
+   "skéftoume"
+  ],
+  "πιστεύω": [
+   "πιστεύκω",
+   "pistéfko"
+  ],
+  "χρειάζομαι": [
+   "χρειάζουμαι",
+   "chriázoume"
+  ],
+  "κάθομαι": [
+   "κάθουμαι",
+   "káthoume"
+  ],
+  "στέκομαι": [
+   "στέκουμαι",
+   "stékoume"
+  ],
+  "μαγειρεύω": [
+   "μαγειρεύκω",
+   "magiréfko"
+  ],
+  "πράγμα": [
+   "πράγμαν",
+   "prágman"
+  ],
+  "χέρι": [
+   "χέριν",
+   "chérin"
+  ],
+  "μάτι": [
+   "μάτιν",
+   "mátin"
+  ],
+  "κεφάλι": [
+   "κεφάλιν",
+   "kefálin"
+  ],
+  "πόδι": [
+   "πόδιν",
+   "pódin"
+  ],
+  "σώμα": [
+   "σώμαν",
+   "sóman"
+  ],
+  "πρόβλημα": [
+   "πρόβλημαν",
+   "próvliman"
+  ],
+  "χρώμα": [
+   "χρώμαν",
+   "chróman"
+  ],
+  "δώρο": [
+   "δώρον",
+   "dóron"
+  ],
+  "ταξίδι": [
+   "ταξίδιν",
+   "taxídin"
+  ],
+  "χαρτί": [
+   "χαρτίν",
+   "chartín"
+  ],
+  "γράμμα": [
+   "γράμμαν",
+   "grámman"
+  ],
+  "μήνυμα": [
+   "μήνυμαν",
+   "mínyman"
+  ],
+  "κινητό": [
+   "κινητόν",
+   "kinitón"
+  ],
+  "ταχυδρομείο": [
+   "ταχυδρομείον",
+   "tachydromíon"
+  ],
+  "αεροδρόμιο": [
+   "αεροδρόμιον",
+   "aerodrómion"
+  ],
+  "λιμάνι": [
+   "λιμάνιν",
+   "limánin"
+  ],
+  "χιόνι": [
+   "χιόνιν",
+   "chiónin"
+  ],
+  "κρύο": [
+   "κρύον",
+   "krýon"
+  ],
+  "δέντρο": [
+   "δέντρον",
+   "déntron"
+  ],
+  "λουλούδι": [
+   "λουλούδιν",
+   "louloúdin"
+  ],
+  "ζώο": [
+   "ζώον",
+   "zóon"
+  ],
+  "μπάνιο": [
+   "μπάνιον",
+   "bánion"
+  ],
+  "διαμέρισμα": [
+   "διαμέρισμαν",
+   "diamérisman"
+  ],
+  "πάτωμα": [
+   "πάτωμαν",
+   "pátoman"
+  ],
+  "παπούτσι": [
+   "παπούτσιν",
+   "papoútsin"
+  ],
+  "πρωινό": [
+   "πρωινόν",
+   "proinón"
+  ],
+  "μεσημεριανό": [
+   "μεσημεριανόν",
+   "mesimerianón"
+  ],
+  "βραδινό": [
+   "βραδινόν",
+   "vradinón"
+  ],
+  "πιάτο": [
+   "πιάτον",
+   "piáton"
+  ],
+  "κουτάλι": [
+   "κουτάλιν",
+   "koutálin"
+  ],
+  "πιρούνι": [
+   "πιρούνιν",
+   "piroúnin"
+  ],
+  "μπουκάλι": [
+   "μπουκάλιν",
+   "boukálin"
+  ],
+  "κρεμμύδι": [
+   "κρεμμύδιν",
+   "kremmýdin"
+  ],
+  "μήλο": [
+   "μήλον",
+   "mílon"
+  ],
+  "πορτοκάλι": [
+   "πορτοκάλιν",
+   "portokálin"
+  ],
+  "λεμόνι": [
+   "λεμόνιν",
+   "lemónin"
+  ],
+  "γιαούρτι": [
+   "γιαούρτιν",
+   "giaoúrtin"
+  ],
+  "μέλι": [
+   "μέλιν",
+   "mélin"
+  ],
+  "ρύζι": [
+   "ρύζιν",
+   "rýzin"
+  ],
+  "παγωτό": [
+   "παγωτόν",
+   "pagotón"
+  ],
+  "ανθρακούχο": [
+   "ανθρακούχον",
+   "anthrakoúchon"
+  ],
+  "φοβάμαι": [
+   "φοούμαι",
+   "fooúme"
+  ],
+  "χορεύω": [
+   "χορεύκω",
+   "choréfko"
+  ],
+  "ταξιδεύω": [
+   "ταξιδεύκω",
+   "taxidéfko"
+  ],
+  "όνειρο": [
+   "όνειρον",
+   "óniron"
+  ],
+  "ψέμα": [
+   "ψέμαν",
+   "pséman"
+  ],
+  "συναίσθημα": [
+   "συναίσθημαν",
+   "synésthiman"
+  ],
+  "παράδειγμα": [
+   "παράδειγμαν",
+   "parádigman"
+  ],
+  "αποτέλεσμα": [
+   "αποτέλεσμαν",
+   "apotélesman"
+  ],
+  "παιχνίδι": [
+   "παιχνίδιν",
+   "pechnídin"
+  ],
+  "επάγγελμα": [
+   "επάγγελμαν",
+   "epángelman"
+  ],
+  "αφεντικό": [
+   "αφεντικόν",
+   "afentikón"
+  ],
+  "ραντεβού": [
+   "ραντεβούν",
+   "rantevoún"
+  ],
+  "γίνομαι": [
+   "γίνουμαι",
+   "gínoume"
+  ],
+  "επισκέπτομαι": [
+   "επισκέπτουμαι",
+   "episképtoume"
+  ],
+  "στομάχι": [
+   "στομάχιν",
+   "stomáchin"
+  ],
+  "δόντι": [
+   "δόντιν",
+   "dóntin"
+  ],
+  "δάχτυλο": [
+   "δάχτυλον",
+   "dáchtylon"
+  ],
+  "πρόσωπο": [
+   "πρόσωπον",
+   "prósopon"
+  ],
+  "γόνατο": [
+   "γόνατον",
+   "gónaton"
+  ],
+  "αίμα": [
+   "αίμαν",
+   "éman"
+  ],
+  "κόκαλο": [
+   "κόκαλον",
+   "kókalon"
+  ],
+  "δέρμα": [
+   "δέρμαν",
+   "dérman"
+  ],
+  "μυαλό": [
+   "μυαλόν",
+   "mialón"
+  ],
+  "φάρμακο": [
+   "φάρμακον",
+   "fármakon"
+  ],
+  "τραύμα": [
+   "τραύμαν",
+   "trávman"
+  ],
+  "σύμπτωμα": [
+   "σύμπτωμαν",
+   "sýmptoman"
+  ],
+  "ασθενοφόρο": [
+   "ασθενοφόρον",
+   "asthenofóron"
+  ],
+  "ενοίκιο": [
+   "ενοίκιον",
+   "eníkion"
+  ],
+  "κτίριο": [
+   "κτίριον",
+   "ktírion"
+  ],
+  "πάρκο": [
+   "πάρκον",
+   "párkon"
+  ],
+  "πεζοδρόμιο": [
+   "πεζοδρόμιον",
+   "pezodrómion"
+  ],
+  "φανάρι": [
+   "φανάριν",
+   "fanárin"
+  ],
+  "ποδήλατο": [
+   "ποδήλατον",
+   "podílaton"
+  ],
+  "ταξί": [
+   "ταξίν",
+   "taxín"
+  ],
+  "μετρό": [
+   "μετρόν",
+   "metrón"
+  ],
+  "πλοίο": [
+   "πλοίον",
+   "plíon"
+  ],
+  "πασαπόρτο": [
+   "πασαπόρτον",
+   "pasapórton"
+  ],
+  "σύννεφο": [
+   "σύννεφον",
+   "sýnnefon"
+  ],
+  "ποτάμι": [
+   "ποτάμιν",
+   "potámin"
+  ],
+  "ρεύμα": [
+   "ρεύμαν",
+   "révman"
+  ],
+  "κλίμα": [
+   "κλίμαν",
+   "klíman"
+  ],
+  "χωράφι": [
+   "χωράφιν",
+   "choráfin"
+  ],
+  "έντομο": [
+   "έντομον",
+   "éntomon"
+  ],
+  "πανεπιστήμιο": [
+   "πανεπιστήμιον",
+   "panepistímion"
+  ],
+  "λεξικό": [
+   "λεξικόν",
+   "lexikón"
+  ],
+  "αρχείο": [
+   "αρχείον",
+   "archíon"
+  ],
+  "διαδίκτυο": [
+   "διαδίκτυον",
+   "diadíktyon"
+  ],
+  "δίκτυο": [
+   "δίκτυον",
+   "díktyon"
+  ],
+  "πρόγραμμα": [
+   "πρόγραμμαν",
+   "prógramman"
+  ],
+  "γραφείο": [
+   "γραφείον",
+   "grafíon"
+  ],
+  "συμβόλαιο": [
+   "συμβόλαιον",
+   "symvóleon"
+  ],
+  "τιμολόγιο": [
+   "τιμολόγιον",
+   "timológion"
+  ],
+  "δάνειο": [
+   "δάνειον",
+   "dánion"
+  ],
+  "εργοστάσιο": [
+   "εργοστάσιον",
+   "ergostásion"
+  ],
+  "έργο": [
+   "έργον",
+   "érgon"
+  ],
+  "κόμμα": [
+   "κόμμαν",
+   "kómman"
+  ],
+  "δικαίωμα": [
+   "δικαίωμαν",
+   "dikéoman"
+  ],
+  "δικαστήριο": [
+   "δικαστήριον",
+   "dikastírion"
+  ],
+  "έγκλημα": [
+   "έγκλημαν",
+   "énkliman"
+  ],
+  "όριο": [
+   "όριον",
+   "órion"
+  ],
+  "θέατρο": [
+   "θέατρον",
+   "théatron"
+  ],
+  "μουσείο": [
+   "μουσείον",
+   "musíon"
+  ],
+  "περιοδικό": [
+   "περιοδικόν",
+   "periodikón"
+  ],
+  "άρθρο": [
+   "άρθρον",
+   "árthron"
+  ],
+  "ραδιόφωνο": [
+   "ραδιόφωνον",
+   "radiófonon"
+  ],
+  "κοινό": [
+   "κοινόν",
+   "kinón"
+  ],
+  "νούμερο": [
+   "νούμερον",
+   "noúmeron"
+  ],
+  "ποσοστό": [
+   "ποσοστόν",
+   "posostón"
+  ],
+  "σκάνδαλο": [
+   "σκάνδαλον",
+   "skándalon"
+  ],
+  "συμπέρασμα": [
+   "συμπέρασμαν",
+   "sympérasman"
+  ],
+  "πλεονέκτημα": [
+   "πλεονέκτημαν",
+   "pleonéktiman"
+  ],
+  "μειονέκτημα": [
+   "μειονέκτημαν",
+   "mionéktiman"
+  ],
+  "μέτρο": [
+   "μέτρον",
+   "métron"
+  ],
+  "κουράγιο": [
+   "κουράγιον",
+   "kourágion"
+  ],
+  "παραδέχομαι": [
+   "παραδέχουμαι",
+   "paradéchoume"
+  ],
+  "διαμαρτύρομαι": [
+   "διαμαρτύρουμαι",
+   "diamartýroume"
+  ],
+  "διαπραγματεύομαι": [
+   "διαπραγματεκουμαι",
+   "diapragmatéfkoume"
+  ],
+  "εμπιστεύομαι": [
+   "εμπιστεκουμαι",
+   "empistéfkoume"
+  ],
+  "αποταμιεύω": [
+   "αποταμιεύκω",
+   "apotamiéfko"
+  ],
+  "ξοδεύω": [
+   "ξοδεύκω",
+   "xodéfko"
+  ],
+  "απαγορεύω": [
+   "απαγορεύκω",
+   "apagoréfko"
+  ],
+  "υπονομεύω": [
+   "υπονομεύκω",
+   "yponoméfko"
+  ],
+  "αντιστέκομαι": [
+   "αντιστέκουμαι",
+   "antistékoume"
+  ],
+  "δεσμεύομαι": [
+   "δεσμεκουμαι",
+   "desméfkoume"
+  ],
+  "εκμεταλλεύομαι": [
+   "εκμεταλλεκουμαι",
+   "ekmetalléfkoume"
+  ],
+  "ισχυρίζομαι": [
+   "ισχυρίζουμαι",
+   "ischyrízoume"
+  ],
+  "φαίνομαι": [
+   "φαίνουμαι",
+   "fénoume"
+  ],
+  "ξεκουράζομαι": [
+   "ξεκουράζουμαι",
+   "xekourázoume"
+  ],
+  "βιάζομαι": [
+   "βιάζουμαι",
+   "viázoume"
+  ],
+  "δανείζομαι": [
+   "δανείζουμαι",
+   "danízoume"
+  ],
+  "νερό": [
+   "νερόν",
+   "nerón"
+  ],
+  "ψωμί": [
+   "ψωμίν",
+   "psomín"
+  ],
+  "κρασί": [
+   "κρασίν",
+   "krasín"
+  ],
+  "σπίτι": [
+   "σπίτιν",
+   "spítin"
+  ],
+  "παιδί": [
+   "παιδίν",
+   "pedín"
+  ],
+  "τυρί": [
+   "τυρίν",
+   "tirín"
+  ],
+  "γάλα": [
+   "γάλαν",
+   "gálan"
+  ],
+  "φαγητό": [
+   "φαΐν",
+   "faín"
+  ],
+  "κρεβάτι": [
+   "καρκόλα",
+   "karkóla"
+  ],
+  "καρέκλα": [
+   "τσαέρα",
+   "tsaéra"
+  ],
+  "τραπέζι": [
+   "τραπέζιν",
+   "trapézin"
+  ],
+  "ποτήρι": [
+   "ποτήριν",
+   "potírin"
+  ],
+  "μαχαίρι": [
+   "μαχαίριν",
+   "machérin"
+  ],
+  "κλειδί": [
+   "κλειδίν",
+   "klidín"
+  ],
+  "νησί": [
+   "νησίν",
+   "nisín"
+  ],
+  "χωριό": [
+   "χωρκόν",
+   "chorkón"
+  ],
+  "τραγούδι": [
+   "τραούιν",
+   "traoúin"
+  ],
+  "γάτα": [
+   "κάττα",
+   "kátta"
+  ],
+  "σκύλος": [
+   "σιύλλος",
+   "shíllos"
+  ],
+  "πουλί": [
+   "πουλλίν",
+   "poullín"
+  ],
+  "λεφτά": [
+   "ριάλια",
+   "riália"
+  ],
+  "χρήματα": [
+   "ριάλια",
+   "riália"
+  ],
+  "αγόρι": [
+   "κοπελλούιν",
+   "kopelloúin"
+  ],
+  "κορίτσι": [
+   "κορούα",
+   "koroúa"
+  ],
+  "φίλος": [
+   "κουμπάρος",
+   "koumbáros"
+  ],
+  "μωρό": [
+   "μωρόν",
+   "morón"
+  ],
+  "αυτοκίνητο": [
+   "αμάξιν",
+   "amáxin"
+  ],
+  "κάνω": [
+   "κάμνω",
+   "kámno"
+  ],
+  "λέω": [
+   "λαλώ",
+   "laló"
+  ],
+  "βλέπω": [
+   "θωρώ",
+   "thoró"
+  ],
+  "μιλάω": [
+   "συντυχάννω",
+   "sindichánno"
+  ],
+  "μιλώ": [
+   "συντυχάννω",
+   "sindichánno"
+  ],
+  "δουλεύω": [
+   "δουλεύκω",
+   "douléfko"
+  ],
+  "τώρα": [
+   "τωρά",
+   "torá"
+  ],
+  "εδώ": [
+   "δαμέ",
+   "damé"
+  ],
+  "εκεί": [
+   "τζιαμέ",
+   "djamé"
+  ],
+  "πολύ": [
+   "πολλά",
+   "pollá"
+  ],
+  "λίγο": [
+   "λλίο",
+   "llío"
+  ],
+  "όχι": [
+   "όι",
+   "ói"
+  ],
+  "και": [
+   "τζιαι",
+   "djé"
+  ],
+  "τι": [
+   "ίντα",
+   "índa"
+  ],
+  "τίποτα": [
+   "τίποτε",
+   "típote"
+  ],
+  "χτες": [
+   "εχτές",
+   "echtés"
+  ],
+  "χθες": [
+   "εχτές",
+   "echtés"
+  ],
+  "πώς είσαι;": [
+   "ίντα κάμνεις;",
+   "índa kámnis"
+  ],
+  "τι κάνεις;": [
+   "ίντα κάμνεις;",
+   "índa kámnis"
+  ],
+  "τι κάνετε;": [
+   "ίντα κάμνετε;",
+   "índa kámnete"
+  ],
+  "όλος": [
+   "ούλλος",
+   "oúllos"
+  ],
+  "όλα": [
+   "ούλλα",
+   "oúlla"
+  ],
+  "μικρός": [
+   "μιτσής",
+   "mitsís"
+  ],
+  "γυναίκα": [
+   "γεναίκα",
+   "genéka"
+  ],
+  "ξέρω": [
+   "ηξέρω",
+   "ixéro"
+  ],
+  "βρίσκω": [
+   "ευρίσκω",
+   "evrísko"
+  ],
+  "σήμερα": [
+   "σήμμερα",
+   "símmera"
+  ],
+  "αύριο": [
+   "αύριον",
+   "ávrion"
+  ],
+  "γρήγορα": [
+   "γλήορα",
+   "glíora"
+  ],
+  "μπορώ": [
+   "δύνουμαι",
+   "dýnoume"
+  ],
+  "κοιτάζω": [
+   "θωρώ",
+   "thoró"
+  ],
+  "ψηλός": [
+   "ψιλός",
+   "psilós"
+  ],
+  "έτοιμος": [
+   "έτοιμος",
+   "étimos"
+  ],
+  "κοπέλα": [
+   "κοπέλλα",
+   "kopélla"
+  ],
+  "ωραίος": [
+   "όμορφος",
+   "ómorfos"
+  ],
+  "παππούς": [
+   "παππούς",
+   "pappoús"
+  ],
+  "δουλειά": [
+   "δουλειά",
+   "douliá"
+  ]
+ }
 }

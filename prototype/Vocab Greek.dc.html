@@ -362,6 +362,10 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:900},&quot;dailyGoal&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:30,&quot;min&quot;:10,&quot;max&quot;:100,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Daily goal (cards)&quot;},&quot;mistakeBudget&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:20,&quot;min&quot;:5,&quot;max&quot;:50,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Misses per day before new words stop&quot;},&quot;quiz&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;DE → EL&quot;,&quot;options&quot;:[&quot;DE → EL&quot;,&quot;EL → DE&quot;,&quot;Mixed&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Quiz direction&quot;}}">
 
 const W = window.DECK || [], TIER_NAMES = window.TIER_NAMES || [];
+const TS = 200, NT = Math.max(1, Math.ceil(W.length / TS)); // 200 Wörter pro Stufe (A1-C1)
+// Migration: gespeicherte tierFloor-Werte stammen aus der 100er-Ära -> auf das aktuelle Raster einrasten.
+// Abrunden, nie runden: ein gespeicherter Wert von 100 w\u00fcrde sonst auf 200 springen und 100 ungesehene W\u00f6rter \u00fcberspringen.
+function snapFloor(v) { const n = Math.max(0, Math.floor(v || 0)); return Math.min(NT - 1, Math.floor(n / TS)) * TS; }
 const MIN = 60000, DAY = 86400000;
 const IV = [10*MIN, DAY, 3*DAY, 7*DAY, 16*DAY, 35*DAY, 90*DAY];
 const ACC = (function () { try { return JSON.parse(localStorage.getItem("bl-session") || "null"); } catch (e) { return null; } })();
@@ -418,7 +422,7 @@ class Component extends DCLogic {
     this.setState({
       cards: (saved && saved.cards) || {}, stats: stats, days: (saved && saved.days) || {},
       badges: (saved && saved.badges) || {}, xp: (saved && saved.xp) || 0,
-      dialect: (saved && saved.dialect) || "el", pace: (saved && saved.pace) || 6, tierFloor: (saved && saved.tierFloor) || 0, loaded: true
+      dialect: (saved && saved.dialect) || "el", pace: (saved && saved.pace) || 6, tierFloor: snapFloor(saved && saved.tierFloor), loaded: true
     });
     idbGet().then((m) => { if (m) this.mergeIn(m, true); });
     if (!SUF) fetch("memoire-grec.csv", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : null; })
@@ -644,17 +648,17 @@ class Component extends DCLogic {
       const r = this.recent, acc = r.length ? r.filter(function (x) { return x > 0; }).length / r.length : 0;
       const pct = Math.round(acc * 100);
       let jumped = false;
-      if (r.length >= 24 && acc >= 0.92 && tierFloor < 400) {
-        tierFloor = (Math.floor(tierFloor / 100) + 1) * 100;
+      if (r.length >= 24 && acc >= 0.92 && tierFloor < (NT - 1) * TS) {
+        tierFloor = (Math.floor(tierFloor / TS) + 1) * TS;
         pace = Math.min(24, pace + 4);
-        note = pct + "% accuracy — too easy. Jumped ahead to tier « " + TIER_NAMES[tierFloor / 100] + " », intake raised to " + pace + " new words per session.";
+        note = pct + "% accuracy — too easy. Jumped ahead to tier « " + (TIER_NAMES[tierFloor / TS] || "Stufe " + (tierFloor / TS + 1)) + " », intake raised to " + pace + " new words per session.";
         this.recent = []; jumped = true;
       } else if (r.length >= 15 && acc >= 0.9 && pace < 24) {
         pace = Math.min(24, pace + 3);
         note = pct + "% accuracy — intake raised to " + pace + " new words per session.";
       } else if (r.length >= 15 && acc < 0.65) {
         pace = Math.max(3, pace - 2);
-        if (tierFloor > 0) { tierFloor = tierFloor - 100; note = pct + "% accuracy — easing off: " + pace + " new words per session, backfilling tier « " + TIER_NAMES[tierFloor / 100] + " »."; }
+        if (tierFloor > 0) { tierFloor = Math.max(0, tierFloor - TS); note = pct + "% accuracy — easing off: " + pace + " new words per session, backfilling tier « " + (TIER_NAMES[tierFloor / TS] || "Stufe " + (tierFloor / TS + 1)) + " »."; }
         else note = pct + "% accuracy — easing off to " + pace + " new words per session.";
         this.recent = r.slice(-10);
       }
@@ -719,18 +723,18 @@ class Component extends DCLogic {
       cells.push({ style: { aspectRatio: "1", borderRadius: "5px", background: c } });
     }
     // tiers
-    const activeTier = Math.min(4, Math.floor((s.tierFloor || 0) / 100));
-    const CEFR = ["A1", "A2", "B1", "B2", "C1"];
+    const activeTier = Math.min(NT - 1, Math.floor((s.tierFloor || 0) / TS));
+    const CEFR = ["A1", "A2", "B1", "B2", "C1", "C2"];
     const tiers = [], tierKn = [], tierSize = [];
-    for (let t = 0; t < 5; t++) {
+    for (let t = 0; t < NT; t++) {
       let kn = 0;
-      const size = Math.max(1, Math.min(W.length, (t + 1) * 100) - t * 100);
-      for (let i = t * 100; i < Math.min(W.length, (t + 1) * 100); i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) kn++; }
+      const size = Math.max(1, Math.min(W.length, (t + 1) * TS) - t * TS);
+      for (let i = t * TS; i < Math.min(W.length, (t + 1) * TS); i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) kn++; }
       const act = t === activeTier, full = kn >= size;
       tierKn.push(kn); tierSize.push(size);
       tiers.push({
-        name: TIER_NAMES[t], count: kn + "/" + size,
-        cefr: CEFR[t],
+        name: TIER_NAMES[t] || ("Stufe " + (t + 1)), count: kn + "/" + size,
+        cefr: CEFR[t] || "C2",
         cefrStyle: { fontSize: "11px", fontWeight: "800", letterSpacing: "0.04em", color: full ? "#b08d3f" : act ? "#2160a8" : "#c9c3b5" },
         trackStyle: { width: "100%", height: act ? "9px" : "6px", background: "#efece5", borderRadius: "999px", overflow: "hidden", boxShadow: act ? "0 0 0 1.5px #2160a8" : "none" },
         fillStyle: { height: "100%", width: Math.round(100 * kn / size) + "%", background: full ? "#b08d3f" : "#2160a8", borderRadius: "999px", transition: "width 0.4s ease" },
