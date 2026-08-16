@@ -38,8 +38,39 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 <script src="bl-config.js"></script>
 <script src="bl-sync.js"></script>
 <script src="nani-work.js"></script>
+<script src="bl-release.js"></script>
 </helmet>
 <div style="min-height:100dvh;background:#f6f4ef" data-screen-label="Vocabulaire Supérieur">
+
+<sc-if value="{{ relDevOn }}" hint-placeholder-val="{{ false }}">
+  <div style="position:fixed;top:calc(8px + env(safe-area-inset-top));right:8px;z-index:70;display:flex;align-items:center;gap:8px;background:rgba(255,255,255,0.94);border:1px solid #e9e5dc;border-radius:999px;padding:5px 7px 5px 11px;box-shadow:0 2px 10px rgba(23,24,29,0.12)">
+    <span style="font-size:8.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#a5a096">{{ relDevLabel }}</span>
+    <button style="{{ relTrackStyle }}" onClick="{{ toggleRelease }}"><span style="{{ relKnobStyle }}"></span></button>
+  </div>
+</sc-if>
+
+<sc-if value="{{ showRelease }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Release note" style="position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(23,24,29,0.45)">
+    <div style="width:min(400px,100%);background:#fff;border-radius:26px;padding:26px 24px 22px;box-shadow:0 24px 60px rgba(23,24,29,0.32);display:flex;flex-direction:column;gap:16px;animation:fadeUp 0.32s ease both">
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <span style="font-size:9.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#d62828">{{ relKicker }}</span>
+        <span style="font-family:Gloock,serif;font-size:29px;line-height:1.06;color:#17181d">{{ relTitle }}</span>
+        <span style="font-size:13px;line-height:1.5;color:#8a857a;text-wrap:pretty">{{ relLead }}</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px;border-top:1px solid #efece5;padding-top:15px">
+        <sc-for list="{{ relItems }}" as="R" hint-placeholder-count="3">
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="width:6px;height:6px;border-radius:999px;background:#d62828;margin-top:7px;flex:none"></span>
+            <span style="font-size:13.5px;line-height:1.45;color:#3d3a34;text-wrap:pretty">{{ R.text }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <span style="font-size:12.5px;line-height:1.45;color:#8a857a;text-wrap:pretty">{{ relOutro }}</span>
+      <button style="min-height:52px;background:#d62828;color:#fff;border-radius:999px;font-size:15.5px;font-weight:700" style-hover="{{ ctaHover }}" onClick="{{ closeRelease }}">{{ relCta }}</button>
+      <span style="font-size:10px;color:#c9c3b5;text-align:center">{{ relFootnote }}</span>
+    </div>
+  </div>
+</sc-if>
 
 <sc-if value="{{ isSplash }}" hint-placeholder-val="{{ true }}">
   <div data-screen-label="Splash" style="min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:20px;padding:calc(24px + env(safe-area-inset-top)) 24px calc(28px + env(safe-area-inset-bottom));overflow:hidden">
@@ -392,6 +423,7 @@ const BADGE_DEFS = [
   ["grimpeur","Bond en Avant","Jump a difficulty tier"]
 ];
 const MY_SIDE = "fr", OPP_KEY = "vocab-el-v1";
+const REL = (window.BL_RELEASE && window.BL_RELEASE.fr) || { kicker: "", title: "", lead: "", cta: "OK", items: [] };
 const MISSIONS = [["w_croissant","Croissant de Combat","Learn 5 new words in a day","n",5],["w_baguette","Baguette Tranchante","12 correct answers in a day","c",12],["w_eclair","Attaque Éclair","8 fast answers in a day","f",8],["w_verbes","Charge des Verbes","Get 6 verbs right in a day","v",6]];
 function idOf(i) { return W[i][0]; }
 function pad(n) { return n < 10 ? "0" + n : "" + n; }
@@ -422,12 +454,39 @@ class Component extends DCLogic {
     setWorld(w);
     this.sessions = []; this.recent = []; this.cur = null; this.lastSess = null; this.sessBadges = [];
     this.loadWorld();
-    if (window.BLSync && window.BLSync.enabled) window.BLSync.latestFront("el").then((r) => { if (r) this.setState({ serverOpp: r }); });
+    this.pullOpp();
   }
+  // last known opponent numbers paint immediately; the network only refines them
+  seedOpp = () => {
+    try { const c = JSON.parse(localStorage.getItem("bl-front-el") || "null"); if (c) this.setState({ serverOpp: c }); } catch (e) {}
+  };
+  pullOpp = () => {
+    if (!(window.BLSync && window.BLSync.enabled)) return;
+    window.BLSync.latestFront("el").then((r) => {
+      if (!r) return;
+      this.setState({ serverOpp: r });
+      try { localStorage.setItem("bl-front-el", JSON.stringify(r)); } catch (e) {}
+    });
+  };
+  onVis = () => { if (document.visibilityState === "visible") this.pullOpp(); };
+  componentWillUnmount() {
+    clearInterval(this._oppT);
+    window.removeEventListener("focus", this.pullOpp);
+    document.removeEventListener("visibilitychange", this.onVis);
+  }
+  closeRelease = () => {
+    if (window.BL_RELEASE && window.BL_RELEASE.markSeen) window.BL_RELEASE.markSeen(ACC && ACC.slot);
+    this.setState({ showRelease: false });
+  };
   componentDidMount() {
+    if (window.BL_RELEASE && window.BL_RELEASE.unseen && window.BL_RELEASE.unseen(ACC && ACC.slot)) this.setState({ showRelease: true });
     try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
     this.loadWorld();
-    if (window.BLSync && window.BLSync.enabled) window.BLSync.latestFront("el").then((r) => { if (r) this.setState({ serverOpp: r }); });
+    this.seedOpp();
+    this.pullOpp();
+    this._oppT = setInterval(this.pullOpp, 45000);
+    window.addEventListener("focus", this.pullOpp);
+    document.addEventListener("visibilitychange", this.onVis);
   }
   loadWorld() {
     const tok = KEY;
@@ -821,7 +880,18 @@ class Component extends DCLogic {
       wdStyle: segStyle(!WORLD_WORK), wwStyle: segStyle(WORLD_WORK),
       goDaily: () => this.goWorld("daily"), goWork: () => this.goWorld("work"),
       tiersGridStyle: { display: "grid", gridTemplateColumns: "repeat(" + NT + ",1fr)", gap: "8px" },
-      splashStats: !s.loaded ? "" : known > 0 ? known + " words known · " + (stats.streak || 0) + "-day streak · " + TIER_NAMES[activeTier] : "Fresh recruit — 500 words await",
+      splashStats: !s.loaded ? "" : known > 0 ? known + " words known · " + (stats.streak || 0) + "-day streak · " + TIER_NAMES[activeTier] : "Fresh recruit — " + W.length + " words await",
+      // release note (sim: driven by the top-right toggle; live: BL_RELEASE.auto)
+      showRelease: !!s.showRelease,
+      relDevOn: !!(window.BL_RELEASE && window.BL_RELEASE.devToggle),
+      relDevLabel: "release " + ((window.BL_RELEASE && window.BL_RELEASE.version) || "—"),
+      relTrackStyle: { width: "34px", height: "20px", borderRadius: "999px", background: s.showRelease ? "#d62828" : "#d9d4c9", display: "flex", alignItems: "center", justifyContent: s.showRelease ? "flex-end" : "flex-start", padding: "2px", transition: "background 0.18s ease" },
+      relKnobStyle: { width: "16px", height: "16px", borderRadius: "999px", background: "#fff", boxShadow: "0 1px 2px rgba(23,24,29,0.25)", display: "block" },
+      toggleRelease: () => this.setState({ showRelease: !this.state.showRelease }),
+      closeRelease: this.closeRelease,
+      relKicker: REL.kicker, relTitle: REL.title, relLead: REL.lead, relCta: REL.cta, relOutro: REL.outro || "",
+      relItems: (REL.items || []).map(function (x, i) { return { text: x, key: i }; }),
+      relFootnote: (window.BL_RELEASE && window.BL_RELEASE.auto) ? "" : "Preview only — shown once per fighter after a real update.",
       ctaHover: { background: "#b21f1f" }, ghostHover: { background: "#e9e5dc" },
       missHover: { background: "#faf1ef" }, memHover: { background: "rgba(255,255,255,0.22)" },
       streak: stats.streak || 0, bestStreak: stats.bestStreak || 0,

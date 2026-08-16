@@ -131,15 +131,28 @@ class Component extends DCLogic {
     while (r.length < 10) r.push(null);
     this.setState({ roster: r });
     if (!window.BLSync || !window.BLSync.enabled) { this.setState({ srv: "off" }); return; }
+    this.pullRoster();
+    // a fighter claimed on the other device shows up without a manual reload
+    this._rosterT = setInterval(this.pullRoster, 15000);
+  }
+  componentWillUnmount() { clearInterval(this._rosterT); }
+  pullRoster = () => {
     window.BLSync.roster().then((rows) => {
       if (!rows) { this.setState({ srv: "off" }); return; }
       this.setState({ srv: "on" });
       const ro = this.state.roster.slice();
       let changed = false;
-      rows.forEach(function (f) { if (f.slot >= 0 && f.slot < 10 && !ro[f.slot]) { ro[f.slot] = { name: f.name, lang: f.language_id, pin: null }; changed = true; } });
-      if (changed) this.setState({ roster: ro });
+      rows.forEach(function (f) {
+        if (f.slot < 0 || f.slot > 9) return;
+        const cur = ro[f.slot];
+        if (!cur) { ro[f.slot] = { name: f.name, lang: f.language_id, pin: null }; changed = true; return; }
+        // server owns name and language; the PIN stays local to this device
+        if (cur.name !== f.name || cur.lang !== f.language_id) { ro[f.slot] = { name: f.name, lang: f.language_id, pin: cur.pin }; changed = true; }
+      });
+      // cache the merged grid so the next open paints every fighter instantly
+      if (changed) { this.saveRoster(ro); this.setState({ roster: ro }); }
     });
-  }
+  };
   saveRoster(r) { try { localStorage.setItem(RKEY, JSON.stringify(r)); } catch (e) {} }
   launch(slot, rec) {
     try { localStorage.setItem(SKEY, JSON.stringify({ slot: slot, name: rec.name, lang: rec.lang })); } catch (e) {}
