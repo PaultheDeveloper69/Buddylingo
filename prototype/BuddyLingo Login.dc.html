@@ -8,6 +8,7 @@
 <body>
 <x-dc>
 <helmet>
+<script>if (location.hostname === "www.buddylingo.de") location.replace(location.href.replace("//www.", "//"));</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f6f4ef">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -27,6 +28,9 @@ input { font-family:inherit; }
 @keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
 @keyframes shake { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-7px); } 75% { transform:translateX(7px); } }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="bl-config.js"></script>
+<script src="bl-sync.js"></script>
 </helmet>
 <div data-screen-label="BuddyLingo Login" style="min-height:100dvh;background:#f6f4ef;display:flex;flex-direction:column;align-items:center;padding:calc(28px + env(safe-area-inset-top)) 20px calc(28px + env(safe-area-inset-bottom))">
 <div style="width:min(420px,100%);display:flex;flex-direction:column;gap:18px">
@@ -54,7 +58,6 @@ input { font-family:inherit; }
         </sc-for>
       </div>
       <span style="font-size:11px;color:#8a857a;text-align:center;text-wrap:pretty">Fighters of the same language battle as one team. Progress is saved per fighter — nothing collides.</span>
-      <button style="align-self:center;color:#a5a096;font-size:11px;text-decoration:underline;text-underline-offset:3px;min-height:44px" onClick="{{ resetRoster }}">Reset all fighters</button>
     </div>
   </sc-if>
 
@@ -106,6 +109,9 @@ input { font-family:inherit; }
 </x-dc>
 <script type="text/x-dc" data-dc-script>
 const RKEY = "bl-roster-v1", SKEY = "bl-session";
+// ALPHA: only the first N slots can be claimed; the rest show "coming soon".
+// Raise this number to open more fighter slots.
+const ALPHA_SLOTS = 2;
 // [id, name, color, app, locked] — locked languages slumber: listed, not playable yet
 const LANGS = [
   ["fr", "Français", "#d62828", "Vocab French.dc.html", false],
@@ -123,6 +129,13 @@ class Component extends DCLogic {
     if (!r || !Array.isArray(r)) r = Array(10).fill(null);
     while (r.length < 10) r.push(null);
     this.setState({ roster: r });
+    if (window.BLSync && window.BLSync.enabled) window.BLSync.roster().then((rows) => {
+      if (!rows) return;
+      const ro = this.state.roster.slice();
+      let changed = false;
+      rows.forEach(function (f) { if (f.slot >= 0 && f.slot < 10 && !ro[f.slot]) { ro[f.slot] = { name: f.name, lang: f.language_id, pin: null }; changed = true; } });
+      if (changed) this.setState({ roster: ro });
+    });
   }
   saveRoster(r) { try { localStorage.setItem(RKEY, JSON.stringify(r)); } catch (e) {} }
   launch(slot, rec) {
@@ -139,11 +152,43 @@ class Component extends DCLogic {
       const r = s.roster.slice();
       r[s.sel] = { name: s.name.trim(), lang: s.lang, pin: pin };
       this.saveRoster(r);
-      this.setState({ roster: r, pin: pin }, () => setTimeout(() => this.launch(s.sel, r[s.sel]), 250));
+      this.setState({ roster: r, pin: pin }, () => {
+        if (!(window.BLSync && window.BLSync.enabled)) return setTimeout(() => this.launch(s.sel, r[s.sel]), 150);
+        const rec = r[s.sel];
+        const t = setTimeout(() => this.launch(s.sel, rec), 5000); // offline fallback
+        const attempt = (slotN, tries) => {
+          window.BLSync.register(slotN, rec.name, rec.lang, pin).then((res) => {
+            if (res && res.slotTaken && tries < 3 && res.next != null) {
+              // someone claimed this slot first — slide over to the next free one
+              const ro = this.state.roster.slice();
+              if (slotN !== res.next) { ro[res.next] = rec; if (ro[slotN] === rec || (ro[slotN] && ro[slotN].name === rec.name)) ro[slotN] = null; }
+              this.saveRoster(ro);
+              this.setState({ roster: ro }, () => attempt(res.next, tries + 1));
+            } else {
+              clearTimeout(t);
+              const fin = res && res.slot != null ? res.slot : slotN;
+              setTimeout(() => this.launch(fin, rec), 150);
+            }
+          });
+        };
+        attempt(s.sel, 0);
+      });
     } else {
       const rec = s.roster[s.sel];
-      if (rec && rec.pin === pin) {
+      if (rec && rec.pin != null && rec.pin === pin) {
+        if (window.BLSync && window.BLSync.enabled) window.BLSync.login(s.sel, rec.name, pin);
         this.setState({ pin: pin }, () => setTimeout(() => this.launch(s.sel, rec), 250));
+      } else if (rec && rec.pin == null && window.BLSync && window.BLSync.enabled) {
+        // fighter created on another device: verify PIN against the server
+        this.setState({ pin: pin });
+        window.BLSync.login(s.sel, rec.name, pin).then((res) => {
+          if (res && res.ok) {
+            const ro = this.state.roster.slice();
+            ro[s.sel] = { name: rec.name, lang: rec.lang, pin: pin };
+            this.saveRoster(ro);
+            this.setState({ roster: ro }, () => this.launch(s.sel, ro[s.sel]));
+          } else this.setState({ pin: "", err: true });
+        });
       } else {
         this.setState({ pin: "", err: true });
       }
@@ -155,16 +200,19 @@ class Component extends DCLogic {
     s.roster.forEach(function (r) { if (r) teamCount[r.lang] = (teamCount[r.lang] || 0) + 1; });
     const slots = s.roster.map((r, i) => {
       const L = r ? langOf(r.lang) : null;
+      const dormant = !r && i >= ALPHA_SLOTS; // alpha: only the first slots are claimable
       return {
-        initial: r ? (r.name[0] || "?").toUpperCase() : "+",
-        name: r ? r.name : "Open slot",
-        sub: r ? L[1] : "tap to enlist",
+        initial: r ? (r.name[0] || "?").toUpperCase() : (dormant ? "·" : "+"),
+        name: r ? r.name : (dormant ? "Locked" : "Open slot"),
+        sub: r ? L[1] : (dormant ? "coming soon" : "tap to enlist"),
         cardStyle: { display: "flex", alignItems: "center", gap: "10px", minHeight: "72px", padding: "12px 14px", borderRadius: "18px", textAlign: "left",
-          background: r ? "#fff" : "transparent", border: r ? "none" : "1.5px dashed #d8d3c8", boxShadow: r ? "0 1px 3px rgba(23,24,29,0.08)" : "none" },
+          background: r ? "#fff" : "transparent", border: r ? "none" : "1.5px dashed #d8d3c8", boxShadow: r ? "0 1px 3px rgba(23,24,29,0.08)" : "none",
+          opacity: dormant ? 0.45 : 1, cursor: dormant ? "not-allowed" : "pointer" },
         discStyle: { width: "36px", height: "36px", borderRadius: "999px", flex: "none", display: "inline-flex", alignItems: "center", justifyContent: "center",
           fontSize: "15px", fontWeight: "800", color: "#fff", background: r ? L[2] : "#d8d3c8" },
         nameStyle: { fontSize: "14px", fontWeight: "700", color: r ? "#17181d" : "#a5a096", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "110px" },
         tap: () => {
+          if (dormant) return;
           if (!r) return this.setState({ view: "claim", sel: i, name: "", lang: "", pin: "", err: false });
           this.setState({ view: "pin", sel: i, mode: "enter", pin: "", err: false });
         }
