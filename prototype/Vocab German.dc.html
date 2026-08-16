@@ -13,47 +13,47 @@
 <meta name="theme-color" content="#f6f4ef">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="BuddyLingo EL">
+<meta name="apple-mobile-web-app-title" content="BuddyLingo DE">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
 <style>
 @keyframes idleBreathe { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.015,0.97); } }
 @keyframes idleSway { 0%,100% { rotate: -2.2deg; } 50% { rotate: 2.2deg; } }
 @keyframes mascotLook { 0%, 26% { transform: scaleX(1) translateY(0); } 6% { transform: scaleX(1) translateY(-2.5px); } 14% { transform: scaleX(1) translateY(0); } 33% { transform: scaleX(-1) translateY(-2px) skewX(3deg); } 38%, 52% { transform: scaleX(-1) translateY(0); } 46% { transform: scaleX(-1) translateY(-2.5px); } 60% { transform: scaleX(-1) translateY(0); } 67% { transform: scaleX(1) translateY(-2px) skewX(-3deg); } 72%, 100% { transform: scaleX(1) translateY(0); } }
-@keyframes mobHop { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-4px) rotate(4deg); } }
 *, *::before, *::after { box-sizing: border-box; }
 html { -webkit-text-size-adjust:100%; }
 body { margin:0; background:#f6f4ef; color:#17181d; font-family:'Figtree',system-ui,sans-serif; -webkit-tap-highlight-color:transparent; overscroll-behavior-y:none; }
 button, a { touch-action:manipulation; }
 img { -webkit-user-drag:none; user-select:none; -webkit-user-select:none; }
-a { color:#2160a8; text-underline-offset:3px; } a:hover { color:#17497f; }
+a { color:#946f00; text-underline-offset:3px; } a:hover { color:#75570a; }
 button { font-family:inherit; cursor:pointer; border:none; }
-button:focus-visible { outline:2px solid #2160a8; outline-offset:2px; }
+button:focus-visible { outline:2px solid #946f00; outline-offset:2px; }
 button:disabled { opacity:0.45; cursor:not-allowed; }
 @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
 </style>
-<script src="greek-deck.js"></script>
+<script src="deck-de.js"></script>
+<script>new MutationObserver(function () { document.querySelectorAll("video").forEach(function (v) { if (!v.muted || v.volume > 0) { v.muted = true; v.volume = 0; } }); }).observe(document.documentElement, { childList: true, subtree: true });</script>
+<script src="image-slot.js"></script>
 </helmet>
-<div style="min-height:100dvh;background:#f6f4ef" data-screen-label="Vocabulaire Inférieur">
+<div style="min-height:100dvh;background:#f6f4ef" data-screen-label="Deutsches Vokabular">
 
 <sc-if value="{{ isSplash }}" hint-placeholder-val="{{ true }}">
   <div data-screen-label="Splash" style="min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:20px;padding:calc(24px + env(safe-area-inset-top)) 24px calc(28px + env(safe-area-inset-bottom));overflow:hidden">
     <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#a5a096">BuddyLingo · vocab 1v1</span>
     <div style="display:flex;flex-direction:column;align-items:center;gap:22px;animation:fadeUp 0.7s ease both;background:#f6f4ef">
-      <img src="https://upload.higgsfield.ai/user_32PgHXDjHlFXmhgKyUnBM4DN7Qi/e0e8a65e-5627-4ee0-8bb6-d7fab44b749e.gif" alt="L’Olive" style="height:205px;display:block">
+      <video src="assets/chars/brezel-hero.mp4" poster="assets/chars/brezel.png" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" style="height:200px;display:block;mix-blend-mode:multiply"></video>
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
-        <span style="font-size:42px;font-weight:800;letter-spacing:-0.03em;line-height:1;color:#17181d">Τα Ελληνικά<span style="color:#2160a8">.</span></span>
-        <span style="font-size:14px;color:#8a857a;text-wrap:balance">Αντικειμενικά κατώτερα. Η ελιά διαφωνεί.</span>
+        <span style="font-size:42px;font-weight:800;letter-spacing:-0.03em;line-height:1;color:#17181d">Das Deutsche<span style="color:#946f00">.</span></span>
+        <span style="font-size:14px;color:#8a857a;text-wrap:balance">Gründlich überlegen. Fragen Sie die Brezel.</span>
       </div>
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:18px;width:min(380px,100%)">
       <div style="display:flex;align-items:flex-end;gap:16px">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:0"><img src="assets/chars/feta.png" alt="" style="height:52px;display:block;transform-origin:50% 100%;animation:idleSway 5.8s ease-in-out -1.7s infinite, mascotLook 7.8s ease-in-out infinite"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center;line-height:1.3;min-height:24px">Φετούλα Παπαδοπούλου</span></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:0"><img src="assets/chars/citron.png" alt="" style="height:56px;display:block;transform-origin:50% 100%;animation:idleSway 6.2s ease-in-out -4.0s infinite, mascotLook 9.4s ease-in-out -3s infinite;mix-blend-mode:multiply"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center;line-height:1.3;min-height:24px">Λεμόνης Ζορμπάς</span></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:0"><img src="assets/chars/tzatziki.png" alt="" style="height:48px;display:block;transform-origin:50% 100%;animation:idleSway 4.9s ease-in-out -0.5s infinite, mascotLook 8.4s ease-in-out -5.5s infinite"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center;line-height:1.3;min-height:24px">Τζατζίκης Σταυρόπουλος</span></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:0"><img src="assets/chars/dolma.png" alt="" style="height:50px;display:block;transform-origin:50% 100%;animation:idleSway 7.1s ease-in-out -2.9s infinite, mascotLook 10.2s ease-in-out -7s infinite"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center;line-height:1.3;min-height:24px">Ντολμαδάκης ο Τυλιχτός</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:0"><img src="assets/chars/brezel.png" alt="" style="height:52px;display:block;mix-blend-mode:multiply;transform-origin:50% 100%;animation:idleSway 5.3s ease-in-out -2.1s infinite, mascotLook 7.5s ease-in-out infinite"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center;line-height:1.3;min-height:24px">Brezel von Bismarck</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:0"><img src="assets/chars/wurst.png" alt="" style="height:62px;display:block;mix-blend-mode:multiply;transform-origin:50% 100%;animation:idleSway 6.7s ease-in-out -0.9s infinite, mascotLook 9s ease-in-out -3s infinite"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center;line-height:1.3;min-height:24px">Wurst Wagner</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px;flex:1;min-width:0"><img src="assets/chars/kartoffel.png" alt="" style="height:50px;display:block;mix-blend-mode:multiply;transform-origin:50% 100%;animation:idleSway 4.6s ease-in-out -3.3s infinite, mascotLook 8.2s ease-in-out -5.5s infinite"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center;line-height:1.3;min-height:24px">Kartoffel Klaus</span></div>
       </div>
-      <button style="width:100%;min-height:58px;background:#2160a8;color:#fff;border-radius:999px;font-size:16.5px;font-weight:700;letter-spacing:0.02em;box-shadow:0 10px 24px rgba(23,73,127,0.35)" style-hover="{{ ctaHover }}" onClick="{{ enter }}">Εμπρός στη μάχη!</button>
+      <button style="width:100%;min-height:58px;background:#946f00;color:#fff;border-radius:999px;font-size:16.5px;font-weight:700;letter-spacing:0.02em;box-shadow:0 10px 24px rgba(110,85,0,0.35)" style-hover="{{ ctaHover }}" onClick="{{ enter }}">An die Vokabeln!</button>
       <span style="font-size:11.5px;letter-spacing:0.04em;color:#a5a096">{{ splashStats }}</span>
     </div>
   </div>
@@ -63,10 +63,10 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 <div style="width:min(440px,100%);margin:0 auto;padding:0 16px calc(56px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px">
 
   <div style="display:flex;align-items:center;gap:12px;padding:calc(14px + env(safe-area-inset-top)) 2px 4px">
-    <img src="assets/chars/olive.png" alt="" style="height:36px;flex:none">
+    <img src="assets/chars/brezel.png" alt="" style="height:36px;flex:none;mix-blend-mode:multiply">
     <div style="display:flex;flex-direction:column;margin-right:auto">
       <span style="font-size:19px;font-weight:800;letter-spacing:-0.02em;line-height:1.1">BuddyLingo</span>
-      <span style="font-size:11px;color:#8a857a">vocab 1v1 · le grec, objectivement inférieur</span>
+      <span style="font-size:11px;color:#8a857a">vocab 1v1 · deutsch, gründlich überlegen</span>
     </div>
     <div style="display:flex;align-items:center;gap:7px;background:#fff;border-radius:999px;padding:7px 14px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
       <span style="font-size:17px;font-weight:800;color:#b08d3f">{{ streak }}</span>
@@ -83,7 +83,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
       <div style="display:flex;align-items:center;gap:18px;background:#fff;border-radius:20px;padding:16px 18px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
         <svg width="86" height="86" viewBox="0 0 86 86" style="flex:none">
           <circle cx="43" cy="43" r="35" fill="none" stroke="#efece5" stroke-width="8"></circle>
-          <circle cx="43" cy="43" r="35" fill="none" stroke="#2160a8" stroke-width="8" stroke-linecap="round" transform="rotate(-90 43 43)" style="{{ ringStyle }}"></circle>
+          <circle cx="43" cy="43" r="35" fill="none" stroke="#946f00" stroke-width="8" stroke-linecap="round" transform="rotate(-90 43 43)" style="{{ ringStyle }}"></circle>
           <text x="43" y="41" text-anchor="middle" style="font-family:'Figtree';font-weight:800;font-size:18px;fill:#17181d">{{ goalDone }}</text>
           <text x="43" y="55" text-anchor="middle" style="font-family:'Figtree';font-size:9.5px;fill:#a5a096">of {{ goalTarget }}</text>
         </svg>
@@ -103,7 +103,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         </div>
         <div style="background:#fff;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:1px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
           <span style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#a5a096;font-weight:600">Known</span>
-          <span style="font-size:26px;font-weight:800;line-height:1.15;color:#2160a8">{{ knownCount }}</span>
+          <span style="font-size:26px;font-weight:800;line-height:1.15;color:#946f00">{{ knownCount }}</span>
         </div>
         <div style="background:#fff;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:1px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
           <span style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#a5a096;font-weight:600">Misses</span>
@@ -111,14 +111,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         </div>
       </div>
 
-      <div style="display:flex;flex-direction:column;gap:6px">
-        <div style="display:flex;background:#fff;border-radius:999px;padding:4px;gap:4px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
-          <button style="{{ dEl }}" onClick="{{ setEl }}">Ελληνικά</button>
-          <button style="{{ dCy }}" onClick="{{ setCy }}">Κυπριακά</button>
-        </div>
-        <span style="font-size:10.5px;color:#a5a096;text-align:center">{{ dialectNote }}</span>
-      </div>
-      <button style="min-height:58px;width:100%;background:#2160a8;color:#fff;border-radius:999px;font-size:16.5px;font-weight:700;box-shadow:0 10px 24px rgba(23,73,127,0.35)" style-hover="{{ ctaHover }}" onClick="{{ startSession }}" disabled="{{ nothingToDo }}">{{ startLabel }}</button>
+      <button style="min-height:58px;width:100%;background:#946f00;color:#fff;border-radius:999px;font-size:16.5px;font-weight:700;box-shadow:0 10px 24px rgba(110,85,0,0.35)" style-hover="{{ ctaHover }}" onClick="{{ startSession }}" disabled="{{ nothingToDo }}">{{ startLabel }}</button>
       <div style="font-size:11px;color:#8a857a;text-align:center;margin-top:-6px">{{ paceLine }}</div>
 
       <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
@@ -127,14 +120,14 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
           <span style="font-size:11px;color:#8a857a">{{ tierNote }}</span>
         </div>
         <div style="display:flex;align-items:center;gap:11px">
-          <span style="font-size:19px;font-weight:800;letter-spacing:0.01em;background:#e7eefa;color:#2160a8;border-radius:12px;padding:6px 12px;flex:none">{{ campLevel }}</span>
+          <span style="font-size:19px;font-weight:800;letter-spacing:0.01em;background:#f3ecd6;color:#946f00;border-radius:12px;padding:6px 12px;flex:none">{{ campLevel }}</span>
           <div style="display:flex;flex-direction:column;gap:1px;min-width:0">
             <span style="font-size:13px;font-weight:700">Your level · {{ campRank }}</span>
             <span style="font-size:10.5px;color:#8a857a">{{ campSub }}</span>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
-          <sc-for list="{{ tiers }}" as="T" hint-placeholder-count="5">
+        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
+          <sc-for list="{{ tiers }}" as="T" hint-placeholder-count="2">
             <div style="display:flex;flex-direction:column;gap:5px;align-items:center">
               <span style="{{ T.cefrStyle }}">{{ T.cefr }}</span>
               <div style="{{ T.trackStyle }}"><div style="{{ T.fillStyle }}"></div></div>
@@ -145,65 +138,17 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         </div>
       </div>
 
-      <div style="background:#fff;border-radius:20px;padding:14px 18px;display:flex;flex-direction:column;gap:9px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
-        <span style="display:flex;align-items:baseline;gap:10px">
-          <span style="font-size:13px;font-weight:700;color:#17181d">The Front Line · France vs Greece</span>
-          <span style="margin-left:auto;font-size:10px;color:#a5a096">war map coming soon</span>
-        </span>
-        <sc-for list="{{ fronts }}" as="Fr" hint-placeholder-count="5">
-          <span style="display:flex;align-items:center;gap:9px">
-            <span style="font-size:10px;font-weight:600;color:#8a857a;width:60px;flex:none">{{ Fr.label }}</span>
-            <span style="font-size:10.5px;font-weight:800;color:#d62828;flex:none;width:28px;text-align:right">{{ Fr.fr }}</span>
-            <span style="flex:1;height:9px;border-radius:999px;overflow:hidden;display:flex;background:#efece5;position:relative">
-              <span style="{{ Fr.frStyle }}"></span>
-              <span style="{{ Fr.elStyle }}"></span>
-              <span style="position:absolute;left:50%;top:-1px;bottom:-1px;width:1.5px;background:#8a6d2f;opacity:0.5"></span>
-            </span>
-            <span style="font-size:10.5px;font-weight:800;color:#2160a8;flex:none;width:28px">{{ Fr.el }}</span>
-          </span>
-        </sc-for>
-        <span style="font-size:10px;color:#a5a096;text-align:center">{{ battleVerdict }} · bars press with every word learned</span>
-        <span style="display:flex;align-items:flex-end;justify-content:center;gap:14px;padding-top:4px">
-          <span style="display:flex;align-items:flex-end">
-            <span style="transform:scaleX(-1);display:inline-flex"><img src="assets/chars/brie.png" alt="" style="height:24px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.62s ease-in-out -0.31s infinite"></span>
-            <span style="transform:scaleX(-1);display:inline-flex;margin-left:-7px"><img src="assets/chars/fromage.png" alt="" style="height:28px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.55s ease-in-out -0.1s infinite"></span>
-            <span style="transform:scaleX(-1);display:inline-flex;margin-left:-8px"><img src="assets/chars/baguette.png" alt="" style="height:40px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.7s ease-in-out -0.45s infinite"></span>
-            <span style="transform:scaleX(-1);display:inline-flex;margin-left:-9px"><img src="assets/chars/croissant.png" alt="" style="height:34px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.5s ease-in-out infinite"></span>
-          </span>
-          <span style="font-size:11px;font-weight:800;color:#a5a096;padding-bottom:9px">VS</span>
-          <span style="display:flex;align-items:flex-end">
-            <img src="assets/chars/feta.png" alt="" style="height:30px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.52s ease-in-out -0.2s infinite">
-            <img src="assets/chars/citron.png" alt="" style="height:36px;margin-left:-9px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.68s ease-in-out -0.4s infinite">
-            <img src="assets/chars/tzatziki.png" alt="" style="height:28px;margin-left:-8px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.58s ease-in-out infinite">
-            <img src="assets/chars/dolma.png" alt="" style="height:26px;margin-left:-7px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.64s ease-in-out -0.25s infinite">
-          </span>
-        </span>
-      </div>
-
       <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
         <div style="display:flex;justify-content:space-between;align-items:baseline">
-          <span style="font-size:13px;font-weight:700">Le Duel</span>
+          <span style="font-size:13px;font-weight:700">Der Vokabelkrieg</span>
           <span style="font-size:11px;color:#8a857a">{{ battleVerdict }}</span>
         </div>
-        <img src="assets/chars/bataille-v2.png" alt="La France contre La Grèce" style="width:100%;display:block;border-radius:12px">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
-          <div style="display:flex;flex-direction:column;gap:1px">
-            <span style="font-size:11px;font-weight:700;color:#d62828">La France {{ youFr }}</span>
-            <span style="font-size:18px;font-weight:800">{{ frScore }}</span>
-          </div>
-          <span style="font-size:12px;font-weight:800;color:#a5a096">VS</span>
-          <div style="display:flex;flex-direction:column;gap:1px;align-items:flex-end">
-            <span style="font-size:11px;font-weight:700;color:#2160a8">La Grèce {{ youEl }}</span>
-            <span style="font-size:18px;font-weight:800">{{ elScore }}</span>
-          </div>
+        <div style="display:flex;flex-direction:column;gap:4px;background:#f8f6f1;border-radius:12px;padding:12px 14px">
+          <span style="font-size:12.5px;font-weight:700">Deutschland mobilisiert · {{ frScore }} pts</span>
+          <span style="font-size:10.5px;color:#8a857a">1 pt per word known · 25 pts per weapon. The Vocab War board is under construction — your points already count for Germany.</span>
         </div>
-        <div style="height:10px;border-radius:999px;overflow:hidden;display:flex;background:#efece5">
-          <div style="{{ barFrStyle }}"></div>
-          <div style="{{ barElStyle }}"></div>
-        </div>
-        <span style="font-size:10.5px;color:#a5a096;text-align:center">{{ battleNote }}</span>
         <div style="display:flex;flex-direction:column;gap:9px;border-top:1px solid #f0ede6;padding-top:11px">
-          <span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#a1823c">Missions · earn weapons</span>
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#a1823c">Missionen · Waffen verdienen</span>
           <sc-for list="{{ missions }}" as="m" hint-placeholder-count="4">
             <div style="display:flex;flex-direction:column;gap:3px">
               <div style="display:flex;justify-content:space-between;gap:8px"><span style="font-size:12.5px;font-weight:700">{{ m.name }}</span><span style="{{ m.stateStyle }}">{{ m.state }}</span></div>
@@ -228,13 +173,13 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 
       <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:13px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
         <div style="display:flex;justify-content:space-between;align-items:baseline">
-          <span style="font-size:13px;font-weight:700">Décorations</span>
+          <span style="font-size:13px;font-weight:700">Auszeichnungen</span>
           <span style="font-size:11px;color:#8a857a">{{ badgeCount }}</span>
         </div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 14px">
           <sc-for list="{{ badges }}" as="b" hint-placeholder-count="10">
             <div style="display:flex;align-items:center;gap:10px;min-width:0">
-              <svg viewBox="0 0 64 64" style="{{ b.medalStyle }}"><g fill="currentColor" stroke="{{ b.medalStroke }}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" transform="rotate(-5 32 32)"><rect x="13" y="6" width="38" height="8" rx="4"></rect><rect x="17" y="16" width="30" height="6" rx="3"></rect><path d="M21 24 L43 24 L41 47 L23 47 Z"></path><line x1="28" y1="27" x2="27.4" y2="44"></line><line x1="36" y1="27" x2="36.6" y2="44"></line><rect x="17" y="49" width="30" height="6" rx="3"></rect><rect x="13" y="57" width="38" height="7" rx="3.5"></rect></g></svg>
+              <svg viewBox="0 0 64 64" style="{{ b.medalStyle }}"><g fill="currentColor" stroke="{{ b.medalStroke }}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" transform="rotate(-5 32 32)"><path d="M32 4 C38 12 40 22 35 31 L32 36 L29 31 C24 22 26 12 32 4 Z"></path><path d="M22 18 C13 19 8 27 11 34 C13 39 19 41 25 38 C26 33 25 27 22 18 Z"></path><path d="M42 18 C51 19 56 27 53 34 C51 39 45 41 39 38 C38 33 39 27 42 18 Z"></path><rect x="21" y="39" width="22" height="7" rx="3.5"></rect><path d="M26 47 C26 53 28 57 32 60 C36 57 38 53 38 47 Z"></path></g></svg>
               <div style="display:flex;flex-direction:column;min-width:0">
                 <span style="{{ b.nameStyle }}">{{ b.name }}</span>
                 <span style="font-size:9.5px;color:#a5a096;line-height:1.3">{{ b.desc }}</span>
@@ -246,14 +191,14 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 
       <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
         <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:4px">
-          <span style="font-size:13px;font-weight:700">Lexicon</span>
+          <span style="font-size:13px;font-weight:700">Lexikon</span>
           <span style="font-size:11px;color:#8a857a">{{ vocabNote }}</span>
         </div>
         <sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
           <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid #f0ede6">
             <div style="display:flex;flex-direction:column;flex:1;min-width:0">
               <span style="font-size:14px">{{ r.en }}</span>
-              <span style="font-size:13.5px;color:#2160a8;font-weight:600">{{ r.fr }}</span>
+              <span style="font-size:13.5px;color:#946f00;font-weight:600">{{ r.fr }}</span>
             </div>
             <span style="{{ r.tagStyle }}">{{ r.status }}</span>
             <span style="font-size:10px;width:58px;text-align:right;color:#a5a096">{{ r.dueLabel }}</span>
@@ -262,16 +207,16 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         <button style="min-height:44px;background:#f0ede6;border-radius:999px;color:#17181d;font-size:13px;font-weight:600;margin-top:4px" style-hover="{{ ghostHover }}" onClick="{{ toggleAll }}">{{ toggleLabel }}</button>
       </div>
 
-      <div style="background:#16283e;color:#f6efe7;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 24px rgba(23,73,127,0.3)">
+      <div style="background:#241c07;color:#eef1f9;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 24px rgba(110,85,0,0.3)">
         <div style="display:flex;justify-content:space-between;align-items:baseline">
-          <span style="font-size:13px;font-weight:700">Mémoire</span>
-          <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#a9bdd6">{{ sessionCount }} sessions</span>
+          <span style="font-size:13px;font-weight:700">Gedächtnis</span>
+          <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#cfc39a">{{ sessionCount }} sessions</span>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <span style="width:8px;height:8px;border-radius:999px;background:#6fd18c;flex:none"></span>
-          <span style="font-size:12px;color:#f6efe7;font-weight:600">Auto-saved on this device after every answer</span>
+          <span style="font-size:12px;color:#eef1f9;font-weight:600">Auto-saved on this device after every answer</span>
         </div>
-        <p style="font-size:11px;line-height:1.55;color:#a9bdd6;margin:0;text-wrap:pretty">Stored twice (browser + database) so it survives cache clean-ups. Back up only if you switch phones — drop the file in chat and I'll keep a copy in the project.</p>
+        <p style="font-size:11px;line-height:1.55;color:#cfc39a;margin:0;text-wrap:pretty">Stored twice (browser + database) so it survives cache clean-ups. Back up only if you switch phones — drop the file in chat and I'll keep a copy in the project.</p>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
           <button style="min-height:44px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:999px;color:#fff;font-size:12.5px;font-weight:600" style-hover="{{ memHover }}" onClick="{{ exportLog }}">Back up</button>
           <button style="min-height:44px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:999px;color:#fff;font-size:12.5px;font-weight:600" style-hover="{{ memHover }}" onClick="{{ importLog }}">Restore</button>
@@ -279,7 +224,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
       </div>
 
       <button style="align-self:center;background:none;color:#a5a096;font-size:11px;text-decoration:underline;text-underline-offset:3px;min-height:44px" onClick="{{ resetAll }}">Reset all progress</button>
-      <div style="display:flex;justify-content:center;gap:18px"><a href="Vocab French.dc.html" style="font-size:11px;color:#a5a096">← retreat to the superior vocabulary</a><a href="BuddyLingo Login.dc.html" style="font-size:11px;color:#a5a096">⇄ switch fighter</a></div>
+      <div style="display:flex;justify-content:center;gap:18px"><a href="Vocab War.dc.html" style="font-size:11px;color:#a5a096">⚔ Vocab War map</a><a href="BuddyLingo Login.dc.html" style="font-size:11px;color:#a5a096">⇄ switch fighter</a></div>
     </div>
   </sc-if>
 
@@ -298,7 +243,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 
         <sc-if value="{{ revealed }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;flex-direction:column;align-items:center;gap:6px;padding-top:16px;border-top:1.5px solid #e9e5dc;width:100%">
-            <div style="font-family:'Gloock',serif;font-size:29px;line-height:1.15;color:#2160a8">{{ backText }}</div>
+            <div style="font-family:'Gloock',serif;font-size:29px;line-height:1.15;color:#946f00">{{ backText }}</div>
             <div style="font-size:13px;letter-spacing:0.06em;color:#8a857a">{{ backSub }}</div>
             <sc-if value="{{ hasConj }}" hint-placeholder-val="{{ false }}">
               <div style="width:100%;margin-top:12px;padding-top:11px;border-top:1px solid #f0ede6;display:grid;grid-template-columns:auto 1fr 1.3fr 1fr;column-gap:8px;row-gap:3px;text-align:left">
@@ -319,7 +264,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
       </div>
 
       <sc-if value="{{ notRevealed }}" hint-placeholder-val="{{ true }}">
-        <button style="min-height:58px;width:100%;background:#2160a8;color:#fff;border-radius:999px;font-size:16px;font-weight:700;box-shadow:0 10px 24px rgba(23,73,127,0.35)" style-hover="{{ ctaHover }}" onClick="{{ reveal }}">Reveal</button>
+        <button style="min-height:58px;width:100%;background:#946f00;color:#fff;border-radius:999px;font-size:16px;font-weight:700;box-shadow:0 10px 24px rgba(110,85,0,0.35)" style-hover="{{ ctaHover }}" onClick="{{ reveal }}">Reveal</button>
         <div style="font-size:10.5px;color:#a5a096;text-align:center;margin-top:-6px">⚡ reveal fast and know it — bonus XP</div>
       </sc-if>
 
@@ -333,7 +278,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
             <span style="font-size:15px;font-weight:700">With effort</span>
             <span style="font-size:10.5px;color:#8a857a">{{ slowLabel }}</span>
           </button>
-          <button style="min-height:62px;grid-column:1 / -1;background:#2160a8;border-radius:18px;color:#fff;display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(23,73,127,0.35)" style-hover="{{ ctaHover }}" onClick="{{ gSure }}">
+          <button style="min-height:62px;grid-column:1 / -1;background:#946f00;border-radius:18px;color:#fff;display:flex;flex-direction:column;gap:2px;align-items:center;justify-content:center;box-shadow:0 8px 20px rgba(110,85,0,0.35)" style-hover="{{ ctaHover }}" onClick="{{ gSure }}">
             <span style="font-size:15.5px;font-weight:700">Knew it</span>
             <span style="font-size:10.5px;opacity:0.8">{{ nextLabel }}</span>
           </button>
@@ -345,23 +290,23 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
   <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
     <div data-screen-label="Session done" style="background:#fff;border-radius:24px;padding:34px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;margin-top:14px;box-shadow:0 2px 10px rgba(23,24,29,0.07);animation:fadeUp 0.5s ease both">
       <span style="font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:#a1823c;font-weight:700">Session complete</span>
-      <img src="assets/chars/olive.png" alt="" style="height:105px;display:block">
-      <div style="font-family:'Gloock',serif;font-size:40px;line-height:1.05">Μπράβο&nbsp;!</div>
+      <img src="assets/chars/brezel.png" alt="" style="height:110px;display:block;mix-blend-mode:multiply">
+      <div style="font-family:'Gloock',serif;font-size:40px;line-height:1.05">Wunderbar!</div>
       <div style="font-size:14.5px;color:#5d5a52">{{ doneSummary }}</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
         <span style="font-size:12px;font-weight:700;background:#f3ecd9;color:#8a6d2f;border-radius:999px;padding:6px 14px">+{{ sessXp }} XP</span>
         <sc-if value="{{ hasFast }}" hint-placeholder-val="{{ false }}">
-          <span style="font-size:12px;font-weight:700;background:#e2ecf7;color:#2160a8;border-radius:999px;padding:6px 14px">⚡ {{ fastCount }} fast</span>
+          <span style="font-size:12px;font-weight:700;background:#f3ecd6;color:#946f00;border-radius:999px;padding:6px 14px">⚡ {{ fastCount }} fast</span>
         </sc-if>
       </div>
       <sc-if value="{{ hasNewBadges }}" hint-placeholder-val="{{ false }}">
-        <div style="font-size:12.5px;color:#8a6d2f;background:#faf6ea;border:1px solid rgba(176,141,63,0.35);border-radius:14px;padding:9px 14px;display:flex;align-items:center;gap:8px"><svg viewBox="0 0 64 64" width="17" height="17" style="color:#b08d3f;flex:none"><g fill="currentColor" stroke="#6d5526" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" transform="rotate(-5 32 32)"><rect x="13" y="6" width="38" height="8" rx="4"></rect><rect x="17" y="16" width="30" height="6" rx="3"></rect><path d="M21 24 L43 24 L41 47 L23 47 Z"></path><line x1="28" y1="27" x2="27.4" y2="44"></line><line x1="36" y1="27" x2="36.6" y2="44"></line><rect x="17" y="49" width="30" height="6" rx="3"></rect><rect x="13" y="57" width="38" height="7" rx="3.5"></rect></g></svg><span>New décoration : <strong>{{ newBadgeNames }}</strong></span></div>
+        <div style="font-size:12.5px;color:#8a6d2f;background:#faf6ea;border:1px solid rgba(176,141,63,0.35);border-radius:14px;padding:9px 14px;display:flex;align-items:center;gap:8px"><svg viewBox="0 0 64 64" width="17" height="17" style="color:#b08d3f;flex:none"><g fill="currentColor" stroke="#6d5526" stroke-width="3" stroke-linejoin="round" stroke-linecap="round" transform="rotate(-5 32 32)"><path d="M32 4 C38 12 40 22 35 31 L32 36 L29 31 C24 22 26 12 32 4 Z"></path><path d="M22 18 C13 19 8 27 11 34 C13 39 19 41 25 38 C26 33 25 27 22 18 Z"></path><path d="M42 18 C51 19 56 27 53 34 C51 39 45 41 39 38 C38 33 39 27 42 18 Z"></path><rect x="21" y="39" width="22" height="7" rx="3.5"></rect><path d="M26 47 C26 53 28 57 32 60 C36 57 38 53 38 47 Z"></path></g></svg><span>Neue Auszeichnung: <strong>{{ newBadgeNames }}</strong></span></div>
       </sc-if>
       <sc-if value="{{ hasAdjust }}" hint-placeholder-val="{{ false }}">
-        <div style="font-size:12px;color:#2160a8;background:#ecf3fa;border-radius:14px;padding:9px 14px;line-height:1.45">{{ adjustNote }}</div>
+        <div style="font-size:12px;color:#946f00;background:#f7f2e2;border-radius:14px;padding:9px 14px;line-height:1.45">{{ adjustNote }}</div>
       </sc-if>
       <div style="font-size:12.5px;color:#a5a096">{{ doneNext }}</div>
-      <button style="min-height:52px;width:100%;background:#2160a8;color:#fff;border-radius:999px;font-size:15px;font-weight:700;margin-top:8px" style-hover="{{ ctaHover }}" onClick="{{ goHome }}">Back to the agora</button>
+      <button style="min-height:52px;width:100%;background:#946f00;color:#fff;border-radius:999px;font-size:15px;font-weight:700;margin-top:8px" style-hover="{{ ctaHover }}" onClick="{{ goHome }}">Zurück ins Hauptquartier</button>
 
     </div>
   </sc-if>
@@ -371,30 +316,30 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 </div>
 
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:900},&quot;dailyGoal&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:30,&quot;min&quot;:10,&quot;max&quot;:100,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Daily goal (cards)&quot;},&quot;mistakeBudget&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:20,&quot;min&quot;:5,&quot;max&quot;:50,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Misses per day before new words stop&quot;},&quot;quiz&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;DE → EL&quot;,&quot;options&quot;:[&quot;DE → EL&quot;,&quot;EL → DE&quot;,&quot;Mixed&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Quiz direction&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:900},&quot;dailyGoal&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:30,&quot;min&quot;:10,&quot;max&quot;:100,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Daily goal (cards)&quot;},&quot;mistakeBudget&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:20,&quot;min&quot;:5,&quot;max&quot;:50,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Misses per day before new words stop&quot;},&quot;quiz&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;EN → DE&quot;,&quot;options&quot;:[&quot;EN → DE&quot;,&quot;DE → EN&quot;,&quot;Mixed&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Quiz direction&quot;},&quot;showConj&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Cards&quot;,&quot;label&quot;:&quot;Conjugation tables on verbs&quot;}}">
 
 const W = window.DECK || [], TIER_NAMES = window.TIER_NAMES || [];
 const MIN = 60000, DAY = 86400000;
 const IV = [10*MIN, DAY, 3*DAY, 7*DAY, 16*DAY, 35*DAY, 90*DAY];
 const ACC = (function () { try { return JSON.parse(localStorage.getItem("bl-session") || "null"); } catch (e) { return null; } })();
 const SUF = ACC && ACC.slot != null ? ":" + ACC.slot : "";
-const KEY = "vocab-el-v1" + SUF;
+const KEY = "vocab-de-v1" + SUF;
 const CAT = { N: "Noun", V: "Verb", A: "Adj.", B: "Phrase" };
-const RANKS = [["Ilote",0],["Hoplite",100],["Phalangite",250],["Hipparque",500],["Stratège",900],["Polémarque",1400],["Archonte",2000],["Tyran",2800],["Philosophe",4000],["Roi de Sparte",5500]];
+const RANKS = [["Rekrut",0],["Gefreiter",100],["Feldwebel",250],["Leutnant",500],["Hauptmann",900],["Major",1400],["Oberst",2000],["General",2800],["Feldmarschall",4000],["Wortkaiser",5500]];
 const BADGE_DEFS = [
-  ["premiere","Alpha","Finish your first session"],
-  ["connu50","Cinquante Hoplites","50 words known"],
-  ["connu100","Hécatombe","100 words known"],
-  ["connu250","Les Trois Cents","250 words known"],
-  ["connu500","Académie","All 367 words known — yes, that’s all"],
-  ["serie7","L’Odyssée","7-day streak"],
-  ["serie30","Le Marathon","30-day streak"],
-  ["parfait","Perfection Platonique","15+ cards, zero misses"],
-  ["eclair","Aux Pieds Légers","10 fast answers in one session"],
-  ["grimpeur","Cheval de Troie","Jump a difficulty tier"]
+  ["premiere","Erste Stunde","Finish your first session"],
+  ["connu50","Die Fünfzig","50 words known"],
+  ["connu100","Die Hundert","100 words known"],
+  ["connu250","Eiserner Bestand","150 words known"],
+  ["connu500","Die Akademie","All 200 words known"],
+  ["serie7","Eine Woche","7-day streak"],
+  ["serie30","Eiserne Disziplin","30-day streak"],
+  ["parfait","Fehlerfrei","15+ cards, zero misses"],
+  ["eclair","Blitzrunde","10 fast answers in one session"],
+  ["grimpeur","Beförderung","Jump a difficulty tier"]
 ];
-const MY_SIDE = "el", OPP_KEY = "vocab-fr-v1";
-const MISSIONS = [["w_bouclier","Huile d’Olive Bouillante","12 correct answers in a day","c",12],["w_lance","Lancer de Feta","Get 6 verbs right in a day","v",6],["w_sandales","Roulade de Dolma","8 fast answers in a day","f",8],["w_feu","Citron Pressé","Learn 5 new words in a day","n",5]];
+const MY_SIDE = "de", OPP_KEY = "";
+const MISSIONS = [["w_brezel","Brezel-Blitz","Learn 5 new words in a day","n",5],["w_wurst","Wurst-Walze","12 correct answers in a day","c",12],["w_blitz","Blitzangriff","8 fast answers in a day","f",8],["w_verben","Verben-Vormarsch","Get 6 verbs right in a day","v",6]];
 function idOf(i) { return W[i][0]; }
 function pad(n) { return n < 10 ? "0" + n : "" + n; }
 function ymd(ms) { const d = new Date(ms); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
@@ -407,7 +352,7 @@ function mergeDays(a, b) { const out = Object.assign({}, a || {}); for (const k 
 function idbOpen() {
   return new Promise(function (res, rej) {
     if (!window.indexedDB) return rej();
-    const r = indexedDB.open("vocab-el" + SUF, 1);
+    const r = indexedDB.open("vocab-de" + SUF, 1);
     r.onupgradeneeded = function () { r.result.createObjectStore("s"); };
     r.onsuccess = function () { res(r.result); };
     r.onerror = function () { rej(); };
@@ -417,7 +362,7 @@ function idbGet() { return idbOpen().then(function (db) { return new Promise(fun
 function idbPut(v) { return idbOpen().then(function (db) { db.transaction("s", "readwrite").objectStore("s").put(v, "state"); }).catch(function () {}); }
 
 class Component extends DCLogic {
-  state = { view: "splash", dialect: "el", cards: {}, stats: {}, days: {}, badges: {}, xp: 0, pace: 6, tierFloor: 0, queue: [], revealed: false, showAll: false, adjustNote: "", loaded: false };
+  state = { view: "splash", cards: {}, stats: {}, days: {}, badges: {}, xp: 0, pace: 6, tierFloor: 0, queue: [], revealed: false, showAll: false, adjustNote: "", loaded: false };
 
   componentDidMount() {
     try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
@@ -430,11 +375,9 @@ class Component extends DCLogic {
     this.setState({
       cards: (saved && saved.cards) || {}, stats: stats, days: (saved && saved.days) || {},
       badges: (saved && saved.badges) || {}, xp: (saved && saved.xp) || 0,
-      dialect: (saved && saved.dialect) || "el", pace: (saved && saved.pace) || 6, tierFloor: (saved && saved.tierFloor) || 0, loaded: true
+      pace: (saved && saved.pace) || 6, tierFloor: (saved && saved.tierFloor) || 0, loaded: true
     });
     idbGet().then((m) => { if (m) this.mergeIn(m, true); });
-    if (!SUF) fetch("memoire-grec.csv", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : null; })
-      .then((t) => { if (t) this.mergeIn(this.parseCsv(t), false); }).catch(function () {});
   }
 
   mergeIn(m, withSessions) {
@@ -452,9 +395,7 @@ class Component extends DCLogic {
 
   save() {
     const s = this.state;
-    const catKnown = { B: 0, N: 0, V: 0, A: 0, total: 0 };
-    for (let i = 0; i < W.length; i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) { catKnown[W[i][3]] = (catKnown[W[i][3]] || 0) + 1; catKnown.total++; } }
-    const payload = { cards: s.cards, stats: s.stats, days: s.days, badges: s.badges, xp: s.xp, dialect: s.dialect, pace: s.pace, tierFloor: s.tierFloor, catKnown: catKnown, sessions: this.sessions || [], recent: this.recent || [], updated: Date.now() };
+    const payload = { cards: s.cards, stats: s.stats, days: s.days, badges: s.badges, xp: s.xp, pace: s.pace, tierFloor: s.tierFloor, sessions: this.sessions || [], recent: this.recent || [], updated: Date.now() };
     this.savedAt = payload.updated;
     try {
       if (!Object.keys(s.cards).length && !this.wipe) {
@@ -496,7 +437,7 @@ class Component extends DCLogic {
 
   buildCsv() {
     const s = this.state, L = [];
-    L.push("# Vocabulaire Inferieur - memoire grecque (learning log). Drop this file in chat and I will write it into the project.");
+    L.push("# BuddyLingo Deutsch - gedaechtnis (learning log). Drop this file in chat and I will write it into the project.");
     L.push("[meta]"); L.push("xp,bestStreak,badges");
     L.push((s.xp || 0) + "," + (s.stats.bestStreak || 0) + "," + Object.keys(s.badges).map(function (k) { return k + ":" + s.badges[k]; }).join(";"));
     L.push("[days]"); L.push("date,reviewed,correct,xp");
@@ -510,7 +451,7 @@ class Component extends DCLogic {
     const blob = new Blob([this.buildCsv()], { type: "text/csv" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = "memoire-grec.csv";
+    a.download = "gedaechtnis-de.csv";
     a.click();
     setTimeout(function () { URL.revokeObjectURL(a.href); }, 2000);
   };
@@ -585,8 +526,8 @@ class Component extends DCLogic {
     };
     if (known >= 50) earn("connu50");
     if (known >= 100) earn("connu100");
-    if (known >= 250) earn("connu250");
-    if (known >= 367) earn("connu500");
+    if (known >= 150) earn("connu250");
+    if (known >= 200) earn("connu500");
     if ((stats.streak || 0) >= 7) earn("serie7");
     if ((stats.streak || 0) >= 30) earn("serie30");
     if (extra.sessionEnd) {
@@ -649,17 +590,17 @@ class Component extends DCLogic {
       const r = this.recent, acc = r.length ? r.filter(function (x) { return x > 0; }).length / r.length : 0;
       const pct = Math.round(acc * 100);
       let jumped = false;
-      if (r.length >= 24 && acc >= 0.92 && tierFloor < 400) {
+      if (r.length >= 24 && acc >= 0.92 && tierFloor < 100) {
         tierFloor = (Math.floor(tierFloor / 100) + 1) * 100;
         pace = Math.min(24, pace + 4);
-        note = pct + "% accuracy — too easy. Jumped ahead to tier « " + TIER_NAMES[tierFloor / 100] + " », intake raised to " + pace + " new words per session.";
+        note = pct + "% accuracy — too easy. Jumped ahead to tier „" + TIER_NAMES[tierFloor / 100] + "“, intake raised to " + pace + " new words per session.";
         this.recent = []; jumped = true;
       } else if (r.length >= 15 && acc >= 0.9 && pace < 24) {
         pace = Math.min(24, pace + 3);
         note = pct + "% accuracy — intake raised to " + pace + " new words per session.";
       } else if (r.length >= 15 && acc < 0.65) {
         pace = Math.max(3, pace - 2);
-        if (tierFloor > 0) { tierFloor = tierFloor - 100; note = pct + "% accuracy — easing off: " + pace + " new words per session, backfilling tier « " + TIER_NAMES[tierFloor / 100] + " »."; }
+        if (tierFloor > 0) { tierFloor = tierFloor - 100; note = pct + "% accuracy — easing off: " + pace + " new words per session, backfilling tier „" + TIER_NAMES[tierFloor / 100] + "“."; }
         else note = pct + "% accuracy — easing off to " + pace + " new words per session.";
         this.recent = r.slice(-10);
       }
@@ -692,18 +633,9 @@ class Component extends DCLogic {
     return this._cc[fr];
   }
 
-  dispOf(w) {
-    if (this.state.dialect !== "cy" || !window.CYP) return { fr: w[1], tr: w[2], cy: false };
-    const parts = w[1].split(" ");
-    const art = ["ο","η","το","οι","τα"].indexOf(parts[0]) >= 0 ? parts[0] : null;
-    const base = art ? parts.slice(1).join(" ") : w[1];
-    const hit = window.CYP[base];
-    if (!hit) return { fr: w[1], tr: w[2], cy: false };
-    return { fr: (art ? art + " " : "") + hit[0], tr: hit[1], cy: true };
-  }
   renderVals() {
     const s = this.state, now = Date.now();
-    const stats = s.stats || {}, quiz = this.props.quiz || "DE → EL";
+    const stats = s.stats || {}, quiz = this.props.quiz || "EN → DE";
     const reviewedToday = stats.day === today() ? (stats.reviewed || 0) : 0;
     const goal = this.goal(), budget = this.budget();
     const known = this.knownCount(s.cards);
@@ -720,14 +652,14 @@ class Component extends DCLogic {
     for (let i = 27; i >= 0; i--) {
       const d = ymd(now - i * DAY), v = (s.days || {})[d];
       const n = v ? v[0] : 0;
-      const c = n === 0 ? "#efece5" : n < 10 ? "#cfdff2" : n < goal ? "#6f97c8" : "#2160a8";
+      const c = n === 0 ? "#efece5" : n < 10 ? "#eadfbe" : n < goal ? "#c9ae5e" : "#946f00";
       cells.push({ style: { aspectRatio: "1", borderRadius: "5px", background: c } });
     }
     // tiers
-    const activeTier = Math.min(4, Math.floor((s.tierFloor || 0) / 100));
-    const CEFR = ["A1", "A2", "B1", "B2", "C1"];
+    const activeTier = Math.min(1, Math.floor((s.tierFloor || 0) / 100));
+    const CEFR = ["A1", "A2"];
     const tiers = [], tierKn = [], tierSize = [];
-    for (let t = 0; t < 5; t++) {
+    for (let t = 0; t < 2; t++) {
       let kn = 0;
       const size = Math.max(1, Math.min(W.length, (t + 1) * 100) - t * 100);
       for (let i = t * 100; i < Math.min(W.length, (t + 1) * 100); i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) kn++; }
@@ -736,9 +668,9 @@ class Component extends DCLogic {
       tiers.push({
         name: TIER_NAMES[t], count: kn + "/" + size,
         cefr: CEFR[t],
-        cefrStyle: { fontSize: "11px", fontWeight: "800", letterSpacing: "0.04em", color: full ? "#b08d3f" : act ? "#2160a8" : "#c9c3b5" },
-        trackStyle: { width: "100%", height: act ? "9px" : "6px", background: "#efece5", borderRadius: "999px", overflow: "hidden", boxShadow: act ? "0 0 0 1.5px #2160a8" : "none" },
-        fillStyle: { height: "100%", width: Math.round(100 * kn / size) + "%", background: full ? "#b08d3f" : "#2160a8", borderRadius: "999px", transition: "width 0.4s ease" },
+        cefrStyle: { fontSize: "11px", fontWeight: "800", letterSpacing: "0.04em", color: full ? "#b08d3f" : act ? "#946f00" : "#c9c3b5" },
+        trackStyle: { width: "100%", height: act ? "9px" : "6px", background: "#efece5", borderRadius: "999px", overflow: "hidden", boxShadow: act ? "0 0 0 1.5px #946f00" : "none" },
+        fillStyle: { height: "100%", width: Math.round(100 * kn / size) + "%", background: full ? "#b08d3f" : "#946f00", borderRadius: "999px", transition: "width 0.4s ease" },
         nameStyle: { fontSize: "9.5px", fontWeight: "700", letterSpacing: "0.03em", color: full ? "#b08d3f" : act ? "#17181d" : "#a5a096" }
       });
     }
@@ -758,9 +690,9 @@ class Component extends DCLogic {
     for (let i = 0; i < W.length; i++) {
       const c = s.cards[idOf(i)];
       const tag = c ? ((c.misses || 0) >= 2 ? "Shaky" : c.lapsed ? "Again" : c.box >= 3 ? "Solid" : "Known") : CAT[W[i][3]];
-      const tc = c ? ((c.misses || 0) >= 2 ? ["#f9e8e5", "#c2402f"] : c.lapsed ? ["#f0ede6", "#5d5a52"] : ["#e2ecf7", "#2160a8"]) : ["transparent", "#a5a096"];
+      const tc = c ? ((c.misses || 0) >= 2 ? ["#f9e8e5", "#c2402f"] : c.lapsed ? ["#f0ede6", "#5d5a52"] : ["#f3ecd6", "#946f00"]) : ["transparent", "#a5a096"];
       all.push({
-        en: W[i][0], fr: s.dialect === "cy" ? this.dispOf(W[i]).fr : W[i][1], sort: c ? c.due : Infinity, status: tag,
+        en: W[i][0], fr: W[i][1], sort: c ? c.due : Infinity, status: tag,
         tagStyle: { flex: "none", fontSize: "10px", fontWeight: "700", padding: "4px 10px", borderRadius: "999px", background: tc[0], color: tc[1], border: c ? "none" : "1px solid #e2ddd2" },
         dueLabel: fmtDue(c ? c.due : null, now)
       });
@@ -771,21 +703,18 @@ class Component extends DCLogic {
     const idx = s.queue[0];
     const w = idx != null ? W[idx] : null;
     const card = w ? s.cards[w[0]] : null;
-    const dir = w ? (quiz === "EL → DE" ? 1 : quiz === "Mixed" ? (idx % 2) : 0) : 0;
+    const dir = w ? (quiz === "DE → EN" ? 1 : quiz === "Mixed" ? (idx % 2) : 0) : 0;
     const conj = w && w[3] === "V" && (this.props.showConj !== false) ? this.conjFor(w[1]) : null;
     const nextBox = Math.min((card ? card.box : 0) + 1, IV.length - 1);
     const answered = s.answered || 0;
     const total = Math.max(s.total || 1, answered + s.queue.length);
     const kickerText = w ? (card ? (card.q === 0 && card.reps > 0 && s.queue.indexOf(idx) === 0 && card.lapsed ? "Again · " : "Review · ") : "New word · ") + CAT[w[3]] : "";
-    const disp = w ? this.dispOf(w) : null;
-    let cyN = 0;
-    if (window.CYP) for (let ci = 0; ci < W.length; ci++) { const p = W[ci][1].split(" "); const b = ["ο","η","το","οι","τα"].indexOf(p[0]) >= 0 ? p.slice(1).join(" ") : W[ci][1]; if (window.CYP[b]) cyN++; }
     let opp = null; try { opp = JSON.parse(localStorage.getItem(OPP_KEY) || "null"); } catch (e) {}
     let oppKnown = 0; if (opp && opp.cards) for (const ok in opp.cards) if (!opp.cards[ok].lapsed) oppKnown++;
     const wOf = function (b) { return Object.keys(b || {}).filter(function (k) { return k.slice(0, 2) === "w_"; }).length; };
     const myW = wOf(s.badges), opW = wOf(opp && opp.badges);
     const myScore = known + 25 * myW, opScore = oppKnown + 25 * opW;
-    const frS = MY_SIDE === "fr" ? myScore : opScore, elS = MY_SIDE === "fr" ? opScore : myScore;
+    const frS = myScore, elS = opScore;
     const frPct = (frS + elS) > 0 ? Math.round(100 * frS / (frS + elS)) : 50;
     const dayC = ((s.days || {})[today()] || [0,0,0])[1];
     const mp = stats.day === today() ? { n: stats.newToday || 0, c: dayC, f: stats.fastToday || 0, v: stats.verbsToday || 0 } : { n: 0, c: dayC, f: 0, v: 0 };
@@ -796,23 +725,13 @@ class Component extends DCLogic {
         stateStyle: { fontSize: "10.5px", fontWeight: "700", color: got ? "#2e7d4f" : "#a5a096", flex: "none" },
         fill: { height: "100%", width: (got ? 100 : Math.round(100 * p / md[4])) + "%", background: got ? "#2e7d4f" : "#b08d3f", borderRadius: "999px", transition: "width 0.3s ease" } };
     });
-    const myCat = { B: 0, N: 0, V: 0, A: 0 };
-    for (let i = 0; i < W.length; i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) myCat[W[i][3]] = (myCat[W[i][3]] || 0) + 1; }
-    const opCat = (opp && opp.catKnown) || { B: 0, N: 0, V: 0, A: 0 };
-    const fronts = [["Overall", known, oppKnown], ["Nouns", myCat.N, opCat.N || 0], ["Verbs", myCat.V, opCat.V || 0], ["Adjectives", myCat.A, opCat.A || 0], ["Phrases", myCat.B, opCat.B || 0]].map(function (d) {
-      const frV = MY_SIDE === "fr" ? d[1] : d[2], elV = MY_SIDE === "fr" ? d[2] : d[1];
-      const p = (frV + elV) > 0 ? Math.round(100 * frV / (frV + elV)) : 50;
-      return { label: d[0], fr: frV, el: elV,
-        frStyle: { width: p + "%", background: "#d62828", transition: "width 0.5s ease" },
-        elStyle: { flex: "1", background: "#2160a8", transition: "width 0.5s ease" } };
-    });
     const ls = this.lastSess || { xp: 0, fast: 0, sure: 0, reviewed: 0 };
     return {
       isSplash: s.view === "splash", notSplash: s.view !== "splash",
       isHome: s.view === "home", isStudy: s.view === "study", isDone: s.view === "done",
       enter: () => this.setState({ view: "home" }),
-      splashStats: !s.loaded ? "" : known > 0 ? known + " words known · " + (stats.streak || 0) + "-day streak · " + TIER_NAMES[activeTier] : "Fresh recruit — 367 words. That’s all they have.",
-      ctaHover: { background: "#17497f" }, ghostHover: { background: "#e9e5dc" },
+      splashStats: !s.loaded ? "" : known > 0 ? known + " words known · " + (stats.streak || 0) + "-day streak · " + TIER_NAMES[activeTier] : "Frischer Rekrut — 200 Wörter warten",
+      ctaHover: { background: "#75570a" }, ghostHover: { background: "#e9e5dc" },
       missHover: { background: "#faf1ef" }, memHover: { background: "rgba(255,255,255,0.22)" },
       streak: stats.streak || 0, bestStreak: stats.bestStreak || 0,
       goalDone: reviewedToday, goalTarget: goal,
@@ -825,11 +744,11 @@ class Component extends DCLogic {
       wrongLabel: (stats.wrongToday || 0) + "/" + budget,
       nothingToDo: queued === 0 && Object.keys(s.cards).length === 0,
       startLabel: queued ? (left > 0 ? "Start session" : "Review only · no new words") : due === 0 && Object.keys(s.cards).length ? "Review ahead" : "Start session",
-      paceLine: (s.pace || 6) + " new words per session · tier « " + TIER_NAMES[activeTier] + " » · adapts to your accuracy",
+      paceLine: (s.pace || 6) + " new words per session · tier „" + TIER_NAMES[activeTier] + "“ · adapts to your accuracy",
       tierNote: known + " of " + W.length + " conquered",
       campLevel: CEFR[activeTier],
       campRank: TIER_NAMES[activeTier],
-      campSub: tierKn[activeTier] + " of " + tierSize[activeTier] + " words at this level" + (tierKn[activeTier] >= tierSize[activeTier] && activeTier < 4 ? " — " + CEFR[activeTier + 1] + " next" : ""),
+      campSub: tierKn[activeTier] + " of " + tierSize[activeTier] + " words at this level" + (tierKn[activeTier] >= tierSize[activeTier] && activeTier < 1 ? " — " + CEFR[activeTier + 1] + " next" : ""),
       heatNote: reviewedToday ? reviewedToday + " cards today" : "nothing yet today",
       heatCells: cells,
       tiers: tiers,
@@ -839,31 +758,25 @@ class Component extends DCLogic {
       toggleLabel: s.showAll ? "Show less" : "Show all " + W.length + " words",
       toggleAll: () => this.setState({ showAll: !s.showAll }),
       sessionCount: (this.sessions || []).length,
-      battleVerdict: frS === elS ? "perfect tie" : frS > elS ? "France ahead by " + (frS - elS) + " pts" : "Greece ahead by " + (elS - frS) + " pts",
+      battleVerdict: "joins the Vocab War",
       frScore: frS, elScore: elS,
       youFr: MY_SIDE === "fr" ? "· you" : "", youEl: MY_SIDE === "el" ? "· you" : "",
-      barFrStyle: { width: frPct + "%", background: "#d62828", transition: "width 0.5s ease" },
+      barFrStyle: { width: frPct + "%", background: "#946f00", transition: "width 0.5s ease" },
       barElStyle: { flex: "1", background: "#2160a8" },
       missions: missions,
-      fronts: fronts,
       battleNote: "1 pt per word known · 25 pts per weapon · live from both fighters' saves",
       exportLog: this.exportLog, importLog: this.importLog, resetAll: this.resetAll,
       startSession: this.startSession,
-      dEl: { flex: "1", minHeight: "40px", borderRadius: "999px", fontSize: "13.5px", fontWeight: "700", background: s.dialect !== "cy" ? "#2160a8" : "transparent", color: s.dialect !== "cy" ? "#fff" : "#5d5a52" },
-      dCy: { flex: "1", minHeight: "40px", borderRadius: "999px", fontSize: "13.5px", fontWeight: "700", background: s.dialect === "cy" ? "#2160a8" : "transparent", color: s.dialect === "cy" ? "#fff" : "#5d5a52" },
-      setEl: () => this.setState({ dialect: "el" }, () => this.save()),
-      setCy: () => this.setState({ dialect: "cy" }, () => this.save()),
-      dialectNote: s.dialect === "cy" ? cyN + " words take their Cypriot form — the rest are shared with standard Greek" : "",
       goHome: () => this.setState({ view: "home", queue: [], revealed: false }),
       // study
-      barStyle: { height: "100%", width: Math.round((answered / total) * 100) + "%", background: "#2160a8", borderRadius: "999px", transition: "width 0.3s ease" },
+      barStyle: { height: "100%", width: Math.round((answered / total) * 100) + "%", background: "#946f00", borderRadius: "999px", transition: "width 0.3s ease" },
       progressLabel: answered + "/" + total,
       cardKicker: kickerText,
       kickerStyle: { fontSize: "9.5px", letterSpacing: "0.16em", textTransform: "uppercase", fontWeight: "700", color: card ? (card.lapsed ? "#c2402f" : "#8a857a") : "#a1823c" },
-      frontText: w ? (dir ? disp.fr : w[0]) : "",
-      frontSub: w && dir ? disp.tr : "",
-      backText: w ? (dir ? w[0] : disp.fr) : "",
-      backSub: w && !dir ? (disp.cy ? "κυπριακά · " + disp.tr : disp.tr) : "",
+      frontText: w ? (dir ? w[1] : w[0]) : "",
+      frontSub: w && dir ? w[2] : "",
+      backText: w ? (dir ? w[0] : w[1]) : "",
+      backSub: w && !dir ? w[2] : "",
       hasConj: !!(s.revealed && conj), conj: conj || [],
       revealed: s.revealed, notRevealed: !s.revealed,
       reveal: this.reveal,

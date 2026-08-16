@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f4ef">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Vocab War">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:#f6f4ef; color:#17181d; font-family:'Figtree',system-ui,sans-serif; -webkit-tap-highlight-color:transparent; overscroll-behavior-y:none; }
+a { color:#8a6d2f; text-underline-offset:3px; } a:hover { color:#6d5526; }
+button { font-family:inherit; cursor:pointer; border:none; background:none; }
+button, a { touch-action:manipulation; }
+@keyframes contestPulse { 0%,100% { stroke-opacity:1; } 50% { stroke-opacity:0.35; } }
+@media (prefers-reduced-motion: reduce) { .contested-stroke { animation:none !important; } }
+@keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+</style>
+<script src="war-config.js"></script>
+<script src="war-content.js"></script>
+<script src="war-rules.js"></script>
+</helmet>
+<div data-screen-label="Vocab War Map" style="min-height:100dvh;background:#f6f4ef;display:flex;flex-direction:column;padding:calc(14px + env(safe-area-inset-top)) 0 calc(20px + env(safe-area-inset-bottom))">
+<div style="width:min(560px,100%);margin:0 auto;display:flex;flex-direction:column;gap:12px;padding:0 14px;flex:1">
+
+  <div style="display:flex;align-items:center;gap:12px">
+    <svg width="44" height="44" viewBox="0 0 96 96" style="flex:none">
+      <circle cx="48" cy="48" r="44" fill="#17181d"></circle>
+      <circle cx="48" cy="48" r="44" fill="none" stroke="#f2c94c" stroke-width="2.5"></circle>
+      <path d="M27 30 L39 62 L48 38" fill="none" stroke="#f2c94c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"></path>
+      <path d="M44 46 L52 66 L58 50 L64 66 L72 46" fill="none" stroke="#f6f4ef" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"></path>
+    </svg>
+    <div style="display:flex;flex-direction:column;margin-right:auto">
+      <span style="font-family:'Gloock',serif;font-size:24px;line-height:1.05">Vocab War</span>
+      <span style="font-size:10.5px;color:#8a857a">campaign 1 · knowledge holds ground</span>
+    </div>
+    <a href="BuddyLingo Login.dc.html" style="font-size:11px;color:#a5a096;text-decoration:underline;text-underline-offset:3px">⇄ fighters</a>
+  </div>
+
+  <div style="display:flex;gap:6px;flex-wrap:wrap">
+    <sc-for list="{{ legend }}" as="L" hint-placeholder-count="5">
+      <div style="{{ L.chipStyle }}">
+        <svg width="13" height="13" viewBox="0 0 24 24" style="flex:none"><path d="{{ L.sigil }}" fill="{{ L.color }}"></path></svg>
+        <span style="font-size:10.5px;font-weight:700">{{ L.name }}</span>
+        <span style="font-size:10px;color:#8a857a">{{ L.stat }}</span>
+      </div>
+    </sc-for>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:6px">
+    <sc-for list="{{ filters }}" as="F" hint-placeholder-count="4">
+      <button style="{{ F.style }}" onClick="{{ F.tap }}">{{ F.label }}</button>
+    </sc-for>
+    <button style="{{ demoStyle }}" onClick="{{ toggleDemo }}">{{ demoLabel }}</button>
+    <div style="margin-left:auto;display:flex;gap:5px">
+      <button style="min-width:34px;min-height:34px;background:#fff;border-radius:10px;font-size:16px;font-weight:700;box-shadow:0 1px 3px rgba(23,24,29,0.08)" onClick="{{ zoomOut }}">−</button>
+      <button style="min-width:34px;min-height:34px;background:#fff;border-radius:10px;font-size:16px;font-weight:700;box-shadow:0 1px 3px rgba(23,24,29,0.08)" onClick="{{ zoomIn }}">+</button>
+    </div>
+  </div>
+
+  <div style="background:#cfdcd4;border-radius:20px;overflow:hidden;box-shadow:inset 0 2px 10px rgba(23,24,29,0.1);position:relative;aspect-ratio:1020/573;touch-action:none;cursor:grab" onPointerDown="{{ panStart }}" onPointerMove="{{ panMove }}" onPointerUp="{{ panEnd }}" onPointerLeave="{{ panEnd }}">
+    <div style="{{ innerT }}">
+      <svg viewBox="0 0 1020 573" preserveAspectRatio="xMidYMid meet" style="position:absolute;left:0;top:0;width:100%;height:100%;display:block">
+        <defs>
+          <pattern id="fogHatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="8" height="8" fill="#e4e0d2"></rect>
+            <line x1="0" y1="0" x2="0" y2="8" stroke="#d5cfbd" stroke-width="2.5"></line>
+          </pattern>
+          <filter id="tshadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#5d5a52" flood-opacity="0.22"></feDropShadow>
+          </filter>
+          <radialGradient id="seaGlow" cx="50%" cy="45%" r="75%">
+            <stop offset="0%" stop-color="#dbe6df"></stop>
+            <stop offset="100%" stop-color="#c8d8cf"></stop>
+          </radialGradient>
+        </defs>
+        <image href="assets/map-europe.png" x="0" y="0" width="1020" height="573" preserveAspectRatio="xMidYMid slice"></image>
+        <g transform="translate(950,90)" opacity="0.8">
+          <circle r="26" fill="none" stroke="#c9c3b0" stroke-width="2"></circle>
+          <path d="M0 -20 L6 6 L0 0 L-6 6 Z" fill="#c9c3b0"></path>
+          <text y="-32" text-anchor="middle" style="font-size:12px;fill:#b9b3a4;font-family:serif">N</text>
+        </g>
+        <sc-for list="{{ edges }}" as="E" hint-placeholder-count="24">
+          <line x1="{{ E.x1 }}" y1="{{ E.y1 }}" x2="{{ E.x2 }}" y2="{{ E.y2 }}" stroke="#b9ac8f" stroke-width="{{ edgeW }}" stroke-dasharray="3 6" opacity="0.55"></line>
+        </sc-for>
+        <sc-for list="{{ tiles }}" as="T" hint-placeholder-count="23">
+          <g onClick="{{ T.tap }}" style="{{ T.gStyle }}">
+            <path d="{{ T.d }}" fill="{{ T.fill }}" stroke="{{ T.stroke }}" stroke-width="{{ T.strokeW }}" stroke-dasharray="{{ T.dash }}" filter="url(#tshadow)" class="contested-stroke" style="{{ T.pathStyle }}"></path>
+            <sc-if value="{{ T.hasSigil }}" hint-placeholder-val="{{ false }}">
+              <g transform="{{ T.sigilT }}"><path d="{{ T.sigilD }}" fill="{{ T.sigilFill }}"></path></g>
+            </sc-if>
+          </g>
+        </sc-for>
+      </svg>
+      <div style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none">
+        <sc-for list="{{ labels }}" as="L" hint-placeholder-count="18">
+          <div style="{{ L.wrapStyle }}">
+            <span style="{{ L.nameStyle }}">{{ L.name }}</span>
+            <span style="{{ L.pctStyle }}">{{ L.pct }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;font-size:10px;color:#5d5a52">
+    <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:11px;height:11px;border-radius:4px;background:#f3d2ce;border:1.5px solid #d62828"></span>held</span>
+    <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:11px;height:11px;border-radius:4px;background:#f6f3ea;border:1.5px solid #c9c3b5"></span>free to claim</span>
+    <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:11px;height:11px;border-radius:4px;background:repeating-linear-gradient(45deg,#e4e0d2,#e4e0d2 2px,#d5cfbd 2px,#d5cfbd 4px)"></span>locked</span>
+    <span style="display:inline-flex;align-items:center;gap:5px"><span style="width:11px;height:11px;border-radius:4px;background:#fff;border:2px dashed #c2402f"></span>contested</span>
+    <span style="display:inline-flex;align-items:center;gap:5px">★ homeland</span>
+    <span style="color:#a5a096">drag to pan · tap a territory</span>
+  </div>
+
+  <sc-if value="{{ noFighters }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#fff;border-radius:16px;padding:14px 16px;font-size:12px;color:#5d5a52;line-height:1.5;box-shadow:0 1px 3px rgba(23,24,29,0.08)">No eligible fighters yet. A fighter joins the war after {{ minCards }} reviews in their language — progress is read from each fighter's own save and never modified. <a href="BuddyLingo Login.dc.html">Enlist fighters →</a></div>
+  </sc-if>
+
+  <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:11px;box-shadow:0 2px 12px rgba(23,24,29,0.12);animation:fadeUp 0.25s ease both">
+      <div style="display:flex;align-items:baseline;gap:10px">
+        <span style="font-family:'Gloock',serif;font-size:21px">{{ selName }}</span>
+        <span style="font-size:10.5px;color:#a5a096">{{ selProvince }}</span>
+        <button style="margin-left:auto;min-height:34px;min-width:34px;background:#f0ede6;border-radius:999px;font-size:14px" onClick="{{ closeSel }}">✕</button>
+      </div>
+      <span style="{{ selStatusStyle }}">{{ selStatus }}</span>
+      <sc-if value="{{ selActive }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <sc-for list="{{ selBars }}" as="B" hint-placeholder-count="5">
+            <div style="display:flex;align-items:center;gap:8px">
+              <svg width="13" height="13" viewBox="0 0 24 24" style="flex:none"><path d="{{ B.sigil }}" fill="{{ B.color }}"></path></svg>
+              <span style="font-size:11px;font-weight:700;width:64px">{{ B.name }}</span>
+              <div style="flex:1;height:8px;background:#efece5;border-radius:999px;overflow:hidden"><div style="{{ B.fill }}"></div></div>
+              <span style="font-size:11px;font-weight:700;width:42px;text-align:right">{{ B.pct }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;border-top:1px solid #f0ede6;padding-top:10px">
+          <sc-for list="{{ selConcepts }}" as="Cc" hint-placeholder-count="6">
+            <span style="{{ Cc.style }}">{{ Cc.label }}</span>
+          </sc-for>
+        </div>
+        <span style="font-size:10px;color:#a5a096">{{ selYourLine }}</span>
+        <sc-if value="{{ selHasHistory }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:3px;border-top:1px solid #f0ede6;padding-top:9px">
+            <span style="font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:#a1823c;font-weight:700">Territory history</span>
+            <sc-for list="{{ selHistory }}" as="H" hint-placeholder-count="3">
+              <span style="font-size:10.5px;color:#8a857a">{{ H.line }}</span>
+            </sc-for>
+          </div>
+        </sc-if>
+        <a href="{{ selApp }}" style="min-height:48px;background:#17181d;color:#fff;border-radius:999px;font-size:13.5px;font-weight:700;display:flex;align-items:center;justify-content:center;text-decoration:none">{{ selCta }}</a>
+      </sc-if>
+      <sc-if value="{{ selFogged }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#f4f2ec;border-radius:12px;padding:11px 13px;font-size:11.5px;color:#5d5a52;line-height:1.5">🌫 Uncharted territory. It opens when every language learns these concepts — missing content never counts against a fighter.<br>{{ selMissing }}</div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <span style="font-size:9.5px;color:#c9c3b5;text-align:center;line-height:1.5;text-wrap:pretty">Strength = average demonstrated recognition mastery of each territory's fixed concepts, averaged over eligible fighters. Claim at {{ claimAt }}% · contested within {{ bandAt }} pts · rules v{{ rulesV }}. The map only reads fighter saves — it never writes them.</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const CFG = window.WAR_CFG, CONTENT = window.WAR_CONTENT, RULES = window.WAR_RULES;
+const WKEY = "bl-war-v1";
+const DECK_FILES = { fr: "deck.js", el: "greek-deck.js", de: "deck-de.js", es: "deck-es.js", tn: "deck-tn.js" };
+const SAVE_PREFIX = { fr: "vocab-fr-v1", el: "vocab-el-v1", de: "vocab-de-v1", es: "vocab-es-v1", tn: "vocab-tn-v1" };
+function factionOf(id) { return CFG.factions.find(function (f) { return f.id === id; }); }
+function blobPath(x, y, r, seed) {
+  let s = seed; const rnd = function () { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+  const n = 8, pts = [];
+  for (let i = 0; i < n; i++) { const a = (Math.PI * 2 * i) / n; const rr = r * (0.84 + rnd() * 0.32); pts.push([x + Math.cos(a) * rr, y + Math.sin(a) * rr * 0.78]); }
+  const mid = function (p, q) { return [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2]; };
+  let d = "M" + mid(pts[n - 1], pts[0]).map(Math.round).join(",");
+  for (let i = 0; i < n; i++) { const p = pts[i], m = mid(pts[i], pts[(i + 1) % n]); d += " Q" + Math.round(p[0]) + "," + Math.round(p[1]) + " " + Math.round(m[0]) + "," + Math.round(m[1]); }
+  return d + " Z";
+}
+class Component extends DCLogic {
+  state = { fighters: [], snaps: {}, sel: null, filter: "all", px: 0, py: 0, zoom: 1, loaded: false, demo: false };
+  componentDidMount() {
+    let session = null, roster = [];
+    try { session = JSON.parse(localStorage.getItem("bl-session") || "null"); } catch (e) {}
+    try { roster = JSON.parse(localStorage.getItem("bl-roster-v1") || "null") || []; } catch (e) {}
+    this.session = session;
+    const fighters = [];
+    const readSave = function (key) { try { return JSON.parse(localStorage.getItem(key) || "null"); } catch (e) { return null; } };
+    roster.forEach(function (r, i) {
+      if (!r) return;
+      const save = readSave(SAVE_PREFIX[r.lang] + ":" + i) || {};
+      fighters.push({ name: r.name, lang: r.lang, slot: i, cards: save.cards || {}, reps: 0 });
+    });
+    for (const lang in SAVE_PREFIX) {
+      const save = readSave(SAVE_PREFIX[lang]);
+      if (save && save.cards && Object.keys(save.cards).length) fighters.push({ name: "Device save", lang: lang, slot: null, cards: save.cards, reps: 0 });
+    }
+    fighters.forEach(function (f) { let n = 0; for (const k in f.cards) n += (f.cards[k].reps || 1); f.reps = n; });
+    this.realFighters = fighters;
+    this.setState({ fighters: fighters, snaps: this.computeSnaps(fighters, true), loaded: true });
+  }
+  // war state (bl-war-v1) is the ONLY storage this page writes; persist=false (demo) writes nothing
+  computeSnaps(fighters, persist) {
+    let war = null;
+    try { war = JSON.parse(localStorage.getItem(WKEY) || "null"); } catch (e) {}
+    war = war || { owners: {}, history: {}, rulesVersion: CFG.rulesVersion };
+    const snaps = {}, langIds = CFG.factions.map(function (f) { return f.id; });
+    let changed = false;
+    // overall faction power (homeland display only — a faction vs its own available concepts)
+    const pseudo = {};
+    for (const lang of langIds) pseudo[lang] = { concepts: Object.keys(CONTENT.concepts).filter(function (cid) { return CONTENT.concepts[cid].keys[lang]; }) };
+    // front line: previous owners (homelands always owned) decide who borders which tile
+    const prevOwners = {};
+    for (const t of CONTENT.tiles) prevOwners[t.id] = t.home || (persist ? (war.owners[t.id] || null) : null);
+    for (const tile of CONTENT.tiles) {
+      if (tile.home) {
+        const hs = {};
+        for (const lang of langIds) hs[lang] = RULES.factionTileStrength(fighters, lang, pseudo[lang], CONTENT, CFG);
+        snaps[tile.id] = { active: true, home: tile.home, strengths: hs, owner: tile.home, contested: false, frontier: true };
+        continue;
+      }
+      const active = RULES.tileActive(tile, CONTENT, langIds);
+      const strengths = {};
+      for (const lang of langIds) strengths[lang] = active ? RULES.factionTileStrength(fighters, lang, tile, CONTENT, CFG) : 0;
+      const prev = persist ? (war.owners[tile.id] || null) : null;
+      const adj = (CONTENT.adjacency && CONTENT.adjacency[tile.id]) || [];
+      const allowed = [];
+      for (const n of adj) { const o = prevOwners[n]; if (o && allowed.indexOf(o) === -1) allowed.push(o); }
+      const res = active ? RULES.resolveOwnership(prev, strengths, CFG, langIds, allowed) : { owner: null, contested: false };
+      snaps[tile.id] = { active: active, strengths: strengths, owner: res.owner, contested: res.contested, frontier: allowed.length > 0 };
+      if (persist && active && res.owner !== prev) {
+        war.owners[tile.id] = res.owner;
+        const h = war.history[tile.id] || [];
+        h.unshift({ t: Date.now(), owner: res.owner, prev: prev });
+        war.history[tile.id] = h.slice(0, CFG.historyLimit);
+        changed = true;
+      }
+    }
+    if (persist && (changed || !war.saved)) { war.saved = true; war.updated = Date.now(); try { localStorage.setItem(WKEY, JSON.stringify(war)); } catch (e) {} }
+    if (persist) this.war = war;
+    return snaps;
+  }
+  demoFighters() {
+    const out = [];
+    CFG.factions.forEach(function (f, fi) {
+      let s = 7 + fi * 13;
+      const rnd = function () { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+      const cards = {};
+      for (const cid in CONTENT.concepts) {
+        const k = CONTENT.concepts[cid].keys[f.id];
+        if (!k) continue;
+        if (rnd() < 0.16 + fi * 0.09) continue;
+        cards[k] = { box: 2 + Math.floor(rnd() * 5), lapsed: rnd() < 0.1, reps: 3 };
+      }
+      out.push({ name: "Demo " + f.name, lang: f.id, slot: null, cards: cards, reps: 100 });
+    });
+    return out;
+  }
+  toggleDemo = () => {
+    const demo = !this.state.demo;
+    const fighters = demo ? this.demoFighters() : (this.realFighters || []);
+    this.setState({ demo: demo, fighters: fighters, snaps: this.computeSnaps(fighters, !demo), sel: null });
+  };
+  panStart = (e) => { this._pan = { x: e.clientX, y: e.clientY, px: this.state.px, py: this.state.py }; };
+  panMove = (e) => {
+    if (!this._pan) return;
+    this.setState({ px: this._pan.px + (e.clientX - this._pan.x), py: this._pan.py + (e.clientY - this._pan.y) });
+  };
+  panEnd = () => { this._pan = null; };
+  renderVals() {
+    const s = this.state, langIds = CFG.factions.map(function (f) { return f.id; });
+    const me = this.session;
+    const counts = {}, eligible = {};
+    for (const lang of langIds) { counts[lang] = 0; eligible[lang] = s.fighters.filter(function (f) { return f.lang === lang && RULES.fighterEligible(f, CFG); }).length; }
+    for (const t of CONTENT.tiles) { const sn = s.snaps[t.id]; if (sn && sn.owner) counts[sn.owner]++; }
+    const legend = CFG.factions.map(function (f) {
+      return { name: f.name, color: f.color, sigil: f.sigil,
+        stat: counts[f.id] + " land · " + eligible[f.id] + (eligible[f.id] === 1 ? " fighter" : " fighters"),
+        chipStyle: { display: "flex", alignItems: "center", gap: "5px", background: "#fff", borderRadius: "999px", padding: "6px 10px", boxShadow: "0 1px 3px rgba(23,24,29,0.08)", border: me && me.lang === f.id ? "1.5px solid " + f.color : "1.5px solid transparent" } };
+    });
+    const filters = [["all", "All"], ["mine", "Mine"], ["contested", "Contested"], ["neutral", "Neutral"]].map(([id, label]) => ({
+      label: label,
+      style: { minHeight: "34px", padding: "0 13px", borderRadius: "999px", fontSize: "11.5px", fontWeight: "700",
+        background: s.filter === id ? "#17181d" : "#fff", color: s.filter === id ? "#fff" : "#5d5a52", boxShadow: "0 1px 3px rgba(23,24,29,0.08)" },
+      tap: () => this.setState({ filter: id })
+    }));
+    const tileById = {};
+    for (const t of CONTENT.tiles) tileById[t.id] = t;
+    const edges = [], seenEdge = {};
+    for (const a in (CONTENT.adjacency || {})) {
+      for (const b of CONTENT.adjacency[a]) {
+        const k = a < b ? a + "|" + b : b + "|" + a;
+        if (seenEdge[k] || !tileById[a] || !tileById[b]) continue;
+        seenEdge[k] = 1;
+        edges.push({ x1: tileById[a].x, y1: tileById[a].y, x2: tileById[b].x, y2: tileById[b].y });
+      }
+    }
+    const tiles = CONTENT.tiles.map((t) => {
+      const sn = s.snaps[t.id] || { active: false, strengths: {}, owner: null, contested: false };
+      const owner = sn.owner ? factionOf(sn.owner) : null;
+      const mineDim = s.filter === "mine" && (!me || sn.owner !== me.lang);
+      const dim = (s.filter === "contested" && !sn.contested) || (s.filter === "neutral" && (sn.owner || !sn.active)) || mineDim;
+      const pct = sn.home ? "★ homeland" : sn.owner ? Math.round(sn.strengths[sn.owner]) + "%" : (sn.active ? (sn.frontier ? "neutral" : "beyond the front") : "");
+      return {
+        d: blobPath(t.x, t.y, t.r, t.seed),
+        fill: !sn.active ? "url(#fogHatch)" : owner ? owner.tint : "#f6f3ea",
+        stroke: !sn.active ? "#cfcaba" : sn.contested ? "#c2402f" : owner ? owner.color : "#c9c3b5",
+        strokeW: String(((sn.home ? 4 : sn.contested ? 3.5 : owner ? 2.5 : 1.5) / s.zoom).toFixed(2)),
+        dash: sn.contested ? "7 5" : (!sn.active ? "3 4" : "none"),
+        pathStyle: sn.contested ? { animation: "contestPulse 1.6s ease-in-out infinite" } : {},
+        gStyle: { cursor: "pointer", opacity: dim ? 0.25 : 1, transition: "opacity 0.25s ease" },
+        hasSigil: !!owner, sigilD: owner ? owner.sigil : "", sigilFill: owner ? owner.color : "",
+        sigilT: "translate(" + (t.x - 11) + "," + (t.y - t.r * 0.62) + ") scale(0.92)",
+        tap: () => this.setState({ sel: t.id }),
+        _label: {
+          name: t.name, pct: (sn.owner && !sn.home) ? Math.round(sn.strengths[sn.owner]) + "%" : (sn.home ? "★" : ""),
+          wrapStyle: { position: "absolute", left: (t.x / 1020 * 100) + "%", top: ((t.y + 2) / 573 * 100) + "%", transform: "translate(-50%,0)", display: "flex", flexDirection: "column", alignItems: "center", width: "66px", textAlign: "center", opacity: dim ? 0.25 : 1, transition: "opacity 0.25s ease" },
+          nameStyle: { fontSize: (8.5 / Math.sqrt(s.zoom)).toFixed(1) + "px", fontWeight: "700", lineHeight: "1.12", color: !sn.active ? "#b0aa9b" : "#17181d", textWrap: "balance", textShadow: "0 1px 2px rgba(246,244,239,0.8)" },
+          pctStyle: { fontSize: (8 / Math.sqrt(s.zoom)).toFixed(1) + "px", fontWeight: "600", color: !sn.active ? "#b9b3a4" : owner ? owner.color : "#a5a096" }
+        }
+      };
+    });
+    const labels = tiles.map(function (t) { return t._label; });
+    // drawer
+    const selTile = s.sel ? CONTENT.tiles.find(function (t) { return t.id === s.sel; }) : null;
+    const selSnap = selTile ? s.snaps[selTile.id] : null;
+    let selBars = [], selConcepts = [], selHistory = [], selStatus = "", selYourLine = "", selMissing = "", selApp = "#", selCta = "Train";
+    if (selTile && selSnap) {
+      const ranked = CFG.factions.slice().sort(function (a, b) { return (selSnap.strengths[b.id] || 0) - (selSnap.strengths[a.id] || 0); });
+      selBars = ranked.map(function (f) {
+        const v = selSnap.strengths[f.id] || 0;
+        return { name: f.name, color: f.color, sigil: f.sigil, pct: Math.round(v) + "%",
+          fill: { height: "100%", width: Math.round(v) + "%", background: f.color, borderRadius: "999px", transition: "width 0.4s ease" } };
+      });
+      const owner = selSnap.owner ? factionOf(selSnap.owner) : null;
+      selStatus = selSnap.home ? "Homeland of " + factionOf(selSnap.home).name + " — can never fall. Its number is each faction's overall mastery." : !selSnap.active ? "Uncharted — awaiting vocabulary expeditions" : owner ? (selSnap.contested ? "Held by " + owner.name + " — CONTESTED" : "Held by " + owner.name) : selSnap.frontier ? "Neutral — a bordering faction claims it at " + CFG.claimThreshold + "%" : "Beyond the front — conquer a neighbouring territory first";
+      const meF = me ? s.fighters.find(function (f) { return f.slot === me.slot; }) : null;
+      if (meF && selSnap.active) {
+        const mine = RULES.playerTileStrength(meF, selTile, CONTENT, CFG);
+        selYourLine = "Your strength here: " + Math.round(mine.pct) + "%" + (RULES.fighterEligible(meF, CFG) ? "" : " · not yet eligible (" + meF.reps + "/" + CFG.minCardsForEligibility + " reviews)");
+        selConcepts = mine.per.map(function (c) {
+          const col = c.mastery >= 75 ? ["#e7f0e2", "#2e7d4f"] : c.mastery >= 40 ? ["#f3ecd9", "#8a6d2f"] : c.seen ? ["#f9e8e5", "#c2402f"] : ["#f0ede6", "#a5a096"];
+          return { label: c.label + " " + (c.seen ? Math.round(c.mastery) + "%" : "·new"), style: { fontSize: "10.5px", fontWeight: "600", padding: "5px 10px", borderRadius: "999px", background: col[0], color: col[1] } };
+        });
+      } else {
+        selConcepts = selTile.concepts.map(function (cid) {
+          return { label: CONTENT.concepts[cid].label, style: { fontSize: "10.5px", fontWeight: "600", padding: "5px 10px", borderRadius: "999px", background: "#f0ede6", color: "#5d5a52" } };
+        });
+      }
+      const missing = RULES.tileMissing(selTile, CONTENT, langIds);
+      selMissing = Object.keys(missing).map(function (l) { return factionOf(l).name + ": " + missing[l].map(function (c) { return CONTENT.concepts[c].label; }).join(", "); }).join(" · ");
+      const hist = (this.war && this.war.history[selTile.id]) || [];
+      selHistory = hist.map(function (h) {
+        const d = new Date(h.t);
+        return { line: (h.owner ? "Captured by " + factionOf(h.owner).name : "Fell neutral") + (h.prev ? " (from " + factionOf(h.prev).name + ")" : "") + " · " + d.toLocaleDateString() };
+      });
+      const appLang = me ? me.lang : (selSnap.owner || "fr");
+      selApp = factionOf(appLang).app;
+      selCta = selSnap.contested ? "Defend " + selTile.name + " — train now" : "Train " + selTile.name;
+    }
+    const anyEligible = langIds.some(function (l) { return eligible[l] > 0; });
+    return {
+      legend: legend, filters: filters, tiles: tiles, labels: labels, edges: edges, edgeW: String((2 / s.zoom).toFixed(2)),
+      innerT: { position: "absolute", left: "0", top: "0", width: "100%", aspectRatio: "1020 / 573", transform: "translate(" + s.px + "px," + s.py + "px) scale(" + s.zoom + ")", transformOrigin: "50% 50%" },
+      zoomIn: () => this.setState({ zoom: Math.min(2.4, s.zoom * 1.25) }),
+      zoomOut: () => this.setState({ zoom: Math.max(0.6, s.zoom / 1.25) }),
+      panStart: this.panStart, panMove: this.panMove, panEnd: this.panEnd,
+      noFighters: s.loaded && !anyEligible && !s.demo,
+      demoLabel: s.demo ? "✦ demo on" : "✦ preview",
+      demoStyle: { minHeight: "34px", padding: "0 13px", borderRadius: "999px", fontSize: "11.5px", fontWeight: "700", background: s.demo ? "#8a6d2f" : "#fff", color: s.demo ? "#fff" : "#8a6d2f", boxShadow: "0 1px 3px rgba(23,24,29,0.08)" },
+      toggleDemo: this.toggleDemo,
+      minCards: CFG.minCardsForEligibility,
+      hasSel: !!selTile, closeSel: () => this.setState({ sel: null }),
+      selName: selTile ? selTile.name : "", selProvince: selTile ? ((CONTENT.provinces.find(function (p) { return p.id === selTile.province; }) || { name: selSnap && selSnap.home ? "homeland" : "" }).name) : "",
+      selStatus: selStatus,
+      selStatusStyle: { fontSize: "11.5px", fontWeight: "700", color: selSnap && selSnap.contested ? "#c2402f" : "#8a6d2f" },
+      selActive: !!(selSnap && selSnap.active), selFogged: !!(selSnap && !selSnap.active),
+      selBars: selBars, selConcepts: selConcepts, selYourLine: selYourLine, selMissing: selMissing,
+      selHasHistory: selHistory.length > 0, selHistory: selHistory,
+      selApp: selApp, selCta: selCta,
+      claimAt: CFG.claimThreshold, bandAt: CFG.contestBand, rulesV: CFG.rulesVersion
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -2,21 +2,30 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <script src="./support.js"></script>
 </head>
 <body>
 <x-dc>
 
 <helmet>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f4ef">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="BuddyLingo FR">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
 <style>
 @keyframes idleBreathe { 0%,100% { transform: scale(1,1); } 50% { transform: scale(1.015,0.97); } }
 @keyframes idleSway { 0%,100% { rotate: -2.2deg; } 50% { rotate: 2.2deg; } }
+@keyframes mascotLook { 0%, 26% { transform: scaleX(1) translateY(0); } 6% { transform: scaleX(1) translateY(-2.5px); } 14% { transform: scaleX(1) translateY(0); } 33% { transform: scaleX(-1) translateY(-2px) skewX(3deg); } 38%, 52% { transform: scaleX(-1) translateY(0); } 46% { transform: scaleX(-1) translateY(-2.5px); } 60% { transform: scaleX(-1) translateY(0); } 67% { transform: scaleX(1) translateY(-2px) skewX(-3deg); } 72%, 100% { transform: scaleX(1) translateY(0); } }
+@keyframes mobHop { 0%, 100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-4px) rotate(4deg); } }
 *, *::before, *::after { box-sizing: border-box; }
-body { margin:0; background:#f6f4ef; color:#17181d; font-family:'Figtree',system-ui,sans-serif; -webkit-tap-highlight-color:transparent; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:#f6f4ef; color:#17181d; font-family:'Figtree',system-ui,sans-serif; -webkit-tap-highlight-color:transparent; overscroll-behavior-y:none; }
+button, a { touch-action:manipulation; }
+img { -webkit-user-drag:none; user-select:none; -webkit-user-select:none; }
 a { color:#d62828; text-underline-offset:3px; } a:hover { color:#b21f1f; }
 button { font-family:inherit; cursor:pointer; border:none; }
 button:focus-visible { outline:2px solid #d62828; outline-offset:2px; }
@@ -24,13 +33,14 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
 </style>
 <script src="deck.js"></script>
+<script src="nani-work.js"></script>
 </helmet>
 <div style="min-height:100dvh;background:#f6f4ef" data-screen-label="Vocabulaire Supérieur">
 
 <sc-if value="{{ isSplash }}" hint-placeholder-val="{{ true }}">
-  <div data-screen-label="Splash" style="min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:20px;padding:30px 24px calc(28px + env(safe-area-inset-bottom));overflow:hidden">
+  <div data-screen-label="Splash" style="min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:20px;padding:calc(24px + env(safe-area-inset-top)) 24px calc(28px + env(safe-area-inset-bottom));overflow:hidden">
     <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#a5a096">BuddyLingo · vocab 1v1</span>
-    <div style="display:flex;flex-direction:column;align-items:center;gap:22px;animation:fadeUp 0.7s ease both">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:22px;animation:fadeUp 0.7s ease both;background:#f6f4ef">
       <img src="https://upload.higgsfield.ai/user_32PgHXDjHlFXmhgKyUnBM4DN7Qi/14f02781-81f9-40a9-938c-806909f714e9.gif" alt="Le Croissant" style="height:200px;display:block">
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
         <span style="font-size:42px;font-weight:800;letter-spacing:-0.03em;line-height:1;color:#17181d">Le Français<span style="color:#d62828">.</span></span>
@@ -39,9 +49,9 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
     </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:18px;width:min(380px,100%)">
       <div style="display:flex;align-items:flex-end;gap:28px">
-        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><img src="assets/chars/fromage.png" alt="" style="height:48px;display:block;transform-origin:50% 100%;animation:idleSway 5.3s ease-in-out -2.1s infinite"><span style="font-size:9px;font-weight:600;color:#a5a096">Jean-Fromage</span></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><img src="assets/chars/baguette.png" alt="" style="height:62px;display:block;transform-origin:50% 100%;animation:idleSway 6.7s ease-in-out -0.9s infinite"><span style="font-size:9px;font-weight:600;color:#a5a096">Baguette Bardot</span></div>
-        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><img src="assets/chars/brie.png" alt="" style="height:40px;display:block;transform-origin:50% 100%;animation:idleSway 4.6s ease-in-out -3.3s infinite"><span style="font-size:9px;font-weight:600;color:#a5a096">Brie-Philippe</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><img src="assets/chars/fromage.png" alt="" style="height:48px;display:block;transform-origin:50% 100%;animation:idleSway 5.3s ease-in-out -2.1s infinite, mascotLook 7.5s ease-in-out infinite"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center;line-height:1.3;min-height:24px">Jean-Fromage</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><img src="assets/chars/baguette.png" alt="" style="height:62px;display:block;transform-origin:50% 100%;animation:idleSway 6.7s ease-in-out -0.9s infinite, mascotLook 9s ease-in-out -3s infinite"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center;line-height:1.3;min-height:24px">Baguette Bardot</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><img src="assets/chars/brie.png" alt="" style="height:40px;display:block;transform-origin:50% 100%;animation:idleSway 4.6s ease-in-out -3.3s infinite, mascotLook 8.2s ease-in-out -5.5s infinite"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center;line-height:1.3;min-height:24px">Brie-Philippe</span></div>
       </div>
       <button style="width:100%;min-height:58px;background:#d62828;color:#fff;border-radius:999px;font-size:16.5px;font-weight:700;letter-spacing:0.02em;box-shadow:0 10px 24px rgba(160,30,30,0.35)" style-hover="{{ ctaHover }}" onClick="{{ enter }}">Aux armes, vocabulaire !</button>
       <span style="font-size:11.5px;letter-spacing:0.04em;color:#a5a096">{{ splashStats }}</span>
@@ -50,13 +60,13 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 </sc-if>
 
 <sc-if value="{{ notSplash }}" hint-placeholder-val="{{ false }}">
-<div style="width:min(440px,100%);margin:0 auto;padding:0 16px 56px;display:flex;flex-direction:column;gap:14px">
+<div style="width:min(440px,100%);margin:0 auto;padding:0 16px calc(56px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px">
 
-  <div style="display:flex;align-items:center;gap:12px;padding:18px 2px 4px">
+  <div style="display:flex;align-items:center;gap:12px;padding:calc(14px + env(safe-area-inset-top)) 2px 4px">
     <img src="assets/chars/croissant.png" alt="" style="height:36px;flex:none">
     <div style="display:flex;flex-direction:column;margin-right:auto">
       <span style="font-size:19px;font-weight:800;letter-spacing:-0.02em;line-height:1.1">BuddyLingo</span>
-      <span style="font-size:11px;color:#8a857a">vocab 1v1 · le français, objectivement supérieur</span>
+      <span style="font-size:11px;color:#8a857a">{{ headerSub }}</span>
     </div>
     <div style="display:flex;align-items:center;gap:7px;background:#fff;border-radius:999px;padding:7px 14px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
       <span style="font-size:17px;font-weight:800;color:#b08d3f">{{ streak }}</span>
@@ -65,6 +75,11 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         <span style="font-size:9px;color:#a5a096">best {{ bestStreak }}</span>
       </div>
     </div>
+  </div>
+
+  <div style="display:flex;background:#e9e5dc;border-radius:999px;padding:3px;gap:3px">
+    <button style="{{ wdStyle }}" onClick="{{ goDaily }}">Le Français</button>
+    <button style="{{ wwStyle }}" onClick="{{ goWork }}">🏭 NANI Work</button>
   </div>
 
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
@@ -116,7 +131,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
             <span style="font-size:10.5px;color:#8a857a">{{ campSub }}</span>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px">
+        <div style="{{ tiersGridStyle }}">
           <sc-for list="{{ tiers }}" as="T" hint-placeholder-count="5">
             <div style="display:flex;flex-direction:column;gap:5px;align-items:center">
               <span style="{{ T.cefrStyle }}">{{ T.cefr }}</span>
@@ -126,6 +141,41 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
             </div>
           </sc-for>
         </div>
+      </div>
+
+      <div style="background:#fff;border-radius:20px;padding:14px 18px;display:flex;flex-direction:column;gap:9px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+        <span style="display:flex;align-items:baseline;gap:10px">
+          <span style="font-size:13px;font-weight:700;color:#17181d">The Front Line · France vs Greece</span>
+          <span style="margin-left:auto;font-size:10px;color:#a5a096">war map coming soon</span>
+        </span>
+        <sc-for list="{{ fronts }}" as="Fr" hint-placeholder-count="5">
+          <span style="display:flex;align-items:center;gap:9px">
+            <span style="font-size:10px;font-weight:600;color:#8a857a;width:60px;flex:none">{{ Fr.label }}</span>
+            <span style="font-size:10.5px;font-weight:800;color:#d62828;flex:none;width:28px;text-align:right">{{ Fr.fr }}</span>
+            <span style="flex:1;height:9px;border-radius:999px;overflow:hidden;display:flex;background:#efece5;position:relative">
+              <span style="{{ Fr.frStyle }}"></span>
+              <span style="{{ Fr.elStyle }}"></span>
+              <span style="position:absolute;left:50%;top:-1px;bottom:-1px;width:1.5px;background:#8a6d2f;opacity:0.5"></span>
+            </span>
+            <span style="font-size:10.5px;font-weight:800;color:#2160a8;flex:none;width:28px">{{ Fr.el }}</span>
+          </span>
+        </sc-for>
+        <span style="font-size:10px;color:#a5a096;text-align:center">{{ battleVerdict }} · bars press with every word learned</span>
+        <span style="display:flex;align-items:flex-end;justify-content:center;gap:14px;padding-top:4px">
+          <span style="display:flex;align-items:flex-end">
+            <span style="transform:scaleX(-1);display:inline-flex"><img src="assets/chars/brie.png" alt="" style="height:24px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.62s ease-in-out -0.31s infinite"></span>
+            <span style="transform:scaleX(-1);display:inline-flex;margin-left:-7px"><img src="assets/chars/fromage.png" alt="" style="height:28px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.55s ease-in-out -0.1s infinite"></span>
+            <span style="transform:scaleX(-1);display:inline-flex;margin-left:-8px"><img src="assets/chars/baguette.png" alt="" style="height:40px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.7s ease-in-out -0.45s infinite"></span>
+            <span style="transform:scaleX(-1);display:inline-flex;margin-left:-9px"><img src="assets/chars/croissant.png" alt="" style="height:34px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.5s ease-in-out infinite"></span>
+          </span>
+          <span style="font-size:11px;font-weight:800;color:#a5a096;padding-bottom:9px">VS</span>
+          <span style="display:flex;align-items:flex-end">
+            <img src="assets/chars/feta.png" alt="" style="height:30px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.52s ease-in-out -0.2s infinite">
+            <img src="assets/chars/citron.png" alt="" style="height:36px;margin-left:-9px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.68s ease-in-out -0.4s infinite">
+            <img src="assets/chars/tzatziki.png" alt="" style="height:28px;margin-left:-8px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.58s ease-in-out infinite">
+            <img src="assets/chars/dolma.png" alt="" style="height:26px;margin-left:-7px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.64s ease-in-out -0.25s infinite">
+          </span>
+        </span>
       </div>
 
       <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
@@ -227,7 +277,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
       </div>
 
       <button style="align-self:center;background:none;color:#a5a096;font-size:11px;text-decoration:underline;text-underline-offset:3px;min-height:44px" onClick="{{ resetAll }}">Reset all progress</button>
-      <a href="Vocab Greek.dc.html" style="align-self:center;font-size:11px;color:#a5a096">visit the inferior vocabulary →</a>
+      <div style="display:flex;justify-content:center;gap:18px"><a href="Vocab Greek.dc.html" style="font-size:11px;color:#a5a096">visit the inferior vocabulary →</a><a href="BuddyLingo Login.dc.html" style="font-size:11px;color:#a5a096">⇄ switch fighter</a></div>
     </div>
   </sc-if>
 
@@ -321,10 +371,21 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:900},&quot;dailyGoal&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:30,&quot;min&quot;:10,&quot;max&quot;:100,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Daily goal (cards)&quot;},&quot;mistakeBudget&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:20,&quot;min&quot;:5,&quot;max&quot;:50,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Misses per day before new words stop&quot;},&quot;quiz&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;EN → FR&quot;,&quot;options&quot;:[&quot;EN → FR&quot;,&quot;FR → EN&quot;,&quot;Mixed&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Quiz direction&quot;},&quot;showConj&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Cards&quot;,&quot;label&quot;:&quot;Conjugation tables on verbs&quot;}}">
 
-const W = window.DECK || [], TIER_NAMES = window.TIER_NAMES || [];
+let WORLD_WORK = (function () { try { return localStorage.getItem("bl-world:fr") === "work"; } catch (e) { return false; } })();
+let W, TIER_NAMES, TS, NT, KEY;
+function applyWorld() {
+  W = WORLD_WORK && window.NANI_DECK ? window.NANI_DECK("fr") : (window.DECK || []);
+  TIER_NAMES = WORLD_WORK ? ["Survive", "Production"] : (window.TIER_NAMES || []);
+  TS = WORLD_WORK ? 50 : 100; NT = Math.max(1, Math.ceil(W.length / TS));
+  KEY = (WORLD_WORK ? "nani-fr-v1" : "vocab-fr-v1") + SUF;
+}
+function setWorld(w) { try { localStorage.setItem("bl-world:fr", w); } catch (e) {} WORLD_WORK = w === "work"; applyWorld(); }
+function segStyle(on) { return on ? { flex: "1", textAlign: "center", background: "#fff", borderRadius: "999px", padding: "9px 0", fontSize: "12.5px", fontWeight: "700", boxShadow: "0 1px 2px rgba(23,24,29,0.08)" } : { flex: "1", textAlign: "center", background: "transparent", borderRadius: "999px", padding: "9px 0", fontSize: "12.5px", fontWeight: "600", color: "#8a857a" }; }
 const MIN = 60000, DAY = 86400000;
 const IV = [10*MIN, DAY, 3*DAY, 7*DAY, 16*DAY, 35*DAY, 90*DAY];
-const KEY = "vocab-fr-v1";
+const ACC = (function () { try { return JSON.parse(localStorage.getItem("bl-session") || "null"); } catch (e) { return null; } })();
+const SUF = ACC && ACC.slot != null ? ":" + ACC.slot : "";
+applyWorld();
 const CAT = { N: "Noun", V: "Verb", A: "Adj.", B: "Phrase" };
 const RANKS = [["Recrue",0],["Caporal",100],["Sergent",250],["Lieutenant",500],["Capitaine",900],["Commandant",1400],["Colonel",2000],["Général",2800],["Maréchal",4000],["Empereur",5500]];
 const BADGE_DEFS = [
@@ -353,7 +414,7 @@ function mergeDays(a, b) { const out = Object.assign({}, a || {}); for (const k 
 function idbOpen() {
   return new Promise(function (res, rej) {
     if (!window.indexedDB) return rej();
-    const r = indexedDB.open("vocab-fr", 1);
+    const r = indexedDB.open((WORLD_WORK ? "nani-fr" : "vocab-fr") + SUF, 1);
     r.onupgradeneeded = function () { r.result.createObjectStore("s"); };
     r.onsuccess = function () { res(r.result); };
     r.onerror = function () { rej(); };
@@ -365,8 +426,18 @@ function idbPut(v) { return idbOpen().then(function (db) { db.transaction("s", "
 class Component extends DCLogic {
   state = { view: "splash", cards: {}, stats: {}, days: {}, badges: {}, xp: 0, pace: 6, tierFloor: 0, queue: [], revealed: false, showAll: false, adjustNote: "", loaded: false };
 
+  goWorld(w) {
+    if ((w === "work") === WORLD_WORK) return;
+    setWorld(w);
+    this.sessions = []; this.recent = []; this.cur = null; this.lastSess = null; this.sessBadges = [];
+    this.loadWorld();
+  }
   componentDidMount() {
     try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+    this.loadWorld();
+  }
+  loadWorld() {
+    const tok = KEY;
     let saved = null;
     try { saved = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) {}
     this.sessions = (saved && saved.sessions) || [];
@@ -376,11 +447,11 @@ class Component extends DCLogic {
     this.setState({
       cards: (saved && saved.cards) || {}, stats: stats, days: (saved && saved.days) || {},
       badges: (saved && saved.badges) || {}, xp: (saved && saved.xp) || 0,
-      pace: (saved && saved.pace) || 6, tierFloor: (saved && saved.tierFloor) || 0, loaded: true
+      pace: (saved && saved.pace) || 6, tierFloor: (saved && saved.tierFloor) || 0, queue: [], revealed: false, view: (this.state.view === "study" || this.state.view === "done") ? "home" : this.state.view, loaded: true
     });
-    idbGet().then((m) => { if (m) this.mergeIn(m, true); });
-    fetch("memoire.csv", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : null; })
-      .then((t) => { if (t) this.mergeIn(this.parseCsv(t), false); }).catch(function () {});
+    idbGet().then((m) => { if (m && tok === KEY) this.mergeIn(m, true); });
+    if (!SUF && !WORLD_WORK) fetch("memoire.csv", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : null; })
+      .then((t) => { if (t && tok === KEY) this.mergeIn(this.parseCsv(t), false); }).catch(function () {});
   }
 
   mergeIn(m, withSessions) {
@@ -398,7 +469,9 @@ class Component extends DCLogic {
 
   save() {
     const s = this.state;
-    const payload = { cards: s.cards, stats: s.stats, days: s.days, badges: s.badges, xp: s.xp, pace: s.pace, tierFloor: s.tierFloor, sessions: this.sessions || [], recent: this.recent || [], updated: Date.now() };
+    const catKnown = { B: 0, N: 0, V: 0, A: 0, total: 0 };
+    for (let i = 0; i < W.length; i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) { catKnown[W[i][3]] = (catKnown[W[i][3]] || 0) + 1; catKnown.total++; } }
+    const payload = { cards: s.cards, stats: s.stats, days: s.days, badges: s.badges, xp: s.xp, pace: s.pace, tierFloor: s.tierFloor, catKnown: catKnown, sessions: this.sessions || [], recent: this.recent || [], updated: Date.now() };
     this.savedAt = payload.updated;
     try {
       if (!Object.keys(s.cards).length && !this.wipe) {
@@ -593,17 +666,17 @@ class Component extends DCLogic {
       const r = this.recent, acc = r.length ? r.filter(function (x) { return x > 0; }).length / r.length : 0;
       const pct = Math.round(acc * 100);
       let jumped = false;
-      if (r.length >= 24 && acc >= 0.92 && tierFloor < 400) {
-        tierFloor = (Math.floor(tierFloor / 100) + 1) * 100;
+      if (r.length >= 24 && acc >= 0.92 && tierFloor < (NT - 1) * TS) {
+        tierFloor = (Math.floor(tierFloor / TS) + 1) * TS;
         pace = Math.min(24, pace + 4);
-        note = pct + "% accuracy — too easy. Jumped ahead to tier « " + TIER_NAMES[tierFloor / 100] + " », intake raised to " + pace + " new words per session.";
+        note = pct + "% accuracy — too easy. Jumped ahead to tier « " + TIER_NAMES[tierFloor / TS] + " », intake raised to " + pace + " new words per session.";
         this.recent = []; jumped = true;
       } else if (r.length >= 15 && acc >= 0.9 && pace < 24) {
         pace = Math.min(24, pace + 3);
         note = pct + "% accuracy — intake raised to " + pace + " new words per session.";
       } else if (r.length >= 15 && acc < 0.65) {
         pace = Math.max(3, pace - 2);
-        if (tierFloor > 0) { tierFloor = tierFloor - 100; note = pct + "% accuracy — easing off: " + pace + " new words per session, backfilling tier « " + TIER_NAMES[tierFloor / 100] + " »."; }
+        if (tierFloor > 0) { tierFloor = tierFloor - TS; note = pct + "% accuracy — easing off: " + pace + " new words per session, backfilling tier « " + TIER_NAMES[tierFloor / TS] + " »."; }
         else note = pct + "% accuracy — easing off to " + pace + " new words per session.";
         this.recent = r.slice(-10);
       }
@@ -659,13 +732,13 @@ class Component extends DCLogic {
       cells.push({ style: { aspectRatio: "1", borderRadius: "5px", background: c } });
     }
     // tiers
-    const activeTier = Math.min(4, Math.floor((s.tierFloor || 0) / 100));
-    const CEFR = ["A1", "A2", "B1", "B2", "C1"];
+    const activeTier = Math.min(NT - 1, Math.floor((s.tierFloor || 0) / TS));
+    const CEFR = WORLD_WORK ? ["N1", "N2"] : ["A1", "A2", "B1", "B2", "C1", "C2"];
     const tiers = [], tierKn = [], tierSize = [];
-    for (let t = 0; t < 5; t++) {
+    for (let t = 0; t < NT; t++) {
       let kn = 0;
-      const size = Math.max(1, Math.min(W.length, (t + 1) * 100) - t * 100);
-      for (let i = t * 100; i < Math.min(W.length, (t + 1) * 100); i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) kn++; }
+      const size = Math.max(1, Math.min(W.length, (t + 1) * TS) - t * TS);
+      for (let i = t * TS; i < Math.min(W.length, (t + 1) * TS); i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) kn++; }
       const act = t === activeTier, full = kn >= size;
       tierKn.push(kn); tierSize.push(size);
       tiers.push({
@@ -728,11 +801,25 @@ class Component extends DCLogic {
         stateStyle: { fontSize: "10.5px", fontWeight: "700", color: got ? "#2e7d4f" : "#a5a096", flex: "none" },
         fill: { height: "100%", width: (got ? 100 : Math.round(100 * p / md[4])) + "%", background: got ? "#2e7d4f" : "#b08d3f", borderRadius: "999px", transition: "width 0.3s ease" } };
     });
+    const myCat = { B: 0, N: 0, V: 0, A: 0 };
+    for (let i = 0; i < W.length; i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) myCat[W[i][3]] = (myCat[W[i][3]] || 0) + 1; }
+    const opCat = (opp && opp.catKnown) || { B: 0, N: 0, V: 0, A: 0 };
+    const fronts = [["Overall", known, oppKnown], ["Nouns", myCat.N, opCat.N || 0], ["Verbs", myCat.V, opCat.V || 0], ["Adjectives", myCat.A, opCat.A || 0], ["Phrases", myCat.B, opCat.B || 0]].map(function (d) {
+      const frV = MY_SIDE === "fr" ? d[1] : d[2], elV = MY_SIDE === "fr" ? d[2] : d[1];
+      const p = (frV + elV) > 0 ? Math.round(100 * frV / (frV + elV)) : 50;
+      return { label: d[0], fr: frV, el: elV,
+        frStyle: { width: p + "%", background: "#d62828", transition: "width 0.5s ease" },
+        elStyle: { flex: "1", background: "#2160a8", transition: "width 0.5s ease" } };
+    });
     const ls = this.lastSess || { xp: 0, fast: 0, sure: 0, reviewed: 0 };
     return {
       isSplash: s.view === "splash", notSplash: s.view !== "splash",
       isHome: s.view === "home", isStudy: s.view === "study", isDone: s.view === "done",
       enter: () => this.setState({ view: "home" }),
+      headerSub: WORLD_WORK ? "NANI Work Mode · le français de l\u2019usine" : "vocab 1v1 · le français, objectivement supérieur",
+      wdStyle: segStyle(!WORLD_WORK), wwStyle: segStyle(WORLD_WORK),
+      goDaily: () => this.goWorld("daily"), goWork: () => this.goWorld("work"),
+      tiersGridStyle: { display: "grid", gridTemplateColumns: "repeat(" + NT + ",1fr)", gap: "8px" },
       splashStats: !s.loaded ? "" : known > 0 ? known + " words known · " + (stats.streak || 0) + "-day streak · " + TIER_NAMES[activeTier] : "Fresh recruit — 500 words await",
       ctaHover: { background: "#b21f1f" }, ghostHover: { background: "#e9e5dc" },
       missHover: { background: "#faf1ef" }, memHover: { background: "rgba(255,255,255,0.22)" },
@@ -751,7 +838,7 @@ class Component extends DCLogic {
       tierNote: known + " of " + W.length + " conquered",
       campLevel: CEFR[activeTier],
       campRank: TIER_NAMES[activeTier],
-      campSub: tierKn[activeTier] + " of " + tierSize[activeTier] + " words at this level" + (tierKn[activeTier] >= tierSize[activeTier] && activeTier < 4 ? " — " + CEFR[activeTier + 1] + " next" : ""),
+      campSub: tierKn[activeTier] + " of " + tierSize[activeTier] + " words at this level" + (tierKn[activeTier] >= tierSize[activeTier] && activeTier < NT - 1 ? " — " + CEFR[activeTier + 1] + " next" : ""),
       heatNote: reviewedToday ? reviewedToday + " cards today" : "nothing yet today",
       heatCells: cells,
       tiers: tiers,
@@ -767,6 +854,7 @@ class Component extends DCLogic {
       barFrStyle: { width: frPct + "%", background: "#d62828", transition: "width 0.5s ease" },
       barElStyle: { flex: "1", background: "#2160a8" },
       missions: missions,
+      fronts: fronts,
       battleNote: "1 pt per word known · 25 pts per weapon · live from both fighters' saves",
       exportLog: this.exportLog, importLog: this.importLog, resetAll: this.resetAll,
       startSession: this.startSession,

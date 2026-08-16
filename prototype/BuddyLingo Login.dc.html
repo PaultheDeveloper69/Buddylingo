@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f4ef">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BuddyLingo">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:#f6f4ef; color:#17181d; font-family:'Figtree',system-ui,sans-serif; -webkit-tap-highlight-color:transparent; overscroll-behavior-y:none; }
+a { color:#8a6d2f; text-underline-offset:3px; } a:hover { color:#6d5526; }
+button { font-family:inherit; cursor:pointer; border:none; background:none; }
+button:focus-visible { outline:2px solid #8a6d2f; outline-offset:2px; }
+button:disabled { opacity:0.45; cursor:not-allowed; }
+button, a { touch-action:manipulation; }
+input { font-family:inherit; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+@keyframes shake { 0%,100% { transform:translateX(0); } 25% { transform:translateX(-7px); } 75% { transform:translateX(7px); } }
+</style>
+</helmet>
+<div data-screen-label="BuddyLingo Login" style="min-height:100dvh;background:#f6f4ef;display:flex;flex-direction:column;align-items:center;padding:calc(28px + env(safe-area-inset-top)) 20px calc(28px + env(safe-area-inset-bottom))">
+<div style="width:min(420px,100%);display:flex;flex-direction:column;gap:18px">
+
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;animation:fadeUp 0.6s ease both">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center">
+      <span style="font-family:'Gloock',serif;font-size:40px;line-height:1">BuddyLingo</span>
+      <span style="font-size:12px;color:#8a857a;letter-spacing:0.06em">five languages · one Vocab War</span>
+    </div>
+    
+  </div>
+
+  <sc-if value="{{ isGrid }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;flex-direction:column;gap:12px;animation:fadeUp 0.6s ease 0.1s both">
+      <span style="font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#a1823c;text-align:center">Choose your fighter</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <sc-for list="{{ slots }}" as="S" hint-placeholder-count="10">
+          <button style="{{ S.cardStyle }}" onClick="{{ S.tap }}">
+            <span style="{{ S.discStyle }}">{{ S.initial }}</span>
+            <span style="display:flex;flex-direction:column;align-items:flex-start;min-width:0">
+              <span style="{{ S.nameStyle }}">{{ S.name }}</span>
+              <span style="font-size:10.5px;color:#a5a096">{{ S.sub }}</span>
+            </span>
+          </button>
+        </sc-for>
+      </div>
+      <span style="font-size:11px;color:#8a857a;text-align:center;text-wrap:pretty">Fighters of the same language battle as one team. Progress is saved per fighter — nothing collides.</span>
+      <button style="align-self:center;color:#a5a096;font-size:11px;text-decoration:underline;text-underline-offset:3px;min-height:44px" onClick="{{ resetRoster }}">Reset all fighters</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isClaim }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;gap:14px;background:#fff;border-radius:22px;padding:20px;box-shadow:0 2px 10px rgba(23,24,29,0.07);animation:fadeUp 0.4s ease both">
+      <div style="display:flex;align-items:center;gap:10px">
+        <button style="min-height:44px;min-width:44px;background:#f0ede6;border-radius:999px;font-size:16px" onClick="{{ back }}">←</button>
+        <span style="font-size:16px;font-weight:800">Enlist a new fighter</span>
+      </div>
+      <input value="{{ nameVal }}" onChange="{{ onName }}" placeholder="Your name" autocomplete="off" style="min-height:52px;border:1.5px solid #d8d3c8;border-radius:14px;padding:0 16px;font-size:16px;background:#fdfcf9;outline:none;width:100%"></input>
+      <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#a1823c">Fight for</span>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <sc-for list="{{ langs }}" as="L" hint-placeholder-count="5">
+          <button style="{{ L.rowStyle }}" onClick="{{ L.pick }}">
+            <span style="{{ L.dotStyle }}"></span>
+            <span style="font-size:14.5px;font-weight:700">{{ L.label }}</span>
+            <span style="font-size:10.5px;color:#a5a096;margin-left:auto">{{ L.team }}</span>
+          </button>
+        </sc-for>
+      </div>
+      <button style="min-height:54px;background:#17181d;color:#fff;border-radius:999px;font-size:15px;font-weight:700" onClick="{{ toPinSet }}" disabled="{{ claimIncomplete }}">Set my secret PIN →</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isPin }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:16px;background:#fff;border-radius:22px;padding:22px 20px;box-shadow:0 2px 10px rgba(23,24,29,0.07);animation:fadeUp 0.4s ease both">
+      <div style="display:flex;align-items:center;gap:10px;width:100%">
+        <button style="min-height:44px;min-width:44px;background:#f0ede6;border-radius:999px;font-size:16px" onClick="{{ back }}">←</button>
+        <span style="font-size:15px;font-weight:800">{{ pinTitle }}</span>
+      </div>
+      <div style="{{ dotsWrapStyle }}">
+        <sc-for list="{{ pinDots }}" as="d" hint-placeholder-count="4">
+          <span style="{{ d.style }}"></span>
+        </sc-for>
+      </div>
+      <span style="{{ pinMsgStyle }}">{{ pinMsg }}</span>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:9px;width:min(270px,100%)">
+        <sc-for list="{{ pad }}" as="k" hint-placeholder-count="12">
+          <button style="{{ k.style }}" onClick="{{ k.tap }}">{{ k.label }}</button>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <span style="align-self:center;display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:10px 18px;box-shadow:0 1px 3px rgba(23,24,29,0.08)"><span style="font-size:12px;font-weight:700;color:#a5a096">⚔ Vocab War — coming soon</span></span>
+  <span style="font-size:10px;color:#c9c3b5;text-align:center;letter-spacing:0.08em">BuddyLingo · prototype garrison · real accounts arrive with the app</span>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const RKEY = "bl-roster-v1", SKEY = "bl-session";
+// [id, name, color, app, locked] — locked languages slumber: listed, not playable yet
+const LANGS = [
+  ["fr", "Français", "#d62828", "Vocab French.dc.html", false],
+  ["el", "Ελληνικά", "#2160a8", "Vocab Greek.dc.html", false],
+  ["de", "Deutsch", "#946f00", "Vocab German.dc.html", true],
+  ["es", "Español", "#c2571d", "Vocab Spanish.dc.html", true],
+  ["tn", "Tounsi تونسي", "#2a8c46", "Vocab Tunisian.dc.html", true]
+];
+function langOf(id) { return LANGS.find(function (l) { return l[0] === id; }) || LANGS[0]; }
+class Component extends DCLogic {
+  state = { view: "grid", roster: [], sel: -1, name: "", lang: "", pin: "", mode: "set", err: false };
+  componentDidMount() {
+    let r = null;
+    try { r = JSON.parse(localStorage.getItem(RKEY) || "null"); } catch (e) {}
+    if (!r || !Array.isArray(r)) r = Array(10).fill(null);
+    while (r.length < 10) r.push(null);
+    this.setState({ roster: r });
+  }
+  saveRoster(r) { try { localStorage.setItem(RKEY, JSON.stringify(r)); } catch (e) {} }
+  launch(slot, rec) {
+    try { localStorage.setItem(SKEY, JSON.stringify({ slot: slot, name: rec.name, lang: rec.lang })); } catch (e) {}
+    window.location.href = langOf(rec.lang)[3];
+  }
+  key(k) {
+    const s = this.state;
+    if (k === "del") return this.setState({ pin: s.pin.slice(0, -1), err: false });
+    if (s.pin.length >= 4) return;
+    const pin = s.pin + k;
+    if (pin.length < 4) return this.setState({ pin: pin, err: false });
+    if (s.mode === "set") {
+      const r = s.roster.slice();
+      r[s.sel] = { name: s.name.trim(), lang: s.lang, pin: pin };
+      this.saveRoster(r);
+      this.setState({ roster: r, pin: pin }, () => setTimeout(() => this.launch(s.sel, r[s.sel]), 250));
+    } else {
+      const rec = s.roster[s.sel];
+      if (rec && rec.pin === pin) {
+        this.setState({ pin: pin }, () => setTimeout(() => this.launch(s.sel, rec), 250));
+      } else {
+        this.setState({ pin: "", err: true });
+      }
+    }
+  }
+  renderVals() {
+    const s = this.state;
+    const teamCount = {};
+    s.roster.forEach(function (r) { if (r) teamCount[r.lang] = (teamCount[r.lang] || 0) + 1; });
+    const slots = s.roster.map((r, i) => {
+      const L = r ? langOf(r.lang) : null;
+      return {
+        initial: r ? (r.name[0] || "?").toUpperCase() : "+",
+        name: r ? r.name : "Open slot",
+        sub: r ? L[1] : "tap to enlist",
+        cardStyle: { display: "flex", alignItems: "center", gap: "10px", minHeight: "72px", padding: "12px 14px", borderRadius: "18px", textAlign: "left",
+          background: r ? "#fff" : "transparent", border: r ? "none" : "1.5px dashed #d8d3c8", boxShadow: r ? "0 1px 3px rgba(23,24,29,0.08)" : "none" },
+        discStyle: { width: "36px", height: "36px", borderRadius: "999px", flex: "none", display: "inline-flex", alignItems: "center", justifyContent: "center",
+          fontSize: "15px", fontWeight: "800", color: "#fff", background: r ? L[2] : "#d8d3c8" },
+        nameStyle: { fontSize: "14px", fontWeight: "700", color: r ? "#17181d" : "#a5a096", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "110px" },
+        tap: () => {
+          if (!r) return this.setState({ view: "claim", sel: i, name: "", lang: "", pin: "", err: false });
+          this.setState({ view: "pin", sel: i, mode: "enter", pin: "", err: false });
+        }
+      };
+    });
+    const langs = LANGS.map((L) => ({
+      label: L[1], team: L[4] ? "coming soon" : (teamCount[L[0]] ? "team of " + teamCount[L[0]] : "unclaimed front"),
+      dotStyle: { width: "14px", height: "14px", borderRadius: "999px", background: L[2], flex: "none", opacity: L[4] ? 0.4 : 1 },
+      rowStyle: { display: "flex", alignItems: "center", gap: "10px", minHeight: "50px", padding: "0 14px", borderRadius: "14px", width: "100%", textAlign: "left", opacity: L[4] ? 0.45 : 1, cursor: L[4] ? "not-allowed" : "pointer",
+        background: s.lang === L[0] ? "#f3ecd9" : "#f8f6f1", border: s.lang === L[0] ? "1.5px solid #b08d3f" : "1.5px solid transparent" },
+      pick: L[4] ? () => {} : () => this.setState({ lang: L[0] })
+    }));
+    const keys = ["1","2","3","4","5","6","7","8","9","",0,"del"];
+    const pad = keys.map((k) => ({
+      label: k === "del" ? "⌫" : String(k),
+      style: { minHeight: "56px", borderRadius: "16px", fontSize: k === "del" ? "18px" : "20px", fontWeight: "700",
+        background: k === "" ? "transparent" : "#f0ede6", visibility: k === "" ? "hidden" : "visible" },
+      tap: k === "" ? () => {} : () => this.key(String(k))
+    }));
+    const dots = [0,1,2,3].map((i) => ({
+      style: { width: "16px", height: "16px", borderRadius: "999px", border: "2px solid #b08d3f",
+        background: i < s.pin.length ? "#b08d3f" : "transparent", transition: "background 0.15s ease" }
+    }));
+    const rec = s.roster[s.sel];
+    return {
+      isGrid: s.view === "grid", isClaim: s.view === "claim", isPin: s.view === "pin",
+      slots: slots, langs: langs, pad: pad, pinDots: dots,
+      nameVal: s.name,
+      onName: (e) => this.setState({ name: e.target.value }),
+      claimIncomplete: !(s.name.trim() && s.lang),
+      toPinSet: () => this.setState({ view: "pin", mode: "set", pin: "", err: false }),
+      back: () => this.setState({ view: s.view === "pin" && s.mode === "set" ? "claim" : "grid", pin: "", err: false }),
+      pinTitle: s.mode === "set" ? "Choose a 4-digit PIN, " + s.name.trim() : "Welcome back, " + (rec ? rec.name : "") + " — your PIN",
+      pinMsg: s.err ? "Wrong PIN — try again" : s.mode === "set" ? "You'll use it to open your world" : "Entering your world…",
+      pinMsgStyle: { fontSize: "11.5px", color: s.err ? "#c2402f" : "#a5a096", fontWeight: s.err ? "700" : "400" },
+      dotsWrapStyle: { display: "flex", gap: "14px", animation: s.err ? "shake 0.3s ease" : "none" },
+      resetRoster: () => {
+        if (!confirm("Remove all 10 fighters? Their learning progress stays saved.")) return;
+        const r = Array(10).fill(null);
+        this.saveRoster(r);
+        this.setState({ roster: r });
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>

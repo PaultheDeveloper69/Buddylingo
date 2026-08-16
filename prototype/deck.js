@@ -1,7 +1,7 @@
 // Vocabulaire Supérieur — deck + French conjugator. Loaded in <helmet>, exposes window.DECK / window.FR.
 // DECK entry: [english, french, pronunciation, cat]  cat: N noun, V verb, A adjective/adverb, B basics & phrases
 // Ordered by frequency tier (≈100 each): introduced in order; the trainer jumps tiers when you're too good.
-window.TIER_NAMES = ["Recrue", "Soldat", "Officier", "Général", "Empereur"];
+window.TIER_NAMES = ["Recrue", "Soldat", "Officier", "Général", "Empereur", "Immortel"];
 window.DECK = [
 // ── Tier 1 · Recrue — survival French ──
 ["hello","bonjour","bohn-ZHOOR","B"],["good evening","bonsoir","bohn-SWAHR","B"],["goodbye","au revoir","oh ruh-VWAHR","B"],
@@ -175,9 +175,51 @@ window.DECK = [
 ["useful","utile","ew-TEEL","A"],["useless","inutile","ee-new-TEEL","A"],["deep","profond","proh-FOHN","A"],
 ["wide","large","larzh","A"],["narrow","étroit","ay-TRWAH","A"],["true","vrai","vreh","A"],
 ["false","faux","foh","A"],["nevertheless","pourtant","poor-TAHN","B"],["therefore","donc","dohnk","B"],
-["however","cependant","suh-pahn-DAHN","B"],["despite","malgré","mahl-GRAY","B"],["thanks to","grâce à","grahss AH","B"],
-["that is to say","c'est-à-dire","seh-tah-DEER","B"],["by the way","d'ailleurs","dah-YUR","B"],["anyway","de toute façon","duh toot fah-SOHN","B"],
-["so much the better","tant mieux","tahn MYUH","B"],["too bad","tant pis","tahn PEE","B"],["long live France!","vive la France !","veev lah FRAHNSS","B"]
+["however","cependant","suh-pahn-DAHN","B"],["despite","malgré","mahl-GRAY","B"]
+// ── Tier 6 · Immortel — émotions, quotidien, connecteurs (expansion plan wave 1) ──
+["happiness","le bonheur","luh bo-NUHR","N"],
+["sadness","la tristesse","lah tree-STESS","N"],
+["anger","la colère","lah koh-LEHR","N"],
+["surprise","la surprise","lah sewr-PREEZ","N"],
+["love (noun)","l'amour (m)","lah-MOOR","N"],
+["feeling","le sentiment","luh sahn-tee-MAHN","N"],
+["memory (recollection)","le souvenir","luh soov-NEER","N"],
+["decision","la décision","lah day-see-ZYOHN","N"],
+["result","le résultat","luh ray-zewl-TAH","N"],
+["possibility","la possibilité","lah poh-see-bee-lee-TAY","N"],
+["difference","la différence","lah dee-fay-RAHNSS","N"],
+["situation","la situation","lah see-tew-ah-SYOHN","N"],
+["moment","le moment","luh moh-MAHN","N"],
+["story / history","l'histoire (f)","lees-TWAHR","N"],
+["lie (untruth)","le mensonge","luh mahn-SOHNZH","N"],
+["danger","le danger","luh dahn-ZHAY","N"],
+["noise","le bruit","luh BRWEE","N"],
+["silence","le silence","luh see-LAHNSS","N"],
+["to smile","sourire","soo-REER","V"],
+["to continue","continuer","kohn-tee-new-AY","V"],
+["to stop","arrêter","ah-reh-TAY","V"],
+["to meet (someone)","rencontrer","rahn-kohn-TRAY","V"],
+["to visit","visiter","vee-zee-TAY","V"],
+["to call (name/phone)","appeler","ahp-LAY","V"],
+["to carry / to wear","porter","por-TAY","V"],
+["to win / to earn","gagner","gah-NYAY","V"],
+["to hate","détester","day-tess-TAY","V"],
+["sometimes","parfois","par-FWAH","A"],
+["still / again","encore","ahn-KOR","A"],
+["soon","bientôt","byan-TOH","A"],
+["really","vraiment","vreh-MAHN","A"],
+["suddenly","soudain","soo-DAN","A"],
+["first (of all)","d'abord","dah-BOR","A"],
+["then / next","ensuite","ahn-SWEET","A"],
+["if","si","SEE","B"],
+["against","contre","KOHNTR","B"],
+["several","plusieurs","plew-ZYUHR","B"],
+["nothing","rien","RYAN","B"],
+["something","quelque chose","kel-kuh-SHOHZ","B"],
+["someone","quelqu'un","kel-KUHN","B"],
+["nobody","personne (négation)","pehr-SUN","B"],
+["everywhere","partout","par-TOO","B"],
+["somewhere","quelque part","kel-kuh-PAR","B"]
 ];
 
 // ── French conjugator: présent · passé composé · futur simple, 6 persons ──

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f4ef">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BuddyLingo">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { margin:0; background:#f6f4ef; color:#17181d; font-family:'Figtree',system-ui,sans-serif; -webkit-tap-highlight-color:transparent; }
+a { color:#8a6d2f; text-underline-offset:3px; } a:hover { color:#6d5526; }
+button, a { touch-action:manipulation; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:none; } }
+@keyframes idleSway { 0%,100% { rotate: -2.2deg; } 50% { rotate: 2.2deg; } }
+@keyframes mascotLook { 0%, 26% { transform: scaleX(1) translateY(0); } 6% { transform: scaleX(1) translateY(-2.5px); } 14% { transform: scaleX(1) translateY(0); } 33% { transform: scaleX(-1) translateY(-2px) skewX(3deg); } 38%, 52% { transform: scaleX(-1) translateY(0); } 46% { transform: scaleX(-1) translateY(-2.5px); } 60% { transform: scaleX(-1) translateY(0); } 67% { transform: scaleX(1) translateY(-2px) skewX(-3deg); } 72%, 100% { transform: scaleX(1) translateY(0); } }
+</style>
+</helmet>
+<div data-screen-label="Full App Entry" style="min-height:100dvh;background:#f6f4ef;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:calc(30px + env(safe-area-inset-top)) 24px calc(30px + env(safe-area-inset-bottom));text-align:center">
+  <div style="display:flex;flex-direction:column;align-items:center;gap:10px;animation:fadeUp 0.6s ease both">
+    <div style="display:flex;align-items:flex-end;gap:4px">
+      <img src="assets/chars/croissant.png" alt="" style="height:52px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:idleSway 4.8s ease-in-out infinite, mascotLook 8.6s ease-in-out infinite">
+      <img src="assets/chars/feta.png" alt="" style="height:44px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:idleSway 5.6s ease-in-out -2s infinite, mascotLook 9.8s ease-in-out -4.4s infinite">
+    </div>
+    <span style="font-family:'Gloock',serif;font-size:42px;line-height:1">BuddyLingo</span>
+    <span style="font-size:13px;color:#8a857a">learn the words · hold the line</span>
+  </div>
+  <div style="width:min(360px,100%);display:flex;flex-direction:column;gap:9px;animation:fadeUp 0.6s ease 0.12s both">
+    <div style="background:#fff;border-radius:16px;padding:12px 16px;display:flex;align-items:center;gap:12px;text-align:left;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+      <span style="font-size:15px;font-weight:800;color:#b08d3f;flex:none">1</span>
+      <span style="font-size:12px;color:#5d5a52;line-height:1.4"><strong>Enlist.</strong> Pick your fighter slot, name, language and PIN.</span>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:12px 16px;display:flex;align-items:center;gap:12px;text-align:left;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+      <span style="font-size:15px;font-weight:800;color:#b08d3f;flex:none">2</span>
+      <span style="font-size:12px;color:#5d5a52;line-height:1.4"><strong>Learn.</strong> Daily vocab sessions — your progress saves per fighter.</span>
+    </div>
+    <div style="background:#fff;border-radius:16px;padding:12px 16px;display:flex;align-items:center;gap:12px;text-align:left;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+      <span style="font-size:15px;font-weight:800;color:#b08d3f;flex:none">3</span>
+      <span style="font-size:12px;color:#5d5a52;line-height:1.4"><strong>Battle.</strong> Every word presses the France-vs-Greece front line.</span>
+    </div>
+  </div>
+  <div style="width:min(360px,100%);display:flex;flex-direction:column;gap:10px;animation:fadeUp 0.6s ease 0.2s both">
+    <a href="BuddyLingo Login.dc.html" style="min-height:56px;background:#17181d;color:#fff;border-radius:999px;font-size:15.5px;font-weight:700;display:flex;align-items:center;justify-content:center;text-decoration:none">Start — choose your fighter</a>
+    <sc-if value="{{ hasSession }}" hint-placeholder-val="{{ false }}">
+      <a href="{{ contApp }}" style="min-height:48px;background:#fff;color:#17181d;border-radius:999px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 1px 3px rgba(23,24,29,0.08)"><span>{{ contLabel }}</span></a>
+    </sc-if>
+    <span style="font-size:10px;color:#c9c3b5">Français &amp; Ελληνικά live · Deutsch, Español, Tounsi coming soon</span>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const APPS = { fr: "Vocab French.dc.html", el: "Vocab Greek.dc.html", de: "Vocab German.dc.html", es: "Vocab Spanish.dc.html", tn: "Vocab Tunisian.dc.html" };
+class Component extends DCLogic {
+  state = { session: null };
+  componentDidMount() {
+    try { this.setState({ session: JSON.parse(localStorage.getItem("bl-session") || "null") }); } catch (e) {}
+  }
+  renderVals() {
+    const se = this.state.session;
+    return {
+      hasSession: !!(se && se.lang && APPS[se.lang]),
+      contLabel: se ? "Continue as " + se.name + " →" : "",
+      contApp: se && APPS[se.lang] ? APPS[se.lang] : "BuddyLingo Login.dc.html"
+    };
+  }
+}
+</script>
+</body>
+</html>
