@@ -1,0 +1,3055 @@
+{
+ "language": "fr",
+ "sourceLanguage": "en",
+ "tierNames": [
+  "Recrue",
+  "Soldat",
+  "Officier",
+  "Général",
+  "Empereur"
+ ],
+ "words": [
+  {
+   "source": "hello",
+   "target": "bonjour",
+   "pron": "bohn-ZHOOR",
+   "cat": "B"
+  },
+  {
+   "source": "good evening",
+   "target": "bonsoir",
+   "pron": "bohn-SWAHR",
+   "cat": "B"
+  },
+  {
+   "source": "goodbye",
+   "target": "au revoir",
+   "pron": "oh ruh-VWAHR",
+   "cat": "B"
+  },
+  {
+   "source": "yes",
+   "target": "oui",
+   "pron": "wee",
+   "cat": "B"
+  },
+  {
+   "source": "no",
+   "target": "non",
+   "pron": "nohn",
+   "cat": "B"
+  },
+  {
+   "source": "please",
+   "target": "s'il vous plaît",
+   "pron": "seel voo PLEH",
+   "cat": "B"
+  },
+  {
+   "source": "thank you",
+   "target": "merci",
+   "pron": "mehr-SEE",
+   "cat": "B"
+  },
+  {
+   "source": "excuse me",
+   "target": "excusez-moi",
+   "pron": "ex-kew-zay-MWAH",
+   "cat": "B"
+  },
+  {
+   "source": "sorry",
+   "target": "pardon",
+   "pron": "par-DOHN",
+   "cat": "B"
+  },
+  {
+   "source": "how are you?",
+   "target": "ça va ?",
+   "pron": "sah VAH",
+   "cat": "B"
+  },
+  {
+   "source": "my name is…",
+   "target": "je m'appelle…",
+   "pron": "zhuh mah-PELL",
+   "cat": "B"
+  },
+  {
+   "source": "nice to meet you",
+   "target": "enchanté",
+   "pron": "ahn-shahn-TAY",
+   "cat": "B"
+  },
+  {
+   "source": "I don't understand",
+   "target": "je ne comprends pas",
+   "pron": "zhuh nuh kohn-PRAHN pah",
+   "cat": "B"
+  },
+  {
+   "source": "do you speak English?",
+   "target": "parlez-vous anglais ?",
+   "pron": "par-lay-voo ahn-GLEH",
+   "cat": "B"
+  },
+  {
+   "source": "where?",
+   "target": "où ?",
+   "pron": "oo",
+   "cat": "B"
+  },
+  {
+   "source": "when?",
+   "target": "quand ?",
+   "pron": "kahn",
+   "cat": "B"
+  },
+  {
+   "source": "why?",
+   "target": "pourquoi ?",
+   "pron": "poor-KWAH",
+   "cat": "B"
+  },
+  {
+   "source": "how?",
+   "target": "comment ?",
+   "pron": "koh-MAHN",
+   "cat": "B"
+  },
+  {
+   "source": "what?",
+   "target": "quoi ?",
+   "pron": "kwah",
+   "cat": "B"
+  },
+  {
+   "source": "who?",
+   "target": "qui ?",
+   "pron": "kee",
+   "cat": "B"
+  },
+  {
+   "source": "how much?",
+   "target": "combien ?",
+   "pron": "kohn-BYAN",
+   "cat": "B"
+  },
+  {
+   "source": "and",
+   "target": "et",
+   "pron": "ay",
+   "cat": "B"
+  },
+  {
+   "source": "or",
+   "target": "ou",
+   "pron": "oo",
+   "cat": "B"
+  },
+  {
+   "source": "but",
+   "target": "mais",
+   "pron": "meh",
+   "cat": "B"
+  },
+  {
+   "source": "because",
+   "target": "parce que",
+   "pron": "parss kuh",
+   "cat": "B"
+  },
+  {
+   "source": "with",
+   "target": "avec",
+   "pron": "ah-VEK",
+   "cat": "B"
+  },
+  {
+   "source": "without",
+   "target": "sans",
+   "pron": "sahn",
+   "cat": "B"
+  },
+  {
+   "source": "for",
+   "target": "pour",
+   "pron": "poor",
+   "cat": "B"
+  },
+  {
+   "source": "here",
+   "target": "ici",
+   "pron": "ee-SEE",
+   "cat": "B"
+  },
+  {
+   "source": "there",
+   "target": "là-bas",
+   "pron": "lah-BAH",
+   "cat": "B"
+  },
+  {
+   "source": "now",
+   "target": "maintenant",
+   "pron": "mant-NAHN",
+   "cat": "B"
+  },
+  {
+   "source": "today",
+   "target": "aujourd'hui",
+   "pron": "oh-zhoor-DWEE",
+   "cat": "B"
+  },
+  {
+   "source": "tomorrow",
+   "target": "demain",
+   "pron": "duh-MAN",
+   "cat": "B"
+  },
+  {
+   "source": "yesterday",
+   "target": "hier",
+   "pron": "ee-YEHR",
+   "cat": "B"
+  },
+  {
+   "source": "always",
+   "target": "toujours",
+   "pron": "too-ZHOOR",
+   "cat": "B"
+  },
+  {
+   "source": "never",
+   "target": "jamais",
+   "pron": "zhah-MEH",
+   "cat": "B"
+  },
+  {
+   "source": "often",
+   "target": "souvent",
+   "pron": "soo-VAHN",
+   "cat": "B"
+  },
+  {
+   "source": "maybe",
+   "target": "peut-être",
+   "pron": "puh-TETR",
+   "cat": "B"
+  },
+  {
+   "source": "of course",
+   "target": "bien sûr",
+   "pron": "byan SEWR",
+   "cat": "B"
+  },
+  {
+   "source": "a lot",
+   "target": "beaucoup",
+   "pron": "boh-KOO",
+   "cat": "B"
+  },
+  {
+   "source": "a little",
+   "target": "un peu",
+   "pron": "un PUH",
+   "cat": "B"
+  },
+  {
+   "source": "too much",
+   "target": "trop",
+   "pron": "troh",
+   "cat": "B"
+  },
+  {
+   "source": "enough",
+   "target": "assez",
+   "pron": "ah-SAY",
+   "cat": "B"
+  },
+  {
+   "source": "also",
+   "target": "aussi",
+   "pron": "oh-SEE",
+   "cat": "B"
+  },
+  {
+   "source": "water",
+   "target": "l'eau (f)",
+   "pron": "loh",
+   "cat": "N"
+  },
+  {
+   "source": "bread",
+   "target": "le pain",
+   "pron": "luh PAN",
+   "cat": "N"
+  },
+  {
+   "source": "coffee",
+   "target": "le café",
+   "pron": "luh kah-FAY",
+   "cat": "N"
+  },
+  {
+   "source": "milk",
+   "target": "le lait",
+   "pron": "luh LEH",
+   "cat": "N"
+  },
+  {
+   "source": "wine",
+   "target": "le vin",
+   "pron": "luh VAN",
+   "cat": "N"
+  },
+  {
+   "source": "beer",
+   "target": "la bière",
+   "pron": "lah BYEHR",
+   "cat": "N"
+  },
+  {
+   "source": "food",
+   "target": "la nourriture",
+   "pron": "lah noo-ree-TEWR",
+   "cat": "N"
+  },
+  {
+   "source": "house",
+   "target": "la maison",
+   "pron": "lah meh-ZOHN",
+   "cat": "N"
+  },
+  {
+   "source": "street",
+   "target": "la rue",
+   "pron": "lah REW",
+   "cat": "N"
+  },
+  {
+   "source": "city",
+   "target": "la ville",
+   "pron": "lah VEEL",
+   "cat": "N"
+  },
+  {
+   "source": "day",
+   "target": "le jour",
+   "pron": "luh ZHOOR",
+   "cat": "N"
+  },
+  {
+   "source": "night",
+   "target": "la nuit",
+   "pron": "lah NWEE",
+   "cat": "N"
+  },
+  {
+   "source": "morning",
+   "target": "le matin",
+   "pron": "luh mah-TAN",
+   "cat": "N"
+  },
+  {
+   "source": "evening",
+   "target": "le soir",
+   "pron": "luh SWAHR",
+   "cat": "N"
+  },
+  {
+   "source": "week",
+   "target": "la semaine",
+   "pron": "lah suh-MEN",
+   "cat": "N"
+  },
+  {
+   "source": "month",
+   "target": "le mois",
+   "pron": "luh MWAH",
+   "cat": "N"
+  },
+  {
+   "source": "year",
+   "target": "l'année (f)",
+   "pron": "lah-NAY",
+   "cat": "N"
+  },
+  {
+   "source": "hour / time",
+   "target": "l'heure (f)",
+   "pron": "LUHR",
+   "cat": "N"
+  },
+  {
+   "source": "friend",
+   "target": "l'ami (m)",
+   "pron": "lah-MEE",
+   "cat": "N"
+  },
+  {
+   "source": "woman",
+   "target": "la femme",
+   "pron": "lah FAHM",
+   "cat": "N"
+  },
+  {
+   "source": "man",
+   "target": "l'homme (m)",
+   "pron": "LOHM",
+   "cat": "N"
+  },
+  {
+   "source": "child",
+   "target": "l'enfant (m)",
+   "pron": "lahn-FAHN",
+   "cat": "N"
+  },
+  {
+   "source": "mother",
+   "target": "la mère",
+   "pron": "lah MEHR",
+   "cat": "N"
+  },
+  {
+   "source": "father",
+   "target": "le père",
+   "pron": "luh PEHR",
+   "cat": "N"
+  },
+  {
+   "source": "family",
+   "target": "la famille",
+   "pron": "lah fah-MEE",
+   "cat": "N"
+  },
+  {
+   "source": "name",
+   "target": "le nom",
+   "pron": "luh NOHN",
+   "cat": "N"
+  },
+  {
+   "source": "money",
+   "target": "l'argent (m)",
+   "pron": "lar-ZHAHN",
+   "cat": "N"
+  },
+  {
+   "source": "work",
+   "target": "le travail",
+   "pron": "luh trah-VIE",
+   "cat": "N"
+  },
+  {
+   "source": "school",
+   "target": "l'école (f)",
+   "pron": "lay-KOHL",
+   "cat": "N"
+  },
+  {
+   "source": "book",
+   "target": "le livre",
+   "pron": "luh LEEVR",
+   "cat": "N"
+  },
+  {
+   "source": "car",
+   "target": "la voiture",
+   "pron": "lah vwah-TEWR",
+   "cat": "N"
+  },
+  {
+   "source": "train",
+   "target": "le train",
+   "pron": "luh TRAN",
+   "cat": "N"
+  },
+  {
+   "source": "ticket",
+   "target": "le billet",
+   "pron": "luh bee-YEH",
+   "cat": "N"
+  },
+  {
+   "source": "hotel",
+   "target": "l'hôtel (m)",
+   "pron": "loh-TEL",
+   "cat": "N"
+  },
+  {
+   "source": "room",
+   "target": "la chambre",
+   "pron": "lah SHAHNBR",
+   "cat": "N"
+  },
+  {
+   "source": "restaurant",
+   "target": "le restaurant",
+   "pron": "luh res-toh-RAHN",
+   "cat": "N"
+  },
+  {
+   "source": "bill / check",
+   "target": "l'addition (f)",
+   "pron": "lah-dee-SYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "menu",
+   "target": "la carte",
+   "pron": "lah KART",
+   "cat": "N"
+  },
+  {
+   "source": "shop",
+   "target": "le magasin",
+   "pron": "luh mah-gah-ZAN",
+   "cat": "N"
+  },
+  {
+   "source": "market",
+   "target": "le marché",
+   "pron": "luh mar-SHAY",
+   "cat": "N"
+  },
+  {
+   "source": "pharmacy",
+   "target": "la pharmacie",
+   "pron": "lah far-mah-SEE",
+   "cat": "N"
+  },
+  {
+   "source": "doctor",
+   "target": "le médecin",
+   "pron": "luh mayd-SAN",
+   "cat": "N"
+  },
+  {
+   "source": "key",
+   "target": "la clé",
+   "pron": "lah KLAY",
+   "cat": "N"
+  },
+  {
+   "source": "door",
+   "target": "la porte",
+   "pron": "lah PORT",
+   "cat": "N"
+  },
+  {
+   "source": "table",
+   "target": "la table",
+   "pron": "lah TAHBL",
+   "cat": "N"
+  },
+  {
+   "source": "to be",
+   "target": "être",
+   "pron": "ETR",
+   "cat": "V"
+  },
+  {
+   "source": "to have",
+   "target": "avoir",
+   "pron": "ah-VWAHR",
+   "cat": "V"
+  },
+  {
+   "source": "to do / make",
+   "target": "faire",
+   "pron": "FEHR",
+   "cat": "V"
+  },
+  {
+   "source": "to go",
+   "target": "aller",
+   "pron": "ah-LAY",
+   "cat": "V"
+  },
+  {
+   "source": "to come",
+   "target": "venir",
+   "pron": "vuh-NEER",
+   "cat": "V"
+  },
+  {
+   "source": "to say",
+   "target": "dire",
+   "pron": "DEER",
+   "cat": "V"
+  },
+  {
+   "source": "to see",
+   "target": "voir",
+   "pron": "VWAHR",
+   "cat": "V"
+  },
+  {
+   "source": "to eat",
+   "target": "manger",
+   "pron": "mahn-ZHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to drink",
+   "target": "boire",
+   "pron": "BWAHR",
+   "cat": "V"
+  },
+  {
+   "source": "to want",
+   "target": "vouloir",
+   "pron": "voo-LWAHR",
+   "cat": "V"
+  },
+  {
+   "source": "to be able to",
+   "target": "pouvoir",
+   "pron": "poo-VWAHR",
+   "cat": "V"
+  },
+  {
+   "source": "to know (facts)",
+   "target": "savoir",
+   "pron": "sah-VWAHR",
+   "cat": "V"
+  },
+  {
+   "source": "to speak",
+   "target": "parler",
+   "pron": "par-LAY",
+   "cat": "V"
+  },
+  {
+   "source": "to understand",
+   "target": "comprendre",
+   "pron": "kohn-PRAHNDR",
+   "cat": "V"
+  },
+  {
+   "source": "to take",
+   "target": "prendre",
+   "pron": "PRAHNDR",
+   "cat": "V"
+  },
+  {
+   "source": "good",
+   "target": "bon / bonne",
+   "pron": "bohn",
+   "cat": "A"
+  },
+  {
+   "source": "bad",
+   "target": "mauvais",
+   "pron": "moh-VEH",
+   "cat": "A"
+  },
+  {
+   "source": "big",
+   "target": "grand",
+   "pron": "grahn",
+   "cat": "A"
+  },
+  {
+   "source": "small",
+   "target": "petit",
+   "pron": "puh-TEE",
+   "cat": "A"
+  },
+  {
+   "source": "beautiful",
+   "target": "beau / belle",
+   "pron": "boh",
+   "cat": "A"
+  },
+  {
+   "source": "expensive",
+   "target": "cher",
+   "pron": "shehr",
+   "cat": "A"
+  },
+  {
+   "source": "cheap",
+   "target": "pas cher",
+   "pron": "pah SHEHR",
+   "cat": "A"
+  },
+  {
+   "source": "hot",
+   "target": "chaud",
+   "pron": "shoh",
+   "cat": "A"
+  },
+  {
+   "source": "cold",
+   "target": "froid",
+   "pron": "frwah",
+   "cat": "A"
+  },
+  {
+   "source": "to give",
+   "target": "donner",
+   "pron": "doh-NAY",
+   "cat": "V"
+  },
+  {
+   "source": "to buy",
+   "target": "acheter",
+   "pron": "ash-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to pay",
+   "target": "payer",
+   "pron": "pay-YAY",
+   "cat": "V"
+  },
+  {
+   "source": "to work",
+   "target": "travailler",
+   "pron": "trah-vie-YAY",
+   "cat": "V"
+  },
+  {
+   "source": "to sleep",
+   "target": "dormir",
+   "pron": "dor-MEER",
+   "cat": "V"
+  },
+  {
+   "source": "to wait",
+   "target": "attendre",
+   "pron": "ah-TAHNDR",
+   "cat": "V"
+  },
+  {
+   "source": "to look for",
+   "target": "chercher",
+   "pron": "shehr-SHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to find",
+   "target": "trouver",
+   "pron": "troo-VAY",
+   "cat": "V"
+  },
+  {
+   "source": "to open",
+   "target": "ouvrir",
+   "pron": "oo-VREER",
+   "cat": "V"
+  },
+  {
+   "source": "to close",
+   "target": "fermer",
+   "pron": "fehr-MAY",
+   "cat": "V"
+  },
+  {
+   "source": "to love",
+   "target": "aimer",
+   "pron": "eh-MAY",
+   "cat": "V"
+  },
+  {
+   "source": "to learn",
+   "target": "apprendre",
+   "pron": "ah-PRAHNDR",
+   "cat": "V"
+  },
+  {
+   "source": "to write",
+   "target": "écrire",
+   "pron": "ay-KREER",
+   "cat": "V"
+  },
+  {
+   "source": "to read",
+   "target": "lire",
+   "pron": "LEER",
+   "cat": "V"
+  },
+  {
+   "source": "to help",
+   "target": "aider",
+   "pron": "eh-DAY",
+   "cat": "V"
+  },
+  {
+   "source": "to live (reside)",
+   "target": "habiter",
+   "pron": "ah-bee-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to stay",
+   "target": "rester",
+   "pron": "res-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to begin",
+   "target": "commencer",
+   "pron": "koh-mahn-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to finish",
+   "target": "finir",
+   "pron": "fee-NEER",
+   "cat": "V"
+  },
+  {
+   "source": "to forget",
+   "target": "oublier",
+   "pron": "oo-blee-AY",
+   "cat": "V"
+  },
+  {
+   "source": "to remember",
+   "target": "se souvenir",
+   "pron": "suh soov-NEER",
+   "cat": "V"
+  },
+  {
+   "source": "to think",
+   "target": "penser",
+   "pron": "pahn-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to believe",
+   "target": "croire",
+   "pron": "KRWAHR",
+   "cat": "V"
+  },
+  {
+   "source": "to need",
+   "target": "avoir besoin de",
+   "pron": "ah-vwahr buh-ZWAN duh",
+   "cat": "V"
+  },
+  {
+   "source": "to play",
+   "target": "jouer",
+   "pron": "zhoo-AY",
+   "cat": "V"
+  },
+  {
+   "source": "to run",
+   "target": "courir",
+   "pron": "koo-REER",
+   "cat": "V"
+  },
+  {
+   "source": "to ask",
+   "target": "demander",
+   "pron": "duh-mahn-DAY",
+   "cat": "V"
+  },
+  {
+   "source": "to answer",
+   "target": "répondre",
+   "pron": "ray-POHNDR",
+   "cat": "V"
+  },
+  {
+   "source": "to call (phone)",
+   "target": "appeler",
+   "pron": "ahp-LAY",
+   "cat": "V"
+  },
+  {
+   "source": "to cook",
+   "target": "cuisiner",
+   "pron": "kwee-zee-NAY",
+   "cat": "V"
+  },
+  {
+   "source": "to listen",
+   "target": "écouter",
+   "pron": "ay-koo-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to leave",
+   "target": "partir",
+   "pron": "par-TEER",
+   "cat": "V"
+  },
+  {
+   "source": "to arrive",
+   "target": "arriver",
+   "pron": "ah-ree-VAY",
+   "cat": "V"
+  },
+  {
+   "source": "cheese",
+   "target": "le fromage",
+   "pron": "luh froh-MAHZH",
+   "cat": "N"
+  },
+  {
+   "source": "meat",
+   "target": "la viande",
+   "pron": "lah VYAHND",
+   "cat": "N"
+  },
+  {
+   "source": "fish",
+   "target": "le poisson",
+   "pron": "luh pwah-SOHN",
+   "cat": "N"
+  },
+  {
+   "source": "salad",
+   "target": "la salade",
+   "pron": "lah sah-LAHD",
+   "cat": "N"
+  },
+  {
+   "source": "fruit",
+   "target": "le fruit",
+   "pron": "luh FRWEE",
+   "cat": "N"
+  },
+  {
+   "source": "vegetable",
+   "target": "le légume",
+   "pron": "luh lay-GEWM",
+   "cat": "N"
+  },
+  {
+   "source": "sugar",
+   "target": "le sucre",
+   "pron": "luh SEWKR",
+   "cat": "N"
+  },
+  {
+   "source": "salt",
+   "target": "le sel",
+   "pron": "luh SEL",
+   "cat": "N"
+  },
+  {
+   "source": "oil",
+   "target": "l'huile (f)",
+   "pron": "LWEEL",
+   "cat": "N"
+  },
+  {
+   "source": "egg",
+   "target": "l'œuf (m)",
+   "pron": "LUFF",
+   "cat": "N"
+  },
+  {
+   "source": "soup",
+   "target": "la soupe",
+   "pron": "lah SOOP",
+   "cat": "N"
+  },
+  {
+   "source": "dessert",
+   "target": "le dessert",
+   "pron": "luh deh-SEHR",
+   "cat": "N"
+  },
+  {
+   "source": "question",
+   "target": "la question",
+   "pron": "lah kes-TYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "answer",
+   "target": "la réponse",
+   "pron": "lah ray-POHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "word",
+   "target": "le mot",
+   "pron": "luh MOH",
+   "cat": "N"
+  },
+  {
+   "source": "language",
+   "target": "la langue",
+   "pron": "lah LAHNG",
+   "cat": "N"
+  },
+  {
+   "source": "dog",
+   "target": "le chien",
+   "pron": "luh SHYAN",
+   "cat": "N"
+  },
+  {
+   "source": "cat",
+   "target": "le chat",
+   "pron": "luh SHAH",
+   "cat": "N"
+  },
+  {
+   "source": "church",
+   "target": "l'église (f)",
+   "pron": "lay-GLEEZ",
+   "cat": "N"
+  },
+  {
+   "source": "square (town)",
+   "target": "la place",
+   "pron": "lah PLAHSS",
+   "cat": "N"
+  },
+  {
+   "source": "sea",
+   "target": "la mer",
+   "pron": "lah MEHR",
+   "cat": "N"
+  },
+  {
+   "source": "beach",
+   "target": "la plage",
+   "pron": "lah PLAHZH",
+   "cat": "N"
+  },
+  {
+   "source": "island",
+   "target": "l'île (f)",
+   "pron": "LEEL",
+   "cat": "N"
+  },
+  {
+   "source": "mountain",
+   "target": "la montagne",
+   "pron": "lah mohn-TAHN-yuh",
+   "cat": "N"
+  },
+  {
+   "source": "sun",
+   "target": "le soleil",
+   "pron": "luh soh-LAY",
+   "cat": "N"
+  },
+  {
+   "source": "rain",
+   "target": "la pluie",
+   "pron": "lah PLWEE",
+   "cat": "N"
+  },
+  {
+   "source": "wind",
+   "target": "le vent",
+   "pron": "luh VAHN",
+   "cat": "N"
+  },
+  {
+   "source": "chair",
+   "target": "la chaise",
+   "pron": "lah SHEZ",
+   "cat": "N"
+  },
+  {
+   "source": "bed",
+   "target": "le lit",
+   "pron": "luh LEE",
+   "cat": "N"
+  },
+  {
+   "source": "window",
+   "target": "la fenêtre",
+   "pron": "lah fuh-NETR",
+   "cat": "N"
+  },
+  {
+   "source": "bus",
+   "target": "le bus",
+   "pron": "luh BEWSS",
+   "cat": "N"
+  },
+  {
+   "source": "plane",
+   "target": "l'avion (m)",
+   "pron": "lah-VYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "telephone",
+   "target": "le téléphone",
+   "pron": "luh tay-lay-FOHN",
+   "cat": "N"
+  },
+  {
+   "source": "hospital",
+   "target": "l'hôpital (m)",
+   "pron": "loh-pee-TAHL",
+   "cat": "N"
+  },
+  {
+   "source": "bathroom",
+   "target": "la salle de bain",
+   "pron": "lah sahl duh BAN",
+   "cat": "N"
+  },
+  {
+   "source": "kitchen",
+   "target": "la cuisine",
+   "pron": "lah kwee-ZEEN",
+   "cat": "N"
+  },
+  {
+   "source": "new",
+   "target": "nouveau / nouvelle",
+   "pron": "noo-VOH",
+   "cat": "A"
+  },
+  {
+   "source": "old",
+   "target": "vieux / vieille",
+   "pron": "vyuh",
+   "cat": "A"
+  },
+  {
+   "source": "young",
+   "target": "jeune",
+   "pron": "zhuhn",
+   "cat": "A"
+  },
+  {
+   "source": "fast",
+   "target": "rapide",
+   "pron": "rah-PEED",
+   "cat": "A"
+  },
+  {
+   "source": "slow",
+   "target": "lent",
+   "pron": "lahn",
+   "cat": "A"
+  },
+  {
+   "source": "easy",
+   "target": "facile",
+   "pron": "fah-SEEL",
+   "cat": "A"
+  },
+  {
+   "source": "difficult",
+   "target": "difficile",
+   "pron": "dee-fee-SEEL",
+   "cat": "A"
+  },
+  {
+   "source": "happy",
+   "target": "heureux",
+   "pron": "uh-RUH",
+   "cat": "A"
+  },
+  {
+   "source": "sad",
+   "target": "triste",
+   "pron": "treest",
+   "cat": "A"
+  },
+  {
+   "source": "tired",
+   "target": "fatigué",
+   "pron": "fah-tee-GAY",
+   "cat": "A"
+  },
+  {
+   "source": "sick",
+   "target": "malade",
+   "pron": "mah-LAHD",
+   "cat": "A"
+  },
+  {
+   "source": "hungry (I'm hungry)",
+   "target": "avoir faim",
+   "pron": "ah-vwahr FAM",
+   "cat": "B"
+  },
+  {
+   "source": "thirsty (I'm thirsty)",
+   "target": "avoir soif",
+   "pron": "ah-vwahr SWAHF",
+   "cat": "B"
+  },
+  {
+   "source": "open (adj)",
+   "target": "ouvert",
+   "pron": "oo-VEHR",
+   "cat": "A"
+  },
+  {
+   "source": "closed",
+   "target": "fermé",
+   "pron": "fehr-MAY",
+   "cat": "A"
+  },
+  {
+   "source": "full",
+   "target": "plein",
+   "pron": "plan",
+   "cat": "A"
+  },
+  {
+   "source": "empty",
+   "target": "vide",
+   "pron": "veed",
+   "cat": "A"
+  },
+  {
+   "source": "clean",
+   "target": "propre",
+   "pron": "prohpr",
+   "cat": "A"
+  },
+  {
+   "source": "dirty",
+   "target": "sale",
+   "pron": "sahl",
+   "cat": "A"
+  },
+  {
+   "source": "important",
+   "target": "important",
+   "pron": "an-por-TAHN",
+   "cat": "A"
+  },
+  {
+   "source": "free (no cost)",
+   "target": "gratuit",
+   "pron": "grah-TWEE",
+   "cat": "A"
+  },
+  {
+   "source": "left",
+   "target": "à gauche",
+   "pron": "ah GOHSH",
+   "cat": "B"
+  },
+  {
+   "source": "right",
+   "target": "à droite",
+   "pron": "ah DRWAHT",
+   "cat": "B"
+  },
+  {
+   "source": "straight ahead",
+   "target": "tout droit",
+   "pron": "too DRWAH",
+   "cat": "B"
+  },
+  {
+   "source": "near",
+   "target": "près de",
+   "pron": "preh duh",
+   "cat": "B"
+  },
+  {
+   "source": "far",
+   "target": "loin",
+   "pron": "lwan",
+   "cat": "B"
+  },
+  {
+   "source": "between",
+   "target": "entre",
+   "pron": "AHNTR",
+   "cat": "B"
+  },
+  {
+   "source": "in front of",
+   "target": "devant",
+   "pron": "duh-VAHN",
+   "cat": "B"
+  },
+  {
+   "source": "behind",
+   "target": "derrière",
+   "pron": "deh-RYEHR",
+   "cat": "B"
+  },
+  {
+   "source": "next to",
+   "target": "à côté de",
+   "pron": "ah koh-TAY duh",
+   "cat": "B"
+  },
+  {
+   "source": "inside",
+   "target": "dedans",
+   "pron": "duh-DAHN",
+   "cat": "B"
+  },
+  {
+   "source": "outside",
+   "target": "dehors",
+   "pron": "duh-OR",
+   "cat": "B"
+  },
+  {
+   "source": "good luck",
+   "target": "bonne chance",
+   "pron": "bun SHAHNSS",
+   "cat": "B"
+  },
+  {
+   "source": "person",
+   "target": "la personne",
+   "pron": "lah pehr-SUN",
+   "cat": "N"
+  },
+  {
+   "source": "thing",
+   "target": "la chose",
+   "pron": "lah SHOHZ",
+   "cat": "N"
+  },
+  {
+   "source": "life",
+   "target": "la vie",
+   "pron": "lah VEE",
+   "cat": "N"
+  },
+  {
+   "source": "world",
+   "target": "le monde",
+   "pron": "luh MOHND",
+   "cat": "N"
+  },
+  {
+   "source": "country",
+   "target": "le pays",
+   "pron": "luh pay-EE",
+   "cat": "N"
+  },
+  {
+   "source": "hand",
+   "target": "la main",
+   "pron": "lah MAN",
+   "cat": "N"
+  },
+  {
+   "source": "eye",
+   "target": "l'œil (m)",
+   "pron": "LUH-yuh",
+   "cat": "N"
+  },
+  {
+   "source": "head",
+   "target": "la tête",
+   "pron": "lah TET",
+   "cat": "N"
+  },
+  {
+   "source": "heart",
+   "target": "le cœur",
+   "pron": "luh KUR",
+   "cat": "N"
+  },
+  {
+   "source": "foot",
+   "target": "le pied",
+   "pron": "luh PYAY",
+   "cat": "N"
+  },
+  {
+   "source": "leg",
+   "target": "la jambe",
+   "pron": "lah ZHAHNB",
+   "cat": "N"
+  },
+  {
+   "source": "body",
+   "target": "le corps",
+   "pron": "luh KOR",
+   "cat": "N"
+  },
+  {
+   "source": "arm",
+   "target": "le bras",
+   "pron": "luh BRAH",
+   "cat": "N"
+  },
+  {
+   "source": "mouth",
+   "target": "la bouche",
+   "pron": "lah BOOSH",
+   "cat": "N"
+  },
+  {
+   "source": "ear",
+   "target": "l'oreille (f)",
+   "pron": "loh-RAY",
+   "cat": "N"
+  },
+  {
+   "source": "part",
+   "target": "la partie",
+   "pron": "lah par-TEE",
+   "cat": "N"
+  },
+  {
+   "source": "reason",
+   "target": "la raison",
+   "pron": "lah reh-ZOHN",
+   "cat": "N"
+  },
+  {
+   "source": "way / manner",
+   "target": "la façon",
+   "pron": "lah fah-SOHN",
+   "cat": "N"
+  },
+  {
+   "source": "problem",
+   "target": "le problème",
+   "pron": "luh proh-BLEM",
+   "cat": "N"
+  },
+  {
+   "source": "idea",
+   "target": "l'idée (f)",
+   "pron": "lee-DAY",
+   "cat": "N"
+  },
+  {
+   "source": "opinion",
+   "target": "l'avis (m)",
+   "pron": "lah-VEE",
+   "cat": "N"
+  },
+  {
+   "source": "truth",
+   "target": "la vérité",
+   "pron": "lah vay-ree-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "strength",
+   "target": "la force",
+   "pron": "lah FORSS",
+   "cat": "N"
+  },
+  {
+   "source": "number",
+   "target": "le nombre",
+   "pron": "luh NOHNBR",
+   "cat": "N"
+  },
+  {
+   "source": "price",
+   "target": "le prix",
+   "pron": "luh PREE",
+   "cat": "N"
+  },
+  {
+   "source": "color",
+   "target": "la couleur",
+   "pron": "lah koo-LUR",
+   "cat": "N"
+  },
+  {
+   "source": "music",
+   "target": "la musique",
+   "pron": "lah mew-ZEEK",
+   "cat": "N"
+  },
+  {
+   "source": "movie",
+   "target": "le film",
+   "pron": "luh FEELM",
+   "cat": "N"
+  },
+  {
+   "source": "party",
+   "target": "la fête",
+   "pron": "lah FET",
+   "cat": "N"
+  },
+  {
+   "source": "gift",
+   "target": "le cadeau",
+   "pron": "luh kah-DOH",
+   "cat": "N"
+  },
+  {
+   "source": "trip",
+   "target": "le voyage",
+   "pron": "luh vwah-YAHZH",
+   "cat": "N"
+  },
+  {
+   "source": "road",
+   "target": "la route",
+   "pron": "lah ROOT",
+   "cat": "N"
+  },
+  {
+   "source": "corner",
+   "target": "le coin",
+   "pron": "luh KWAN",
+   "cat": "N"
+  },
+  {
+   "source": "beginning",
+   "target": "le début",
+   "pron": "luh day-BEW",
+   "cat": "N"
+  },
+  {
+   "source": "end",
+   "target": "la fin",
+   "pron": "lah FAN",
+   "cat": "N"
+  },
+  {
+   "source": "middle",
+   "target": "le milieu",
+   "pron": "luh mee-LYUH",
+   "cat": "N"
+  },
+  {
+   "source": "side",
+   "target": "le côté",
+   "pron": "luh koh-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "size",
+   "target": "la taille",
+   "pron": "lah TIE",
+   "cat": "N"
+  },
+  {
+   "source": "paper",
+   "target": "le papier",
+   "pron": "luh pah-PYAY",
+   "cat": "N"
+  },
+  {
+   "source": "letter",
+   "target": "la lettre",
+   "pron": "lah LETR",
+   "cat": "N"
+  },
+  {
+   "source": "newspaper",
+   "target": "le journal",
+   "pron": "luh zhoor-NAHL",
+   "cat": "N"
+  },
+  {
+   "source": "message",
+   "target": "le message",
+   "pron": "luh meh-SAHZH",
+   "cat": "N"
+  },
+  {
+   "source": "computer",
+   "target": "l'ordinateur (m)",
+   "pron": "lor-dee-nah-TUR",
+   "cat": "N"
+  },
+  {
+   "source": "cell phone",
+   "target": "le portable",
+   "pron": "luh por-TAHBL",
+   "cat": "N"
+  },
+  {
+   "source": "bank",
+   "target": "la banque",
+   "pron": "lah BAHNK",
+   "cat": "N"
+  },
+  {
+   "source": "post office",
+   "target": "la poste",
+   "pron": "lah POHST",
+   "cat": "N"
+  },
+  {
+   "source": "police",
+   "target": "la police",
+   "pron": "lah poh-LEESS",
+   "cat": "N"
+  },
+  {
+   "source": "airport",
+   "target": "l'aéroport (m)",
+   "pron": "lah-ay-roh-POR",
+   "cat": "N"
+  },
+  {
+   "source": "harbor",
+   "target": "le port",
+   "pron": "luh POR",
+   "cat": "N"
+  },
+  {
+   "source": "station",
+   "target": "la gare",
+   "pron": "lah GAR",
+   "cat": "N"
+  },
+  {
+   "source": "weather",
+   "target": "le temps",
+   "pron": "luh TAHN",
+   "cat": "N"
+  },
+  {
+   "source": "snow",
+   "target": "la neige",
+   "pron": "lah NEZH",
+   "cat": "N"
+  },
+  {
+   "source": "heat",
+   "target": "la chaleur",
+   "pron": "lah shah-LUR",
+   "cat": "N"
+  },
+  {
+   "source": "fire",
+   "target": "le feu",
+   "pron": "luh FUH",
+   "cat": "N"
+  },
+  {
+   "source": "earth / ground",
+   "target": "la terre",
+   "pron": "lah TEHR",
+   "cat": "N"
+  },
+  {
+   "source": "sky",
+   "target": "le ciel",
+   "pron": "luh SYEL",
+   "cat": "N"
+  },
+  {
+   "source": "tree",
+   "target": "l'arbre (m)",
+   "pron": "LARBR",
+   "cat": "N"
+  },
+  {
+   "source": "flower",
+   "target": "la fleur",
+   "pron": "lah FLUR",
+   "cat": "N"
+  },
+  {
+   "source": "garden",
+   "target": "le jardin",
+   "pron": "luh zhar-DAN",
+   "cat": "N"
+  },
+  {
+   "source": "animal",
+   "target": "l'animal (m)",
+   "pron": "lah-nee-MAHL",
+   "cat": "N"
+  },
+  {
+   "source": "bird",
+   "target": "l'oiseau (m)",
+   "pron": "lwah-ZOH",
+   "cat": "N"
+  },
+  {
+   "source": "apartment",
+   "target": "l'appartement (m)",
+   "pron": "lah-par-tuh-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "floor (storey)",
+   "target": "l'étage (m)",
+   "pron": "lay-TAHZH",
+   "cat": "N"
+  },
+  {
+   "source": "wall",
+   "target": "le mur",
+   "pron": "luh MEWR",
+   "cat": "N"
+  },
+  {
+   "source": "clothes",
+   "target": "les vêtements (m)",
+   "pron": "lay vet-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "shoe",
+   "target": "la chaussure",
+   "pron": "lah shoh-SEWR",
+   "cat": "N"
+  },
+  {
+   "source": "bag",
+   "target": "le sac",
+   "pron": "luh SAHK",
+   "cat": "N"
+  },
+  {
+   "source": "breakfast",
+   "target": "le petit-déjeuner",
+   "pron": "luh puh-tee day-zhuh-NAY",
+   "cat": "N"
+  },
+  {
+   "source": "lunch",
+   "target": "le déjeuner",
+   "pron": "luh day-zhuh-NAY",
+   "cat": "N"
+  },
+  {
+   "source": "dinner",
+   "target": "le dîner",
+   "pron": "luh dee-NAY",
+   "cat": "N"
+  },
+  {
+   "source": "glass",
+   "target": "le verre",
+   "pron": "luh VEHR",
+   "cat": "N"
+  },
+  {
+   "source": "plate",
+   "target": "l'assiette (f)",
+   "pron": "lah-SYET",
+   "cat": "N"
+  },
+  {
+   "source": "spoon",
+   "target": "la cuillère",
+   "pron": "lah kwee-YEHR",
+   "cat": "N"
+  },
+  {
+   "source": "fork",
+   "target": "la fourchette",
+   "pron": "lah foor-SHET",
+   "cat": "N"
+  },
+  {
+   "source": "knife",
+   "target": "le couteau",
+   "pron": "luh koo-TOH",
+   "cat": "N"
+  },
+  {
+   "source": "bottle",
+   "target": "la bouteille",
+   "pron": "lah boo-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "potato",
+   "target": "la pomme de terre",
+   "pron": "lah pum duh TEHR",
+   "cat": "N"
+  },
+  {
+   "source": "tomato",
+   "target": "la tomate",
+   "pron": "lah toh-MAHT",
+   "cat": "N"
+  },
+  {
+   "source": "onion",
+   "target": "l'oignon (m)",
+   "pron": "loh-NYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "apple",
+   "target": "la pomme",
+   "pron": "lah PUM",
+   "cat": "N"
+  },
+  {
+   "source": "orange",
+   "target": "l'orange (f)",
+   "pron": "loh-RAHNZH",
+   "cat": "N"
+  },
+  {
+   "source": "lemon",
+   "target": "le citron",
+   "pron": "luh see-TROHN",
+   "cat": "N"
+  },
+  {
+   "source": "yogurt",
+   "target": "le yaourt",
+   "pron": "luh yah-OORT",
+   "cat": "N"
+  },
+  {
+   "source": "honey",
+   "target": "le miel",
+   "pron": "luh MYEL",
+   "cat": "N"
+  },
+  {
+   "source": "rice",
+   "target": "le riz",
+   "pron": "luh REE",
+   "cat": "N"
+  },
+  {
+   "source": "cake",
+   "target": "le gâteau",
+   "pron": "luh gah-TOH",
+   "cat": "N"
+  },
+  {
+   "source": "ice cream",
+   "target": "la glace",
+   "pron": "lah GLAHSS",
+   "cat": "N"
+  },
+  {
+   "source": "chicken",
+   "target": "le poulet",
+   "pron": "luh poo-LEH",
+   "cat": "N"
+  },
+  {
+   "source": "ham",
+   "target": "le jambon",
+   "pron": "luh zhahn-BOHN",
+   "cat": "N"
+  },
+  {
+   "source": "butter",
+   "target": "le beurre",
+   "pron": "luh BUR",
+   "cat": "N"
+  },
+  {
+   "source": "to send",
+   "target": "envoyer",
+   "pron": "ahn-vwah-YAY",
+   "cat": "V"
+  },
+  {
+   "source": "to bring",
+   "target": "apporter",
+   "pron": "ah-por-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to put",
+   "target": "mettre",
+   "pron": "METR",
+   "cat": "V"
+  },
+  {
+   "source": "to pull",
+   "target": "tirer",
+   "pron": "tee-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to push",
+   "target": "pousser",
+   "pron": "poo-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to show",
+   "target": "montrer",
+   "pron": "mohn-TRAY",
+   "cat": "V"
+  },
+  {
+   "source": "to explain",
+   "target": "expliquer",
+   "pron": "ex-plee-KAY",
+   "cat": "V"
+  },
+  {
+   "source": "to ask for",
+   "target": "demander",
+   "pron": "duh-mahn-DAY",
+   "cat": "V"
+  },
+  {
+   "source": "to thank",
+   "target": "remercier",
+   "pron": "ruh-mehr-SYAY",
+   "cat": "V"
+  },
+  {
+   "source": "to hope",
+   "target": "espérer",
+   "pron": "es-pay-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to fear",
+   "target": "avoir peur de",
+   "pron": "ah-vwahr PUR duh",
+   "cat": "V"
+  },
+  {
+   "source": "to laugh",
+   "target": "rire",
+   "pron": "REER",
+   "cat": "V"
+  },
+  {
+   "source": "to cry",
+   "target": "pleurer",
+   "pron": "pluh-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to sing",
+   "target": "chanter",
+   "pron": "shahn-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to dance",
+   "target": "danser",
+   "pron": "dahn-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to travel",
+   "target": "voyager",
+   "pron": "vwah-yah-ZHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to return (go back)",
+   "target": "retourner",
+   "pron": "ruh-toor-NAY",
+   "cat": "V"
+  },
+  {
+   "source": "to meet",
+   "target": "rencontrer",
+   "pron": "rahn-kohn-TRAY",
+   "cat": "V"
+  },
+  {
+   "source": "to know (people)",
+   "target": "connaître",
+   "pron": "koh-NETR",
+   "cat": "V"
+  },
+  {
+   "source": "to change",
+   "target": "changer",
+   "pron": "shahn-ZHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to try",
+   "target": "essayer",
+   "pron": "eh-say-YAY",
+   "cat": "V"
+  },
+  {
+   "source": "to succeed",
+   "target": "réussir",
+   "pron": "ray-ew-SEER",
+   "cat": "V"
+  },
+  {
+   "source": "to choose",
+   "target": "choisir",
+   "pron": "shwah-ZEER",
+   "cat": "V"
+  },
+  {
+   "source": "to decide",
+   "target": "décider",
+   "pron": "day-see-DAY",
+   "cat": "V"
+  },
+  {
+   "source": "to lose",
+   "target": "perdre",
+   "pron": "PEHRDR",
+   "cat": "V"
+  },
+  {
+   "source": "to win",
+   "target": "gagner",
+   "pron": "gah-NYAY",
+   "cat": "V"
+  },
+  {
+   "source": "to use",
+   "target": "utiliser",
+   "pron": "ew-tee-lee-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to clean",
+   "target": "nettoyer",
+   "pron": "neh-twah-YAY",
+   "cat": "V"
+  },
+  {
+   "source": "to wash",
+   "target": "laver",
+   "pron": "lah-VAY",
+   "cat": "V"
+  },
+  {
+   "source": "to break",
+   "target": "casser",
+   "pron": "kah-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to repair",
+   "target": "réparer",
+   "pron": "ray-pah-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to allow",
+   "target": "permettre",
+   "pron": "pehr-METR",
+   "cat": "V"
+  },
+  {
+   "source": "to have to",
+   "target": "devoir",
+   "pron": "duh-VWAHR",
+   "cat": "V"
+  },
+  {
+   "source": "to cost",
+   "target": "coûter",
+   "pron": "koo-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to sell",
+   "target": "vendre",
+   "pron": "VAHNDR",
+   "cat": "V"
+  },
+  {
+   "source": "to hear",
+   "target": "entendre",
+   "pron": "ahn-TAHNDR",
+   "cat": "V"
+  },
+  {
+   "source": "to feel",
+   "target": "sentir",
+   "pron": "sahn-TEER",
+   "cat": "V"
+  },
+  {
+   "source": "to follow",
+   "target": "suivre",
+   "pron": "SWEEVR",
+   "cat": "V"
+  },
+  {
+   "source": "to hold",
+   "target": "tenir",
+   "pron": "tuh-NEER",
+   "cat": "V"
+  },
+  {
+   "source": "to receive",
+   "target": "recevoir",
+   "pron": "ruh-suh-VWAHR",
+   "cat": "V"
+  },
+  {
+   "source": "to offer",
+   "target": "offrir",
+   "pron": "oh-FREER",
+   "cat": "V"
+  },
+  {
+   "source": "to drive",
+   "target": "conduire",
+   "pron": "kohn-DWEER",
+   "cat": "V"
+  },
+  {
+   "source": "to walk",
+   "target": "marcher",
+   "pron": "mar-SHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to get up",
+   "target": "se lever",
+   "pron": "suh luh-VAY",
+   "cat": "V"
+  },
+  {
+   "source": "to sit down",
+   "target": "s'asseoir",
+   "pron": "sah-SWAHR",
+   "cat": "V"
+  },
+  {
+   "source": "to live (be alive)",
+   "target": "vivre",
+   "pron": "VEEVR",
+   "cat": "V"
+  },
+  {
+   "source": "to die",
+   "target": "mourir",
+   "pron": "moo-REER",
+   "cat": "V"
+  },
+  {
+   "source": "to be born",
+   "target": "naître",
+   "pron": "NETR",
+   "cat": "V"
+  },
+  {
+   "source": "to become",
+   "target": "devenir",
+   "pron": "duhv-NEER",
+   "cat": "V"
+  },
+  {
+   "source": "to enter",
+   "target": "entrer",
+   "pron": "ahn-TRAY",
+   "cat": "V"
+  },
+  {
+   "source": "to go out",
+   "target": "sortir",
+   "pron": "sor-TEER",
+   "cat": "V"
+  },
+  {
+   "source": "to go up",
+   "target": "monter",
+   "pron": "mohn-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to go down",
+   "target": "descendre",
+   "pron": "deh-SAHNDR",
+   "cat": "V"
+  },
+  {
+   "source": "to fall",
+   "target": "tomber",
+   "pron": "tohn-BAY",
+   "cat": "V"
+  },
+  {
+   "source": "happy (content)",
+   "target": "content",
+   "pron": "kohn-TAHN",
+   "cat": "A"
+  },
+  {
+   "source": "angry",
+   "target": "fâché",
+   "pron": "fah-SHAY",
+   "cat": "A"
+  },
+  {
+   "source": "surprised",
+   "target": "surpris",
+   "pron": "sewr-PREE",
+   "cat": "A"
+  },
+  {
+   "source": "healthy (in shape)",
+   "target": "en forme",
+   "pron": "ahn FORM",
+   "cat": "A"
+  },
+  {
+   "source": "possible",
+   "target": "possible",
+   "pron": "poh-SEEBL",
+   "cat": "A"
+  },
+  {
+   "source": "impossible",
+   "target": "impossible",
+   "pron": "an-poh-SEEBL",
+   "cat": "A"
+  },
+  {
+   "source": "long",
+   "target": "long / longue",
+   "pron": "lohn",
+   "cat": "A"
+  },
+  {
+   "source": "short",
+   "target": "court",
+   "pron": "koor",
+   "cat": "A"
+  },
+  {
+   "source": "high / tall",
+   "target": "haut",
+   "pron": "oh",
+   "cat": "A"
+  },
+  {
+   "source": "low",
+   "target": "bas",
+   "pron": "bah",
+   "cat": "A"
+  },
+  {
+   "source": "strong",
+   "target": "fort",
+   "pron": "for",
+   "cat": "A"
+  },
+  {
+   "source": "weak",
+   "target": "faible",
+   "pron": "FEBL",
+   "cat": "A"
+  },
+  {
+   "source": "heavy",
+   "target": "lourd",
+   "pron": "loor",
+   "cat": "A"
+  },
+  {
+   "source": "light (weight)",
+   "target": "léger",
+   "pron": "lay-ZHAY",
+   "cat": "A"
+  },
+  {
+   "source": "whole / all",
+   "target": "tout / toute",
+   "pron": "too",
+   "cat": "A"
+  },
+  {
+   "source": "each",
+   "target": "chaque",
+   "pron": "shahk",
+   "cat": "A"
+  },
+  {
+   "source": "other",
+   "target": "autre",
+   "pron": "OHTR",
+   "cat": "A"
+  },
+  {
+   "source": "same",
+   "target": "même",
+   "pron": "mem",
+   "cat": "A"
+  },
+  {
+   "source": "together",
+   "target": "ensemble",
+   "pron": "ahn-SAHNBL",
+   "cat": "B"
+  },
+  {
+   "source": "alone",
+   "target": "seul",
+   "pron": "suhl",
+   "cat": "B"
+  },
+  {
+   "source": "almost",
+   "target": "presque",
+   "pron": "presk",
+   "cat": "B"
+  },
+  {
+   "source": "already",
+   "target": "déjà",
+   "pron": "day-ZHAH",
+   "cat": "B"
+  },
+  {
+   "source": "still / yet",
+   "target": "encore",
+   "pron": "ahn-KOR",
+   "cat": "B"
+  },
+  {
+   "source": "only",
+   "target": "seulement",
+   "pron": "suhl-MAHN",
+   "cat": "B"
+  },
+  {
+   "source": "very",
+   "target": "très",
+   "pron": "treh",
+   "cat": "B"
+  },
+  {
+   "source": "quite / rather",
+   "target": "plutôt",
+   "pron": "plew-TOH",
+   "cat": "B"
+  },
+  {
+   "source": "before",
+   "target": "avant",
+   "pron": "ah-VAHN",
+   "cat": "B"
+  },
+  {
+   "source": "after",
+   "target": "après",
+   "pron": "ah-PREH",
+   "cat": "B"
+  },
+  {
+   "source": "during",
+   "target": "pendant",
+   "pron": "pahn-DAHN",
+   "cat": "B"
+  },
+  {
+   "source": "early",
+   "target": "tôt",
+   "pron": "toh",
+   "cat": "B"
+  },
+  {
+   "source": "late",
+   "target": "tard",
+   "pron": "tar",
+   "cat": "B"
+  },
+  {
+   "source": "again",
+   "target": "à nouveau",
+   "pron": "ah noo-VOH",
+   "cat": "B"
+  },
+  {
+   "source": "finally",
+   "target": "enfin",
+   "pron": "ahn-FAN",
+   "cat": "B"
+  },
+  {
+   "source": "immediately",
+   "target": "tout de suite",
+   "pron": "toot SWEET",
+   "cat": "B"
+  },
+  {
+   "source": "slowly",
+   "target": "lentement",
+   "pron": "lahnt-MAHN",
+   "cat": "B"
+  },
+  {
+   "source": "gladly",
+   "target": "volontiers",
+   "pron": "voh-lohn-TYAY",
+   "cat": "B"
+  },
+  {
+   "source": "no problem",
+   "target": "pas de problème",
+   "pron": "pah duh proh-BLEM",
+   "cat": "B"
+  },
+  {
+   "source": "excuse me (formal)",
+   "target": "je vous prie de m'excuser",
+   "pron": "zhuh voo PREE duh mex-kew-ZAY",
+   "cat": "B"
+  },
+  {
+   "source": "it depends",
+   "target": "ça dépend",
+   "pron": "sah day-PAHN",
+   "cat": "B"
+  },
+  {
+   "source": "I agree",
+   "target": "je suis d'accord",
+   "pron": "zhuh swee dah-KOR",
+   "cat": "B"
+  },
+  {
+   "source": "welcome",
+   "target": "bienvenue",
+   "pron": "byan-vuh-NEW",
+   "cat": "B"
+  },
+  {
+   "source": "cheers!",
+   "target": "santé !",
+   "pron": "sahn-TAY",
+   "cat": "B"
+  },
+  {
+   "source": "have a good meal",
+   "target": "bon appétit",
+   "pron": "bohn ah-pay-TEE",
+   "cat": "B"
+  },
+  {
+   "source": "government",
+   "target": "le gouvernement",
+   "pron": "luh goo-vehr-nuh-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "law",
+   "target": "la loi",
+   "pron": "lah LWAH",
+   "cat": "N"
+  },
+  {
+   "source": "war",
+   "target": "la guerre",
+   "pron": "lah GEHR",
+   "cat": "N"
+  },
+  {
+   "source": "peace",
+   "target": "la paix",
+   "pron": "lah PEH",
+   "cat": "N"
+  },
+  {
+   "source": "history",
+   "target": "l'histoire (f)",
+   "pron": "lees-TWAHR",
+   "cat": "N"
+  },
+  {
+   "source": "story",
+   "target": "l'histoire (f)",
+   "pron": "lees-TWAHR",
+   "cat": "N"
+  },
+  {
+   "source": "art",
+   "target": "l'art (m)",
+   "pron": "LAR",
+   "cat": "N"
+  },
+  {
+   "source": "painting",
+   "target": "le tableau",
+   "pron": "luh tah-BLOH",
+   "cat": "N"
+  },
+  {
+   "source": "museum",
+   "target": "le musée",
+   "pron": "luh mew-ZAY",
+   "cat": "N"
+  },
+  {
+   "source": "century",
+   "target": "le siècle",
+   "pron": "luh SYEKL",
+   "cat": "N"
+  },
+  {
+   "source": "king",
+   "target": "le roi",
+   "pron": "luh RWAH",
+   "cat": "N"
+  },
+  {
+   "source": "queen",
+   "target": "la reine",
+   "pron": "lah REN",
+   "cat": "N"
+  },
+  {
+   "source": "victory",
+   "target": "la victoire",
+   "pron": "lah veek-TWAHR",
+   "cat": "N"
+  },
+  {
+   "source": "defeat",
+   "target": "la défaite",
+   "pron": "lah day-FET",
+   "cat": "N"
+  },
+  {
+   "source": "battle",
+   "target": "la bataille",
+   "pron": "lah bah-TIE",
+   "cat": "N"
+  },
+  {
+   "source": "army",
+   "target": "l'armée (f)",
+   "pron": "lar-MAY",
+   "cat": "N"
+  },
+  {
+   "source": "flag",
+   "target": "le drapeau",
+   "pron": "luh drah-POH",
+   "cat": "N"
+  },
+  {
+   "source": "horse",
+   "target": "le cheval",
+   "pron": "luh shuh-VAHL",
+   "cat": "N"
+  },
+  {
+   "source": "health",
+   "target": "la santé",
+   "pron": "lah sahn-TAY",
+   "cat": "N"
+  },
+  {
+   "source": "pain",
+   "target": "la douleur",
+   "pron": "lah doo-LUR",
+   "cat": "N"
+  },
+  {
+   "source": "medicine (drug)",
+   "target": "le médicament",
+   "pron": "luh may-dee-kah-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "appointment",
+   "target": "le rendez-vous",
+   "pron": "luh rahn-day-VOO",
+   "cat": "N"
+  },
+  {
+   "source": "meeting",
+   "target": "la réunion",
+   "pron": "lah ray-ew-NYOHN",
+   "cat": "N"
+  },
+  {
+   "source": "company (firm)",
+   "target": "l'entreprise (f)",
+   "pron": "lahn-truh-PREEZ",
+   "cat": "N"
+  },
+  {
+   "source": "boss",
+   "target": "le patron",
+   "pron": "luh pah-TROHN",
+   "cat": "N"
+  },
+  {
+   "source": "colleague",
+   "target": "le collègue",
+   "pron": "luh koh-LEG",
+   "cat": "N"
+  },
+  {
+   "source": "salary",
+   "target": "le salaire",
+   "pron": "luh sah-LEHR",
+   "cat": "N"
+  },
+  {
+   "source": "news",
+   "target": "les nouvelles (f)",
+   "pron": "lay noo-VEL",
+   "cat": "N"
+  },
+  {
+   "source": "environment",
+   "target": "l'environnement (m)",
+   "pron": "lahn-vee-run-MAHN",
+   "cat": "N"
+  },
+  {
+   "source": "future",
+   "target": "l'avenir (m)",
+   "pron": "lahv-NEER",
+   "cat": "N"
+  },
+  {
+   "source": "past",
+   "target": "le passé",
+   "pron": "luh pah-SAY",
+   "cat": "N"
+  },
+  {
+   "source": "memory",
+   "target": "le souvenir",
+   "pron": "luh soov-NEER",
+   "cat": "N"
+  },
+  {
+   "source": "dream",
+   "target": "le rêve",
+   "pron": "luh REV",
+   "cat": "N"
+  },
+  {
+   "source": "fear",
+   "target": "la peur",
+   "pron": "lah PUR",
+   "cat": "N"
+  },
+  {
+   "source": "joy",
+   "target": "la joie",
+   "pron": "lah ZHWAH",
+   "cat": "N"
+  },
+  {
+   "source": "hope",
+   "target": "l'espoir (m)",
+   "pron": "les-PWAHR",
+   "cat": "N"
+  },
+  {
+   "source": "luck",
+   "target": "la chance",
+   "pron": "lah SHAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "mistake",
+   "target": "l'erreur (f)",
+   "pron": "leh-RUR",
+   "cat": "N"
+  },
+  {
+   "source": "success",
+   "target": "le succès",
+   "pron": "luh sewk-SEH",
+   "cat": "N"
+  },
+  {
+   "source": "choice",
+   "target": "le choix",
+   "pron": "luh SHWAH",
+   "cat": "N"
+  },
+  {
+   "source": "advice",
+   "target": "le conseil",
+   "pron": "luh kohn-SAY",
+   "cat": "N"
+  },
+  {
+   "source": "example",
+   "target": "l'exemple (m)",
+   "pron": "leg-ZAHNPL",
+   "cat": "N"
+  },
+  {
+   "source": "level",
+   "target": "le niveau",
+   "pron": "luh nee-VOH",
+   "cat": "N"
+  },
+  {
+   "source": "goal",
+   "target": "le but",
+   "pron": "luh BEW",
+   "cat": "N"
+  },
+  {
+   "source": "knowledge",
+   "target": "la connaissance",
+   "pron": "lah koh-neh-SAHNSS",
+   "cat": "N"
+  },
+  {
+   "source": "to improve",
+   "target": "améliorer",
+   "pron": "ah-may-lyoh-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to develop",
+   "target": "développer",
+   "pron": "dayv-loh-PAY",
+   "cat": "V"
+  },
+  {
+   "source": "to create",
+   "target": "créer",
+   "pron": "kray-AY",
+   "cat": "V"
+  },
+  {
+   "source": "to build",
+   "target": "construire",
+   "pron": "kohn-STRWEER",
+   "cat": "V"
+  },
+  {
+   "source": "to destroy",
+   "target": "détruire",
+   "pron": "day-TRWEER",
+   "cat": "V"
+  },
+  {
+   "source": "to defend",
+   "target": "défendre",
+   "pron": "day-FAHNDR",
+   "cat": "V"
+  },
+  {
+   "source": "to attack",
+   "target": "attaquer",
+   "pron": "ah-tah-KAY",
+   "cat": "V"
+  },
+  {
+   "source": "to conquer",
+   "target": "conquérir",
+   "pron": "kohn-kay-REER",
+   "cat": "V"
+  },
+  {
+   "source": "to protect",
+   "target": "protéger",
+   "pron": "proh-tay-ZHAY",
+   "cat": "V"
+  },
+  {
+   "source": "to promise",
+   "target": "promettre",
+   "pron": "proh-METR",
+   "cat": "V"
+  },
+  {
+   "source": "to lie",
+   "target": "mentir",
+   "pron": "mahn-TEER",
+   "cat": "V"
+  },
+  {
+   "source": "to forgive",
+   "target": "pardonner",
+   "pron": "par-doh-NAY",
+   "cat": "V"
+  },
+  {
+   "source": "to discuss",
+   "target": "discuter",
+   "pron": "dees-kew-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to compare",
+   "target": "comparer",
+   "pron": "kohn-pah-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to prefer",
+   "target": "préférer",
+   "pron": "pray-fay-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to suggest",
+   "target": "proposer",
+   "pron": "proh-poh-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to accept",
+   "target": "accepter",
+   "pron": "ahk-sep-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to refuse",
+   "target": "refuser",
+   "pron": "ruh-few-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to translate",
+   "target": "traduire",
+   "pron": "trah-DWEER",
+   "cat": "V"
+  },
+  {
+   "source": "to pronounce",
+   "target": "prononcer",
+   "pron": "proh-nohn-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to teach",
+   "target": "enseigner",
+   "pron": "ahn-seh-NYAY",
+   "cat": "V"
+  },
+  {
+   "source": "to seem",
+   "target": "sembler",
+   "pron": "sahn-BLAY",
+   "cat": "V"
+  },
+  {
+   "source": "to happen",
+   "target": "se passer",
+   "pron": "suh pah-SAY",
+   "cat": "V"
+  },
+  {
+   "source": "to notice",
+   "target": "remarquer",
+   "pron": "ruh-mar-KAY",
+   "cat": "V"
+  },
+  {
+   "source": "to check",
+   "target": "vérifier",
+   "pron": "vay-ree-FYAY",
+   "cat": "V"
+  },
+  {
+   "source": "to prepare",
+   "target": "préparer",
+   "pron": "pray-pah-RAY",
+   "cat": "V"
+  },
+  {
+   "source": "to organize",
+   "target": "organiser",
+   "pron": "or-gah-nee-ZAY",
+   "cat": "V"
+  },
+  {
+   "source": "to invite",
+   "target": "inviter",
+   "pron": "an-vee-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to visit (place)",
+   "target": "visiter",
+   "pron": "vee-zee-TAY",
+   "cat": "V"
+  },
+  {
+   "source": "to rent",
+   "target": "louer",
+   "pron": "loo-AY",
+   "cat": "V"
+  },
+  {
+   "source": "proud",
+   "target": "fier",
+   "pron": "fyehr",
+   "cat": "A"
+  },
+  {
+   "source": "jealous",
+   "target": "jaloux",
+   "pron": "zhah-LOO",
+   "cat": "A"
+  },
+  {
+   "source": "polite",
+   "target": "poli",
+   "pron": "poh-LEE",
+   "cat": "A"
+  },
+  {
+   "source": "rude",
+   "target": "impoli",
+   "pron": "an-poh-LEE",
+   "cat": "A"
+  },
+  {
+   "source": "funny",
+   "target": "drôle",
+   "pron": "drohl",
+   "cat": "A"
+  },
+  {
+   "source": "serious",
+   "target": "sérieux",
+   "pron": "say-RYUH",
+   "cat": "A"
+  },
+  {
+   "source": "strange",
+   "target": "bizarre",
+   "pron": "bee-ZAR",
+   "cat": "A"
+  },
+  {
+   "source": "dangerous",
+   "target": "dangereux",
+   "pron": "dahn-zhuh-RUH",
+   "cat": "A"
+  },
+  {
+   "source": "safe",
+   "target": "sûr",
+   "pron": "sewr",
+   "cat": "A"
+  },
+  {
+   "source": "famous",
+   "target": "célèbre",
+   "pron": "say-LEBR",
+   "cat": "A"
+  },
+  {
+   "source": "superior",
+   "target": "supérieur",
+   "pron": "sew-pay-RYUR",
+   "cat": "A"
+  },
+  {
+   "source": "excellent",
+   "target": "excellent",
+   "pron": "ek-seh-LAHN",
+   "cat": "A"
+  },
+  {
+   "source": "useful",
+   "target": "utile",
+   "pron": "ew-TEEL",
+   "cat": "A"
+  },
+  {
+   "source": "useless",
+   "target": "inutile",
+   "pron": "ee-new-TEEL",
+   "cat": "A"
+  },
+  {
+   "source": "deep",
+   "target": "profond",
+   "pron": "proh-FOHN",
+   "cat": "A"
+  },
+  {
+   "source": "wide",
+   "target": "large",
+   "pron": "larzh",
+   "cat": "A"
+  },
+  {
+   "source": "narrow",
+   "target": "étroit",
+   "pron": "ay-TRWAH",
+   "cat": "A"
+  },
+  {
+   "source": "true",
+   "target": "vrai",
+   "pron": "vreh",
+   "cat": "A"
+  },
+  {
+   "source": "false",
+   "target": "faux",
+   "pron": "foh",
+   "cat": "A"
+  },
+  {
+   "source": "nevertheless",
+   "target": "pourtant",
+   "pron": "poor-TAHN",
+   "cat": "B"
+  },
+  {
+   "source": "therefore",
+   "target": "donc",
+   "pron": "dohnk",
+   "cat": "B"
+  },
+  {
+   "source": "however",
+   "target": "cependant",
+   "pron": "suh-pahn-DAHN",
+   "cat": "B"
+  },
+  {
+   "source": "despite",
+   "target": "malgré",
+   "pron": "mahl-GRAY",
+   "cat": "B"
+  },
+  {
+   "source": "thanks to",
+   "target": "grâce à",
+   "pron": "grahss AH",
+   "cat": "B"
+  },
+  {
+   "source": "that is to say",
+   "target": "c'est-à-dire",
+   "pron": "seh-tah-DEER",
+   "cat": "B"
+  },
+  {
+   "source": "by the way",
+   "target": "d'ailleurs",
+   "pron": "dah-YUR",
+   "cat": "B"
+  },
+  {
+   "source": "anyway",
+   "target": "de toute façon",
+   "pron": "duh toot fah-SOHN",
+   "cat": "B"
+  },
+  {
+   "source": "so much the better",
+   "target": "tant mieux",
+   "pron": "tahn MYUH",
+   "cat": "B"
+  },
+  {
+   "source": "too bad",
+   "target": "tant pis",
+   "pron": "tahn PEE",
+   "cat": "B"
+  },
+  {
+   "source": "long live France!",
+   "target": "vive la France !",
+   "pron": "veev lah FRAHNSS",
+   "cat": "B"
+  }
+ ]
+}

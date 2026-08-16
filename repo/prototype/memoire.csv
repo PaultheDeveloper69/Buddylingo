@@ -1,0 +1,10 @@
+# Vocabulaire Superieur - memoire (low-token learning log).
+# The app fetches this file on launch and merges it with on-device storage (newest t per word wins).
+# After a session: Export -> send me the file -> I update it here. Progress then survives any cleared cache.
+[meta]
+xp,bestStreak,badges
+0,0,
+[days]
+# date,reviewed,correct,xp
+[cards]
+# word,box,due,reps,hits,slow,misses,q,t   (box 0-6 Leitner; due/t = ms timestamps; q: 2 knew, 1 hard, 0 missed)
