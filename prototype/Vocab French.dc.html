@@ -9,6 +9,7 @@
 <x-dc>
 
 <helmet>
+<script>if (location.hostname === "www.buddylingo.de") location.replace(location.href.replace("//www.", "//"));</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#f6f4ef">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -33,6 +34,9 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
 </style>
 <script src="deck.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="bl-config.js"></script>
+<script src="bl-sync.js"></script>
 <script src="nani-work.js"></script>
 </helmet>
 <div style="min-height:100dvh;background:#f6f4ef" data-screen-label="Vocabulaire Supérieur">
@@ -41,7 +45,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
   <div data-screen-label="Splash" style="min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:20px;padding:calc(24px + env(safe-area-inset-top)) 24px calc(28px + env(safe-area-inset-bottom));overflow:hidden">
     <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#a5a096">BuddyLingo · vocab 1v1</span>
     <div style="display:flex;flex-direction:column;align-items:center;gap:22px;animation:fadeUp 0.7s ease both;background:#f6f4ef">
-      <img src="https://upload.higgsfield.ai/user_32PgHXDjHlFXmhgKyUnBM4DN7Qi/14f02781-81f9-40a9-938c-806909f714e9.gif" alt="Le Croissant" style="height:200px;display:block">
+      <img src="assets/chars/croissant.png" alt="Le Croissant" style="height:200px;display:block;mix-blend-mode:multiply;transform-origin:50% 100%;animation:idleSway 4.8s ease-in-out infinite">
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
         <span style="font-size:42px;font-weight:800;letter-spacing:-0.03em;line-height:1;color:#17181d">Le Français<span style="color:#d62828">.</span></span>
         <span style="font-size:14px;color:#8a857a;text-wrap:balance">Objectivement supérieur. Demandez au croissant.</span>
@@ -260,22 +264,6 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         <button style="min-height:44px;background:#f0ede6;border-radius:999px;color:#17181d;font-size:13px;font-weight:600;margin-top:4px" style-hover="{{ ghostHover }}" onClick="{{ toggleAll }}">{{ toggleLabel }}</button>
       </div>
 
-      <div style="background:#43201b;color:#eef1f9;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:10px;box-shadow:0 8px 24px rgba(160,30,30,0.3)">
-        <div style="display:flex;justify-content:space-between;align-items:baseline">
-          <span style="font-size:13px;font-weight:700">Mémoire</span>
-          <span style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:#d3a8a0">{{ sessionCount }} sessions</span>
-        </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <span style="width:8px;height:8px;border-radius:999px;background:#6fd18c;flex:none"></span>
-          <span style="font-size:12px;color:#eef1f9;font-weight:600">Auto-saved on this device after every answer</span>
-        </div>
-        <p style="font-size:11px;line-height:1.55;color:#d3a8a0;margin:0;text-wrap:pretty">Stored twice (browser + database) so it survives cache clean-ups. Back up only if you switch phones — drop the file in chat and I'll keep a copy in the project.</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-          <button style="min-height:44px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:999px;color:#fff;font-size:12.5px;font-weight:600" style-hover="{{ memHover }}" onClick="{{ exportLog }}">Back up</button>
-          <button style="min-height:44px;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:999px;color:#fff;font-size:12.5px;font-weight:600" style-hover="{{ memHover }}" onClick="{{ importLog }}">Restore</button>
-        </div>
-      </div>
-
       <button style="align-self:center;background:none;color:#a5a096;font-size:11px;text-decoration:underline;text-underline-offset:3px;min-height:44px" onClick="{{ resetAll }}">Reset all progress</button>
       <div style="display:flex;justify-content:center;gap:18px"><a href="Vocab Greek.dc.html" style="font-size:11px;color:#a5a096">visit the inferior vocabulary →</a><a href="BuddyLingo Login.dc.html" style="font-size:11px;color:#a5a096">⇄ switch fighter</a></div>
     </div>
@@ -431,10 +419,12 @@ class Component extends DCLogic {
     setWorld(w);
     this.sessions = []; this.recent = []; this.cur = null; this.lastSess = null; this.sessBadges = [];
     this.loadWorld();
+    if (window.BLSync && window.BLSync.enabled) window.BLSync.latestFront("el").then((r) => { if (r) this.setState({ serverOpp: r }); });
   }
   componentDidMount() {
     try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
     this.loadWorld();
+    if (window.BLSync && window.BLSync.enabled) window.BLSync.latestFront("el").then((r) => { if (r) this.setState({ serverOpp: r }); });
   }
   loadWorld() {
     const tok = KEY;
@@ -481,6 +471,12 @@ class Component extends DCLogic {
       localStorage.setItem(KEY, JSON.stringify(payload));
     } catch (e) {}
     idbPut(payload);
+    try {
+      if (window.BLSync && window.BLSync.enabled && !WORLD_WORK) {
+        clearTimeout(this._syncT);
+        this._syncT = setTimeout(() => window.BLSync.pushSnapshot("fr", this.knownCount(this.state.cards), catKnown), 1500);
+      }
+    } catch (e) {}
   }
 
   parseCsv(text) {
@@ -786,7 +782,9 @@ class Component extends DCLogic {
     const total = Math.max(s.total || 1, answered + s.queue.length);
     const kickerText = w ? (card ? (card.q === 0 && card.reps > 0 && s.queue.indexOf(idx) === 0 && card.lapsed ? "Again · " : "Review · ") : "New word · ") + CAT[w[3]] : "";
     let opp = null; try { opp = JSON.parse(localStorage.getItem(OPP_KEY) || "null"); } catch (e) {}
+    if (this.state.serverOpp) opp = { cards: {}, badges: (opp && opp.badges) || {}, known: this.state.serverOpp.known, catKnown: this.state.serverOpp.cat_known || {} };
     let oppKnown = 0; if (opp && opp.cards) for (const ok in opp.cards) if (!opp.cards[ok].lapsed) oppKnown++;
+    if (opp && opp.known != null) oppKnown = opp.known;
     const wOf = function (b) { return Object.keys(b || {}).filter(function (k) { return k.slice(0, 2) === "w_"; }).length; };
     const myW = wOf(s.badges), opW = wOf(opp && opp.badges);
     const myScore = known + 25 * myW, opScore = oppKnown + 25 * opW;
