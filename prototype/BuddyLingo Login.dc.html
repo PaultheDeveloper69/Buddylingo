@@ -103,6 +103,7 @@ input { font-family:inherit; }
   </sc-if>
 
   <span style="align-self:center;display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:10px 18px;box-shadow:0 1px 3px rgba(23,24,29,0.08)"><span style="font-size:12px;font-weight:700;color:#a5a096">⚔ Vocab War — coming soon</span></span>
+  <span style="align-self:center;display:inline-flex;align-items:center;gap:6px;font-size:10px;color:#a5a096;letter-spacing:0.06em"><span style="{{ srvDotStyle }}"></span>{{ srvLabel }}</span>
   <span style="font-size:10px;color:#c9c3b5;text-align:center;letter-spacing:0.08em">BuddyLingo · prototype garrison · real accounts arrive with the app</span>
 </div>
 </div>
@@ -122,15 +123,17 @@ const LANGS = [
 ];
 function langOf(id) { return LANGS.find(function (l) { return l[0] === id; }) || LANGS[0]; }
 class Component extends DCLogic {
-  state = { view: "grid", roster: [], sel: -1, name: "", lang: "", pin: "", mode: "set", err: false };
+  state = { view: "grid", roster: [], sel: -1, name: "", lang: "", pin: "", mode: "set", err: false, srv: "wait" };
   componentDidMount() {
     let r = null;
     try { r = JSON.parse(localStorage.getItem(RKEY) || "null"); } catch (e) {}
     if (!r || !Array.isArray(r)) r = Array(10).fill(null);
     while (r.length < 10) r.push(null);
     this.setState({ roster: r });
-    if (window.BLSync && window.BLSync.enabled) window.BLSync.roster().then((rows) => {
-      if (!rows) return;
+    if (!window.BLSync || !window.BLSync.enabled) { this.setState({ srv: "off" }); return; }
+    window.BLSync.roster().then((rows) => {
+      if (!rows) { this.setState({ srv: "off" }); return; }
+      this.setState({ srv: "on" });
       const ro = this.state.roster.slice();
       let changed = false;
       rows.forEach(function (f) { if (f.slot >= 0 && f.slot < 10 && !ro[f.slot]) { ro[f.slot] = { name: f.name, lang: f.language_id, pin: null }; changed = true; } });
@@ -240,6 +243,9 @@ class Component extends DCLogic {
     return {
       isGrid: s.view === "grid", isClaim: s.view === "claim", isPin: s.view === "pin",
       slots: slots, langs: langs, pad: pad, pinDots: dots,
+      srvLabel: s.srv === "on" ? "server connected" : s.srv === "off" ? "offline — this device only" : "connecting…",
+      srvDotStyle: { width: "6px", height: "6px", borderRadius: "999px", flex: "none",
+        background: s.srv === "on" ? "#2a8c46" : s.srv === "off" ? "#d62828" : "#c9c3b5" },
       nameVal: s.name,
       onName: (e) => this.setState({ name: e.target.value }),
       claimIncomplete: !(s.name.trim() && s.lang),
