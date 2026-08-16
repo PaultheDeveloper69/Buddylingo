@@ -1,4 +1,4 @@
--- BuddyLingo schema v2 (ADDITIVE — run after schema.sql)
+-- BuddyLingo schema v2 (ADDITIVE — run after schema.sql; safe to re-run)
 -- Adds: language registry (dormant languages slumber with active=false),
 -- per-user fighters (login slots), and front-line snapshots for FR vs EL battle.
 
@@ -19,6 +19,7 @@ on conflict (id) do update
   set name = excluded.name, color = excluded.color,
       active = excluded.active, deck_size = excluded.deck_size;
 alter table languages enable row level security;
+drop policy if exists "languages are public" on languages;
 create policy "languages are public" on languages for select using (true);
 
 -- one row per login slot (mirrors the prototype's 10-fighter roster)
@@ -32,8 +33,11 @@ create table if not exists fighters (
   primary key (user_id, slot)
 );
 alter table fighters enable row level security;
+drop policy if exists "own fighters read" on fighters;
 create policy "own fighters read"  on fighters for select using (auth.uid() = user_id);
+drop policy if exists "own fighters write" on fighters;
 create policy "own fighters write" on fighters for insert with check (auth.uid() = user_id);
+drop policy if exists "own fighters update" on fighters;
 create policy "own fighters update" on fighters for update using (auth.uid() = user_id);
 
 -- append-only front-line snapshots: each device posts its own counts;
@@ -48,6 +52,8 @@ create table if not exists front_snapshots (
   computed_at timestamptz default now()
 );
 alter table front_snapshots enable row level security;
+drop policy if exists "fronts readable by all" on front_snapshots;
 create policy "fronts readable by all" on front_snapshots for select using (true);
+drop policy if exists "write own front" on front_snapshots;
 create policy "write own front" on front_snapshots for insert with check (auth.uid() = user_id);
 create index if not exists front_latest on front_snapshots (language_id, world, computed_at desc);

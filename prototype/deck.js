@@ -175,7 +175,7 @@ window.DECK = [
 ["useful","utile","ew-TEEL","A"],["useless","inutile","ee-new-TEEL","A"],["deep","profond","proh-FOHN","A"],
 ["wide","large","larzh","A"],["narrow","étroit","ay-TRWAH","A"],["true","vrai","vreh","A"],
 ["false","faux","foh","A"],["nevertheless","pourtant","poor-TAHN","B"],["therefore","donc","dohnk","B"],
-["however","cependant","suh-pahn-DAHN","B"],["despite","malgré","mahl-GRAY","B"]
+["however","cependant","suh-pahn-DAHN","B"],["despite","malgré","mahl-GRAY","B"],
 // ── Tier 6 · Immortel — émotions, quotidien, connecteurs (expansion plan wave 1) ──
 ["happiness","le bonheur","luh bo-NUHR","N"],
 ["sadness","la tristesse","lah tree-STESS","N"],

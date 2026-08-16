@@ -123,7 +123,7 @@ window.DECK = [
 ["geradeaus","ευθεία","efthía","B"],["wieder","ξανά","xaná","B"],["endlich","επιτέλους","epitélous","B"],
 ["sofort","αμέσως","amésos","B"],["langsam (Adv.)","αργά","argá","B"],["früh","νωρίς","norís","B"],
 ["spät","αργά το βράδυ","argá to vrádi","B"],["gerne","ευχαρίστως","efcharístos","B"],["kein Problem","κανένα πρόβλημα","kanéna próvlima","B"],
-["Verzeihung (formell)","με συγχωρείτε","me synchoríte","B"]
+["Verzeihung (formell)","με συγχωρείτε","me synchoríte","B"],
 // ── Tier 5 · Olympien — A2 Breite: Gefühle, Alltag, Konnektoren (expansion plan wave 1) ──
 ["Freude","η χαρά","i chará","N"],
 ["Angst","ο φόβος","o fóvos","N"],
