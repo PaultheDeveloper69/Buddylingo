@@ -196,7 +196,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
           <span style="font-size:13px;font-weight:700">Le Duel</span>
           <span style="font-size:11px;color:#8a857a">{{ battleVerdict }}</span>
         </div>
-        <video src="https://d8j0ntlcm91z4.cloudfront.net/user_32PgHXDjHlFXmhgKyUnBM4DN7Qi/hf_20260817_072947_e60247ef-65b3-49e4-be48-057b5f4f9fb3.mp4" poster="assets/chars/bataille-v2.png" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" preload="auto" aria-label="La France contre La Grèce" style="width:100%;display:block;border-radius:12px"></video>
+        <video src="https://d8j0ntlcm91z4.cloudfront.net/user_32PgHXDjHlFXmhgKyUnBM4DN7Qi/hf_20260817_072947_e60247ef-65b3-49e4-be48-057b5f4f9fb3.mp4" poster="assets/chars/bataille-v2.png" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" preload="auto" disablepictureinpicture="{{ true }}" controlslist="nodownload nofullscreen noplaybackrate" aria-label="La France contre La Grèce" style="width:100%;display:block;border-radius:12px;pointer-events:none"></video>
         <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
           <div style="display:flex;flex-direction:column;gap:1px">
             <span style="font-size:11px;font-weight:700;color:#d62828">La France {{ youFr }}</span>
@@ -523,7 +523,14 @@ class Component extends DCLogic {
   pullOpp = () => {
     if (!(window.BLSync && window.BLSync.enabled)) return;
     this.pullSelf();
-    window.BLSync.latestFront("el").then((r) => {
+    Promise.all([window.BLSync.whoAmI(), window.BLSync.rosterFull()]).then(([me, rows]) => {
+      // The opponent is the fighter ON that language — never yourself. Reading
+      // "newest snapshot for the language" broke as soon as you opened the other
+      // deck: your own 0-known rows for that language became the newest.
+      const foe = (rows || []).find(function (f) { return f.language_id === "el" && f.user_id !== me; });
+      if (!foe) return null;
+      return window.BLSync.latestFront("el", foe.user_id);
+    }).then((r) => {
       if (!r) return;
       this.setState({ serverOpp: r });
       try { localStorage.setItem("bl-front-el", JSON.stringify(r)); } catch (e) {}
@@ -548,7 +555,16 @@ class Component extends DCLogic {
     }, true);
     document.addEventListener("loadeddata", function (e) {
       const v = e.target;
-      if (v && v.tagName === "VIDEO") { v.loop = true; v.muted = true; const p = v.play(); if (p && p.catch) p.catch(function () {}); }
+      if (v && v.tagName === "VIDEO") {
+        // iOS Safari: without real playsinline/muted ATTRIBUTES it refuses to
+        // autoplay inline and paints its native player chrome over the clip.
+        v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
+        v.setAttribute("muted", ""); v.playsInline = true; v.muted = true;
+        v.controls = false; v.loop = true; v.disablePictureInPicture = true;
+        v.setAttribute("controlslist", "nodownload nofullscreen noplaybackrate");
+        v.style.pointerEvents = "none"; // untouchable, like a baked-in gif
+        const p = v.play(); if (p && p.catch) p.catch(function () {});
+      }
     }, true);
     if (window.BL_RELEASE && window.BL_RELEASE.unseen && window.BL_RELEASE.unseen(ACC && ACC.slot)) this.setState({ showRelease: true });
     try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
