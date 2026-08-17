@@ -11,13 +11,13 @@
 (function () {
   var note = {
     kicker: "What's new",
-    lead: "Dear fighters — our team has been hard at work on version 2.4.1, which comes with the following updates.",
+    lead: "Sorry dear users — we've heard your criticism, and the team has been hard at work on version 2.5 to improve performance and fix what was broken.",
     items: [
-      "The French deck grows to 1,059 words and the Greek deck to 967 — over 1,000 new entries from B1 to C1: society, work, media, health, environment and idiom.",
-      "Levels now hold 200 words instead of 100, so A1 through C1 each take real work to clear.",
-      "216 Greek words switch to their Cypriot form when you flip the dialect toggle — it was 39 before.",
-      "Your progress is untouched. Every word you have already learned keeps its box, its review date and your streak.",
-      "Performance updates: the fighter grid and your rival's score now load in one fast request and paint from the last known values, so fighters and battle numbers appear straight away instead of after a refresh."
+      "Your progress now always follows your account. Log in on any device or browser and the words you know appear straight away — no waiting, no refreshing, no empty deck.",
+      "Missed words are no longer a daily limit. A word you get wrong turns hot: inside a session it comes back after a growing gap of other cards, and it only cools once you have recalled it correctly on three different days. New words never stop arriving, however many you miss.",
+      "Levels are rebuilt: A1 to C2 are gone, replaced by named ranks that each hold 100 words.",
+      "Le Duel and The Front Line are now one section — the overall line big on top, the category breakdown below — and the faceoff is animated.",
+      "New app icon."
     ],
     outro: "Keep an eye out for new features.",
     cta: "Let's go"
@@ -26,10 +26,10 @@
     var o = {}; for (var k in note) o[k] = note[k]; o.title = t; return o;
   }
   window.BL_RELEASE = {
-    version: "2.4.1",
+    version: "2.5",
     auto: true,
-    fr: withTitle("Le Français 2.4.1"),
-    el: withTitle("Τα Ελληνικά 2.4.1"),
+    fr: withTitle("Le Français 2.5"),
+    el: withTitle("Τα Ελληνικά 2.5"),
     // The sim-only toggle stays out of the live app.
     devToggle: (function () {
       try {

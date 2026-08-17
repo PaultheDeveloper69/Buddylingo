@@ -32,12 +32,26 @@ button { font-family:inherit; cursor:pointer; border:none; }
 button:focus-visible { outline:2px solid #2160a8; outline-offset:2px; }
 button:disabled { opacity:0.45; cursor:not-allowed; }
 @keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+@keyframes tussleA { 0% { transform: translate(0,0) rotate(-3deg); } 25% { transform: translate(3px,-1px) rotate(4deg); } 50% { transform: translate(-2px,1px) rotate(-5deg); } 75% { transform: translate(2px,-2px) rotate(3deg); } 100% { transform: translate(0,0) rotate(-3deg); } }
+@keyframes tussleB { 0% { transform: translate(1px,0) rotate(4deg); } 30% { transform: translate(-3px,-2px) rotate(-6deg); } 60% { transform: translate(3px,1px) rotate(5deg); } 100% { transform: translate(1px,0) rotate(4deg); } }
+@keyframes tussleC { 0% { transform: translate(-1px,1px) rotate(2deg); } 35% { transform: translate(3px,0) rotate(-4deg); } 70% { transform: translate(-3px,-1px) rotate(5deg); } 100% { transform: translate(-1px,1px) rotate(2deg); } }
+@keyframes flingL { 0%, 62% { transform: translate(0,0) rotate(0deg); } 67% { transform: translate(-22px,-13px) rotate(-38deg); } 72% { transform: translate(-30px,-2px) rotate(-74deg); } 78% { transform: translate(-26px,0) rotate(-30deg); } 86% { transform: translate(-10px,-4px) rotate(-8deg); } 100% { transform: translate(0,0) rotate(0deg); } }
+@keyframes flingR { 0%, 62% { transform: translate(0,0) rotate(0deg); } 67% { transform: translate(22px,-13px) rotate(38deg); } 72% { transform: translate(30px,-2px) rotate(74deg); } 78% { transform: translate(26px,0) rotate(30deg); } 86% { transform: translate(10px,-4px) rotate(8deg); } 100% { transform: translate(0,0) rotate(0deg); } }
+@keyframes smokeFront { 0% { opacity: 0.28; transform: scale(0.9) translate(-2px,0); } 30% { opacity: 0.5; transform: scale(1.06) translate(2px,-2px); } 60% { opacity: 0.36; transform: scale(1) translate(3px,-1px); } 100% { opacity: 0.28; transform: scale(0.9) translate(-2px,0); } }
+@keyframes dustPuff { 0% { opacity: 0; transform: scale(0.45) translateY(2px); } 35% { opacity: 0.5; transform: scale(0.95) translateY(0); } 100% { opacity: 0; transform: scale(1.5) translateY(-6px); } }
+@keyframes powPop { 0%, 78% { opacity: 0; transform: scale(0.55) rotate(-8deg); } 84% { opacity: 1; transform: scale(1.04) rotate(4deg); } 92% { opacity: 0.9; transform: scale(0.98) rotate(-3deg); } 100% { opacity: 0; transform: scale(1.16) rotate(6deg); } }
 </style>
 <script src="greek-deck.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="bl-config.js"></script>
 <script src="bl-sync.js"></script>
+<script src="bl-front.js"></script>
 <script src="bl-release.js"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/icon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/brand/icon-512.png">
+<link rel="apple-touch-icon" href="assets/brand/icon-180.png">
+<meta property="og:image" content="assets/brand/icon-512.png">
+<script src="bl-sound.js"></script>
 </helmet>
 <div style="min-height:100dvh;background:#f6f4ef" data-screen-label="Vocabulaire Inférieur">
 
@@ -120,7 +134,6 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
           <circle cx="43" cy="43" r="35" fill="none" stroke="#efece5" stroke-width="8"></circle>
           <circle cx="43" cy="43" r="35" fill="none" stroke="#2160a8" stroke-width="8" stroke-linecap="round" transform="rotate(-90 43 43)" style="{{ ringStyle }}"></circle>
           <text x="43" y="41" text-anchor="middle" style="font-family:'Figtree';font-weight:800;font-size:18px;fill:#17181d">{{ goalDone }}</text>
-          <text x="43" y="55" text-anchor="middle" style="font-family:'Figtree';font-size:9.5px;fill:#a5a096">of {{ goalTarget }}</text>
         </svg>
         <div style="display:flex;flex-direction:column;gap:3px;min-width:0;flex:1">
           <span style="font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:#a1823c;font-weight:700">Rank</span>
@@ -141,8 +154,8 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
           <span style="font-size:26px;font-weight:800;line-height:1.15;color:#2160a8">{{ knownCount }}</span>
         </div>
         <div style="background:#fff;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:1px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
-          <span style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#a5a096;font-weight:600">Misses</span>
-          <span style="font-size:26px;font-weight:800;line-height:1.15">{{ wrongLabel }}</span>
+          <span style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#a5a096;font-weight:600">Hot words</span>
+          <span style="font-size:26px;font-weight:800;line-height:1.15">{{ hotLabel }}</span>
         </div>
       </div>
 
@@ -180,47 +193,12 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         </div>
       </div>
 
-      <div style="background:#fff;border-radius:20px;padding:14px 18px;display:flex;flex-direction:column;gap:9px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
-        <span style="display:flex;align-items:baseline;gap:10px">
-          <span style="font-size:13px;font-weight:700;color:#17181d">The Front Line · France vs Greece</span>
-          <span style="margin-left:auto;font-size:10px;color:#a5a096">war map coming soon</span>
-        </span>
-        <sc-for list="{{ fronts }}" as="Fr" hint-placeholder-count="5">
-          <span style="display:flex;align-items:center;gap:9px">
-            <span style="font-size:10px;font-weight:600;color:#8a857a;width:60px;flex:none">{{ Fr.label }}</span>
-            <span style="font-size:10.5px;font-weight:800;color:#d62828;flex:none;width:28px;text-align:right">{{ Fr.fr }}</span>
-            <span style="flex:1;height:9px;border-radius:999px;overflow:hidden;display:flex;background:#efece5;position:relative">
-              <span style="{{ Fr.frStyle }}"></span>
-              <span style="{{ Fr.elStyle }}"></span>
-              <span style="position:absolute;left:50%;top:-1px;bottom:-1px;width:1.5px;background:#8a6d2f;opacity:0.5"></span>
-            </span>
-            <span style="font-size:10.5px;font-weight:800;color:#2160a8;flex:none;width:28px">{{ Fr.el }}</span>
-          </span>
-        </sc-for>
-        <span style="font-size:10px;color:#a5a096;text-align:center">{{ battleVerdict }} · bars press with every word learned</span>
-        <span style="display:flex;align-items:flex-end;justify-content:center;gap:14px;padding-top:4px">
-          <span style="display:flex;align-items:flex-end">
-            <span style="transform:scaleX(-1);display:inline-flex"><img src="assets/chars/brie.png" alt="" style="height:24px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.62s ease-in-out -0.31s infinite"></span>
-            <span style="transform:scaleX(-1);display:inline-flex;margin-left:-7px"><img src="assets/chars/fromage.png" alt="" style="height:28px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.55s ease-in-out -0.1s infinite"></span>
-            <span style="transform:scaleX(-1);display:inline-flex;margin-left:-8px"><img src="assets/chars/baguette.png" alt="" style="height:40px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.7s ease-in-out -0.45s infinite"></span>
-            <span style="transform:scaleX(-1);display:inline-flex;margin-left:-9px"><img src="assets/chars/croissant.png" alt="" style="height:34px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.5s ease-in-out infinite"></span>
-          </span>
-          <span style="font-size:11px;font-weight:800;color:#a5a096;padding-bottom:9px">VS</span>
-          <span style="display:flex;align-items:flex-end">
-            <img src="assets/chars/feta.png" alt="" style="height:30px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.52s ease-in-out -0.2s infinite">
-            <img src="assets/chars/citron.png" alt="" style="height:36px;margin-left:-9px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.68s ease-in-out -0.4s infinite">
-            <img src="assets/chars/tzatziki.png" alt="" style="height:28px;margin-left:-8px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.58s ease-in-out infinite">
-            <img src="assets/chars/dolma.png" alt="" style="height:26px;margin-left:-7px;mix-blend-mode:multiply;transform-origin:50% 100%;animation:mobHop 0.64s ease-in-out -0.25s infinite">
-          </span>
-        </span>
-      </div>
-
       <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
         <div style="display:flex;justify-content:space-between;align-items:baseline">
           <span style="font-size:13px;font-weight:700">Le Duel</span>
           <span style="font-size:11px;color:#8a857a">{{ battleVerdict }}</span>
         </div>
-        <img src="assets/chars/bataille-v2.png" alt="La France contre La Grèce" style="width:100%;display:block;border-radius:12px">
+        <video src="https://d8j0ntlcm91z4.cloudfront.net/user_32PgHXDjHlFXmhgKyUnBM4DN7Qi/hf_20260817_072947_e60247ef-65b3-49e4-be48-057b5f4f9fb3.mp4" poster="assets/chars/bataille-v2.png" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" preload="auto" aria-label="La France contre La Grèce" style="width:100%;display:block;border-radius:12px"></video>
         <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
           <div style="display:flex;flex-direction:column;gap:1px">
             <span style="font-size:11px;font-weight:700;color:#d62828">La France {{ youFr }}</span>
@@ -232,9 +210,36 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
             <span style="font-size:18px;font-weight:800">{{ elScore }}</span>
           </div>
         </div>
-        <div style="height:10px;border-radius:999px;overflow:hidden;display:flex;background:#efece5">
-          <div style="{{ barFrStyle }}"></div>
-          <div style="{{ barElStyle }}"></div>
+        <div style="position:relative;height:58px;margin-bottom:-8px;overflow:hidden">
+          <sc-for list="{{ dust }}" as="D" hint-placeholder-count="3">
+            <div style="{{ D.style }}"></div>
+          </sc-for>
+          <sc-for list="{{ skirmish }}" as="S" hint-placeholder-count="6">
+            <div style="{{ S.wrap }}"><div style="{{ S.mid }}"><div style="{{ S.body }}"></div></div></div>
+          </sc-for>
+          <sc-for list="{{ pows }}" as="P" hint-placeholder-count="3">
+            <div style="{{ P.style }}"></div>
+          </sc-for>
+        </div>
+        <div style="height:14px;border-radius:999px;overflow:hidden;display:flex;background:#efece5;position:relative">
+          <div style="{{ ovFrStyle }}"></div>
+          <div style="{{ ovElStyle }}"></div>
+          <span style="position:absolute;left:50%;top:-1px;bottom:-1px;width:1.5px;background:#8a6d2f;opacity:0.5"></span>
+        </div>
+        <span style="font-size:10.5px;color:#a5a096;text-align:center">{{ lineNote }}</span>
+        <div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid #f0ede6;padding-top:11px">
+          <sc-for list="{{ frontsBreakdown }}" as="Fr" hint-placeholder-count="4">
+            <span style="display:flex;align-items:center;gap:9px">
+              <span style="font-size:10px;font-weight:600;color:#8a857a;width:60px;flex:none">{{ Fr.label }}</span>
+              <span style="font-size:10.5px;font-weight:800;color:#d62828;flex:none;width:28px;text-align:right">{{ Fr.fr }}</span>
+              <span style="flex:1;height:9px;border-radius:999px;overflow:hidden;display:flex;background:#efece5;position:relative">
+                <span style="{{ Fr.frStyle }}"></span>
+                <span style="{{ Fr.elStyle }}"></span>
+                <span style="position:absolute;left:50%;top:-1px;bottom:-1px;width:1.5px;background:#8a6d2f;opacity:0.5"></span>
+              </span>
+              <span style="font-size:10.5px;font-weight:800;color:#2160a8;flex:none;width:28px">{{ Fr.el }}</span>
+            </span>
+          </sc-for>
         </div>
         <span style="font-size:10.5px;color:#a5a096;text-align:center">{{ battleNote }}</span>
         <div style="display:flex;flex-direction:column;gap:9px;border-top:1px solid #f0ede6;padding-top:11px">
@@ -393,12 +398,18 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:900},&quot;dailyGoal&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:30,&quot;min&quot;:10,&quot;max&quot;:100,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Daily goal (cards)&quot;},&quot;mistakeBudget&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:20,&quot;min&quot;:5,&quot;max&quot;:50,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Misses per day before new words stop&quot;},&quot;quiz&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;DE → EL&quot;,&quot;options&quot;:[&quot;DE → EL&quot;,&quot;EL → DE&quot;,&quot;Mixed&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Quiz direction&quot;}}">
 
 const W = window.DECK || [], TIER_NAMES = window.TIER_NAMES || [];
-const TS = 200, NT = Math.max(1, Math.ceil(W.length / TS)); // 200 Wörter pro Stufe (A1-C1)
+const TS = 100, NT = Math.max(1, Math.ceil(W.length / TS)); // ein Rang = 100 Wörter
 // Migration: gespeicherte tierFloor-Werte stammen aus der 100er-Ära -> auf das aktuelle Raster einrasten.
 // Abrunden, nie runden: ein gespeicherter Wert von 100 w\u00fcrde sonst auf 200 springen und 100 ungesehene W\u00f6rter \u00fcberspringen.
 function snapFloor(v) { const n = Math.max(0, Math.floor(v || 0)); return Math.min(NT - 1, Math.floor(n / TS)) * TS; }
 const MIN = 60000, DAY = 86400000;
 const IV = [10*MIN, DAY, 3*DAY, 7*DAY, 16*DAY, 35*DAY, 90*DAY];
+// A miss makes a word HOT. Hot words are relearned by SUCCESSIVE RELEARNING:
+// retrieved correctly on HOT_DAYS different days before they rejoin normal
+// spacing. Within a session the word returns after a GROWING gap of other cards
+// (HOT_GAPS) so each attempt is real retrieval, not recognition of what you just
+// read. Between sessions it climbs an expanding ladder (HOT_LADDER).
+const HOT_GAPS = [3, 8, 16], HOT_LADDER = [10 * MIN, DAY, 3 * DAY], HOT_DAYS = 3;
 const ACC = (function () { try { return JSON.parse(localStorage.getItem("bl-session") || "null"); } catch (e) { return null; } })();
 const SUF = ACC && ACC.slot != null ? ":" + ACC.slot : "";
 const KEY = "vocab-el-v1" + SUF;
@@ -416,6 +427,17 @@ const BADGE_DEFS = [
   ["eclair","Aux Pieds Légers","10 fast answers in one session"],
   ["grimpeur","Cheval de Troie","Jump a difficulty tier"]
 ];
+// Rank = 100 words, identical in every language. The badge word is a plain
+// description of what that many words buys you — no CEFR claim.
+function capOf(rank) {
+  if (rank <= 2) return "Survive";
+  if (rank <= 4) return "Get by";
+  if (rank <= 6) return "Converse";
+  if (rank <= 8) return "Follow";
+  if (rank <= 10) return "Core";
+  return "Beyond";
+}
+function rankLabel(t) { return (t + 1) < 10 ? "0" + (t + 1) : "" + (t + 1); }
 const MY_SIDE = "el", OPP_KEY = "vocab-fr-v1";
 const REL = (window.BL_RELEASE && window.BL_RELEASE.el) || { kicker: "", title: "", lead: "", cta: "OK", items: [] };
 const MISSIONS = [["w_bouclier","Huile d’Olive Bouillante","12 correct answers in a day","c",12],["w_lance","Lancer de Feta","Get 6 verbs right in a day","v",6],["w_sandales","Roulade de Dolma","8 fast answers in a day","f",8],["w_feu","Citron Pressé","Learn 5 new words in a day","n",5]];
@@ -448,6 +470,16 @@ class Component extends DCLogic {
     this.setState({ showRelease: false });
   };
   componentDidMount() {
+    // The faceoff clip mounts with the duel section, long after this runs, so the
+    // loop is enforced from the document instead of the tag.
+    document.addEventListener("ended", function (e) {
+      const v = e.target;
+      if (v && v.tagName === "VIDEO") { v.loop = true; v.muted = true; v.currentTime = 0; const p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    }, true);
+    document.addEventListener("loadeddata", function (e) {
+      const v = e.target;
+      if (v && v.tagName === "VIDEO") { v.loop = true; v.muted = true; const p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    }, true);
     try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
     if (window.BL_RELEASE && window.BL_RELEASE.unseen && window.BL_RELEASE.unseen(ACC && ACC.slot)) this.setState({ showRelease: true });
     let saved = null;
@@ -474,8 +506,45 @@ class Component extends DCLogic {
   seedOpp = () => {
     try { const c = JSON.parse(localStorage.getItem("bl-front-fr") || "null"); if (c) this.setState({ serverOpp: c }); } catch (e) {}
   };
+  // Fresh device: local save is empty even though this fighter has server
+  // progress. Rebuild known words from their own newest snapshot. Local
+  // progress always wins; this only ever fills an empty deck.
+  pullSelf = () => {
+    if (!(window.BLSync && window.BLSync.enabled && window.BLSync.myFront)) return;
+    if (this.knownCount(this.state.cards) > 0) return;
+    if (window.BLSync.pullState) {
+      window.BLSync.pullState("el").then((m) => {
+        if (m && m.cards && Object.keys(m.cards).length) {
+          if (this.knownCount(this.state.cards) > 0) return;
+          this.mergeIn({ cards: m.cards, stats: m.stats, days: m.days, badges: m.badges,
+            xp: m.xp, tierFloor: m.tier_floor }, false);
+          return;
+        }
+        this.pullSelfCounts();
+      });
+      return;
+    }
+    this.pullSelfCounts();
+  };
+  pullSelfCounts = () => {
+    window.BLSync.myFront("el").then((r) => {
+      if (!r || this.knownCount(this.state.cards) > 0) return;
+      let b = null; try { if (r.known_mask) b = atob(r.known_mask); } catch (e) {}
+      const cards = Object.assign({}, this.state.cards);
+      const due = Date.now() + IV[3]; let n = 0;
+      for (let i = 0; i < W.length; i++) {
+        // pre-v4 snapshots have no mask: fall back to the first `known` words
+        // in deck order (the order the deck deals them), so the count survives.
+        const on = b ? (b.charCodeAt(i >> 3) & (1 << (i & 7))) : i < (r.known || 0);
+        if (on && !cards[idOf(i)]) { cards[idOf(i)] = { box: 3, reps: 3, misses: 0, due: due }; n++; }
+      }
+      if (!n) return;
+      this.setState({ cards: cards }, () => this.save());
+    });
+  };
   pullOpp = () => {
     if (!(window.BLSync && window.BLSync.enabled)) return;
+    this.pullSelf();
     window.BLSync.latestFront("fr").then((r) => {
       if (!r) return;
       this.setState({ serverOpp: r });
@@ -519,7 +588,15 @@ class Component extends DCLogic {
     try {
       if (window.BLSync && window.BLSync.enabled) {
         clearTimeout(this._syncT);
-        this._syncT = setTimeout(() => window.BLSync.pushSnapshot("el", this.knownCount(this.state.cards), catKnown), 1500);
+        this._syncT = setTimeout(() => {
+          const st = this.state;
+          const mask = window.BLFront ? window.BLFront.maskFromCards(st.cards, W) : null;
+          const kn = this.knownCount(st.cards);
+          if (window.BLSync.pushState) window.BLSync.pushState("el", { cards: st.cards, known: kn,
+            mask: mask, catKnown: catKnown, xp: st.xp, stats: st.stats, badges: st.badges,
+            days: st.days, tierFloor: st.tierFloor });
+          window.BLSync.pushSnapshot("el", kn, catKnown, { mask: mask });
+        }, 1500);
       }
     } catch (e) {}
   }
@@ -595,12 +672,13 @@ class Component extends DCLogic {
 
   budget() { const n = parseInt(this.props.mistakeBudget, 10); return isNaN(n) ? 20 : n; }
   goal() { const n = parseInt(this.props.dailyGoal, 10); return isNaN(n) ? 30 : n; }
+  // kept for the old prop, no longer gates anything
   budgetLeft(stats) { return Math.max(0, this.budget() - (stats.wrongToday || 0)); }
+  hotCount(cards) { let n = 0; for (const k in cards) if (cards[k].hot) n++; return n; }
   knownCount(cards) { let n = 0; for (const k in cards) if (!cards[k].lapsed) n++; return n; }
 
   refill(cards, queue, stats, commit) {
     const q = queue.slice();
-    if (this.budgetLeft(stats) <= 0) return q;
     let sn = this.sessNew || 0;
     const cap = this.state.pace || 6;
     const inQ = {}; q.forEach(function (i) { inQ[i] = 1; });
@@ -614,7 +692,11 @@ class Component extends DCLogic {
     return q;
   }
 
-  dueList() { const now = Date.now(), c = this.state.cards, out = []; for (let i = 0; i < W.length; i++) { const k = c[idOf(i)]; if (k && k.due <= now) out.push(i); } return out; }
+  dueList() {
+    const now = Date.now(), c = this.state.cards, hot = [], cold = [];
+    for (let i = 0; i < W.length; i++) { const k = c[idOf(i)]; if (k && k.due <= now) (k.hot ? hot : cold).push(i); }
+    return hot.concat(cold); // hot words are always dealt first
+  }
   aheadList() {
     const c = this.state.cards, out = [];
     for (const k in c) { const i = W.findIndex(function (w) { return w[0] === k; }); if (i >= 0) out.push({ i: i, due: c[k].due }); }
@@ -623,6 +705,7 @@ class Component extends DCLogic {
   }
 
   startSession = () => {
+    this.hotSeen = {};
     this.cur = null; this.sessNew = 0; this.sessBadges = []; this.lastSess = null;
     let q = this.refill(this.state.cards, this.dueList(), this.state.stats, true);
     if (!q.length) q = this.aheadList();
@@ -662,9 +745,18 @@ class Component extends DCLogic {
     const fast = q === 2 && this.revealAt && (this.revealAt - this.shownAt) < 6000;
     const cards = Object.assign({}, s.cards);
     const prev = cards[key], pb = prev ? prev.box : 0;
-    const box = q === 2 ? Math.min(pb + 1, IV.length - 1) : q === 1 ? Math.max(1, pb) : 0;
+    const wasHot = !!(prev && prev.hot);
+    // hotDays = distinct days with a correct retrieval since this word lapsed.
+    // Repeats inside one day count once — days are what buy long-term retention.
+    let hotDays = q === 0 ? [] : (wasHot ? (prev.hotDays || []).slice() : []);
+    if (q > 0 && wasHot && hotDays.indexOf(today()) === -1) hotDays.push(today());
+    const hot = q === 0 ? true : wasHot ? hotDays.length < HOT_DAYS : false;
+    const box = hot ? 0 : q === 2 ? Math.min(pb + 1, IV.length - 1) : q === 1 ? Math.max(1, pb) : 0;
+    const dueAt = q === 0 ? now + HOT_LADDER[0]
+      : hot ? now + HOT_LADDER[Math.min(hotDays.length, HOT_LADDER.length - 1)]
+      : now + IV[hotDays.length ? Math.max(box, 2) : box];
     cards[key] = {
-      box: box, due: now + IV[box], lapsed: q === 0,
+      box: box, due: dueAt, lapsed: q === 0, hot: hot, hotDays: hotDays,
       reps: ((prev && prev.reps) || 0) + 1,
       hits: ((prev && prev.hits) || 0) + (q === 2 ? 1 : 0),
       slow: ((prev && prev.slow) || 0) + (q === 1 ? 1 : 0),
@@ -695,7 +787,13 @@ class Component extends DCLogic {
     if (this.cur.words.indexOf(key) === -1) this.cur.words.push(key);
 
     let queue = s.queue.slice(1);
-    if (q === 0) queue.push(idx);
+    // A missed word never comes back next: it returns after a growing gap so the
+    // attempt is a retrieval, not a recognition of what you just read.
+    if (q === 0) {
+      const seen = (this.hotSeen = this.hotSeen || {});
+      const n = seen[key] = (seen[key] || 0) + 1;
+      queue.splice(Math.min(HOT_GAPS[Math.min(n - 1, HOT_GAPS.length - 1)], queue.length), 0, idx);
+    }
     queue = this.refill(cards, queue, stats, true);
 
     const badges = Object.assign({}, s.badges);
@@ -783,7 +881,7 @@ class Component extends DCLogic {
     }
     // tiers
     const activeTier = Math.min(NT - 1, Math.floor((s.tierFloor || 0) / TS));
-    const CEFR = ["A1", "A2", "B1", "B2", "C1", "C2"];
+    const CEFR = null; // Ränge statt CEFR
     const tiers = [], tierKn = [], tierSize = [];
     for (let t = 0; t < NT; t++) {
       let kn = 0;
@@ -793,7 +891,7 @@ class Component extends DCLogic {
       tierKn.push(kn); tierSize.push(size);
       tiers.push({
         name: TIER_NAMES[t] || ("Stufe " + (t + 1)), count: kn + "/" + size,
-        cefr: CEFR[t] || "C2",
+        cefr: rankLabel(t),
         cefrStyle: { fontSize: "11px", fontWeight: "800", letterSpacing: "0.04em", color: full ? "#b08d3f" : act ? "#2160a8" : "#c9c3b5" },
         trackStyle: { width: "100%", height: act ? "9px" : "6px", background: "#efece5", borderRadius: "999px", overflow: "hidden", boxShadow: act ? "0 0 0 1.5px #2160a8" : "none" },
         fillStyle: { height: "100%", width: Math.round(100 * kn / size) + "%", background: full ? "#b08d3f" : "#2160a8", borderRadius: "999px", transition: "width 0.4s ease" },
@@ -815,8 +913,8 @@ class Component extends DCLogic {
     const all = [];
     for (let i = 0; i < W.length; i++) {
       const c = s.cards[idOf(i)];
-      const tag = c ? ((c.misses || 0) >= 2 ? "Shaky" : c.lapsed ? "Again" : c.box >= 3 ? "Solid" : "Known") : CAT[W[i][3]];
-      const tc = c ? ((c.misses || 0) >= 2 ? ["#f9e8e5", "#c2402f"] : c.lapsed ? ["#f0ede6", "#5d5a52"] : ["#e2ecf7", "#2160a8"]) : ["transparent", "#a5a096"];
+      const tag = c ? (c.hot ? "Hot" : c.lapsed ? "Again" : c.box >= 3 ? "Solid" : "Known") : CAT[W[i][3]];
+      const tc = c ? (c.hot ? ["#f9e8e5", "#c2402f"] : c.lapsed ? ["#f0ede6", "#5d5a52"] : ["#e2ecf7", "#2160a8"]) : ["transparent", "#a5a096"];
       all.push({
         en: W[i][0], fr: s.dialect === "cy" ? this.dispOf(W[i]).fr : W[i][1], sort: c ? c.due : Infinity, status: tag,
         tagStyle: { flex: "none", fontSize: "10px", fontWeight: "700", padding: "4px 10px", borderRadius: "999px", background: tc[0], color: tc[1], border: c ? "none" : "1px solid #e2ddd2" },
@@ -866,6 +964,36 @@ class Component extends DCLogic {
         frStyle: { width: p + "%", background: "#d62828", transition: "width 0.5s ease" },
         elStyle: { flex: "1", background: "#2160a8", transition: "width 0.5s ease" } };
     });
+        // battling mob over the overall line (lifted from Vocab Map)
+    const frVal = MY_SIDE === "fr" ? known : oppKnown, elVal = MY_SIDE === "fr" ? oppKnown : known;
+    const clash = Math.max(18, Math.min(82, (frVal + elVal) > 0 ? Math.round(100 * frVal / (frVal + elVal)) : 50));
+    const TUS = ["tussleA", "tussleB", "tussleC"], sizesM = [34, 27, 30], liftsM = [0, 4, 1];
+    const CASTM = { fr: ["croissant", "fromage", "baguette"], el: ["olive", "feta", "dolma"] };
+    const SCALEM = { baguette: 1.5, olive: 0.92, dolma: 1.08 };
+    const losing = frVal === elVal ? null : frVal < elVal ? "me" : "them";
+    const flingCycles = function (side) { return losing === null ? [8.5, 10.5, 12.5] : losing === side ? [4.7, 6.1, 7.3] : [11.3, 14.1, 16.7]; };
+    const skirmish = [];
+    const buildMob = function (lang, side, xs) {
+      const cycles = flingCycles(side);
+      CASTM[lang].forEach(function (m, i) {
+        const size = Math.round(sizesM[i] * (SCALEM[m] || 1));
+        skirmish.push({
+          wrap: { position: "absolute", left: "calc(" + clash + "% + " + xs[i] + "px)", bottom: (5 + liftsM[i]) + "px", width: size + "px", height: size + "px", zIndex: String(3 - i),
+            animation: (side === "me" ? "flingL " : "flingR ") + cycles[i] + "s cubic-bezier(0.3,0.05,0.2,1) " + (i * 1.7 + (side === "me" ? 0 : 0.9)).toFixed(2) + "s infinite", pointerEvents: "none" },
+          mid: { width: "100%", height: "100%", animation: TUS[i % 3] + " " + (0.72 + i * 0.19).toFixed(2) + "s ease-in-out " + (i * 0.11).toFixed(2) + "s infinite" },
+          body: { width: "100%", height: "100%", backgroundImage: "url(assets/chars/" + m + ".png)", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply", transformOrigin: "50% 100%", transform: side === "me" ? "rotate(7deg)" : "rotate(-7deg)" }
+        });
+      });
+    };
+    buildMob("fr", "me", [-30, -13, -22]);
+    buildMob("el", "them", [-2, 12, 4]);
+    const dust = [[40, 2.3, 0, 1, "dustPuff", 0], [32, 3.1, 0.7, 1, "dustPuff", 6], [52, 4.9, 0.3, 6, "smokeFront", -6], [38, 3.7, 2.1, 6, "smokeFront", 10]].map(function (a) {
+      const w = a[0], anim = a[4];
+      return { style: { position: "absolute", left: "calc(" + clash + "% - " + (w / 2 - a[5]) + "px)", bottom: anim === "smokeFront" ? "1px" : "0px", width: w + "px", height: Math.round(w * 0.72) + "px", zIndex: String(a[3]), backgroundImage: "url(assets/chars/dust.png)", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply", opacity: anim === "smokeFront" ? "0.4" : "0", animation: anim + " " + a[1] + "s ease-in-out " + a[2] + "s infinite", pointerEvents: "none" } };
+    });
+    const pows = [["pow-1", 34, 4.7, 0.4, -30], ["pow-2", 28, 6.1, 2.3, 10], ["pow-3", 31, 7.9, 4.1, -8]].map(function (a) {
+      return { style: { position: "absolute", left: "calc(" + clash + "% + " + a[4] + "px)", top: "0px", width: a[1] + "px", height: a[1] + "px", backgroundImage: "url(assets/chars/" + a[0] + ".png)", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center", mixBlendMode: "multiply", opacity: "0", animation: "powPop " + a[2] + "s ease-out " + a[3] + "s infinite", pointerEvents: "none" } };
+    });
     const ls = this.lastSess || { xp: 0, fast: 0, sure: 0, reviewed: 0 };
     return {
       isSplash: s.view === "splash", notSplash: s.view !== "splash",
@@ -893,14 +1021,15 @@ class Component extends DCLogic {
       xpBarStyle: { height: "100%", width: Math.round(rankPct * 100) + "%", background: "#b08d3f", borderRadius: "999px", transition: "width 0.4s ease" },
       rankNext: nextRank ? (nextRank[1] - s.xp) + " XP to " + nextRank[0] : "Highest rank reached",
       dueCount: due, knownCount: known,
-      wrongLabel: (stats.wrongToday || 0) + "/" + budget,
+      hotLabel: String(this.hotCount(s.cards)),
+      wrongLabel: String(stats.wrongToday || 0),
       nothingToDo: queued === 0 && Object.keys(s.cards).length === 0,
-      startLabel: queued ? (left > 0 ? "Start session" : "Review only · no new words") : due === 0 && Object.keys(s.cards).length ? "Review ahead" : "Start session",
+      startLabel: queued ? "Start session" : due === 0 && Object.keys(s.cards).length ? "Review ahead" : "Start session",
       paceLine: (s.pace || 6) + " new words per session · tier « " + TIER_NAMES[activeTier] + " » · adapts to your accuracy",
       tierNote: known + " of " + W.length + " conquered",
-      campLevel: CEFR[activeTier],
-      campRank: TIER_NAMES[activeTier],
-      campSub: tierKn[activeTier] + " of " + tierSize[activeTier] + " words at this level" + (tierKn[activeTier] >= tierSize[activeTier] && activeTier < 4 ? " — " + CEFR[activeTier + 1] + " next" : ""),
+      campLevel: "R" + rankLabel(activeTier),
+      campRank: capOf(activeTier + 1) + " · " + (TIER_NAMES[activeTier] || "Stufe " + (activeTier + 1)),
+      campSub: tierKn[activeTier] + " of " + tierSize[activeTier] + " words at rank " + rankLabel(activeTier) + " · 100 words per rank" + (tierKn[activeTier] >= tierSize[activeTier] && activeTier < NT - 1 ? " — rank " + rankLabel(activeTier + 1) + " next" : ""),
       heatNote: reviewedToday ? reviewedToday + " cards today" : "nothing yet today",
       heatCells: cells,
       tiers: tiers,
@@ -916,7 +1045,10 @@ class Component extends DCLogic {
       barFrStyle: { width: frPct + "%", background: "#d62828", transition: "width 0.5s ease" },
       barElStyle: { flex: "1", background: "#2160a8" },
       missions: missions,
-      fronts: fronts,
+      fronts: fronts, frontsBreakdown: fronts.slice(1),
+      skirmish: skirmish, dust: dust, pows: pows,
+      ovFrStyle: Object.assign({}, fronts[0].frStyle, { height: "100%" }), ovElStyle: Object.assign({}, fronts[0].elStyle, { height: "100%" }),
+      lineNote: (function () { const fv = MY_SIDE === "fr" ? known : oppKnown, ev = MY_SIDE === "fr" ? oppKnown : known; const p = (fv + ev) > 0 ? Math.round(100 * fv / (fv + ev)) : 50; const my = MY_SIDE === "fr" ? p : 100 - p; const d = Math.abs(my - 50) * 2; return d === 0 ? "the line sits at the border" : "the line is " + d + "% into " + (my >= 50 ? "their" : "your") + " half"; })(),
       battleNote: "1 pt per word known · 25 pts per weapon · live from both fighters' saves",
       exportLog: this.exportLog, importLog: this.importLog, resetAll: this.resetAll,
       startSession: this.startSession,
@@ -948,7 +1080,7 @@ class Component extends DCLogic {
       hasNewBadges: (this.sessBadges || []).length > 0,
       newBadgeNames: (this.sessBadges || []).join(", "),
       hasAdjust: !!s.adjustNote, adjustNote: s.adjustNote,
-      doneNext: left > 0 ? known + " words known · streak " + (stats.streak || 0) + " days" : (stats.wrongToday || 0) + " misses today — no new words until tomorrow. Reviews stay open."
+      doneNext: (function (h) { return known + " words known · streak " + (stats.streak || 0) + " days" + (h ? " · " + h + " hot word" + (h === 1 ? "" : "s") + " still repeating" : ""); })(this.hotCount(s.cards))
     };
   }
 }
