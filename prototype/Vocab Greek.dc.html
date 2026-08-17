@@ -247,6 +247,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
           </sc-for>
         </div>
         <span style="font-size:10.5px;color:#a5a096;text-align:center">{{ battleNote }}</span>
+        <span style="{{ syncNoteStyle }}">{{ syncNote }}</span>
         <div style="display:flex;flex-direction:column;gap:9px;border-top:1px solid #f0ede6;padding-top:11px">
           <span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#a1823c">Missions · earn weapons</span>
           <sc-for list="{{ missions }}" as="m" hint-placeholder-count="4">
@@ -307,8 +308,11 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         <button style="min-height:44px;background:#f0ede6;border-radius:999px;color:#17181d;font-size:13px;font-weight:600;margin-top:4px" style-hover="{{ ghostHover }}" onClick="{{ toggleAll }}">{{ toggleLabel }}</button>
       </div>
 
-      <button style="align-self:center;background:none;color:#a5a096;font-size:11px;text-decoration:underline;text-underline-offset:3px;min-height:44px" onClick="{{ resetAll }}">Reset all progress</button>
-      <div style="display:flex;justify-content:center;gap:18px"><a href="Vocab French.dc.html" style="font-size:11px;color:#a5a096">← retreat to the superior vocabulary</a><a href="BuddyLingo Login.dc.html" style="font-size:11px;color:#a5a096">⇄ switch fighter</a></div>
+      <button style="align-self:center;min-height:46px;padding:0 28px;background:#17181d;color:#fff;border-radius:999px;font-size:13.5px;font-weight:700;box-shadow:0 1px 3px rgba(23,24,29,0.18)" onClick="{{ openSupport }}">Contact support</button>
+      <sc-if value="{{ devTools }}" hint-placeholder-val="{{ false }}">
+        <button style="align-self:center;background:none;color:#a5a096;font-size:11px;text-decoration:underline;text-underline-offset:3px;min-height:44px" onClick="{{ resetAll }}">Reset all progress</button>
+        <div style="display:flex;justify-content:center;gap:18px"><a href="Vocab French.dc.html" style="font-size:11px;color:#a5a096">← retreat to the superior vocabulary</a><a href="BuddyLingo Login.dc.html" style="font-size:11px;color:#a5a096">⇄ switch fighter</a></div>
+      </sc-if>
     </div>
   </sc-if>
 
@@ -399,7 +403,17 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 </sc-if>
 </div>
 
-</x-dc>
+
+  <sc-if value="{{ showSupport }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(23,24,29,0.45);display:flex;align-items:center;justify-content:center;padding:24px;z-index:50" onClick="{{ closeSupport }}">
+      <div style="background:#fffdf8;border-radius:20px;padding:26px 24px;max-width:340px;width:100%;display:flex;flex-direction:column;gap:12px;text-align:center;box-shadow:0 18px 50px rgba(23,24,29,0.25)" onClick="{{ eatClick }}">
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#a1823c">BuddyLingo Support</span>
+        <span style="font-size:20px;font-weight:800;color:#17181d">Screw you and learn!</span>
+        <span style="font-size:12px;color:#8a857a">Ticket #0001 closed. Reason: skill issue.</span>
+        <button style="min-height:44px;background:#17181d;color:#fff;border-radius:999px;font-size:13px;font-weight:700;margin-top:4px" onClick="{{ closeSupport }}">Fine</button>
+      </div>
+    </div>
+  </sc-if></x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:900},&quot;dailyGoal&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:30,&quot;min&quot;:10,&quot;max&quot;:100,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Daily goal (cards)&quot;},&quot;mistakeBudget&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:20,&quot;min&quot;:5,&quot;max&quot;:50,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Misses per day before new words stop&quot;},&quot;quiz&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;DE → EL&quot;,&quot;options&quot;:[&quot;DE → EL&quot;,&quot;EL → DE&quot;,&quot;Mixed&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Quiz direction&quot;}}">
 
 const W = window.DECK || [], TIER_NAMES = window.TIER_NAMES || [];
@@ -618,7 +632,12 @@ class Component extends DCLogic {
           if (window.BLSync.pushState) window.BLSync.pushState("el", { cards: st.cards, known: kn,
             mask: mask, catKnown: catKnown, xp: st.xp, stats: st.stats, badges: st.badges,
             days: st.days, tierFloor: st.tierFloor });
-          window.BLSync.pushSnapshot("el", kn, catKnown, { mask: mask });
+          // weapons travel with the snapshot as bonus POINTS (25 per weapon)
+          const wN = Object.keys(st.badges || {}).filter(function (k) { return k.slice(0, 2) === "w_"; }).length;
+          window.BLSync.pushSnapshot("el", kn, catKnown, { mask: mask, bonus: 25 * wN }).then((r) => {
+            if (r && r.ok) { const t = Date.now(); try { localStorage.setItem("bl-pub:el", String(t)); } catch (e) {} this.setState({ pubAt: t, pubErr: null }); }
+            else this.setState({ pubErr: r && r.blocked ? "preview" : (r && r.error) || "offline" });
+          });
         }, 1500);
       }
     } catch (e) {}
@@ -963,12 +982,23 @@ class Component extends DCLogic {
     let cyKn = 0;
     if (window.CYP) for (let ci = 0; ci < W.length; ci++) { const c2 = s.cards[idOf(ci)]; if (!c2 || c2.lapsed) continue; const p2 = W[ci][1].split(" "); const b2 = ["ο","η","το","οι","τα"].indexOf(p2[0]) >= 0 ? p2.slice(1).join(" ") : W[ci][1]; if (window.CYP[b2]) cyKn++; }
     let opp = null; try { opp = JSON.parse(localStorage.getItem(OPP_KEY) || "null"); } catch (e) {}
-    if (this.state.serverOpp) opp = { cards: {}, badges: (opp && opp.badges) || {}, known: this.state.serverOpp.known, catKnown: this.state.serverOpp.cat_known || {} };
+    if (this.state.serverOpp) opp = { cards: {}, badges: (opp && opp.badges) || {}, known: this.state.serverOpp.known, catKnown: this.state.serverOpp.cat_known || {}, bonus: this.state.serverOpp.bonus };
     let oppKnown = 0; if (opp && opp.cards) for (const ok in opp.cards) if (!opp.cards[ok].lapsed) oppKnown++;
     if (opp && opp.known != null) oppKnown = opp.known;
     const wOf = function (b) { return Object.keys(b || {}).filter(function (k) { return k.slice(0, 2) === "w_"; }).length; };
-    const myW = wOf(s.badges), opW = wOf(opp && opp.badges);
+    // opponent weapons come from the SERVER snapshot (bonus = points); the local
+    // fallback only ever worked when both fighters shared one device
+    const myW = wOf(s.badges), opW = opp && opp.bonus != null ? Math.round(opp.bonus / 25) : wOf(opp && opp.badges);
     const myScore = known + 25 * myW, opScore = oppKnown + 25 * opW;
+    // sync health: when did MY score last reach the server, how fresh is THEIRS
+    const fmtAgo = function (ms) { if (ms < 90000) return "just now"; const mm = Math.round(ms / 60000); if (mm < 60) return mm + " min ago"; const hh = Math.round(mm / 60); if (hh < 36) return hh + " h ago"; return Math.round(hh / 24) + " d ago"; };
+    let pubAt = s.pubAt || 0; if (!pubAt) { try { pubAt = Number(localStorage.getItem("bl-pub:el")) || 0; } catch (e) {} }
+    const oppAt = this.state.serverOpp && this.state.serverOpp.computed_at ? Date.parse(this.state.serverOpp.computed_at) : 0;
+    const syncBad = !!(s.pubErr && s.pubErr !== "preview");
+    const syncNote = !(window.BLSync && window.BLSync.enabled) ? "offline \u2014 no server configured"
+      : s.pubErr === "preview" ? "preview copy \u2014 scores are not published from here"
+      : syncBad ? "\u26a0 your score is not reaching the server (" + s.pubErr + ") \u2014 sign in again from the login page"
+      : (pubAt ? "yours published " + fmtAgo(Date.now() - pubAt) : "yours not published yet") + (oppAt ? " \u00b7 theirs from " + fmtAgo(Date.now() - oppAt) : "");
     const mathOf = function (w, n) { return n > 0 ? w + " words + " + n + " weapon" + (n > 1 ? "s" : "") + " \u00d7 25" : w + " words \u00b7 no weapons"; };
     const frS = MY_SIDE === "fr" ? myScore : opScore, elS = MY_SIDE === "fr" ? opScore : myScore;
     // dialects share one deck, so the total is already complete; the split just says so
@@ -1082,7 +1112,10 @@ class Component extends DCLogic {
       ovFrStyle: Object.assign({}, fronts[0].frStyle, { height: "100%" }), ovElStyle: Object.assign({}, fronts[0].elStyle, { height: "100%" }),
       lineNote: (function () { const fv = frS, ev = elS; const p = (fv + ev) > 0 ? Math.round(100 * fv / (fv + ev)) : 50; const my = MY_SIDE === "fr" ? p : 100 - p; const d = Math.abs(my - 50) * 2; return d === 0 ? "the line sits at the border" : "the line is " + d + "% into " + (my >= 50 ? "their" : "your") + " half"; })(),
       battleNote: "1 pt per word known · 25 pts per weapon · live from both fighters' saves",
+      syncNote: syncNote, syncNoteStyle: { fontSize: "10.5px", fontWeight: syncBad ? "700" : "400", color: syncBad ? "#b3261e" : "#b8b3a8", textAlign: "center" },
       exportLog: this.exportLog, importLog: this.importLog, resetAll: this.resetAll,
+      devTools: (function () { try { return !/(^|\.)buddylingo\.de$/i.test(location.hostname); } catch (e) { return true; } })(),
+      showSupport: !!s.showSupport, openSupport: () => this.setState({ showSupport: true }), closeSupport: () => this.setState({ showSupport: false }), eatClick: (e) => e.stopPropagation(),
       startSession: this.startSession,
       dEl: { flex: "1", minHeight: "40px", borderRadius: "999px", fontSize: "13.5px", fontWeight: "700", background: s.dialect !== "cy" ? "#2160a8" : "transparent", color: s.dialect !== "cy" ? "#fff" : "#5d5a52" },
       dCy: { flex: "1", minHeight: "40px", borderRadius: "999px", fontSize: "13.5px", fontWeight: "700", background: s.dialect === "cy" ? "#2160a8" : "transparent", color: s.dialect === "cy" ? "#fff" : "#5d5a52" },

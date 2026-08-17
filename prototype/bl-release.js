@@ -11,13 +11,12 @@
 (function () {
   var note = {
     kicker: "What's new",
-    lead: "Sorry dear users — we've heard your criticism, and the team has been hard at work on version 2.5 to improve performance and fix what was broken.",
+    lead: "Version 2.6 — the great score reconciliation. Paul and Nancop compared phones at 19:05 and the numbers disagreed. They will never disagree again.",
     items: [
-      "Your progress now always follows your account. Log in on any device or browser and the words you know appear straight away — no waiting, no refreshing, no empty deck.",
-      "Missed words are no longer a daily limit. A word you get wrong turns hot: inside a session it comes back after a growing gap of other cards, and it only cools once you have recalled it correctly on three different days. New words never stop arriving, however many you miss.",
-      "Levels are rebuilt: A1 to C2 are gone, replaced by named ranks that each hold 100 words.",
-      "Le Duel and The Front Line are now one section — the overall line big on top, the category breakdown below — and the faceoff is animated.",
-      "New app icon."
+      "Weapons now travel with your score: your rival's phone finally sees them. No more secretly winning.",
+      "If your score stops reaching the server, the duel card now says so in red instead of silently showing your rival last week's number.",
+      "A stale device can no longer roll your published score backwards.",
+      "New: Contact support button at the bottom of every language. Our support team is standing by."
     ],
     outro: "Keep an eye out for new features.",
     cta: "Let's go"
@@ -26,10 +25,10 @@
     var o = {}; for (var k in note) o[k] = note[k]; o.title = t; return o;
   }
   window.BL_RELEASE = {
-    version: "2.5",
+    version: "2.6",
     auto: true,
-    fr: withTitle("Le Français 2.5"),
-    el: withTitle("Τα Ελληνικά 2.5"),
+    fr: withTitle("Le Français 2.6"),
+    el: withTitle("Τα Ελληνικά 2.6"),
     // The sim-only toggle stays out of the live app.
     devToggle: (function () {
       try {

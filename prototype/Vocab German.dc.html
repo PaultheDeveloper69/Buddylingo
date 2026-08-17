@@ -35,6 +35,11 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 <script src="deck-de.js"></script>
 <script>new MutationObserver(function () { document.querySelectorAll("video").forEach(function (v) { if (!v.muted || v.volume > 0) { v.muted = true; v.volume = 0; } }); }).observe(document.documentElement, { childList: true, subtree: true });</script>
 <script src="image-slot.js"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/icon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/brand/icon-512.png">
+<link rel="apple-touch-icon" href="assets/brand/icon-180.png">
+<meta property="og:image" content="assets/brand/icon-512.png">
+<script src="bl-sound.js"></script>
 </helmet>
 <div style="min-height:100dvh;background:#f6f4ef" data-screen-label="Deutsches Vokabular">
 
@@ -44,7 +49,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
     <div style="display:flex;flex-direction:column;align-items:center;gap:22px;animation:fadeUp 0.7s ease both;background:#f6f4ef">
       <video src="assets/chars/brezel-hero.mp4" poster="assets/chars/brezel.png" autoPlay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsInline="{{ true }}" style="height:200px;display:block;mix-blend-mode:multiply"></video>
       <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
-        <span style="font-size:42px;font-weight:800;letter-spacing:-0.03em;line-height:1;color:#17181d">Das Deutsche<span style="color:#946f00">.</span></span>
+        <span style="font-size:42px;font-weight:800;letter-spacing:-0.03em;line-height:1;color:#17181d">Deutsch<span style="color:#946f00">!</span></span>
         <span style="font-size:14px;color:#8a857a;text-wrap:balance">Gründlich überlegen. Fragen Sie die Brezel.</span>
       </div>
     </div>
@@ -127,8 +132,8 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
             <span style="font-size:10.5px;color:#8a857a">{{ campSub }}</span>
           </div>
         </div>
-        <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px">
-          <sc-for list="{{ tiers }}" as="T" hint-placeholder-count="2">
+        <div style="{{ tiersGridStyle }}">
+          <sc-for list="{{ tiers }}" as="T" hint-placeholder-count="5">
             <div style="display:flex;flex-direction:column;gap:5px;align-items:center">
               <span style="{{ T.cefrStyle }}">{{ T.cefr }}</span>
               <div style="{{ T.trackStyle }}"><div style="{{ T.fillStyle }}"></div></div>
@@ -224,8 +229,11 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         </div>
       </div>
 
-      <button style="align-self:center;background:none;color:#a5a096;font-size:11px;text-decoration:underline;text-underline-offset:3px;min-height:44px" onClick="{{ resetAll }}">Reset all progress</button>
-      <div style="display:flex;justify-content:center;gap:18px"><a href="Vocab War.dc.html" style="font-size:11px;color:#a5a096">⚔ Vocab War map</a><a href="BuddyLingo Login.dc.html" style="font-size:11px;color:#a5a096">⇄ switch fighter</a></div>
+      <button style="align-self:center;min-height:46px;padding:0 28px;background:#17181d;color:#fff;border-radius:999px;font-size:13.5px;font-weight:700;box-shadow:0 1px 3px rgba(23,24,29,0.18)" onClick="{{ openSupport }}">Contact support</button>
+      <sc-if value="{{ devTools }}" hint-placeholder-val="{{ false }}">
+        <button style="align-self:center;background:none;color:#a5a096;font-size:11px;text-decoration:underline;text-underline-offset:3px;min-height:44px" onClick="{{ resetAll }}">Reset all progress</button>
+        <div style="display:flex;justify-content:center;gap:18px"><a href="Vocab War.dc.html" style="font-size:11px;color:#a5a096">⚔ Vocab War map</a><a href="BuddyLingo Login.dc.html" style="font-size:11px;color:#a5a096">⇄ switch fighter</a></div>
+      </sc-if>
     </div>
   </sc-if>
 
@@ -316,10 +324,22 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 </sc-if>
 </div>
 
-</x-dc>
+
+  <sc-if value="{{ showSupport }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(23,24,29,0.45);display:flex;align-items:center;justify-content:center;padding:24px;z-index:50" onClick="{{ closeSupport }}">
+      <div style="background:#fffdf8;border-radius:20px;padding:26px 24px;max-width:340px;width:100%;display:flex;flex-direction:column;gap:12px;text-align:center;box-shadow:0 18px 50px rgba(23,24,29,0.25)" onClick="{{ eatClick }}">
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#a1823c">BuddyLingo Support</span>
+        <span style="font-size:20px;font-weight:800;color:#17181d">Screw you and learn!</span>
+        <span style="font-size:12px;color:#8a857a">Ticket #0001 closed. Reason: skill issue.</span>
+        <button style="min-height:44px;background:#17181d;color:#fff;border-radius:999px;font-size:13px;font-weight:700;margin-top:4px" onClick="{{ closeSupport }}">Fine</button>
+      </div>
+    </div>
+  </sc-if></x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:900},&quot;dailyGoal&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:30,&quot;min&quot;:10,&quot;max&quot;:100,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Daily goal (cards)&quot;},&quot;mistakeBudget&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:20,&quot;min&quot;:5,&quot;max&quot;:50,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Misses per day before new words stop&quot;},&quot;quiz&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;EN → DE&quot;,&quot;options&quot;:[&quot;EN → DE&quot;,&quot;DE → EN&quot;,&quot;Mixed&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Quiz direction&quot;},&quot;showConj&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Cards&quot;,&quot;label&quot;:&quot;Conjugation tables on verbs&quot;}}">
 
 const W = window.DECK || [], TIER_NAMES = window.TIER_NAMES || [];
+const TS = 100, NT = Math.max(1, Math.ceil(W.length / TS)); // 10 Bänder à 100 Lexeme
+function snapFloor(v) { const n = Math.max(0, Math.floor(v || 0)); return Math.min(NT - 1, Math.floor(n / TS)) * TS; }
 const MIN = 60000, DAY = 86400000;
 const IV = [10*MIN, DAY, 3*DAY, 7*DAY, 16*DAY, 35*DAY, 90*DAY];
 const ACC = (function () { try { return JSON.parse(localStorage.getItem("bl-session") || "null"); } catch (e) { return null; } })();
@@ -339,6 +359,17 @@ const BADGE_DEFS = [
   ["eclair","Blitzrunde","10 fast answers in one session"],
   ["grimpeur","Beförderung","Jump a difficulty tier"]
 ];
+// Rank = 100 words, identical in every language. The badge word is a plain
+// description of what that many words buys you — no CEFR claim.
+function capOf(rank) {
+  if (rank <= 2) return "Survive";
+  if (rank <= 4) return "Get by";
+  if (rank <= 6) return "Converse";
+  if (rank <= 8) return "Follow";
+  if (rank <= 10) return "Core";
+  return "Beyond";
+}
+function rankLabel(t) { return (t + 1) < 10 ? "0" + (t + 1) : "" + (t + 1); }
 const MY_SIDE = "de", OPP_KEY = "";
 const MISSIONS = [["w_brezel","Brezel-Blitz","Learn 5 new words in a day","n",5],["w_wurst","Wurst-Walze","12 correct answers in a day","c",12],["w_blitz","Blitzangriff","8 fast answers in a day","f",8],["w_verben","Verben-Vormarsch","Get 6 verbs right in a day","v",6]];
 function idOf(i) { return W[i][0]; }
@@ -376,7 +407,7 @@ class Component extends DCLogic {
     this.setState({
       cards: (saved && saved.cards) || {}, stats: stats, days: (saved && saved.days) || {},
       badges: (saved && saved.badges) || {}, xp: (saved && saved.xp) || 0,
-      pace: (saved && saved.pace) || 6, tierFloor: (saved && saved.tierFloor) || 0, loaded: true
+      pace: (saved && saved.pace) || 6, tierFloor: snapFloor(saved && saved.tierFloor), loaded: true
     });
     idbGet().then((m) => { if (m) this.mergeIn(m, true); });
   }
@@ -591,17 +622,17 @@ class Component extends DCLogic {
       const r = this.recent, acc = r.length ? r.filter(function (x) { return x > 0; }).length / r.length : 0;
       const pct = Math.round(acc * 100);
       let jumped = false;
-      if (r.length >= 24 && acc >= 0.92 && tierFloor < 100) {
-        tierFloor = (Math.floor(tierFloor / 100) + 1) * 100;
+      if (r.length >= 24 && acc >= 0.92 && tierFloor < (NT - 1) * TS) {
+        tierFloor = (Math.floor(tierFloor / TS) + 1) * TS;
         pace = Math.min(24, pace + 4);
-        note = pct + "% accuracy — too easy. Jumped ahead to tier „" + TIER_NAMES[tierFloor / 100] + "“, intake raised to " + pace + " new words per session.";
+        note = pct + "% accuracy — too easy. Jumped ahead to tier „" + (TIER_NAMES[tierFloor / TS] || "Stufe " + (tierFloor / TS + 1)) + "“, intake raised to " + pace + " new words per session.";
         this.recent = []; jumped = true;
       } else if (r.length >= 15 && acc >= 0.9 && pace < 24) {
         pace = Math.min(24, pace + 3);
         note = pct + "% accuracy — intake raised to " + pace + " new words per session.";
       } else if (r.length >= 15 && acc < 0.65) {
         pace = Math.max(3, pace - 2);
-        if (tierFloor > 0) { tierFloor = tierFloor - 100; note = pct + "% accuracy — easing off: " + pace + " new words per session, backfilling tier „" + TIER_NAMES[tierFloor / 100] + "“."; }
+        if (tierFloor > 0) { tierFloor = Math.max(0, tierFloor - TS); note = pct + "% accuracy — easing off: " + pace + " new words per session, backfilling tier „" + (TIER_NAMES[tierFloor / TS] || "Stufe " + (tierFloor / TS + 1)) + "“."; }
         else note = pct + "% accuracy — easing off to " + pace + " new words per session.";
         this.recent = r.slice(-10);
       }
@@ -657,18 +688,18 @@ class Component extends DCLogic {
       cells.push({ style: { aspectRatio: "1", borderRadius: "5px", background: c } });
     }
     // tiers
-    const activeTier = Math.min(1, Math.floor((s.tierFloor || 0) / 100));
-    const CEFR = ["A1", "A2"];
+    const activeTier = Math.min(NT - 1, Math.floor((s.tierFloor || 0) / TS));
+    const CEFR = null; // Ränge statt CEFR
     const tiers = [], tierKn = [], tierSize = [];
-    for (let t = 0; t < 2; t++) {
+    for (let t = 0; t < NT; t++) {
       let kn = 0;
-      const size = Math.max(1, Math.min(W.length, (t + 1) * 100) - t * 100);
-      for (let i = t * 100; i < Math.min(W.length, (t + 1) * 100); i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) kn++; }
+      const size = Math.max(1, Math.min(W.length, (t + 1) * TS) - t * TS);
+      for (let i = t * TS; i < Math.min(W.length, (t + 1) * TS); i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) kn++; }
       const act = t === activeTier, full = kn >= size;
       tierKn.push(kn); tierSize.push(size);
       tiers.push({
-        name: TIER_NAMES[t], count: kn + "/" + size,
-        cefr: CEFR[t],
+        name: TIER_NAMES[t] || ("Stufe " + (t + 1)), count: kn + "/" + size,
+        cefr: rankLabel(t),
         cefrStyle: { fontSize: "11px", fontWeight: "800", letterSpacing: "0.04em", color: full ? "#b08d3f" : act ? "#946f00" : "#c9c3b5" },
         trackStyle: { width: "100%", height: act ? "9px" : "6px", background: "#efece5", borderRadius: "999px", overflow: "hidden", boxShadow: act ? "0 0 0 1.5px #946f00" : "none" },
         fillStyle: { height: "100%", width: Math.round(100 * kn / size) + "%", background: full ? "#b08d3f" : "#946f00", borderRadius: "999px", transition: "width 0.4s ease" },
@@ -731,7 +762,7 @@ class Component extends DCLogic {
       isSplash: s.view === "splash", notSplash: s.view !== "splash",
       isHome: s.view === "home", isStudy: s.view === "study", isDone: s.view === "done",
       enter: () => this.setState({ view: "home" }),
-      splashStats: !s.loaded ? "" : known > 0 ? known + " words known · " + (stats.streak || 0) + "-day streak · " + TIER_NAMES[activeTier] : "Frischer Rekrut — 200 Wörter warten",
+      splashStats: !s.loaded ? "" : known > 0 ? known + " words known · " + (stats.streak || 0) + "-day streak · " + TIER_NAMES[activeTier] : "Frischer Rekrut — " + W.length + " Wörter warten",
       ctaHover: { background: "#75570a" }, ghostHover: { background: "#e9e5dc" },
       missHover: { background: "#faf1ef" }, memHover: { background: "rgba(255,255,255,0.22)" },
       streak: stats.streak || 0, bestStreak: stats.bestStreak || 0,
@@ -747,9 +778,11 @@ class Component extends DCLogic {
       startLabel: queued ? (left > 0 ? "Start session" : "Review only · no new words") : due === 0 && Object.keys(s.cards).length ? "Review ahead" : "Start session",
       paceLine: (s.pace || 6) + " new words per session · tier „" + TIER_NAMES[activeTier] + "“ · adapts to your accuracy",
       tierNote: known + " of " + W.length + " conquered",
-      campLevel: CEFR[activeTier],
-      campRank: TIER_NAMES[activeTier],
-      campSub: tierKn[activeTier] + " of " + tierSize[activeTier] + " words at this level" + (tierKn[activeTier] >= tierSize[activeTier] && activeTier < 1 ? " — " + CEFR[activeTier + 1] + " next" : ""),
+      // ten bands wrap onto two rows of five rather than ten unreadable slivers
+      tiersGridStyle: { display: "grid", gridTemplateColumns: "repeat(" + (NT > 6 ? 5 : NT) + ",1fr)", gap: "8px", rowGap: "12px" },
+      campLevel: "R" + rankLabel(activeTier),
+      campRank: capOf(activeTier + 1) + " · " + (TIER_NAMES[activeTier] || "Stufe " + (activeTier + 1)),
+      campSub: tierKn[activeTier] + " of " + tierSize[activeTier] + " words at rank " + rankLabel(activeTier) + " · 100 words per rank" + (tierKn[activeTier] >= tierSize[activeTier] && activeTier < NT - 1 ? " — rank " + rankLabel(activeTier + 1) + " next" : ""),
       heatNote: reviewedToday ? reviewedToday + " cards today" : "nothing yet today",
       heatCells: cells,
       tiers: tiers,
@@ -767,6 +800,8 @@ class Component extends DCLogic {
       missions: missions,
       battleNote: "1 pt per word known · 25 pts per weapon · live from both fighters' saves",
       exportLog: this.exportLog, importLog: this.importLog, resetAll: this.resetAll,
+      devTools: (function () { try { return !/(^|\.)buddylingo\.de$/i.test(location.hostname); } catch (e) { return true; } })(),
+      showSupport: !!s.showSupport, openSupport: () => this.setState({ showSupport: true }), closeSupport: () => this.setState({ showSupport: false }), eatClick: (e) => e.stopPropagation(),
       startSession: this.startSession,
       goHome: () => this.setState({ view: "home", queue: [], revealed: false }),
       // study

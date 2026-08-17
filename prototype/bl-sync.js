@@ -4,6 +4,13 @@
 window.BLSync = (function () {
   const cfg = window.BL_CONFIG || {};
   const ok = !!(cfg.url && cfg.anonKey && String(cfg.url).indexOf("YOUR-") === -1 && String(cfg.anonKey).indexOf("YOUR-") === -1);
+  // Publishing is gated to the real deployment: a design preview or local copy
+  // with a logged-in session must never overwrite the live score (it happened:
+  // a stale save rolled fr back from 125 to 57 on 2026-08-17). Reads stay open
+  // everywhere; cfg.pushAnywhere = true overrides for testing.
+  const canPush = !!cfg.pushAnywhere || (function () {
+    try { return /(^|\.)buddylingo\.de$/i.test(location.hostname); } catch (e) { return false; }
+  })();
   let client = null;
   const REST = ok ? String(cfg.url).replace(/\/+$/, "") + "/rest/v1/" : null;
   // Public reads (roster, front snapshots) go straight to REST: one request, no
@@ -112,9 +119,10 @@ window.BLSync = (function () {
   }
   async function pushSnapshot(lang, known, catKnown, extra) {
     try {
-      if (!(await ready())) return;
+      if (!canPush) return { blocked: true };
+      if (!(await ready())) return { offline: true };
       const u = await client.auth.getUser();
-      if (!u || !u.data || !u.data.user) return;
+      if (!u || !u.data || !u.data.user) return { error: "not signed in" };
       const row = { user_id: u.data.user.id, language_id: lang, known: known, cat_known: catKnown || {} };
       // v4 columns — sent only when the caller has them, so a pre-v4 database
       // still accepts the insert.
@@ -123,9 +131,11 @@ window.BLSync = (function () {
       const r = await client.from("front_snapshots").insert(row);
       if (r && r.error && (row.known_mask || row.bonus != null)) {
         // database not migrated yet: fall back to the plain shape
-        await client.from("front_snapshots").insert({ user_id: row.user_id, language_id: lang, known: known, cat_known: catKnown || {} });
+        const r2 = await client.from("front_snapshots").insert({ user_id: row.user_id, language_id: lang, known: known, cat_known: catKnown || {} });
+        return r2 && r2.error ? { error: r2.error.message } : { ok: true };
       }
-    } catch (e) {}
+      return r && r.error ? { error: r.error.message } : { ok: true };
+    } catch (e) { return { offline: true }; }
   }
   // Everyone's current numbers. Uses the v4 `standings` view when it exists and
   // otherwise rebuilds it client-side, so this works before the SQL is applied.
@@ -184,6 +194,7 @@ window.BLSync = (function () {
   // public, read for the ladder and the duel. Master is never built from sub.
   async function pushState(lang, payload) {
     try {
+      if (!canPush) return { blocked: true };
       if (!(await ready())) return { offline: true };
       const u = await client.auth.getUser();
       if (!u || !u.data || !u.data.user) return { error: "not signed in" };
@@ -254,7 +265,7 @@ window.BLSync = (function () {
     if (!me) return null;
     return latestFront(lang, me);
   }
-  return { enabled: ok, ready: ready, login: login, register: register, roster: roster, rosterFull: roster2,
+  return { enabled: ok, canPush: canPush, ready: ready, login: login, register: register, roster: roster, rosterFull: roster2,
     pushSnapshot: pushSnapshot, latestFront: latestFront, myFront: myFront, pushState: pushState, pullState: pullState,
     standings: standings, masksFor: masksFor,
     rivals: rivals, setRival: setRival, whoAmI: whoAmI };
