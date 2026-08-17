@@ -606,6 +606,22 @@ class Component extends DCLogic {
     }, () => this.save());
   }
 
+  otherWorld() {
+    // Words are specific to each world, but progress is universal: whichever
+    // world is open, the other's known words still count toward every total.
+    const out = { known: 0, cat: { B: 0, N: 0, V: 0, A: 0 }, cards: null };
+    try {
+      const key = (WORLD_WORK ? "vocab-fr-v1" : "nani-fr-v1") + SUF;
+      const m = JSON.parse(localStorage.getItem(key) || "null");
+      if (!m || !m.cards) return out;
+      out.cards = m.cards;
+      const deck = WORLD_WORK ? (window.DECK || []) : (window.NANI_DECK ? window.NANI_DECK("fr") : []);
+      if (deck.length) { for (let i = 0; i < deck.length; i++) { const c = m.cards[deck[i][0]]; if (c && !c.lapsed) { out.known++; out.cat[deck[i][3]] = (out.cat[deck[i][3]] || 0) + 1; } } }
+      else { for (const k in m.cards) if (!m.cards[k].lapsed) out.known++; }
+    } catch (e) {}
+    return out;
+  }
+
   save() {
     const s = this.state;
     const catKnown = { B: 0, N: 0, V: 0, A: 0, total: 0 };
@@ -621,17 +637,24 @@ class Component extends DCLogic {
     } catch (e) {}
     idbPut(payload);
     try {
-      if (window.BLSync && window.BLSync.enabled && !WORLD_WORK) {
+      if (window.BLSync && window.BLSync.enabled) {
         clearTimeout(this._syncT);
         this._syncT = setTimeout(() => {
           const st = this.state;
-          const mask = window.BLFront ? window.BLFront.maskFromCards(st.cards, W) : null;
-          const kn = this.knownCount(st.cards);
-          // MASTER: full record incl. hot state. SUB: derived counts others read.
-          if (window.BLSync.pushState) window.BLSync.pushState("fr", { cards: st.cards, known: kn,
+          const ow = this.otherWorld();
+          // Universal totals: daily + work words both count, whichever world is open.
+          const kn = this.knownCount(st.cards) + ow.known;
+          const catAll = { B: (catKnown.B || 0) + ow.cat.B, N: (catKnown.N || 0) + ow.cat.N,
+            V: (catKnown.V || 0) + ow.cat.V, A: (catKnown.A || 0) + ow.cat.A, total: kn };
+          // The mask is deck-indexed, so it is always built over the VOCAB deck:
+          // from live cards in daily mode, from the stored save in work mode.
+          const vc = WORLD_WORK ? ow.cards : st.cards;
+          const mask = window.BLFront && vc ? window.BLFront.maskFromCards(vc, window.DECK || []) : null;
+          // MASTER stays world-exact (vocab cards only) — work words live in their own save.
+          if (!WORLD_WORK && window.BLSync.pushState) window.BLSync.pushState("fr", { cards: st.cards, known: this.knownCount(st.cards),
             mask: mask, catKnown: catKnown, xp: st.xp, stats: st.stats, badges: st.badges,
             days: st.days, tierFloor: st.tierFloor });
-          window.BLSync.pushSnapshot("fr", kn, catKnown, { mask: mask });
+          window.BLSync.pushSnapshot("fr", kn, catAll, { mask: mask });
         }, 1500);
       }
     } catch (e) {}
@@ -980,8 +1003,12 @@ class Component extends DCLogic {
     });
     const myCat = { B: 0, N: 0, V: 0, A: 0 };
     for (let i = 0; i < W.length; i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) myCat[W[i][3]] = (myCat[W[i][3]] || 0) + 1; }
+    // progress is universal: add the other world's words to every duel number
+    const ow = this.otherWorld();
+    for (const ck in ow.cat) myCat[ck] = (myCat[ck] || 0) + ow.cat[ck];
+    const totalKnown = known + ow.known;
     const opCat = (opp && opp.catKnown) || { B: 0, N: 0, V: 0, A: 0 };
-    const fronts = [["Overall", known, oppKnown], ["Nouns", myCat.N, opCat.N || 0], ["Verbs", myCat.V, opCat.V || 0], ["Adjectives", myCat.A, opCat.A || 0], ["Phrases", myCat.B, opCat.B || 0]].map(function (d) {
+    const fronts = [["Overall", totalKnown, oppKnown], ["Nouns", myCat.N, opCat.N || 0], ["Verbs", myCat.V, opCat.V || 0], ["Adjectives", myCat.A, opCat.A || 0], ["Phrases", myCat.B, opCat.B || 0]].map(function (d) {
       const frV = MY_SIDE === "fr" ? d[1] : d[2], elV = MY_SIDE === "fr" ? d[2] : d[1];
       const p = (frV + elV) > 0 ? Math.round(100 * frV / (frV + elV)) : 50;
       return { label: d[0], fr: frV, el: elV,
@@ -989,7 +1016,7 @@ class Component extends DCLogic {
         elStyle: { flex: "1", background: "#2160a8", transition: "width 0.5s ease" } };
     });
         // battling mob over the overall line (lifted from Vocab Map)
-    const frVal = MY_SIDE === "fr" ? known : oppKnown, elVal = MY_SIDE === "fr" ? oppKnown : known;
+    const frVal = MY_SIDE === "fr" ? totalKnown : oppKnown, elVal = MY_SIDE === "fr" ? oppKnown : totalKnown;
     const clash = Math.max(18, Math.min(82, (frVal + elVal) > 0 ? Math.round(100 * frVal / (frVal + elVal)) : 50));
     const TUS = ["tussleA", "tussleB", "tussleC"], sizesM = [34, 27, 30], liftsM = [0, 4, 1];
     const CASTM = { fr: ["croissant", "fromage", "baguette"], el: ["olive", "feta", "dolma"] };
