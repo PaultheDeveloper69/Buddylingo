@@ -123,6 +123,11 @@ window.BLSync = (function () {
       if (!(await ready())) return { offline: true };
       const u = await client.auth.getUser();
       if (!u || !u.data || !u.data.user) return { error: "not signed in" };
+      // split-brain guard: the auth session must BE the fighter this device logged
+      // in as — otherwise pushes land on someone else's row (it happened: Paul's
+      // phone published to Test User 1 for a whole afternoon).
+      const cached = cachedUid();
+      if (cached && u.data.user.id !== cached) return { error: "session belongs to another fighter" };
       const row = { user_id: u.data.user.id, language_id: lang, known: known, cat_known: catKnown || {} };
       // v4 columns — sent only when the caller has them, so a pre-v4 database
       // still accepts the insert.
@@ -198,6 +203,8 @@ window.BLSync = (function () {
       if (!(await ready())) return { offline: true };
       const u = await client.auth.getUser();
       if (!u || !u.data || !u.data.user) return { error: "not signed in" };
+      const cachedS = cachedUid();
+      if (cachedS && u.data.user.id !== cachedS) return { error: "session belongs to another fighter" };
       const row = {
         user_id: u.data.user.id, language_id: lang, rev: Date.now(),
         cards: payload.cards || {}, known: payload.known || 0,
