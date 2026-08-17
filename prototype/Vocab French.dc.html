@@ -201,12 +201,14 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
           <div style="display:flex;flex-direction:column;gap:1px">
             <span style="font-size:11px;font-weight:700;color:#d62828">La France {{ youFr }}</span>
             <span style="font-size:18px;font-weight:800">{{ frScore }}</span>
+            <span style="font-size:9.5px;color:#8a857a">{{ frMath }}</span>
             <span style="font-size:9.5px;font-weight:700;color:#a1823c">{{ frSplit }}</span>
           </div>
           <span style="font-size:12px;font-weight:800;color:#a5a096">VS</span>
           <div style="display:flex;flex-direction:column;gap:1px;align-items:flex-end">
             <span style="font-size:11px;font-weight:700;color:#2160a8">La Grèce {{ youEl }}</span>
             <span style="font-size:18px;font-weight:800">{{ elScore }}</span>
+            <span style="font-size:9.5px;color:#8a857a">{{ elMath }}</span>
             <span style="font-size:9.5px;font-weight:700;color:#a1823c">{{ elSplit }}</span>
           </div>
         </div>
@@ -997,6 +999,7 @@ class Component extends DCLogic {
     const ow = this.otherWorld();
     const totalKnown = known + ow.known;
     const myScore = totalKnown + 25 * myW, opScore = oppKnown + 25 * opW;
+    const mathOf = function (w, n) { return n > 0 ? w + " words + " + n + " weapon" + (n > 1 ? "s" : "") + " \u00d7 25" : w + " words \u00b7 no weapons"; };
     const frS = MY_SIDE === "fr" ? myScore : opScore, elS = MY_SIDE === "fr" ? opScore : myScore;
     const workN = WORLD_WORK ? known : ow.known, dailyN = WORLD_WORK ? ow.known : known;
     const mySplit = workN > 0 ? totalKnown + " = " + dailyN + " français + " + workN + " NANI" : "";
@@ -1015,7 +1018,7 @@ class Component extends DCLogic {
     // the other world's words count in the category breakdown too
     for (const ck in ow.cat) myCat[ck] = (myCat[ck] || 0) + ow.cat[ck];
     const opCat = (opp && opp.catKnown) || { B: 0, N: 0, V: 0, A: 0 };
-    const fronts = [["Overall", totalKnown, oppKnown], ["Nouns", myCat.N, opCat.N || 0], ["Verbs", myCat.V, opCat.V || 0], ["Adjectives", myCat.A, opCat.A || 0], ["Phrases", myCat.B, opCat.B || 0]].map(function (d) {
+    const fronts = [["Overall", myScore, opScore], ["Nouns", myCat.N, opCat.N || 0], ["Verbs", myCat.V, opCat.V || 0], ["Adjectives", myCat.A, opCat.A || 0], ["Phrases", myCat.B, opCat.B || 0]].map(function (d) {
       const frV = MY_SIDE === "fr" ? d[1] : d[2], elV = MY_SIDE === "fr" ? d[2] : d[1];
       const p = (frV + elV) > 0 ? Math.round(100 * frV / (frV + elV)) : 50;
       return { label: d[0], fr: frV, el: elV,
@@ -1023,7 +1026,7 @@ class Component extends DCLogic {
         elStyle: { flex: "1", background: "#2160a8", transition: "width 0.5s ease" } };
     });
         // battling mob over the overall line (lifted from Vocab Map)
-    const frVal = MY_SIDE === "fr" ? totalKnown : oppKnown, elVal = MY_SIDE === "fr" ? oppKnown : totalKnown;
+    const frVal = frS, elVal = elS; // full score (words + weapons) — must match the verdict
     const clash = Math.max(18, Math.min(82, (frVal + elVal) > 0 ? Math.round(100 * frVal / (frVal + elVal)) : 50));
     const TUS = ["tussleA", "tussleB", "tussleC"], sizesM = [34, 27, 30], liftsM = [0, 4, 1];
     const CASTM = { fr: ["croissant", "fromage", "baguette"], el: ["olive", "feta", "dolma"] };
@@ -1103,6 +1106,8 @@ class Component extends DCLogic {
       sessionCount: (this.sessions || []).length,
       battleVerdict: frS === elS ? "perfect tie" : frS > elS ? "France ahead by " + (frS - elS) + " pts" : "Greece ahead by " + (elS - frS) + " pts",
       frScore: frS, elScore: elS,
+      frMath: MY_SIDE === "fr" ? mathOf(totalKnown, myW) : mathOf(oppKnown, opW),
+      elMath: MY_SIDE === "el" ? mathOf(totalKnown, myW) : mathOf(oppKnown, opW),
       // e.g. "225 = 194 français + 31 NANI" — the total is always the complete total
       frSplit: MY_SIDE === "fr" ? mySplit : "", elSplit: MY_SIDE === "el" ? mySplit : "",
       youFr: MY_SIDE === "fr" ? "· you" : "", youEl: MY_SIDE === "el" ? "· you" : "",
@@ -1112,7 +1117,7 @@ class Component extends DCLogic {
       fronts: fronts, frontsBreakdown: fronts.slice(1),
       skirmish: skirmish, dust: dust, pows: pows,
       ovFrStyle: Object.assign({}, fronts[0].frStyle, { height: "100%" }), ovElStyle: Object.assign({}, fronts[0].elStyle, { height: "100%" }),
-      lineNote: (function () { const fv = MY_SIDE === "fr" ? totalKnown : oppKnown, ev = MY_SIDE === "fr" ? oppKnown : totalKnown; const p = (fv + ev) > 0 ? Math.round(100 * fv / (fv + ev)) : 50; const my = MY_SIDE === "fr" ? p : 100 - p; const d = Math.abs(my - 50) * 2; return d === 0 ? "the line sits at the border" : "the line is " + d + "% into " + (my >= 50 ? "their" : "your") + " half"; })(),
+      lineNote: (function () { const fv = frS, ev = elS; const p = (fv + ev) > 0 ? Math.round(100 * fv / (fv + ev)) : 50; const my = MY_SIDE === "fr" ? p : 100 - p; const d = Math.abs(my - 50) * 2; return d === 0 ? "the line sits at the border" : "the line is " + d + "% into " + (my >= 50 ? "their" : "your") + " half"; })(),
       battleNote: "1 pt per word known · 25 pts per weapon · live from both fighters' saves",
       exportLog: this.exportLog, importLog: this.importLog, resetAll: this.resetAll,
       startSession: this.startSession,

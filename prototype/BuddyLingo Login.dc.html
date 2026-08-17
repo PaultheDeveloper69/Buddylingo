@@ -222,19 +222,20 @@ class Component extends DCLogic {
     const slots = s.roster.map((r, i) => {
       const L = r ? langOf(r.lang) : null;
       const dormant = !r && i >= ALPHA_SLOTS; // alpha: only the first slots are claimable
-      const bot = !!(r && /^test user/i.test(r.name)); // simulation accounts — humans keep out
+      const bot = !!(r && /^test user/i.test(r.name)); // simulation accounts — hidden from the grid
+      const asLocked = dormant || bot; // bots masquerade as locked slots
       return {
-        initial: r ? (/^test user/i.test(r.name) ? "🤖" : (r.name[0] || "?").toUpperCase()) : (dormant ? "·" : "+"),
-        name: r ? r.name : (dormant ? "Locked" : "Open slot"),
-        sub: bot ? "simulation bot · not playable" : (r ? L[1] : (dormant ? "coming soon" : "tap to enlist")),
+        initial: r && !bot ? (r.name[0] || "?").toUpperCase() : (asLocked ? "·" : "+"),
+        name: r && !bot ? r.name : (asLocked ? "Locked" : "Open slot"),
+        sub: bot ? "coming soon" : (r ? L[1] : (dormant ? "coming soon" : "tap to enlist")),
         cardStyle: { display: "flex", alignItems: "center", gap: "10px", minHeight: "72px", padding: "12px 14px", borderRadius: "18px", textAlign: "left",
-          background: bot ? "#eceae4" : r ? "#fff" : "transparent", border: r ? "none" : "1.5px dashed #d8d3c8", boxShadow: bot ? "none" : r ? "0 1px 3px rgba(23,24,29,0.08)" : "none",
-          opacity: dormant ? 0.45 : bot ? 0.6 : 1, cursor: dormant || bot ? "not-allowed" : "pointer", filter: bot ? "grayscale(1)" : "none" },
+          background: r && !bot ? "#fff" : "transparent", border: r && !bot ? "none" : "1.5px dashed #d8d3c8", boxShadow: r && !bot ? "0 1px 3px rgba(23,24,29,0.08)" : "none",
+          opacity: asLocked ? 0.45 : 1, cursor: asLocked ? "not-allowed" : "pointer" },
         discStyle: { width: "36px", height: "36px", borderRadius: "999px", flex: "none", display: "inline-flex", alignItems: "center", justifyContent: "center",
-          fontSize: "15px", fontWeight: "800", color: "#fff", background: bot ? "#a5a096" : r ? L[2] : "#d8d3c8" },
-        nameStyle: { fontSize: "14px", fontWeight: "700", color: r ? "#17181d" : "#a5a096", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "110px" },
+          fontSize: "15px", fontWeight: "800", color: "#fff", background: r && !bot ? L[2] : "#d8d3c8" },
+        nameStyle: { fontSize: "14px", fontWeight: "700", color: r && !bot ? "#17181d" : "#a5a096", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", maxWidth: "110px" },
         tap: () => {
-          if (dormant || bot) return; // bots cannot be logged into from the UI
+          if (asLocked) return; // locked + bot slots are inert
           if (!r) return this.setState({ view: "claim", sel: i, name: "", lang: "", pin: "", err: false });
           this.setState({ view: "pin", sel: i, mode: "enter", pin: "", err: false });
         }
