@@ -204,11 +204,13 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
           <div style="display:flex;flex-direction:column;gap:1px">
             <span style="font-size:11px;font-weight:700;color:#d62828">La France {{ youFr }}</span>
             <span style="font-size:18px;font-weight:800">{{ frScore }}</span>
+            <span style="font-size:9.5px;font-weight:700;color:#a1823c">{{ frSplit }}</span>
           </div>
           <span style="font-size:12px;font-weight:800;color:#a5a096">VS</span>
           <div style="display:flex;flex-direction:column;gap:1px;align-items:flex-end">
             <span style="font-size:11px;font-weight:700;color:#2160a8">La Grèce {{ youEl }}</span>
             <span style="font-size:18px;font-weight:800">{{ elScore }}</span>
+            <span style="font-size:9.5px;font-weight:700;color:#a1823c">{{ elSplit }}</span>
           </div>
         </div>
         <div style="position:relative;height:58px;margin-bottom:-8px;overflow:hidden">
@@ -559,7 +561,9 @@ class Component extends DCLogic {
       // The opponent is the fighter ON that language — never yourself. Reading
       // "newest snapshot for the language" broke as soon as you opened the other
       // deck: your own 0-known rows for that language became the newest.
-      const foe = (rows || []).find(function (f) { return f.language_id === "fr" && f.user_id !== me; });
+      const my = (rows || []).find(function (f) { return f.user_id === me; });
+      const testMe = !!(my && /^test user/i.test(my.name));
+      const foe = (rows || []).find(function (f) { return f.language_id === "fr" && f.user_id !== me && /^test user/i.test(f.name) === testMe; });
       if (!foe) return null;
       return window.BLSync.latestFront("fr", foe.user_id);
     }).then((r) => {
@@ -953,6 +957,9 @@ class Component extends DCLogic {
     const disp = w ? this.dispOf(w) : null;
     let cyN = 0;
     if (window.CYP) for (let ci = 0; ci < W.length; ci++) { const p = W[ci][1].split(" "); const b = ["ο","η","το","οι","τα"].indexOf(p[0]) >= 0 ? p.slice(1).join(" ") : W[ci][1]; if (window.CYP[b]) cyN++; }
+    // how many KNOWN words take a Cypriot form — the total already includes them
+    let cyKn = 0;
+    if (window.CYP) for (let ci = 0; ci < W.length; ci++) { const c2 = s.cards[idOf(ci)]; if (!c2 || c2.lapsed) continue; const p2 = W[ci][1].split(" "); const b2 = ["ο","η","το","οι","τα"].indexOf(p2[0]) >= 0 ? p2.slice(1).join(" ") : W[ci][1]; if (window.CYP[b2]) cyKn++; }
     let opp = null; try { opp = JSON.parse(localStorage.getItem(OPP_KEY) || "null"); } catch (e) {}
     if (this.state.serverOpp) opp = { cards: {}, badges: (opp && opp.badges) || {}, known: this.state.serverOpp.known, catKnown: this.state.serverOpp.cat_known || {} };
     let oppKnown = 0; if (opp && opp.cards) for (const ok in opp.cards) if (!opp.cards[ok].lapsed) oppKnown++;
@@ -961,6 +968,8 @@ class Component extends DCLogic {
     const myW = wOf(s.badges), opW = wOf(opp && opp.badges);
     const myScore = known + 25 * myW, opScore = oppKnown + 25 * opW;
     const frS = MY_SIDE === "fr" ? myScore : opScore, elS = MY_SIDE === "fr" ? opScore : myScore;
+    // dialects share one deck, so the total is already complete; the split just says so
+    const mySplit = s.dialect === "cy" && cyKn > 0 ? known + " words · " + cyKn + " in Cypriot form" : "";
     const frPct = (frS + elS) > 0 ? Math.round(100 * frS / (frS + elS)) : 50;
     const dayC = ((s.days || {})[today()] || [0,0,0])[1];
     const mp = stats.day === today() ? { n: stats.newToday || 0, c: dayC, f: stats.fastToday || 0, v: stats.verbsToday || 0 } : { n: 0, c: dayC, f: 0, v: 0 };
@@ -1058,6 +1067,7 @@ class Component extends DCLogic {
       sessionCount: (this.sessions || []).length,
       battleVerdict: frS === elS ? "perfect tie" : frS > elS ? "France ahead by " + (frS - elS) + " pts" : "Greece ahead by " + (elS - frS) + " pts",
       frScore: frS, elScore: elS,
+      frSplit: MY_SIDE === "fr" ? mySplit : "", elSplit: MY_SIDE === "el" ? mySplit : "",
       youFr: MY_SIDE === "fr" ? "· you" : "", youEl: MY_SIDE === "el" ? "· you" : "",
       barFrStyle: { width: frPct + "%", background: "#d62828", transition: "width 0.5s ease" },
       barElStyle: { flex: "1", background: "#2160a8" },
