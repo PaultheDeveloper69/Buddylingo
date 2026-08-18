@@ -73,6 +73,7 @@ window.BLSync = (function () {
   async function login(slot, name, pin) {
     if (!(await ready())) return { offline: true };
     try {
+      try { await client.auth.signOut(); } catch (e) {} // clear any stale/foreign session first
       const r = await client.auth.signInWithPassword({ email: email(slot, name), password: pass(pin, name) });
       if (!r.error && r.data && r.data.user) cacheUid(slot, name, r.data.user.id);
       return r.error ? { error: r.error.message } : { ok: true };
@@ -127,7 +128,12 @@ window.BLSync = (function () {
       // in as — otherwise pushes land on someone else's row (it happened: Paul's
       // phone published to Test User 1 for a whole afternoon).
       const cached = cachedUid();
-      if (cached && u.data.user.id !== cached) return { error: "session belongs to another fighter" };
+      if (cached && u.data.user.id !== cached) {
+        // foreign session (e.g. a test account): sign it out so it can never
+        // push again, then ask the user to log in as their fighter.
+        try { await client.auth.signOut(); } catch (e) {}
+        return { error: "wrong account was signed in — now signed out" };
+      }
       const row = { user_id: u.data.user.id, language_id: lang, known: known, cat_known: catKnown || {} };
       // v4 columns — sent only when the caller has them, so a pre-v4 database
       // still accepts the insert.
@@ -204,7 +210,10 @@ window.BLSync = (function () {
       const u = await client.auth.getUser();
       if (!u || !u.data || !u.data.user) return { error: "not signed in" };
       const cachedS = cachedUid();
-      if (cachedS && u.data.user.id !== cachedS) return { error: "session belongs to another fighter" };
+      if (cachedS && u.data.user.id !== cachedS) {
+        try { await client.auth.signOut(); } catch (e) {}
+        return { error: "wrong account was signed in — now signed out" };
+      }
       const row = {
         user_id: u.data.user.id, language_id: lang, rev: Date.now(),
         cards: payload.cards || {}, known: payload.known || 0,

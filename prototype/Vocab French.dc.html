@@ -309,8 +309,9 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
       <button style="align-self:center;min-height:46px;padding:0 28px;background:#17181d;color:#fff;border-radius:999px;font-size:13.5px;font-weight:700;box-shadow:0 1px 3px rgba(23,24,29,0.18)" onClick="{{ openSupport }}">Contact support</button>
       <sc-if value="{{ devTools }}" hint-placeholder-val="{{ false }}">
         <button style="align-self:center;background:none;color:#a5a096;font-size:11px;text-decoration:underline;text-underline-offset:3px;min-height:44px" onClick="{{ resetAll }}">Reset all progress</button>
-        <div style="display:flex;justify-content:center;gap:18px"><a href="Vocab Greek.dc.html" style="font-size:11px;color:#a5a096">visit the inferior vocabulary →</a><a href="BuddyLingo Login.dc.html" style="font-size:11px;color:#a5a096">⇄ switch fighter</a></div>
+        <div style="display:flex;justify-content:center;gap:18px"><a href="Vocab Greek.dc.html" style="font-size:11px;color:#a5a096">visit the inferior vocabulary →</a></div>
       </sc-if>
+      <a href="BuddyLingo Login.dc.html" style="align-self:center;font-size:12px;color:#a5a096;text-decoration:underline;text-underline-offset:3px;padding:10px 0">⇄ switch fighter</a>
     </div>
   </sc-if>
 
@@ -1034,7 +1035,7 @@ class Component extends DCLogic {
     const syncBad = !!(s.pubErr && s.pubErr !== "preview");
     const syncNote = !(window.BLSync && window.BLSync.enabled) ? "offline \u2014 no server configured"
       : s.pubErr === "preview" ? "preview copy \u2014 scores are not published from here"
-      : syncBad ? "\u26a0 your score is not reaching the server (" + s.pubErr + ") \u2014 sign in again from the login page"
+      : syncBad ? "\u26a0 your score is not reaching the server (" + s.pubErr + ") \u2014 tap \u21c4 switch fighter below and sign in as YOUR fighter"
       : (pubAt ? "yours published " + fmtAgo(Date.now() - pubAt) : "yours not published yet") + (oppAt ? " \u00b7 theirs from " + fmtAgo(Date.now() - oppAt) : "");
     const mathOf = function (w, n) { return n > 0 ? w + " words + " + n + " weapon" + (n > 1 ? "s" : "") + " \u00d7 25" : w + " words \u00b7 no weapons"; };
     const frS = MY_SIDE === "fr" ? myScore : opScore, elS = MY_SIDE === "fr" ? opScore : myScore;
