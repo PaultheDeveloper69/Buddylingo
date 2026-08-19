@@ -31,6 +31,7 @@ input { font-family:inherit; }
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="bl-config.js"></script>
 <script src="bl-sync.js"></script>
+<script src="bl-langs.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/icon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="assets/brand/icon-512.png">
 <link rel="apple-touch-icon" href="assets/brand/icon-180.png">
@@ -72,6 +73,9 @@ input { font-family:inherit; }
         <button style="min-height:44px;min-width:44px;background:#f0ede6;border-radius:999px;font-size:16px" onClick="{{ back }}">←</button>
         <span style="font-size:16px;font-weight:800">Enlist a new fighter</span>
       </div>
+      <sc-if value="{{ blockedEnlist }}" hint-placeholder-val="{{ false }}">
+        <span style="font-size:11.5px;font-weight:700;color:#8a6d2f;background:#faf6ea;border:1px solid rgba(176,141,63,0.35);border-radius:12px;padding:9px 12px;line-height:1.45;text-wrap:pretty">{{ blockedNote }}</span>
+      </sc-if>
       <input value="{{ nameVal }}" onChange="{{ onName }}" placeholder="Your name" autocomplete="off" style="min-height:52px;border:1.5px solid #d8d3c8;border-radius:14px;padding:0 16px;font-size:16px;background:#fdfcf9;outline:none;width:100%"></input>
       <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#a1823c">Fight for</span>
       <div style="display:flex;flex-direction:column;gap:8px">
@@ -116,9 +120,13 @@ input { font-family:inherit; }
 <script type="text/x-dc" data-dc-script>
 const RKEY = "bl-roster-v1", SKEY = "bl-session";
 // ALPHA: only the first N slots can be claimed; the rest show "coming soon".
-// Raise this number to open more fighter slots.
-const ALPHA_SLOTS = 4; // slots 3-4 are the test users' — they never duel Paul or Nancop
-// [id, name, color, app, locked] — locked languages slumber: listed, not playable yet
+// Set BL_CONFIG.alphaSlots to open more — the database no longer caps the count
+// (schema-v8 dropped the 0..9 check), so this is purely a product gate.
+const ALPHA_SLOTS = (window.BL_CONFIG && window.BL_CONFIG.alphaSlots != null) ? window.BL_CONFIG.alphaSlots : 4;
+// Languages come from the registry (bl-langs.js), which mirrors the `languages`
+// table: a language is playable when it is active there and not locked locally.
+// The literal list below is the offline fallback only.
+const LOCKED = (window.BL_CONFIG && window.BL_CONFIG.lockedLangs) || [];
 const LANGS = [
   ["fr", "Français", "#d62828", "Vocab French.dc.html", false],
   ["el", "Ελληνικά", "#2160a8", "Vocab Greek.dc.html", false],
@@ -126,7 +134,15 @@ const LANGS = [
   ["es", "Español", "#c2571d", "Vocab Spanish.dc.html", true],
   ["tn", "Tounsi تونسي", "#2a8c46", "Vocab Tunisian.dc.html", true]
 ];
-function langOf(id) { return LANGS.find(function (l) { return l[0] === id; }) || LANGS[0]; }
+// read lazily: the registry script mounts with the helmet, after this evaluates
+function allLangs() {
+  const B = window.BLLangs;
+  if (!B) return LANGS;
+  return B.all().map(function (l) {
+    return [l.id, l.name, l.color, l.page, !l.active || LOCKED.indexOf(l.id) > -1];
+  });
+}
+function langOf(id) { const L = allLangs(); return L.find(function (l) { return l[0] === id; }) || L[0]; }
 class Component extends DCLogic {
   state = { view: "grid", roster: [], sel: -1, name: "", lang: "", pin: "", mode: "set", err: false, srv: "wait" };
   componentDidMount() {
@@ -219,10 +235,20 @@ class Component extends DCLogic {
     const s = this.state;
     const teamCount = {};
     s.roster.forEach(function (r) { if (r) teamCount[r.lang] = (teamCount[r.lang] || 0) + 1; });
+    // The alpha budget counts HUMAN slots only. Bot slots (server-side
+    // simulations) used to eat it, so the grid could show a full roster with
+    // nothing claimable — the wall sat exactly on the last occupied slot.
+    const isBotRow = function (r) { return !!(r && (r.is_bot === true || /^test user/i.test(r.name || ""))); };
+    const openSlot = {};
+    let budget = ALPHA_SLOTS;
+    s.roster.forEach(function (r, i) {
+      if (isBotRow(r)) return;
+      if (budget > 0) { openSlot[i] = true; budget--; }
+    });
     const slots = s.roster.map((r, i) => {
       const L = r ? langOf(r.lang) : null;
-      const dormant = !r && i >= ALPHA_SLOTS; // alpha: only the first slots are claimable
-      const bot = !!(r && /^test user/i.test(r.name)); // simulation accounts — hidden from the grid
+      const dormant = !r && !openSlot[i]; // alpha: only the budgeted slots are claimable
+      const bot = isBotRow(r); // simulation accounts — hidden from the grid
       const asLocked = dormant || bot; // bots masquerade as locked slots
       return {
         initial: r && !bot ? (r.name[0] || "?").toUpperCase() : (asLocked ? "·" : "+"),
@@ -241,7 +267,7 @@ class Component extends DCLogic {
         }
       };
     });
-    const langs = LANGS.map((L) => ({
+    const langs = allLangs().map((L) => ({
       label: L[1], team: L[4] ? "coming soon" : (teamCount[L[0]] ? "team of " + teamCount[L[0]] : "unclaimed front"),
       dotStyle: { width: "14px", height: "14px", borderRadius: "999px", background: L[2], flex: "none", opacity: L[4] ? 0.4 : 1 },
       rowStyle: { display: "flex", alignItems: "center", gap: "10px", minHeight: "50px", padding: "0 14px", borderRadius: "14px", width: "100%", textAlign: "left", opacity: L[4] ? 0.45 : 1, cursor: L[4] ? "not-allowed" : "pointer",
@@ -263,6 +289,10 @@ class Component extends DCLogic {
     return {
       isGrid: s.view === "grid", isClaim: s.view === "claim", isPin: s.view === "pin",
       slots: slots, langs: langs, pad: pad, pinDots: dots,
+      // claiming a slot is gated to the live site: a preview must not burn one of
+      // the few open slots on a real, unfreeable fighters row
+      blockedEnlist: !!(window.BLSync && window.BLSync.enabled && window.BLSync.canPush === false),
+      blockedNote: "Enlisting only works on buddylingo.de \u2014 here the fighter is created on this device only, and no slot is claimed on the server.",
       srvLabel: s.srv === "on" ? "server connected" : s.srv === "off" ? "offline — this device only" : "connecting…",
       srvDotStyle: { width: "6px", height: "6px", borderRadius: "999px", flex: "none",
         background: s.srv === "on" ? "#2a8c46" : s.srv === "off" ? "#d62828" : "#c9c3b5" },

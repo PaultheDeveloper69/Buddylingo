@@ -11,12 +11,13 @@
 (function () {
   var note = {
     kicker: "What's new",
-    lead: "Version 2.6 — the great score reconciliation. Paul and Nancop compared phones at 19:05 and the numbers disagreed. They will never disagree again.",
+    lead: "Version 2.8 — the expansion. German is live, two slots are open for new fighters, and the whole language war now has a map.",
     items: [
-      "Weapons now travel with your score: your rival's phone finally sees them. No more secretly winning.",
-      "If your score stops reaching the server, the duel card now says so in red instead of silently showing your rival last week's number.",
-      "A stale device can no longer roll your published score backwards.",
-      "New: Contact support button at the bottom of every language. Our support team is standing by."
+      "Deutsch is a real front: it publishes, restores on a new phone, and holds territory like French and Greek.",
+      "The Vocab Map folds out from the duel: every language on one road to one crown, ranked, with the duel one tap away.",
+      "Declare war on as many fighters as you like — one war each. Tap any fighter to declare, tap again to withdraw.",
+      "Two open slots on the login grid. Bring a friend; they pick a language and join the board immediately.",
+      "Your own progress is safe: nothing about your words, streak or decorations changed in this update."
     ],
     outro: "Keep an eye out for new features.",
     cta: "Let's go"
@@ -25,10 +26,13 @@
     var o = {}; for (var k in note) o[k] = note[k]; o.title = t; return o;
   }
   window.BL_RELEASE = {
-    version: "2.6",
+    version: "2.8",
     auto: true,
-    fr: withTitle("Le Français 2.6"),
-    el: withTitle("Τα Ελληνικά 2.6"),
+    fr: withTitle("Le Français 2.8"),
+    el: withTitle("Τα Ελληνικά 2.8"),
+    de: withTitle("Deutsch 2.8"),
+    es: withTitle("El Español 2.8"),
+    tn: withTitle("Tounsi 2.8"),
     // The sim-only toggle stays out of the live app.
     devToggle: (function () {
       try {

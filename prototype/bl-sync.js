@@ -79,12 +79,20 @@ window.BLSync = (function () {
       return r.error ? { error: r.error.message } : { ok: true };
     } catch (e) { return { offline: true }; }
   }
+  // Slots are no longer capped at ten (v8 dropped the 0..9 check): slot is just
+  // the public ordinal on the login grid, so registration keeps going.
+  const MAX_SLOTS = cfg.maxSlots || 200;
   function firstFree(rows) {
     const by = {}; (rows || []).forEach(function (f) { by[f.slot] = f; });
-    for (let i = 0; i < 10; i++) if (!by[i]) return i;
+    for (let i = 0; i < MAX_SLOTS; i++) if (!by[i]) return i;
     return null;
   }
   async function register(slot, name, lang, pin) {
+    // Enlisting is gated to the real deployment, exactly like publishing. A slot
+    // claimed from a preview or a local copy creates a real auth user and a real
+    // fighters row that nobody can free again (unique slot + owner-only RLS) —
+    // and claimable slots are deliberately scarce. cfg.pushAnywhere overrides.
+    if (!canPush) return { blocked: true };
     if (!(await ready())) return { offline: true };
     try {
       // slot already claimed by someone else? tell the client to slide over
@@ -96,6 +104,7 @@ window.BLSync = (function () {
       const uid = r.data && r.data.user ? r.data.user.id : null;
       if (uid) {
         cacheUid(slot, name, uid);
+        enrolLanguage(lang, uid);
         const ins = await client.from("fighters").insert({ user_id: uid, slot: slot, name: name, language_id: lang });
         if (ins.error) { // lost a simultaneous race: DB unique index protected the slot
           const fresh = (await roster()) || [];
@@ -148,14 +157,31 @@ window.BLSync = (function () {
       return r && r.error ? { error: r.error.message } : { ok: true };
     } catch (e) { return { offline: true }; }
   }
-  // Everyone's current numbers. Uses the v4 `standings` view when it exists and
-  // otherwise rebuilds it client-side, so this works before the SQL is applied.
+  // A fighter row per language they actually study (v8 fighter_languages). Only
+  // needed by clients that want to know before a snapshot exists; standings
+  // already carries it. Fire-and-forget.
+  async function enrolLanguage(lang, uid) {
+    try {
+      if (!canPush) return { blocked: true };
+      if (!(await ready())) return { offline: true };
+      let id = uid;
+      if (!id) { const u = await client.auth.getUser(); id = u && u.data && u.data.user ? u.data.user.id : null; }
+      if (!id) return { error: "not signed in" };
+      const r = await client.from("fighter_languages").upsert({ user_id: id, language_id: lang }, { onConflict: "user_id,language_id" });
+      return r && r.error ? { error: r.error.message } : { ok: true };
+    } catch (e) { return { offline: true }; }
+  }
+  // Everyone's current numbers, one row per fighter per language. Tries the v8
+  // shape (is_bot / is_primary), then the v6 shape, then rebuilds client-side —
+  // so this works whatever the live database has had applied to it.
   async function standings() {
+    const v8 = await restGet("standings?select=slot,name,language_id,user_id,known,bonus,cat_known,computed_at,is_primary,is_bot");
+    if (v8 && v8.length) return v8;
     const view = await restGet("standings?select=slot,name,language_id,user_id,known,bonus,cat_known,computed_at");
     if (view && view.length) return view;
     const people = await roster2();
     if (!people) return null;
-    const snaps = await restGet("front_snapshots?select=user_id,language_id,known,cat_known,computed_at&order=computed_at.desc&limit=500");
+    const snaps = await restGet("front_snapshots?select=user_id,language_id,known,cat_known,computed_at&order=computed_at.desc&limit=5000");
     const best = {};
     (snaps || []).forEach(function (s) {
       const k = s.user_id + "|" + s.language_id;
@@ -183,17 +209,74 @@ window.BLSync = (function () {
     (rows || []).forEach(function (r) { if (r.known_mask) out[r.user_id] = r.known_mask; });
     return out;
   }
-  async function rivals() {
+  // Rivals are per language from v8 (declaring a nemesis in German used to
+  // overwrite the French one). Pre-v8 databases have no language_id column, so
+  // the select falls back to the old shape.
+  async function velocities(days) {
+    const d = days || 7;
+    const since = new Date(Date.now() - d * 86400000).toISOString();
+    const rows = await restGet("front_snapshots?select=user_id,language_id,known,computed_at&computed_at=gte."
+      + encodeURIComponent(since) + "&order=computed_at.asc&limit=5000");
+    if (!rows) return null;
+    const first = {}, last = {};
+    rows.forEach(function (r) {
+      const k = r.user_id + "|" + r.language_id;
+      if (first[k] == null) first[k] = r.known || 0;
+      last[k] = r.known || 0;
+    });
+    const out = {};
+    Object.keys(last).forEach(function (k) { out[k] = Math.max(0, (last[k] || 0) - (first[k] || 0)); });
+    return out;
+  }
+  async function rivals(lang) {
+    const q = lang ? "&language_id=eq." + encodeURIComponent(lang) : "";
+    const v8 = await restGet("rivals?select=user_id,rival_user_id,language_id,updated_at" + q);
+    if (v8) return v8;
     const rows = await restGet("rivals?select=user_id,rival_user_id,updated_at");
     return rows || null;
   }
-  async function setRival(rivalUserId) {
+  async function setRival(rivalUserId, lang) {
     try {
       if (!(await ready())) return { offline: true };
       const u = await client.auth.getUser();
       if (!u || !u.data || !u.data.user) return { error: "not signed in" };
-      const row = { user_id: u.data.user.id, rival_user_id: rivalUserId, updated_at: new Date().toISOString() };
-      const r = await client.from("rivals").upsert(row, { onConflict: "user_id" });
+      const base = { user_id: u.data.user.id, rival_user_id: rivalUserId, updated_at: new Date().toISOString() };
+      if (lang) {
+        const row = Object.assign({ language_id: lang }, base);
+        const r = await client.from("rivals").upsert(row, { onConflict: "user_id,language_id" });
+        if (!(r && r.error)) return { ok: true };
+      }
+      const r2 = await client.from("rivals").upsert(base, { onConflict: "user_id" });
+      return r2 && r2.error ? { error: r2.error.message } : { ok: true };
+    } catch (e) { return { offline: true }; }
+  }
+  // ---- challenges (the Vocab Map's declarations of war) -------------------
+  // Public by design: the map shows who declared whom. Each row banks both
+  // sides' counts at signing, so only words learned inside the term count.
+  async function challenges(lang) {
+    const q = lang ? "&language_id=eq." + encodeURIComponent(lang) : "";
+    const rows = await restGet("challenges?select=id,challenger,target,language_id,term_days,started_at,base_challenger,base_target,settled_at,winner,margin,forfeited_by" + q + "&order=started_at.desc&limit=200");
+    return rows || null;
+  }
+  async function startChallenge(spec) {
+    try {
+      if (!canPush) return { blocked: true };
+      if (!(await ready())) return { offline: true };
+      const u = await client.auth.getUser();
+      if (!u || !u.data || !u.data.user) return { error: "not signed in" };
+      const row = { challenger: u.data.user.id, target: spec.target, language_id: spec.language_id,
+        term_days: spec.term_days || 7, base_challenger: spec.base_challenger || 0, base_target: spec.base_target || 0 };
+      const r = await client.from("challenges").insert(row).select("id").limit(1);
+      if (r && r.error) return { error: r.error.message };
+      return { ok: true, id: r && r.data && r.data[0] ? r.data[0].id : null };
+    } catch (e) { return { offline: true }; }
+  }
+  async function settleChallenge(id, patch) {
+    try {
+      if (!canPush) return { blocked: true };
+      if (!(await ready())) return { offline: true };
+      const row = Object.assign({ settled_at: new Date().toISOString() }, patch || {});
+      const r = await client.from("challenges").update(row).eq("id", id);
       return r && r.error ? { error: r.error.message } : { ok: true };
     } catch (e) { return { offline: true }; }
   }
@@ -283,6 +366,7 @@ window.BLSync = (function () {
   }
   return { enabled: ok, canPush: canPush, ready: ready, login: login, register: register, roster: roster, rosterFull: roster2,
     pushSnapshot: pushSnapshot, latestFront: latestFront, myFront: myFront, pushState: pushState, pullState: pullState,
-    standings: standings, masksFor: masksFor,
-    rivals: rivals, setRival: setRival, whoAmI: whoAmI };
+    standings: standings, masksFor: masksFor, enrolLanguage: enrolLanguage, velocities: velocities,
+    rivals: rivals, setRival: setRival, whoAmI: whoAmI,
+    challenges: challenges, startChallenge: startChallenge, settleChallenge: settleChallenge };
 })();

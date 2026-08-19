@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
+<style>
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-family: Figtree, system-ui, sans-serif; color: #17181d; background: #f6f4ef; -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; border: 0; background: none; cursor: pointer; text-align: left; }
+a { color: #d62828; } a:hover { color: #b21f1f; }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes cheer { 0%, 100% { transform: rotate(-2.5deg); } 50% { transform: rotate(2.5deg); } }
+@keyframes clashPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+/* the scrum: everyone shoves continuously (short desynced loops) while a long,
+   mostly-idle loop occasionally flings one fighter out to recover and pile back in */
+@keyframes tussleA {
+  0% { transform: translate(0, 0) rotate(-3deg); }
+  25% { transform: translate(3px, -1px) rotate(4deg); }
+  50% { transform: translate(-2px, 1px) rotate(-5deg); }
+  75% { transform: translate(2px, 0) rotate(2deg); }
+  100% { transform: translate(0, 0) rotate(-3deg); }
+}
+@keyframes tussleB {
+  0% { transform: translate(1px, 0) rotate(4deg); }
+  30% { transform: translate(-3px, -2px) rotate(-6deg); }
+  55% { transform: translate(2px, 1px) rotate(5deg); }
+  80% { transform: translate(-1px, -1px) rotate(-2deg); }
+  100% { transform: translate(1px, 0) rotate(4deg); }
+}
+@keyframes tussleC {
+  0% { transform: translate(-1px, 1px) rotate(2deg); }
+  35% { transform: translate(3px, 0) rotate(-4deg); }
+  60% { transform: translate(-2px, -2px) rotate(6deg); }
+  85% { transform: translate(1px, 1px) rotate(-1deg); }
+  100% { transform: translate(-1px, 1px) rotate(2deg); }
+}
+@keyframes flingL {
+  0%, 62% { transform: translate(0, 0) rotate(0deg); }
+  67% { transform: translate(-22px, -13px) rotate(-38deg); }
+  72% { transform: translate(-40px, 2px) rotate(-104deg); }
+  78% { transform: translate(-38px, 0) rotate(-92deg); }
+  84% { transform: translate(-34px, 0) rotate(-8deg); }
+  93% { transform: translate(-14px, 0) rotate(4deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+@keyframes flingR {
+  0%, 62% { transform: translate(0, 0) rotate(0deg); }
+  67% { transform: translate(22px, -13px) rotate(38deg); }
+  72% { transform: translate(40px, 2px) rotate(104deg); }
+  78% { transform: translate(38px, 0) rotate(92deg); }
+  84% { transform: translate(34px, 0) rotate(8deg); }
+  93% { transform: translate(14px, 0) rotate(-4deg); }
+  100% { transform: translate(0, 0) rotate(0deg); }
+}
+@keyframes marchAnts { to { background-position-y: -14px; } }
+@keyframes tipBob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-3px) rotate(2deg); }
+}
+@keyframes tipShove {
+  0%, 100% { transform: translateX(0) rotate(-1deg); }
+  40% { transform: translateX(3px) rotate(3deg); }
+  70% { transform: translateX(-2px) rotate(-3deg); }
+}
+@keyframes smokeFront {
+  0% { opacity: 0.28; transform: scale(0.9) translate(-2px, 0); }
+  30% { opacity: 0.5; transform: scale(1.06) translate(2px, -2px); }
+  60% { opacity: 0.36; transform: scale(1) translate(3px, -1px); }
+  100% { opacity: 0.28; transform: scale(0.9) translate(-2px, 0); }
+}
+@keyframes dustPuff {
+  0% { opacity: 0; transform: scale(0.45) translateY(2px); }
+  35% { opacity: 0.5; transform: scale(0.95) translateY(0); }
+  100% { opacity: 0; transform: scale(1.5) translateY(-6px); }
+}
+@keyframes powPop {
+  0%, 78% { opacity: 0; transform: scale(0.55) rotate(-8deg); }
+  84% { opacity: 1; transform: scale(1.04) rotate(4deg); }
+  92% { opacity: 0.9; transform: scale(0.98) rotate(-3deg); }
+  100% { opacity: 0; transform: scale(1.16) rotate(6deg); }
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="bl-config.js"></script>
+<script src="bl-sync.js"></script>
+<script src="bl-langs.js"></script>
+<script src="bl-front.js"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/icon-32.png">
+<link rel="icon" type="image/png" sizes="512x512" href="assets/brand/icon-512.png">
+<link rel="apple-touch-icon" href="assets/brand/icon-180.png">
+<meta property="og:image" content="assets/brand/icon-512.png">
+<script src="bl-sound.js"></script>
+</helmet>
+<div style="min-height:100dvh;background:#f6f4ef" data-screen-label="Vocab Map">
+<div style="width:min(460px,100%);margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 16px calc(48px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px">
+
+  <div style="display:flex;align-items:flex-end;gap:10px">
+    <div style="display:flex;flex-direction:column;margin-right:auto">
+      <span style="font-size:9.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#a5a096">Vocabble</span>
+      <span style="font-family:Gloock,serif;font-size:31px;line-height:1.02">Vocab Map</span>
+    </div>
+    <span style="font-size:11px;color:#8a857a;text-align:right;line-height:1.35">{{ rosterLine }}</span>
+  </div>
+
+  <div style="display:flex;background:#e9e5dc;border-radius:999px;padding:3px;gap:3px">
+    <button style="{{ mDuel }}" onClick="{{ setDuel }}">Duel</button>
+    <button style="{{ mFaction }}" onClick="{{ setFaction }}">Front</button>
+    <button style="{{ mLadder }}" onClick="{{ setLadder }}">Ladder</button>
+    <button style="{{ mCoop }}" onClick="{{ setCoop }}">Co-op</button>
+  </div>
+
+  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+    <span style="font-size:9.5px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#c9c3b5;flex:none">Viewing as</span>
+    <sc-for list="{{ viewChips }}" as="V" hint-placeholder-count="4">
+      <button style="{{ V.style }}" onClick="{{ V.pick }}"><span style="{{ V.dot }}"></span>{{ V.label }}</button>
+    </sc-for>
+  </div>
+
+  <sc-if value="{{ isDuel }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Duel" style="display:flex;flex-direction:column;gap:12px;animation:fadeUp 0.3s ease both">
+
+      <sc-if value="{{ noRival }}" hint-placeholder-val="{{ false }}">
+        <div style="background:#fff;border-radius:22px;padding:20px 18px;box-shadow:0 1px 3px rgba(23,24,29,0.08);display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:Gloock,serif;font-size:23px;line-height:1.12">Who are you gunning for?</span>
+          <span style="font-size:12.5px;color:#8a857a;line-height:1.45;text-wrap:pretty">Name one fighter as your nemesis. Their count sits next to yours from then on, and they get told you are coming.</span>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <sc-for list="{{ rivalChips }}" as="R" hint-placeholder-count="3">
+              <button style="{{ R.style }}" onClick="{{ R.pick }}">{{ R.label }}</button>
+            </sc-for>
+          </div>
+          <span style="font-size:11px;color:#a5a096">{{ suggestLine }}</span>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hasRival }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;gap:12px">
+
+          <sc-if value="{{ superNemesis }}" hint-placeholder-val="{{ false }}">
+            <div style="background:#f4ecda;border:1px solid #e5d7b6;border-radius:18px;padding:14px 16px;display:flex;flex-direction:column;gap:6px">
+              <div style="display:flex;align-items:center;gap:9px">
+                <span style="font-size:9.5px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:#9a7c33">Supernemesis</span>
+                <span style="height:1px;flex:1;background:rgba(154,124,51,0.22)"></span>
+              </div>
+              <span style="font-size:12.5px;color:#5c5240;line-height:1.45;text-wrap:pretty">{{ superLine }}</span>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ hasChallenge }}" hint-placeholder-val="{{ true }}">
+          <div style="background:#fff;border-radius:20px;padding:15px 16px 16px;box-shadow:0 1px 3px rgba(23,24,29,0.08);display:flex;flex-direction:column;gap:11px">
+            <div style="display:flex;align-items:baseline;gap:8px">
+              <span style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#9a7c33">{{ chTermLabel }}</span>
+              <span style="{{ chStatusStyle }}">{{ chStatus }}</span>
+            </div>
+            <div style="display:flex;gap:4px">
+              <sc-for list="{{ chPips }}" as="P" hint-placeholder-count="7">
+                <div style="{{ P.style }}"></div>
+              </sc-for>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:start">
+              <div style="display:flex;flex-direction:column;gap:1px">
+                <span style="font-size:11px;font-weight:700;color:#8a857a">{{ meName }}</span>
+                <span style="font-family:Gloock,serif;font-size:29px;line-height:1.05">{{ chMine }}</span>
+                <span style="font-size:10px;color:#a5a096">words this term</span>
+              </div>
+              <span style="width:1px;background:#efece5;align-self:stretch"></span>
+              <div style="display:flex;flex-direction:column;gap:1px;text-align:right">
+                <span style="font-size:11px;font-weight:700;color:#8a857a">{{ foeName }}</span>
+                <span style="font-family:Gloock,serif;font-size:29px;line-height:1.05">{{ chTheirs }}</span>
+                <span style="font-size:10px;color:#a5a096">words this term</span>
+              </div>
+            </div>
+            <span style="{{ chVerdictStyle }}">{{ chVerdict }}</span>
+            <sc-if value="{{ chOver }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;gap:8px">
+                <button style="{{ chRematchStyle }}" onClick="{{ chRematch }}">{{ chRematchLabel }}</button>
+                <button style="{{ chNewStyle }}" onClick="{{ chNew }}">{{ chNewLabel }}</button>
+              </div>
+            </sc-if>
+          </div>
+          </sc-if>
+
+          <div style="background:#fff;border-radius:22px;padding:16px 16px 18px;box-shadow:0 1px 3px rgba(23,24,29,0.08);display:flex;flex-direction:column;gap:10px">
+            <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:6px">
+              <div style="{{ meTeamStyle }}" role="img" aria-label="Your team"></div>
+              <div style="display:flex;flex-direction:column;align-items:center;gap:3px;padding-bottom:16px">
+                <span style="font-size:10.5px;font-weight:800;letter-spacing:0.12em;text-transform:uppercase;color:#c9c3b5">vs</span>
+                <span style="{{ gapBadgeStyle }}">{{ gapBadge }}</span>
+              </div>
+              <div style="{{ foeTeamStyle }}" role="img" aria-label="Rival team"></div>
+            </div>
+
+            <sc-if value="{{ hasFaceoff }}" hint-placeholder-val="{{ false }}">
+              <video src="https://d8j0ntlcm91z4.cloudfront.net/user_32PgHXDjHlFXmhgKyUnBM4DN7Qi/hf_20260817_072947_e60247ef-65b3-49e4-be48-057b5f4f9fb3.mp4" poster="assets/chars/bataille-v2.png" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" preload="auto" disablepictureinpicture="{{ true }}" controlslist="nodownload nofullscreen noplaybackrate" aria-label="{{ faceoffAria }}" style="width:100%;display:block;border-radius:12px;pointer-events:none"></video>
+            </sc-if>
+            <sc-if value="{{ hasBattleStill }}" hint-placeholder-val="{{ true }}">
+              <div style="{{ faceoffBand }}" role="img" aria-label="{{ faceoffAria }}">
+                <div style="{{ faceoffGround }}"></div>
+                <div style="{{ faceoffLeft }}"></div>
+                <div style="{{ faceoffRight }}"></div>
+                <div style="{{ faceoffSmoke }}"></div>
+                <div style="{{ faceoffPow }}"></div>
+              </div>
+            </sc-if>
+            <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:start">
+              <div style="display:flex;flex-direction:column;gap:1px">
+                <span style="font-size:15.5px;font-weight:800;letter-spacing:-0.01em">{{ meName }}</span>
+                <span style="font-size:11px;color:#8a857a">{{ meLang }}</span>
+                <span style="font-family:Gloock,serif;font-size:34px;line-height:1.05">{{ meScore }}</span>
+              </div>
+              <span style="width:1px;background:#efece5;align-self:stretch"></span>
+              <div style="display:flex;flex-direction:column;gap:1px;text-align:right">
+                <span style="font-size:15.5px;font-weight:800;letter-spacing:-0.01em">{{ foeName }}</span>
+                <span style="font-size:11px;color:#8a857a">{{ foeLang }}</span>
+                <span style="font-family:Gloock,serif;font-size:34px;line-height:1.05">{{ foeScore }}</span>
+              </div>
+            </div>
+
+            <div style="position:relative;height:58px;margin-bottom:-2px;overflow:hidden">
+              <sc-for list="{{ dust }}" as="D" hint-placeholder-count="3">
+                <div style="{{ D.style }}"></div>
+              </sc-for>
+              <sc-for list="{{ skirmish }}" as="S" hint-placeholder-count="6">
+                <div style="{{ S.wrap }}"><div style="{{ S.mid }}"><div style="{{ S.body }}"></div></div></div>
+              </sc-for>
+              <sc-for list="{{ pows }}" as="P" hint-placeholder-count="3">
+                <div style="{{ P.style }}"></div>
+              </sc-for>
+            </div>
+            <div style="display:flex;height:11px;border-radius:999px;overflow:hidden;background:#efece5">
+              <div style="{{ barMine }}"></div>
+              <div style="{{ barTheirs }}"></div>
+            </div>
+            <div style="{{ lineNoteWrap }}">
+              <span style="{{ lineNoteStyle }}">{{ lineNote }}</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px">
+              <span style="{{ verdictStyle }}">{{ verdict }}</span>
+              <span style="font-size:11.5px;color:#8a857a;margin-left:auto">{{ trendLine }}</span>
+            </div>
+          </div>
+
+          <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 1px 3px rgba(23,24,29,0.08);display:flex;flex-direction:column;gap:12px">
+            <div style="display:flex;align-items:baseline;gap:8px">
+              <span style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#a5a096">Declare war</span>
+              <span style="font-size:10.5px;color:#c9c3b5;margin-left:auto">{{ warCountLine }}</span>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ rivalChips }}" as="R" hint-placeholder-count="3">
+                <button style="{{ R.style }}" onClick="{{ R.pick }}">{{ R.label }}</button>
+              </sc-for>
+            </div>
+            <sc-if value="{{ hasChain }}" hint-placeholder-val="{{ true }}">
+              <div style="border-top:1px solid #efece5;padding-top:12px;display:flex;flex-direction:column;gap:7px">
+                <span style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#a5a096">The chain</span>
+                <sc-for list="{{ chain }}" as="C" hint-placeholder-count="2">
+                  <div style="display:flex;align-items:baseline;gap:7px">
+                    <span style="{{ C.dot }}"></span>
+                    <span style="font-size:12.5px;color:#3d3a34;line-height:1.4">{{ C.line }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+            <sc-if value="{{ hasHunters }}" hint-placeholder-val="{{ true }}">
+              <div style="border-top:1px solid #efece5;padding-top:12px;display:flex;flex-direction:column;gap:6px">
+                <span style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#c2402f">Gunning for you</span>
+                <sc-for list="{{ hunters }}" as="H" hint-placeholder-count="2">
+                  <div style="display:flex;align-items:baseline;gap:8px">
+                    <span style="font-size:13.5px;font-weight:700">{{ H.name }}</span>
+                    <span style="font-size:11.5px;color:#8a857a">{{ H.line }}</span>
+                  </div>
+                </sc-for>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ hasScrolls }}" hint-placeholder-val="{{ true }}">
+      <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 1px 3px rgba(23,24,29,0.08);display:flex;flex-direction:column;gap:11px">
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#a5a096">Challenges won</span>
+          <span style="font-size:10.5px;color:#c9c3b5;margin-left:auto">{{ scrollCount }}</span>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:10px;padding:2px 0">
+          <sc-for list="{{ scrolls }}" as="Sc" hint-placeholder-count="3">
+            <div style="{{ Sc.wrap }}">
+              <span style="{{ Sc.initStyle }}">{{ Sc.init }}</span>
+              <span style="{{ Sc.seal }}"></span>
+              <span style="{{ Sc.marginStyle }}">{{ Sc.margin }}</span>
+              <span style="{{ Sc.dateStyle }}">{{ Sc.date }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <span style="font-size:10.5px;color:#a5a096;line-height:1.45;text-wrap:pretty">Only challenges you win get a scroll — initials of the foe sealed in their colour, the margin you won by, the day it settled. Lose one and nothing is written.</span>
+      </div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isFaction }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Front" style="display:flex;flex-direction:column;gap:12px;animation:fadeUp 0.3s ease both">
+      <div style="background:#fff;border-radius:22px;padding:18px 16px 16px;box-shadow:0 1px 3px rgba(23,24,29,0.08);display:flex;flex-direction:column;gap:13px">
+
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <div style="display:flex;flex-direction:column;gap:2px;margin-right:auto;min-width:0">
+            <span style="font-size:9.5px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:#a5a096">{{ rumbleEyebrow }}</span>
+            <span style="font-family:Gloock,serif;font-size:25px;line-height:1.08">{{ leaderLine }}</span>
+          </div>
+          <button style="{{ demoBtnStyle }}" onClick="{{ toggleDemo }}">{{ demoLabel }}</button>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:8px;padding-left:46px">
+            <span style="font-size:8.5px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#c9c3b5">Start</span>
+            <span style="flex:1;height:1px;background:#f1eee6"></span>
+            <span style="font-size:8.5px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#9a7c33">The crown</span>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:3px">
+            <sc-for list="{{ laneRows }}" as="R" hint-placeholder-count="4">
+              <button style="{{ R.rowStyle }}" onClick="{{ R.tap }}" aria-label="{{ R.aria }}">
+                <span style="{{ R.rankStyle }}">{{ R.rank }}</span>
+                <span style="{{ R.codeStyle }}">{{ R.code }}</span>
+                <span style="{{ R.road }}">
+                  <span style="{{ R.track }}"></span>
+                  <span style="{{ R.fill }}"></span>
+                  <span style="{{ R.finish }}"></span>
+                  <span style="{{ R.token }}"><span style="{{ R.art }}"></span></span>
+                </span>
+                <span style="{{ R.scoreStyle }}">{{ R.score }}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+
+        <sc-if value="{{ hasSel }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;align-items:center;gap:9px;background:#f8f6f1;border-radius:14px;padding:11px 13px">
+            <span style="font-size:11.5px;font-weight:700;color:#3d3a34;line-height:1.4;text-wrap:pretty">{{ selLine }}</span>
+            <sc-if value="{{ canDuel }}" hint-placeholder-val="{{ false }}">
+              <button style="{{ duelBtnStyle }}" onClick="{{ openDuel }}">{{ duelLabel }}</button>
+            </sc-if>
+          </div>
+        </sc-if>
+
+        <div style="display:flex;flex-direction:column;gap:5px;border-top:1px solid #efece5;padding-top:11px">
+          <sc-for list="{{ readMe }}" as="M" hint-placeholder-count="2">
+            <div style="display:flex;align-items:baseline;gap:8px">
+              <span style="{{ M.mark }}"></span>
+              <span style="font-size:11.5px;color:#5d5a52;line-height:1.4;text-wrap:pretty">{{ M.line }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <sc-if value="{{ hasCallouts }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:6px;border-top:1px solid #efece5;padding-top:11px">
+            <sc-for list="{{ callouts }}" as="C" hint-placeholder-count="2">
+              <div style="display:flex;align-items:baseline;gap:9px">
+                <span style="font-size:9px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#c9c3b5;width:86px;flex:none">{{ C.label }}</span>
+                <span style="font-size:11.5px;color:#3d3a34;line-height:1.4;text-wrap:pretty">{{ C.value }}</span>
+              </div>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <span style="font-size:11.5px;color:#8a857a;text-wrap:pretty;padding:0 2px">{{ factionNote }}</span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isLadder }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Ladder" style="display:flex;flex-direction:column;gap:12px;animation:fadeUp 0.3s ease both">
+      <div style="background:#fff;border-radius:22px;padding:16px 18px;box-shadow:0 1px 3px rgba(23,24,29,0.08);display:flex;align-items:center;gap:14px">
+        <div style="{{ topMascotStyle }}" role="img" aria-label="Ladder leader mascot"></div>
+        <div style="display:flex;flex-direction:column;gap:3px;min-width:0">
+          <span style="font-size:9.5px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:#b08d3f">Top of the ladder</span>
+          <span style="font-family:Gloock,serif;font-size:26px;line-height:1.05">{{ topName }}</span>
+          <span style="font-size:12px;color:#8a857a;line-height:1.4;text-wrap:pretty">{{ topTaunt }}</span>
+        </div>
+      </div>
+      <div style="background:#fff;border-radius:22px;padding:8px 6px;box-shadow:0 1px 3px rgba(23,24,29,0.08);display:flex;flex-direction:column">
+        <sc-for list="{{ ladderRows }}" as="R" hint-placeholder-count="4">
+          <div style="{{ R.rowStyle }}">
+            <span style="font-size:12px;font-weight:700;color:#a5a096;width:22px">{{ R.rank }}</span>
+            <span style="{{ R.dot }}"></span>
+            <span style="font-size:14.5px;font-weight:700;letter-spacing:-0.01em">{{ R.name }}</span>
+            <span style="font-size:11px;color:#a5a096">{{ R.lang }}</span>
+            <span style="font-family:Gloock,serif;font-size:19px;margin-left:auto">{{ R.score }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isCoop }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Co-op" style="display:flex;flex-direction:column;gap:12px;animation:fadeUp 0.3s ease both">
+      <div style="background:#fff;border-radius:22px;padding:20px 18px;box-shadow:0 1px 3px rgba(23,24,29,0.08);display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;align-items:flex-end;gap:12px">
+          <div style="display:flex;flex-direction:column;gap:2px;margin-right:auto">
+            <span style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#a5a096">{{ coopTitle }}</span>
+            <div style="display:flex;align-items:flex-end;gap:8px">
+              <span style="font-family:Gloock,serif;font-size:44px;line-height:0.9">{{ coopTotal }}</span>
+              <span style="font-size:12px;color:#8a857a;padding-bottom:6px">words, added together</span>
+            </div>
+          </div>
+          <div style="{{ coopTeamStyle }}" role="img" aria-label="Your team"></div>
+        </div>
+        <div style="display:flex;gap:10px;border-top:1px solid #efece5;padding-top:13px">
+          <div style="display:flex;flex-direction:column;flex:1">
+            <span style="font-size:19px;font-weight:800">{{ coopDistinct }}</span>
+            <span style="font-size:10.5px;color:#8a857a;line-height:1.35">distinct words the team holds</span>
+          </div>
+          <div style="display:flex;flex-direction:column;flex:1">
+            <span style="font-size:19px;font-weight:800">{{ coopShared }}</span>
+            <span style="font-size:10.5px;color:#8a857a;line-height:1.35">known by both of you</span>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;border-top:1px solid #efece5;padding-top:13px">
+          <sc-for list="{{ coopMembers }}" as="M" hint-placeholder-count="2">
+            <div style="display:flex;flex-direction:column;gap:5px">
+              <div style="display:flex;align-items:baseline;gap:8px">
+                <span style="font-size:13.5px;font-weight:700">{{ M.name }}</span>
+                <span style="font-size:11px;color:#8a857a">{{ M.note }}</span>
+                <span style="font-size:13.5px;font-weight:700;margin-left:auto">{{ M.score }}</span>
+              </div>
+              <div style="height:6px;border-radius:999px;background:#efece5;overflow:hidden"><div style="{{ M.fill }}"></div></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      <span style="font-size:11.5px;color:#8a857a;text-wrap:pretty;padding:0 2px">{{ coopNote }}</span>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isSandbox }}" hint-placeholder-val="{{ true }}">
+  <div style="display:flex;flex-direction:column;gap:6px;padding:4px 2px 0">
+    <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#c9c3b5">Sandbox</span>
+    <span style="font-size:11px;color:#a5a096;line-height:1.45;text-wrap:pretty">{{ sandboxNote }}</span>
+    <div style="display:flex;gap:7px;padding-top:4px">
+      <button style="{{ sbBtn }}" onClick="{{ sbBack }}">− a day</button>
+      <button style="{{ sbBtn }}" onClick="{{ sbFwd }}">+ a day</button>
+      <button style="{{ sbBtn }}" onClick="{{ sbEnd }}">skip to the result</button>
+    </div>
+  </div>
+  </sc-if>
+
+</div>
+</div>
+
+  <sc-if value="{{ showDeclare }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Declaration of war" style="position:fixed;inset:0;background:rgba(23,24,29,0.55);display:flex;align-items:center;justify-content:center;padding:24px;z-index:60" onClick="{{ cancelDeclare }}">
+      <div style="background:#fffdf8;border:2px solid #17181d;border-radius:22px;padding:24px 22px;max-width:360px;width:100%;display:flex;flex-direction:column;gap:13px;text-align:center;box-shadow:0 24px 60px rgba(23,24,29,0.4);animation:fadeUp 0.3s ease both" onClick="{{ eatClick }}">
+        <span style="font-size:10px;font-weight:800;letter-spacing:0.24em;text-transform:uppercase;color:#a1823c">Declaration of War</span>
+        <div style="display:grid;grid-template-columns:1fr auto 1fr;align-items:end;gap:8px">
+          <div style="{{ decMeStyle }}" role="img" aria-label="Your team"></div>
+          <span style="font-size:11px;font-weight:800;color:#c9c3b5;padding-bottom:22px">VS</span>
+          <div style="{{ decFoeStyle }}" role="img" aria-label="Nemesis team"></div>
+        </div>
+        <span style="font-family:Gloock,serif;font-size:26px;line-height:1.12">{{ decTitle }}</span>
+        <span style="font-size:12.5px;color:#5d5a52;line-height:1.5;text-wrap:pretty">{{ decLine }}</span>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <span style="font-size:9.5px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:#a5a096">How long it runs</span>
+          <div style="display:flex;gap:8px">
+            <button style="{{ term3Style }}" onClick="{{ pickTerm3 }}">3 days</button>
+            <button style="{{ term7Style }}" onClick="{{ pickTerm7 }}">7 days</button>
+          </div>
+        </div>
+        <sc-if value="{{ decOathBreak }}" hint-placeholder-val="{{ false }}">
+          <span style="font-size:11.5px;font-weight:700;color:#b3261e;line-height:1.45;background:#fdefed;border-radius:12px;padding:9px 12px">{{ decOathLine }}</span>
+        </sc-if>
+        <button style="min-height:54px;display:flex;align-items:center;justify-content:center;text-align:center;background:#d62828;color:#fff;border-radius:999px;font-size:15px;font-weight:800;letter-spacing:0.02em;box-shadow:0 10px 24px rgba(160,30,30,0.35)" onClick="{{ signDeclare }}">{{ decCta }}</button>
+        <button style="min-height:44px;display:flex;align-items:center;justify-content:center;text-align:center;background:#f0ede6;color:#5d5a52;border-radius:999px;font-size:13px;font-weight:700" onClick="{{ cancelDeclare }}">Think again</button>
+        <span style="font-size:10px;color:#c9c3b5">{{ decFootnote }}</span>
+      </div>
+    </div>
+  </sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:460,&quot;height&quot;:940},&quot;cousinJoined&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Who has joined&quot;},&quot;wifeJoined&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Who has joined&quot;},&quot;spainJoined&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Who has joined&quot;},&quot;tunisJoined&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Who has joined&quot;},&quot;paulWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:163,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:1059,&quot;section&quot;:&quot;Fighters&quot;},&quot;cousinWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:60,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:1059,&quot;section&quot;:&quot;Fighters&quot;},&quot;nancopWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:213,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:967,&quot;section&quot;:&quot;Fighters&quot;},&quot;wifeWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:34,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:1000,&quot;section&quot;:&quot;Fighters&quot;},&quot;spainWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:118,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:1000,&quot;section&quot;:&quot;Fighters&quot;},&quot;tunisWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:66,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:1000,&quot;section&quot;:&quot;Fighters&quot;},&quot;cousinName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Manon&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Fighters&quot;},&quot;wifeName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Lena&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Fighters&quot;},&quot;spainName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Carlos&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Fighters&quot;},&quot;tunisName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Omar&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Fighters&quot;},&quot;nancopTargetsMe&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Rivalry&quot;},&quot;oathDays&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:7,&quot;min&quot;:1,&quot;max&quot;:30,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Rivalry&quot;,&quot;label&quot;:&quot;Nemesis oath (days)&quot;},&quot;clashGap&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:15,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:1,&quot;max&quot;:100,&quot;section&quot;:&quot;Map&quot;},&quot;laneStep&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:250,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:50,&quot;max&quot;:500,&quot;section&quot;:&quot;Map&quot;}}">
+// Every language fact now comes from the registry (bl-langs.js), which mirrors
+// the `languages` table. Adding a language touches that file, not this one.
+// Lazy lookups: the registry script mounts with the helmet, after this evaluates.
+function reg() { return window.BLLangs || null; }
+function langOf(id) { const B = reg(); return (B && B.get(id)) || null; }
+function colorOf(id) { const l = langOf(id); return (l && l.color) || "#a5a096"; }
+function codeOf(id) { const l = langOf(id); return (l && l.code) || String(id || "").toUpperCase(); }
+function nameOf(id) { const l = langOf(id); return (l && l.country) || id; }
+function nativeOf(id) { const l = langOf(id); return (l && l.native) || id; }
+function facesRight(id) { const l = langOf(id); return !!(l && l.facesRight); }
+function castOf(id) { const l = langOf(id); return (l && l.cast) || ["croissant", "fromage", "baguette"]; }
+// duo / cheer art, falling back to the language's first single when it has none
+function artOf(id, kind) { const B = reg(); return B ? B.art(id, kind) : "assets/chars/croissant.png"; }
+// the language's second character — never the same drawing as its hero
+function secondOf(id) {
+  const l = langOf(id);
+  const hero = ((l && l.hero) || "").split("/").pop().replace(".png", "");
+  const cast = castOf(id);
+  return cast.filter((c) => c !== hero)[0] || cast[0];
+}
+function scaleOf(m) { const B = reg(); return (B && B.SCALE && B.SCALE[m]) || 1; }
+
+// same-language duels are colour-on-colour, so the weaker side gets a darker tone
+function shade(hex, amount) {
+  const n = parseInt(hex.slice(1), 16);
+  const r = Math.round(((n >> 16) & 255) * (1 - amount));
+  const g = Math.round(((n >> 8) & 255) * (1 - amount));
+  const b = Math.round((n & 255) * (1 - amount));
+  return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+}
+
+class Component extends DCLogic {
+  state = { mode: "duel", rival: "u-nancop", me: "u-paul", declare: null, declaredAt: null,
+    term: 7, pendingTerm: 7, dayOverride: null, arena: null, selA: null, selB: null, demo: null, warsBy: {},
+    // the archive holds won challenges only, per viewer — seeded with Paul's record
+    scrollsBy: { "u-paul": [
+      { n: "nancop", lang: "el", at: Date.now() - 25 * 86400000, term: 7, by: 18 },
+      { n: "Manon", lang: "fr", at: Date.now() - 12 * 86400000, term: 3, by: 6 }
+    ] } };
+
+  // every war this viewer has declared: one per fighter, never two on the same
+  // person. Keyed by viewer so switching "viewing as" shows that fighter's wars.
+  wars() { return (this.state.warsBy || {})[this.state.me] || {}; }
+  atWar(id) { return !!this.wars()[id]; }
+  warCount() { return Object.keys(this.wars()).length; }
+  termBtn(on) {
+    return { flex: "1", minHeight: "44px", borderRadius: "999px", fontSize: "13.5px", fontWeight: "800",
+      display: "flex", alignItems: "center", justifyContent: "center",
+      background: on ? "#f4ecda" : "#f7f5f0", color: on ? "#6b5a2c" : "#a5a096",
+      boxShadow: on ? "inset 0 0 0 1.5px #d9c493" : "inset 0 0 0 1px #ebe7de" };
+  }
+
+  mask(indices) {
+    const bytes = new Uint8Array(133);
+    indices.forEach((i) => { if (i >= 0 && i < 1064) bytes[i >> 3] |= (1 << (i & 7)); });
+    let str = "";
+    for (let i = 0; i < bytes.length; i++) str += String.fromCharCode(bytes[i]);
+    try { return btoa(str); } catch (e) { return null; }
+  }
+  // ---- live arena ---------------------------------------------------------
+  // One entry per fighter PER LANGUAGE (schema-v8 fighter_languages), so a
+  // person studying two languages holds ground for both. The composite id keeps
+  // duels, rivals and challenges pointed at the right side of that person.
+  liveRows() {
+    const a = this.state.arena;
+    if (!a || !a.rows || !a.rows.length) return null;
+    const real = a.rows.filter((f) => !(f.is_bot === true || (f.is_bot == null && /^test/i.test(f.name || ""))))
+      // opening another language once published a known=0 row; those are not sides
+      .filter((f) => ((f.known || 0) + (f.bonus || 0)) > 0 || f.is_primary !== false);
+    if (!real.length) return null;
+    const vel = a.vel || null;
+    return real.map((f) => ({
+      user_id: f.user_id + "|" + f.language_id, fighter_id: f.user_id,
+      slot: f.slot, name: f.name, language_id: f.language_id,
+      known: f.known || 0, bonus: f.bonus || 0,
+      // real 7-day growth from the snapshot history; null when the window holds
+      // no history for this fighter, so nothing claims a pace it cannot know
+      per_week: vel ? (vel[f.user_id + "|" + f.language_id] ?? null) : null,
+      known_mask: f.known_mask || null, computed_at: f.computed_at || null,
+      primary: f.is_primary !== false
+    }));
+  }
+  isLive() { return !!this.liveRows(); }
+  seedArena = () => {
+    try { const c = JSON.parse(localStorage.getItem("bl-map-arena") || "null"); if (c) this.setState({ arena: c }, this.adoptMe); } catch (e) {}
+  };
+  pullArena = () => {
+    if (!(window.BLSync && window.BLSync.enabled)) return;
+    Promise.all([
+      window.BLSync.whoAmI(),
+      window.BLSync.standings(),
+      window.BLSync.rivals(),
+      window.BLSync.challenges ? window.BLSync.challenges() : Promise.resolve(null),
+      window.BLSync.velocities ? window.BLSync.velocities(7) : Promise.resolve(null)
+    ]).then(([who, rows, rv, ch, vel]) => {
+      if (!rows || !rows.length) return;
+      const arena = { me: who || null, rows: rows, rivals: rv || [], challenges: ch || [], vel: vel || null, at: Date.now() };
+      this.setState({ arena: arena }, this.adoptMe);
+      try { localStorage.setItem("bl-map-arena", JSON.stringify(arena)); } catch (e) {}
+    });
+  };
+  // first live pull: look at the map through the signed-in fighter's eyes
+  adoptMe = () => {
+    if (this._adopted) return;
+    const rows = this.liveRows(), a = this.state.arena;
+    if (!rows || !a) return;
+    this._adopted = true;
+    const mine = a.me ? rows.filter((r) => r.fighter_id === a.me) : [];
+    const pick = mine.filter((r) => r.primary)[0] || mine[0] || rows[0];
+    if (pick) this.setState({ me: pick.user_id, rival: null, declare: null, dayOverride: null });
+  };
+  onVis = () => { if (document.visibilityState === "visible") this.pullArena(); };
+  componentDidMount() {
+    // the clip mounts with the duel section, long after this runs, so the loop
+    // and inline playback are enforced from the document (as on the language pages)
+    document.addEventListener("loadeddata", function (e) {
+      const v = e.target;
+      if (v && v.tagName === "VIDEO") {
+        v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
+        v.setAttribute("muted", ""); v.playsInline = true; v.muted = true;
+        v.controls = false; v.loop = true; v.disablePictureInPicture = true;
+        v.style.pointerEvents = "none";
+        const p = v.play(); if (p && p.catch) p.catch(function () {});
+      }
+    }, true);
+    document.addEventListener("ended", function (e) {
+      const v = e.target;
+      if (v && v.tagName === "VIDEO") { v.loop = true; v.muted = true; v.currentTime = 0; const p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    }, true);
+    if (reg() && reg().hydrate) reg().hydrate(() => this.forceUpdate());
+    this.seedArena();
+    this.pullArena();
+    this._t = setInterval(this.pullArena, 45000);
+    window.addEventListener("focus", this.pullArena);
+    document.addEventListener("visibilitychange", this.onVis);
+  }
+  componentWillUnmount() {
+    clearInterval(this._t);
+    window.removeEventListener("focus", this.pullArena);
+    document.removeEventListener("visibilitychange", this.onVis);
+  }
+  // The open challenge between two fighters, from the server. Counts are banked
+  // at signing, so only words learned inside the term decide it.
+  liveChallenge(me, foe) {
+    const a = this.state.arena;
+    if (!a || !a.challenges || !a.challenges.length || !me || !foe || !me.fighter_id || !foe.fighter_id) return null;
+    const row = a.challenges.filter((c) => !c.settled_at && c.language_id === me.language_id
+        && ((c.challenger === me.fighter_id && c.target === foe.fighter_id)
+         || (c.challenger === foe.fighter_id && c.target === me.fighter_id)))
+      .sort((x, y) => Date.parse(y.started_at) - Date.parse(x.started_at))[0];
+    if (!row) return null;
+    const mineIsChallenger = row.challenger === me.fighter_id;
+    return { id: row.id, term_days: row.term_days || 7,
+      day: Math.max(0, Math.floor((Date.now() - Date.parse(row.started_at)) / 86400000)),
+      baseMine: mineIsChallenger ? row.base_challenger : row.base_target,
+      baseTheirs: mineIsChallenger ? row.base_target : row.base_challenger };
+  }
+  // the archive, from settled challenges this fighter won
+  liveScrolls(me) {
+    const a = this.state.arena;
+    if (!a || !a.challenges || !me || !me.fighter_id) return null;
+    const rows = this.liveRows() || [];
+    const nameOfId = (uid, lang) => {
+      const hit = rows.filter((r) => r.fighter_id === uid);
+      const x = hit.filter((r) => r.language_id === lang)[0] || hit[0];
+      return x ? { n: x.name, lang: x.language_id } : { n: "?", lang: lang };
+    };
+    return a.challenges.filter((c) => c.settled_at && c.winner === me.fighter_id).map((c) => {
+      const other = c.challenger === me.fighter_id ? c.target : c.challenger;
+      const who = nameOfId(other, c.language_id);
+      return { n: who.n, lang: who.lang, at: Date.parse(c.settled_at), term: c.term_days, by: c.margin || 0 };
+    });
+  }
+  // Only fighters that exist are listed, so only languages actually in use ever
+  // appear. Nothing anywhere hardcodes a language or a count.
+  syntheticStandings() {
+    const p = this.props;
+    const pw = p.paulWords ?? 163, cw = p.cousinWords ?? 60;
+    const paul = []; for (let i = 0; i < pw; i++) paul.push(i);
+    // she starts further down the deck and skips every third word, so both hold
+    // words the other does not
+    const cousin = []; for (let i = 0; cousin.length < cw && i < 900; i++) if (i % 3 !== 0) cousin.push(i + 120);
+    const all = [
+      { on: true, user_id: "u-paul", slot: 0, name: "Paul", language_id: "fr", known: pw, per_week: 40, known_mask: this.mask(paul) },
+      { on: p.cousinJoined !== false, user_id: "u-cousin", slot: 2, name: p.cousinName || "Manon", language_id: "fr", known: cw, per_week: 62, known_mask: this.mask(cousin) },
+      { on: true, user_id: "u-nancop", slot: 1, name: "nancop", language_id: "el", known: p.nancopWords ?? 213, per_week: 25 },
+      { on: p.wifeJoined !== false, user_id: "u-wife", slot: 3, name: p.wifeName || "Lena", language_id: "de", known: p.wifeWords ?? 34, per_week: 34 },
+      { on: p.spainJoined !== false, user_id: "u-carlos", slot: 4, name: p.spainName || "Carlos", language_id: "es", known: p.spainWords ?? 118, per_week: 28 },
+      { on: p.tunisJoined !== false, user_id: "u-omar", slot: 5, name: p.tunisName || "Omar", language_id: "tn", known: p.tunisWords ?? 66, per_week: 19 }
+    ];
+    return all.filter((x) => x.on).map((x) => { const y = Object.assign({}, x); delete y.on; return y; });
+  }
+  // Two extra languages, scaled off the current leader, for judging the ring
+  // with a fuller board. Clearly labelled and off by default; they never touch
+  // the server and disappear the moment the switch goes off.
+  demoRows(lead) {
+    const base = Math.max(60, lead);
+    return [["de", "Lena", 0.64], ["es", "Carlos", 0.6]].map((d, i) => ({
+      user_id: "demo-" + d[0], fighter_id: null, slot: 90 + i, name: d[1] + " (demo)",
+      language_id: d[0], known: Math.round(base * d[2]), bonus: 0, per_week: null,
+      known_mask: null, computed_at: null, primary: true, demo: true
+    }));
+  }
+  // On by default while fewer than four languages have real data: the ring is
+  // about comparing many sides, so it should never open as a barbell. Off the
+  // moment the switch is touched, and always off once four languages are live.
+  demoOn() {
+    if (this.state.demo != null) return this.state.demo;
+    const rows = this.liveRows() || this.syntheticStandings();
+    const seen = {}; rows.forEach((r) => { seen[r.language_id] = 1; });
+    return Object.keys(seen).length < 4;
+  }
+  // Live data when the server has any, the synthetic set otherwise — so the
+  // page is a real screen on a phone and still judgeable in a design preview.
+  standings() {
+    const rows = this.liveRows() || this.syntheticStandings();
+    if (!this.demoOn()) return rows;
+    const have = {}; rows.forEach((r) => { have[r.language_id] = 1; });
+    const lead = rows.reduce((m, r) => Math.max(m, (r.known || 0) + (r.bonus || 0)), 0);
+    return rows.concat(this.demoRows(lead).filter((r) => !have[r.language_id]));
+  }
+  rivals() {
+    const rowsLive = this.liveRows();
+    if (rowsLive) {
+      const a = this.state.arena || {};
+      const rowFor = (uid, lang) => {
+        const hit = rowsLive.filter((r) => r.fighter_id === uid);
+        return hit.filter((r) => r.language_id === lang)[0] || hit.filter((r) => r.primary)[0] || hit[0] || null;
+      };
+      const out = [];
+      // every war this device declared outranks the server copy (may be in flight)
+      const mineIds = Object.keys(this.wars());
+      if (this.state.rival && mineIds.indexOf(this.state.rival) < 0) mineIds.unshift(this.state.rival);
+      else if (this.state.rival) mineIds.sort((a, b) => (a === this.state.rival ? -1 : b === this.state.rival ? 1 : 0));
+      mineIds.forEach((t) => { if (this.state.me) out.push({ user_id: this.state.me, rival_user_id: t }); });
+      (a.rivals || []).forEach((r) => {
+        const A = rowFor(r.user_id, r.language_id), B = rowFor(r.rival_user_id, r.language_id);
+        if (A && B && A.user_id !== B.user_id) out.push({ user_id: A.user_id, rival_user_id: B.user_id });
+      });
+      const seen = {};
+      return out.filter((r) => {
+        const k = r.user_id + ">" + r.rival_user_id;
+        if (seen[k]) return false; seen[k] = 1; return true;
+      });
+    }
+    const S = this.syntheticStandings();
+    const live = {}; S.forEach((x) => { live[x.user_id] = 1; });
+    const declared = Object.keys(this.wars());
+    if (this.state.rival && declared.indexOf(this.state.rival) < 0) declared.unshift(this.state.rival);
+    const mine = declared.map((t) => ({ user_id: this.state.me, rival_user_id: t }));
+    const others = [
+      { user_id: "u-nancop", rival_user_id: this.props.nancopTargetsMe === false ? "u-cousin" : "u-paul" },
+      { user_id: "u-cousin", rival_user_id: "u-paul" }
+    ];
+    // a declared rival who is not on the roster is simply dropped
+    return mine.concat(others).filter((r) => live[r.user_id] && live[r.rival_user_id]);
+  }
+  tab(on) {
+    return { flex: "1", minHeight: "42px", borderRadius: "999px", fontSize: "13px", fontWeight: "700",
+      display: "flex", alignItems: "center", justifyContent: "center", whiteSpace: "nowrap",
+      background: on ? "#fff" : "transparent", color: on ? "#17181d" : "#8a857a",
+      boxShadow: on ? "0 1px 3px rgba(23,24,29,0.12)" : "none", transition: "background 0.15s ease" };
+  }
+  dot(lang, size) {
+    return { width: (size || 9) + "px", height: (size || 9) + "px", borderRadius: "999px", background: colorOf(lang), flex: "none" };
+  }
+  flag(lang, small) {
+    return { display: "flex", alignItems: "center", justifyContent: "center", flex: "none",
+      width: (small ? 26 : 30) + "px", height: (small ? 20 : 23) + "px", borderRadius: "4px 7px 7px 4px",
+      background: colorOf(lang), color: "#fff",
+      fontSize: (small ? 9.5 : 10.5) + "px", fontWeight: "800", letterSpacing: "0.06em",
+      boxShadow: "0 1px 2px rgba(23,24,29,0.2)" };
+  }
+  // assets ride in as background images: a src="{{ hole }}" would fire a request
+  // for the literal placeholder before values resolve
+  teamStyle(lang, side, dim) {
+    const flip = side === "left" ? !facesRight(lang) : facesRight(lang);
+    return { width: "100%", maxWidth: "150px", height: "116px", justifySelf: side === "left" ? "start" : "end",
+      backgroundImage: "url(" + (artOf(lang, "duo")) + ")", backgroundSize: "contain", backgroundRepeat: "no-repeat",
+      backgroundPosition: side === "left" ? "left bottom" : "right bottom",
+      transform: flip ? "scaleX(-1)" : "none", mixBlendMode: "multiply",
+      filter: dim ? "brightness(0.8) contrast(1.18)" : "none" };
+  }
+  mascotStyle(lang, size, animate) {
+    return { width: size + "px", height: size + "px", flex: "none",
+      backgroundImage: "url(" + (artOf(lang, "cheer")) + ")", backgroundSize: "contain",
+      backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply",
+      animation: animate ? "cheer 3.4s ease-in-out infinite" : "none", transformOrigin: "50% 100%" };
+  }
+
+  renderVals() {
+    const s = this.state, f = window.BLFront;
+    const S = this.standings(), R = this.rivals();
+    const byId = {}; S.forEach((x) => { byId[x.user_id] = x; });
+    const me = byId[s.me] || S[0];
+    const rv = f.rivalView(S, R, s.me);
+    const foe = rv.nemesis;
+    const d = foe ? f.duel(me, foe) : null;
+    const ahead = d ? d.mine > d.theirs : false;
+    const co = f.coop(S, me.language_id);
+    const L = f.ladder(S, s.me, { top: 3, around: 2 });
+    const lanes = f.lanes(S, { step: this.props.laneStep ?? 250 });
+    const langs = lanes.lanes;
+    const ceiling = lanes.ceiling;
+    const clashGap = this.props.clashGap ?? 15;
+
+    // where the two sides meet, and the cast that fights over it
+    const clash = Math.max(18, Math.min(82, d ? d.minePct : 50));
+    const sameLang = !!(foe && foe.language_id === me.language_id);
+    const foeTone = foe ? (sameLang ? shade(colorOf(foe.language_id), 0.42) : colorOf(foe.language_id)) : "#c9c3b5";
+    // Everyone stays in the pile. Two layers per fighter: a short tussle loop that
+    // never stops, and a long mostly-idle loop that flings them out now and then.
+    // The losing side gets flung more often — that is the balance of power.
+    const TUS = ["tussleA", "tussleB", "tussleC"];
+    const sizes = [34, 27, 30], lifts = [0, 4, 1];
+    const losing = d ? (ahead ? "them" : d.tie ? null : "me") : null;
+    const flingCycles = (side) => losing === null ? [8.5, 10.5, 12.5]
+      : losing === side ? [4.7, 6.1, 7.3] : [11.3, 14.1, 16.7];
+    const skirmish = [];
+    const build = (lang, side, xs, dim) => {
+      const cycles = flingCycles(side);
+      castOf(lang).slice(0, 3).forEach((m, i) => {
+        const size = Math.round(sizes[i] * (scaleOf(m) || 1));
+        skirmish.push({
+          wrap: { position: "absolute", left: "calc(" + clash + "% + " + xs[i] + "px)", bottom: (5 + lifts[i]) + "px",
+            width: size + "px", height: size + "px", zIndex: String(3 - i),
+            animation: (side === "me" ? "flingL " : "flingR ") + cycles[i] + "s cubic-bezier(0.3,0.05,0.2,1) " + (i * 1.7 + (side === "me" ? 0 : 0.9)).toFixed(2) + "s infinite",
+            pointerEvents: "none" },
+          mid: { width: "100%", height: "100%",
+            animation: TUS[i % 3] + " " + (0.72 + i * 0.19).toFixed(2) + "s ease-in-out " + (i * 0.11).toFixed(2) + "s infinite" },
+          body: { width: "100%", height: "100%", backgroundImage: "url(assets/chars/" + m + ".png)",
+            backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center bottom",
+            mixBlendMode: "multiply", transformOrigin: "50% 100%",
+            // front-on art: the inward lean is what makes them read as facing each other
+            transform: (side === "me" ? "rotate(7deg)" : "rotate(-7deg)"),
+            filter: dim ? "brightness(0.82) contrast(1.15)" : "none" }
+        });
+      });
+    };
+    build(me.language_id, "me", [-30, -13, -22], false);
+    build(foe ? foe.language_id : "el", "them", [-2, 12, 4], sameLang);
+    // smoke on both sides of the fighters: two puffs behind for depth, one always-on
+    // cloud in FRONT that drifts over the scrum and hides the seams
+    const dust = [
+      [40, 2.3, 0, 1, "dustPuff", 0],
+      [32, 3.1, 0.7, 1, "dustPuff", 6],
+      [52, 4.9, 0.3, 6, "smokeFront", -6],
+      [38, 3.7, 2.1, 6, "smokeFront", 10]
+    ].map(([w, dur, del, z, anim, dx]) => ({
+      style: { position: "absolute", left: "calc(" + clash + "% - " + (w / 2 - dx) + "px)", bottom: anim === "smokeFront" ? "1px" : "0px",
+        width: w + "px", height: Math.round(w * 0.72) + "px", zIndex: String(z),
+        backgroundImage: "url(assets/chars/dust.png)", backgroundSize: "contain", backgroundRepeat: "no-repeat",
+        backgroundPosition: "center bottom", mixBlendMode: "multiply",
+        opacity: anim === "smokeFront" ? "0.4" : "0",
+        animation: anim + " " + dur + "s ease-in-out " + del + "s infinite", pointerEvents: "none" }
+    }));
+    const pows = [["pow-1", 34, 4.7, 0.4, -30], ["pow-2", 28, 6.1, 2.3, 10], ["pow-3", 31, 7.9, 4.1, -8]].map(([img, w, dur, del, dx]) => ({
+      style: { position: "absolute", left: "calc(" + clash + "% + " + dx + "px)", top: "0px", width: w + "px", height: w + "px",
+        backgroundImage: "url(assets/chars/" + img + ".png)", backgroundSize: "contain", backgroundRepeat: "no-repeat",
+        backgroundPosition: "center", mixBlendMode: "multiply", opacity: "0",
+        animation: "powPop " + dur + "s ease-out " + del + "s infinite", pointerEvents: "none" }
+    }));
+
+    // ---- the road to the crown ---------------------------------------------
+    // Parallel lanes, one per language, ranked top to bottom. Every lane starts
+    // at the same line and finishes at the same crown, so the front lines can be
+    // compared straight down the column — a spoke on a wheel cannot be.
+    const sorted = langs.slice().sort((a, b) => b.score - a.score);
+    const leader = sorted[0];
+    const second = sorted[1] || null;
+    const totalPts = sorted.reduce((n, l) => n + l.score, 0) || 1;
+    const N = sorted.length;
+    const leadScore = leader.score || 1;
+    const selA = s.selA || null, selB = s.selB || null;
+    const anySel = !!(selA || selB);
+    const picked = (id) => id === selA || id === selB;
+    const tapLang = (id) => () => {
+      if (id === selA) return this.setState({ selA: selB, selB: null });
+      if (id === selB) return this.setState({ selB: null });
+      if (!selA) return this.setState({ selA: id });
+      if (!selB) return this.setState({ selB: id });
+      this.setState({ selA: id, selB: null });
+    };
+    const rowOf = (id) => sorted.filter((x) => x.language_id === id)[0] || null;
+    const rankOf = (id) => sorted.findIndex((x) => x.language_id === id) + 1;
+    const laneRows = sorted.map((l, i) => {
+      const c = colorOf(l.language_id), first = i === 0;
+      const dim = anySel && !picked(l.language_id);
+      const adv = Math.max(0.05, l.score / leadScore);
+      const at = 4 + 88 * adv;                       // front line, % of the road
+      const size = first ? 34 : 29;
+      return {
+        rank: i + 1, code: codeOf(l.language_id), score: l.score,
+        aria: nameOf(l.language_id) + ", rank " + (i + 1) + ", " + l.score + " points",
+        rowStyle: { display: "flex", alignItems: "center", gap: "8px", width: "100%",
+          padding: "5px 6px", borderRadius: "13px", background: picked(l.language_id) ? "#f8f6f1" : "transparent",
+          opacity: dim ? "0.4" : "1", transition: "opacity 0.2s ease, background 0.2s ease" },
+        rankStyle: { fontSize: "11px", fontWeight: "800", color: first ? "#9a7c33" : "#c9c3b5", width: "10px", flex: "none" },
+        codeStyle: { fontSize: "10px", fontWeight: "800", letterSpacing: "0.06em", color: c, width: "22px", flex: "none" },
+        road: { position: "relative", display: "block", flex: "1", minWidth: "0", height: "36px" },
+        track: { position: "absolute", display: "block", left: "0", right: "0", top: "50%",
+          transform: "translateY(-50%)", height: "8px", borderRadius: "999px", background: "#f2efe8" },
+        fill: { position: "absolute", display: "block", left: "0", top: "50%", transform: "translateY(-50%)",
+          width: at + "%", height: "8px", borderRadius: "999px", background: c, transition: "width 0.5s ease" },
+        finish: { position: "absolute", display: "block", right: "0", top: "1px", bottom: "1px", width: "2px",
+          background: "repeating-linear-gradient(to bottom, #17181d 0 4px, transparent 4px 8px)",
+          opacity: first ? "0.6" : "0.28" },
+        token: { position: "absolute", left: at + "%", top: "50%", transform: "translate(-50%, -50%)",
+          width: size + "px", height: size + "px", borderRadius: "999px", background: "#fffdf8",
+          boxShadow: "0 1px 3px rgba(23,24,29,0.16), inset 0 0 0 " + (first ? 2 : 1.2) + "px " + (first ? "#d9a63f" : c + "55"),
+          display: "flex", alignItems: "flex-end", justifyContent: "center", zIndex: "3",
+          transition: "left 0.5s ease" },
+        art: { display: "block", width: "76%", height: "76%", marginBottom: "9%",
+          backgroundImage: "url(" + artOf(l.language_id, "cheer") + ")", backgroundSize: "contain",
+          backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply",
+          transformOrigin: "50% 100%", animation: first ? "cheer 3.4s ease-in-out infinite" : "none" },
+        scoreStyle: { fontFamily: "Gloock, serif", fontSize: "17px", flex: "none", width: "46px", textAlign: "right" },
+        tap: tapLang(l.language_id)
+      };
+    });
+    const hotPair = sorted.slice(0, -1).map((l, i) => ({ a: sorted[i], b: sorted[i + 1], gap: sorted[i].score - sorted[i + 1].score })).sort((p, q) => p.gap - q.gap)[0] || null;
+    const velBy = {};
+    S.forEach((x) => { if (x.per_week != null && x.per_week > 0) velBy[x.language_id] = (velBy[x.language_id] || 0) + x.per_week; });
+    const fastest = Object.keys(velBy).sort((a, b) => velBy[b] - velBy[a])[0] || null;
+    const myRank = rankOf(me.language_id);
+    const aboveMe = myRank > 1 ? sorted[myRank - 2] : null;
+    const callouts = [];
+    if (hotPair && N > 1) callouts.push({ label: "Tightest", value: nameOf(hotPair.a.language_id) + " vs " + nameOf(hotPair.b.language_id) + " · " + hotPair.gap + " apart" });
+    if (fastest) callouts.push({ label: "Fastest week", value: nameOf(fastest) + " · +" + velBy[fastest] + " points in seven days" });
+    if (myRank) callouts.push({ label: "Your side", value: nameOf(me.language_id) + " · #" + myRank + (aboveMe ? " · " + (aboveMe.score - rowOf(me.language_id).score) + " to #" + (myRank - 1) : " · out in front") });
+    const selRow = selA ? rowOf(selA) : null;
+    const selLine = !selRow ? "" : (function () {
+      const ra = rankOf(selA), ab = ra > 1 ? sorted[ra - 2] : null;
+      const base = nativeOf(selA) + " · #" + ra + " · " + selRow.score + " points";
+      if (selB) { const b = rowOf(selB); return base + " vs " + nativeOf(selB) + " · " + Math.abs(selRow.score - (b ? b.score : 0)) + " apart"; }
+      return base + (ab ? " · " + (ab.score - selRow.score) + " behind " + nameOf(ab.language_id) : " · out in front");
+    })();
+    const pinTop = (id) => { const lane = langs.filter((x) => x.language_id === id)[0]; return lane && lane.pins && lane.pins.length ? lane.pins[0] : null; };
+    const topRow = L.all[0];
+    // naming a nemesis starts a challenge: it runs a 3- or 7-day term and then
+    // settles. Only the words each side learns inside the term count.
+    const liveCh = this.liveChallenge(me, foe);
+    const termDays = liveCh ? liveCh.term_days : (s.term ?? (this.props.oathDays ?? 7));
+    const rawDay = liveCh ? liveCh.day : (s.dayOverride != null ? s.dayOverride : 2);
+    const chDay = Math.max(0, Math.min(termDays, rawDay));
+    const chOver = chDay >= termDays;
+    const chLeft = Math.max(0, termDays - chDay);
+    const dayWord = (n) => n + (n === 1 ? " day" : " days");
+    const rate = (x) => (x && x.per_week ? x.per_week / 7 : 0);
+    // live: words learned since the challenge was signed. sandbox: weekly pace.
+    const chMine = liveCh ? Math.max(0, f.score(me) - liveCh.baseMine) : Math.round(rate(me) * chDay);
+    const chTheirs = liveCh ? Math.max(0, (foe ? f.score(foe) : 0) - liveCh.baseTheirs) : Math.round(rate(foe) * chDay);
+    const chDiff = chMine - chTheirs;
+    const decFoe = s.declare ? byId[s.declare] : null;
+    const pendTerm = s.pendingTerm ?? termDays;
+    // wars run in parallel now: a new declaration never touches the others, and
+    // the same fighter can only be declared on once.
+    const oathBreak = false;
+    const wars = this.wars();
+    const warTerm = (id) => (wars[id] && wars[id].term) || null;
+    // a win in hand that has not been filed yet, shown in the archive straight away
+    const liveWin = chOver && chDiff > 0 && foe ? [{ n: foe.name, lang: foe.language_id, at: Date.now(), term: termDays, by: chDiff }] : [];
+    const served = this.liveScrolls(me);
+    const wonList = served
+      ? served.concat(liveCh ? liveWin : [])
+      : ((s.scrollsBy || {})[s.me] || []).filter((c) => c.by > 0).concat(liveWin);
+    // settling a live challenge is a server write; the local archive is the
+    // sandbox equivalent of the same thing
+    const settleLive = () => {
+      if (!(liveCh && window.BLSync && window.BLSync.settleChallenge)) return;
+      if (!chOver) { window.BLSync.settleChallenge(liveCh.id, { forfeited_by: me.fighter_id, winner: foe ? foe.fighter_id : null, margin: Math.abs(chDiff) }); return; }
+      window.BLSync.settleChallenge(liveCh.id, {
+        winner: chDiff > 0 ? me.fighter_id : chDiff < 0 && foe ? foe.fighter_id : null,
+        margin: Math.abs(chDiff) });
+    };
+    const fileWin = () => {
+      const sb = Object.assign({}, this.state.scrollsBy);
+      if (liveWin.length) sb[s.me] = (sb[s.me] || []).concat(liveWin);
+      return sb;
+    };
+
+    return {
+      // the preview fighters are counted apart from the real ones: this line is
+      // how the user knows whether they are looking at server truth
+      rosterLine: (function () {
+        const real = S.filter((x) => !x.demo), fake = S.length - real.length;
+        const rl = {}; real.forEach((x) => { rl[x.language_id] = 1; });
+        return (this.isLive() ? "live · " : "sandbox · ") + real.length + " fighters · "
+          + Object.keys(rl).length + " languages" + (fake ? " · +" + fake + " preview" : "");
+      }).call(this),
+      isSandbox: !this.isLive(),
+      isDuel: s.mode === "duel", isFaction: s.mode === "faction", isLadder: s.mode === "ladder", isCoop: s.mode === "coop",
+      mDuel: this.tab(s.mode === "duel"), mFaction: this.tab(s.mode === "faction"),
+      mLadder: this.tab(s.mode === "ladder"), mCoop: this.tab(s.mode === "coop"),
+      setDuel: () => this.setState({ mode: "duel" }), setFaction: () => this.setState({ mode: "faction" }),
+      setLadder: () => this.setState({ mode: "ladder" }), setCoop: () => this.setState({ mode: "coop" }),
+
+      // ---- viewing as (sandbox: see the map through any fighter's eyes)
+      viewChips: S.map((x) => ({
+        label: x.name,
+        dot: { width: "7px", height: "7px", borderRadius: "999px", background: colorOf(x.language_id), flex: "none", marginRight: "5px" },
+        pick: () => { if (x.user_id !== s.me) this.setState({ me: x.user_id, rival: null, declare: null, declaredAt: null }); },
+        style: { minHeight: "34px", padding: "0 12px", borderRadius: "999px", fontSize: "12px", fontWeight: "700", flex: "none", display: "flex", alignItems: "center",
+          background: x.user_id === s.me ? "#eee7d7" : "#fff", color: x.user_id === s.me ? "#3f3a30" : "#5d5a52",
+          boxShadow: x.user_id === s.me ? "inset 0 0 0 1.5px #cfc3a3" : "0 1px 2px rgba(23,24,29,0.08)" }
+      })),
+
+      // ---- the declaration ceremony
+      showDeclare: !!decFoe,
+      decTitle: decFoe ? "War on " + decFoe.name : "",
+      decLine: decFoe ? "Name " + decFoe.name + " (" + (nativeOf(decFoe.language_id) || decFoe.language_id) + " · " + f.score(decFoe) + " words) your nemesis. They will be told you are coming, the whole map will see it, and whoever learns more words before the term is up wins the challenge." : "",
+      decOathBreak: oathBreak,
+      decOathLine: oathBreak && foe ? "Your " + termDays + "-day challenge with " + foe.name + " has " + dayWord(chLeft) + " to run. Switching now forfeits it, and a forfeited challenge never reaches your archive." : "",
+      decCta: oathBreak ? "Forfeit & declare" : "Sign the declaration",
+      decFootnote: "Signing starts a " + pendTerm + "-day challenge. Declare on as many fighters as you like \u2014 one war each, and no second declaration on the same person.",
+      term3Style: this.termBtn(pendTerm === 3),
+      term7Style: this.termBtn(pendTerm === 7),
+      pickTerm3: () => this.setState({ pendingTerm: 3 }),
+      pickTerm7: () => this.setState({ pendingTerm: 7 }),
+      signDeclare: () => {
+        const target = byId[this.state.declare];
+        const term = this.state.pendingTerm ?? 7;
+        if (!target || this.atWar(target.user_id)) return this.setState({ declare: null });
+        const wb = Object.assign({}, this.state.warsBy || {});
+        wb[this.state.me] = Object.assign({}, wb[this.state.me] || {});
+        wb[this.state.me][target.user_id] = { term: term, at: Date.now() };
+        this.setState({ warsBy: wb, rival: target.user_id, declare: null, declaredAt: Date.now(),
+          term: term, dayOverride: 0, scrollsBy: fileWin() });
+        // publish: the nemesis pick (per language) and the challenge itself
+        if (target && target.fighter_id && window.BLSync && window.BLSync.enabled) {
+          if (window.BLSync.setRival) window.BLSync.setRival(target.fighter_id, me.language_id);
+          if (window.BLSync.startChallenge) window.BLSync.startChallenge({
+            target: target.fighter_id, language_id: me.language_id, term_days: term,
+            base_challenger: f.score(me), base_target: f.score(target) }).then(this.pullArena);
+        }
+      },
+      cancelDeclare: () => this.setState({ declare: null }),
+
+      // ---- the running challenge
+      // A challenge is a server object: on live data it renders only when a real
+      // challenge row exists, so nothing invents a term or a score from thin air.
+      hasChallenge: !!(liveCh || !this.isLive()),
+      chTermLabel: termDays + "-day challenge",
+      chStatus: chOver ? "Settled" : "Day " + Math.min(termDays, chDay + 1) + " of " + termDays,
+      chStatusStyle: { marginLeft: "auto", fontSize: "10px", fontWeight: "700", letterSpacing: "0.08em", textTransform: "uppercase", color: chOver ? "#9a7c33" : "#c9c3b5" },
+      chPips: Array.from({ length: termDays }, (x, i) => ({
+        style: { flex: "1", height: "4px", borderRadius: "999px", background: i < chDay ? "#d9a63f" : "#eae5d9" }
+      })),
+      chMine: chMine, chTheirs: chTheirs, chOver: chOver,
+      chVerdict: !foe ? "" : chOver
+        ? (chDiff > 0 ? "You won by " + chDiff + " words. The scroll is signed."
+          : chDiff < 0 ? foe.name + " won by " + (-chDiff) + " words. Nothing goes in your archive."
+          : "Drawn at " + chMine + " words each. No scroll for a draw.")
+        : (chDiff > 0 ? "You lead by " + chDiff + " · " + dayWord(chLeft) + " left"
+          : chDiff < 0 ? foe.name + " leads by " + (-chDiff) + " · " + dayWord(chLeft) + " left"
+          : "Level at " + chMine + " each · " + dayWord(chLeft) + " left"),
+      chVerdictStyle: { fontSize: "12.5px", fontWeight: "700", lineHeight: "1.4", textWrap: "pretty",
+        color: chOver ? (chDiff > 0 ? "#2f7a44" : chDiff < 0 ? "#c2402f" : "#8a857a") : "#5d5a52" },
+      chRematchLabel: "Run it again",
+      chRematchStyle: { flex: "1", minHeight: "42px", borderRadius: "999px", fontSize: "13px", fontWeight: "800", display: "flex", alignItems: "center", justifyContent: "center",
+        background: "#f4ecda", color: "#6b5a2c", boxShadow: "inset 0 0 0 1.5px #e0cfa6" },
+      chNewStyle: { flex: "1", minHeight: "42px", borderRadius: "999px", fontSize: "13px", fontWeight: "700", display: "flex", alignItems: "center", justifyContent: "center",
+        background: "#f0ede6", color: "#5d5a52" },
+      chNewLabel: this.warCount() > 1 ? "Withdraw" : "New nemesis",
+      chRematch: () => { settleLive(); this.setState({ scrollsBy: fileWin(), dayOverride: 0, declaredAt: Date.now() }); },
+      // withdrawing drops only THIS war; the others keep running
+      chNew: () => {
+        settleLive();
+        const wb = Object.assign({}, this.state.warsBy || {});
+        const mine = Object.assign({}, wb[s.me] || {});
+        if (foe) delete mine[foe.user_id];
+        wb[s.me] = mine;
+        const next = Object.keys(mine)[0] || null;
+        this.setState({ warsBy: wb, scrollsBy: fileWin(), rival: next, declare: null,
+          declaredAt: null, dayOverride: null, term: next ? (mine[next].term || 7) : null });
+      },
+      sbBtn: { minHeight: "30px", padding: "0 11px", borderRadius: "999px", fontSize: "11px", fontWeight: "700", background: "#eae6dd", color: "#8a857a", flex: "none" },
+      sbBack: () => this.setState({ dayOverride: Math.max(0, chDay - 1) }),
+      sbFwd: () => this.setState({ dayOverride: Math.min(termDays, chDay + 1) }),
+      sbEnd: () => this.setState({ dayOverride: termDays }),
+
+      // ---- the archive: only the challenges you won leave a scroll behind
+      hasScrolls: wonList.length > 0,
+      scrollCount: (function (n) { return n + (n === 1 ? " won" : " won"); })(wonList.length),
+      scrolls: wonList.map((c, i) => {
+        const parts = String(c.n).trim().split(/\s+/);
+        const init = (parts.length > 1 ? parts[0][0] + parts[1][0] : String(c.n).slice(0, 2)).toUpperCase();
+        const dt = new Date(c.at);
+        return {
+          init: init,
+          date: dt.getDate() + " " + ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][dt.getMonth()],
+          margin: "+" + c.by,
+          marginStyle: { fontSize: "9px", fontWeight: "800", color: "#2f7a44", letterSpacing: "0.02em" },
+          term: c.term ? c.term + "d" : "",
+          wrap: { width: "50px", height: "68px", position: "relative", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: "2px", flex: "none",
+            background: "linear-gradient(to bottom, #e6dcc2 0, #e6dcc2 5px, #fdf8ec 5px, #fdf8ec calc(100% - 5px), #e6dcc2 calc(100% - 5px))",
+            border: "1px solid #ddd2b6", borderRadius: "4px", boxShadow: "0 1px 2px rgba(23,24,29,0.12)",
+            transform: "rotate(" + (((i % 3) - 1) * 2.5) + "deg)" },
+          initStyle: { fontFamily: "Gloock, serif", fontSize: "15px", lineHeight: "1", color: "#3d3a34" },
+          seal: { width: "11px", height: "11px", borderRadius: "999px", background: colorOf(c.lang) || "#b3261e", boxShadow: "inset 0 -2px 3px rgba(0,0,0,0.28)", flex: "none" },
+          dateStyle: { fontSize: "7.5px", fontWeight: "600", color: "#a5a096", letterSpacing: "0.04em" }
+        };
+      }),
+      eatClick: (e) => e.stopPropagation(),
+      decMeStyle: Object.assign({}, this.teamStyle(me.language_id, "left"), { height: "86px", maxWidth: "122px" }),
+      decFoeStyle: Object.assign({}, this.teamStyle(decFoe ? decFoe.language_id : "el", "right"), { height: "86px", maxWidth: "122px" }),
+
+      // ---- duel
+      noRival: !foe, hasRival: !!foe,
+      suggestLine: rv.suggest ? "Closest to your count right now: " + rv.suggest.name + " on " + f.score(rv.suggest) + " words." : "",
+      meName: me.name, meLang: nativeOf(me.language_id),
+      foeName: foe ? foe.name : "", foeLang: foe ? nativeOf(foe.language_id) : "",
+      meScore: d ? d.mine : f.score(me), foeScore: d ? d.theirs : 0,
+      meTeamSrc: artOf(me.language_id, "duo"), foeTeamSrc: foe ? artOf(foe.language_id, "duo") : artOf("el", "duo"),
+      meTeamStyle: this.teamStyle(me.language_id, "left"),
+      foeTeamStyle: this.teamStyle(foe ? foe.language_id : "el", "right", sameLang),
+      // the battle art the language pages already use: the France-vs-Greece clip
+      // for that pair, the bataille still for every other matchup
+      hasFaceoff: !!(foe && ((me.language_id === "fr" && foe.language_id === "el") || (me.language_id === "el" && foe.language_id === "fr"))),
+      hasBattleStill: !!(foe && !((me.language_id === "fr" && foe.language_id === "el") || (me.language_id === "el" && foe.language_id === "fr"))),
+      faceoffAria: foe ? nameOf(me.language_id) + " against " + nameOf(foe.language_id) : "",
+      // bataille-v2.png IS the croissant-versus-olive scene, so it only fits that
+      // pair. Every other matchup gets the same kind of faceoff built from the two
+      // languages' own characters — which means a new language needs no new art.
+      faceoffBand: { position: "relative", width: "100%", height: "104px", borderRadius: "12px",
+        background: "#faf8f3", overflow: "hidden" },
+      faceoffGround: { position: "absolute", left: "9%", right: "9%", bottom: "15px", height: "1.5px",
+        background: "#e6e2d7" },
+      faceoffLeft: { position: "absolute", left: "13%", bottom: "15px",
+        width: Math.round(66 * scaleOf(secondOf(me.language_id))) + "px", height: "70px",
+        backgroundImage: "url(assets/chars/" + secondOf(me.language_id) + ".png)", backgroundSize: "contain",
+        backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply",
+        transformOrigin: "50% 100%", transform: "rotate(6deg)", animation: "tipShove 1.9s ease-in-out infinite" },
+      faceoffRight: { position: "absolute", right: "13%", bottom: "15px",
+        width: Math.round(66 * scaleOf(secondOf(foe ? foe.language_id : "el"))) + "px", height: "70px",
+        backgroundImage: "url(assets/chars/" + secondOf(foe ? foe.language_id : "el") + ".png)", backgroundSize: "contain",
+        backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply",
+        transformOrigin: "50% 100%", transform: "rotate(-6deg)", animation: "tipShove 2.3s ease-in-out 0.4s infinite" },
+      faceoffSmoke: { position: "absolute", left: "50%", bottom: "12px", width: "58px", height: "42px",
+        transform: "translateX(-50%)", backgroundImage: "url(assets/chars/dust.png)", backgroundSize: "contain",
+        backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply",
+        opacity: "0.4", animation: "smokeFront 4.6s ease-in-out infinite" },
+      faceoffPow: { position: "absolute", left: "50%", top: "14px", width: "34px", height: "34px",
+        transform: "translateX(-50%)", backgroundImage: "url(assets/chars/pow-2.png)", backgroundSize: "contain",
+        backgroundRepeat: "no-repeat", backgroundPosition: "center", mixBlendMode: "multiply", opacity: "0",
+        animation: "powPop 5.4s ease-out 1.2s infinite" },
+      gapBadge: !d ? "" : d.tie ? "level" : d.gap + "",
+      gapBadgeStyle: { fontSize: "11px", fontWeight: "800", padding: "3px 9px", borderRadius: "999px",
+        background: !d || d.tie ? "#efece5" : ahead ? "#eaf3ec" : "#fbeeec",
+        color: !d || d.tie ? "#8a857a" : ahead ? "#2f7a44" : "#c2402f", whiteSpace: "nowrap" },
+      barMine: { width: (d ? d.minePct : 50) + "%", background: colorOf(me.language_id), transition: "width 0.45s ease" },
+      barTheirs: { flex: "1", background: foeTone },
+      // the skirmish sits exactly on the split, so the line's position reads as the
+      // balance of power even when both sides share a colour
+      skirmish: skirmish, dust: dust, pows: pows,
+      lineNoteWrap: { display: "flex", justifyContent: clash > 60 ? "flex-start" : clash < 40 ? "flex-end" : "center" },
+      lineNoteStyle: { fontSize: "10.5px", color: "#a5a096", letterSpacing: "0.02em" },
+      lineNote: !d ? "" : d.tie ? "the line holds dead centre"
+        : (ahead ? "the line is " + (d.minePct - 50) + "% into their half" : "the line is " + (50 - d.minePct) + "% into your half"),
+      verdict: !d ? "" : d.tie ? "Dead level" : ahead ? "You lead by " + d.gap : foe.name + " leads by " + d.gap,
+      verdictStyle: { fontSize: "12.5px", fontWeight: "700", color: !d || d.tie ? "#8a857a" : ahead ? "#2f7a44" : "#c2402f" },
+      trendLine: !d || !(me.per_week != null && foe && foe.per_week != null) ? ""
+        : d.trend === "gaining" ? "you are closing faster this week" : d.trend === "losing" ? "they are pulling away this week" : "same pace this week",
+      superNemesis: rv.feud,
+      superLine: rv.feud && foe ? "You and " + foe.name + " have each named the other. Every word either of you learns moves this line." : "",
+      cooldownLine: this.warCount() > 1 ? this.warCount() + " running · tap one to watch it" : chOver ? "this one has settled" : dayWord(chLeft) + " left",
+      rivalChips: S.filter((x) => x.user_id !== s.me).map((x) => {
+        const on = this.atWar(x.user_id), focused = !!(foe && x.user_id === foe.user_id);
+        return {
+          label: x.name + " · " + f.score(x) + (on ? " · at war" : ""),
+          pick: () => this.setState(on ? { rival: x.user_id, dayOverride: null } : { declare: x.user_id }),
+          style: { minHeight: "38px", padding: "0 14px", borderRadius: "999px", fontSize: "12.5px", fontWeight: "700",
+            flex: "none", display: "flex", alignItems: "center", whiteSpace: "nowrap",
+            background: on ? colorOf(x.language_id) : "#f1eee6",
+            color: on ? "#fff" : "#5d5a52",
+            boxShadow: focused ? "inset 0 0 0 2px #17181d" : "none" }
+        };
+      }),
+      warCountLine: (function (n) { return n === 0 ? "no wars declared" : n === 1 ? "1 war running" : n + " wars running"; })(this.warCount()),
+      hasChain: R.length > 0,
+      chain: (function () {
+        const out = [];
+        R.forEach((r) => {
+          const a = byId[r.user_id], b = byId[r.rival_user_id];
+          if (!a || !b) return;
+          const mutual = R.some((o) => o.user_id === r.rival_user_id && o.rival_user_id === r.user_id);
+          out.push({
+            dot: { width: "7px", height: "7px", borderRadius: "999px", flex: "none", background: colorOf(a.language_id), marginTop: "5px" },
+            line: a.name + " is gunning for " + b.name + (mutual ? " · mutual" : "")
+          });
+        });
+        return out;
+      })(),
+      hasHunters: rv.hunters.length > 0,
+      hunters: rv.hunters.map((h) => ({
+        name: h.name,
+        line: f.score(h) + " words · " + (f.score(h) > f.score(me) ? (f.score(h) - f.score(me)) + " ahead of you" : (f.score(me) - f.score(h)) + " behind you")
+      })),
+
+      // ---- front: the road to the crown
+      landTotal: totalPts,
+      rumbleEyebrow: (this.demoOn() ? "The rumble · preview · " : "The rumble · ") + N + " languages · " + totalPts + " points",
+      leaderLine: second ? nameOf(leader.language_id) + " leads by " + (leader.score - second.score)
+        : nameOf(leader.language_id) + " has the board to itself",
+      demoLabel: this.demoOn() ? "Live only" : "+2 languages",
+      demoBtnStyle: { flex: "none", minHeight: "30px", padding: "0 11px", borderRadius: "999px", fontSize: "10.5px",
+        fontWeight: "800", letterSpacing: "0.02em", display: "flex", alignItems: "center", justifyContent: "center",
+        background: this.demoOn() ? "#f4ecda" : "#f1eee6", color: this.demoOn() ? "#6b5a2c" : "#8a857a",
+        boxShadow: this.demoOn() ? "inset 0 0 0 1.2px #dcc79a" : "none" },
+      toggleDemo: () => this.setState({ demo: !this.demoOn(), selA: null, selB: null }),
+      laneRows: laneRows,
+      readMe: [
+        ["Every language runs the same road: same start, same crown. The furthest character is winning.", "#d9a63f"],
+        ["Lanes are ranked top to bottom, so two front lines almost level are a real fight.", colorOf(leader.language_id)]
+      ].map((r) => ({ line: r[0], mark: { width: "12px", height: "2px", background: r[1], borderRadius: "2px", flex: "none", marginTop: "6px" } })),
+      hasSel: !!selA, canDuel: !!(selA && selB), selLine: selLine,
+      duelLabel: selA && selB ? "Le Duel" : "",
+      duelBtnStyle: { marginLeft: "auto", flex: "none", minHeight: "34px", padding: "0 14px", borderRadius: "999px",
+        background: "#17181d", color: "#fff", fontSize: "12px", fontWeight: "800", letterSpacing: "0.02em",
+        display: "flex", alignItems: "center", justifyContent: "center" },
+      openDuel: () => {
+        const a = pinTop(selA), b = pinTop(selB);
+        if (!a || !b) return;
+        this.setState({ mode: "duel", me: a.user_id, rival: b.user_id, declare: null,
+          declaredAt: null, dayOverride: null, selA: null, selB: null });
+      },
+      hasCallouts: callouts.length > 0, callouts: callouts,
+      factionNote: this.demoOn() ? "Two preview languages (marked demo) are standing in so the road can be judged with a fuller field. They exist only on this device." : "Tap one language to isolate it, two to drop into their duel.",
+
+      // ---- ladder
+      topMascotStyle: this.mascotStyle(topRow.language_id, 96, true), topName: topRow.name,
+      topTaunt: topRow.name + " is top of the ladder on " + topRow.score + " words. "
+        + (topRow.user_id === s.me ? "That is you — expect company." : "Everyone else is climbing."),
+      ladderRows: L.view.map((r) => ({
+        rank: r.rank, name: r.name, lang: nativeOf(r.language_id), score: r.score, dot: this.dot(r.language_id),
+        rowStyle: { display: "flex", alignItems: "center", gap: "9px", padding: "11px 12px", borderRadius: "16px",
+          background: r.user_id === s.me ? "#f6f4ef" : "transparent" }
+      })),
+
+      // ---- co-op
+      coopTitle: (nameOf(me.language_id) || me.language_id) + " together",
+      coopTeamStyle: { width: "70px", height: "70px", flex: "none", backgroundImage: "url(" + (artOf(me.language_id, "duo")) + ")",
+        backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply" },
+      coopTotal: co.total, coopDistinct: co.distinct == null ? "—" : co.distinct, coopShared: co.shared == null ? "—" : co.shared,
+      coopMembers: co.members.map((m) => ({
+        name: m.name, score: f.score(m), note: m.user_id === s.me ? "you" : "teammate",
+        fill: { height: "100%", width: (co.total > 0 ? Math.round(100 * f.score(m) / co.total) : 0) + "%", background: colorOf(m.language_id), borderRadius: "999px" }
+      })),
+      coopNote: co.count < 2
+        ? "Co-op needs a second fighter on your language."
+        : "Added together, per your call. Distinct and shared come from per-word data — the same data the map will use to decide who holds which words.",
+
+      sandboxNote: "No published numbers reached this device, so these are synthetic — the modes can still be judged. Word counts are tweakable; live data plugs into the same functions."
+    };
+  }
+}
+</script>
+</body>
+</html>

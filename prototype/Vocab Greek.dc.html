@@ -47,6 +47,8 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 <script src="bl-config.js"></script>
 <script src="bl-sync.js"></script>
 <script src="bl-front.js"></script>
+<script src="bl-langs.js"></script>
+<script src="bl-arena.js"></script>
 <script src="bl-release.js"></script>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/icon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="assets/brand/icon-512.png">
@@ -126,6 +128,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         <span style="font-size:9px;color:#a5a096">best {{ bestStreak }}</span>
       </div>
     </div>
+    <button style="display:flex;align-items:center;gap:5px;background:#17181d;color:#fff;border-radius:999px;padding:0 12px;min-height:37px;font-size:12px;font-weight:800;letter-spacing:0.05em;box-shadow:0 1px 3px rgba(23,24,29,0.08)" onClick="{{ openLangs }}">ΕΛ<span style="font-size:7.5px;opacity:0.65">▼</span></button>
   </div>
 
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
@@ -200,20 +203,22 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
           <span style="font-size:13px;font-weight:700">Le Duel</span>
           <span style="font-size:11px;color:#8a857a">{{ battleVerdict }}</span>
         </div>
-        <video src="https://d8j0ntlcm91z4.cloudfront.net/user_32PgHXDjHlFXmhgKyUnBM4DN7Qi/hf_20260817_072947_e60247ef-65b3-49e4-be48-057b5f4f9fb3.mp4" poster="assets/chars/bataille-v2.png" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" preload="auto" disablepictureinpicture="{{ true }}" controlslist="nodownload nofullscreen noplaybackrate" aria-label="La France contre La Grèce" style="width:100%;display:block;border-radius:12px;pointer-events:none"></video>
+        <sc-if value="{{ hasFaceoff }}" hint-placeholder-val="{{ true }}">
+          <video src="https://d8j0ntlcm91z4.cloudfront.net/user_32PgHXDjHlFXmhgKyUnBM4DN7Qi/hf_20260817_072947_e60247ef-65b3-49e4-be48-057b5f4f9fb3.mp4" poster="assets/chars/bataille-v2.png" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" preload="auto" disablepictureinpicture="{{ true }}" controlslist="nodownload nofullscreen noplaybackrate" aria-label="La France contre La Grèce" style="width:100%;display:block;border-radius:12px;pointer-events:none"></video>
+        </sc-if>
         <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
           <div style="display:flex;flex-direction:column;gap:1px">
-            <span style="font-size:11px;font-weight:700;color:#d62828">La France {{ youFr }}</span>
-            <span style="font-size:18px;font-weight:800">{{ frScore }}</span>
-            <span style="font-size:9.5px;color:#8a857a">{{ frMath }}</span>
-            <span style="font-size:9.5px;font-weight:700;color:#a1823c">{{ frSplit }}</span>
+            <span style="{{ meNameStyle }}">{{ meDuelName }}</span>
+            <span style="font-size:18px;font-weight:800">{{ meScore }}</span>
+            <span style="font-size:9.5px;color:#8a857a">{{ meMath }}</span>
+            <span style="font-size:9.5px;font-weight:700;color:#a1823c">{{ meSplit }}</span>
           </div>
           <span style="font-size:12px;font-weight:800;color:#a5a096">VS</span>
-          <div style="display:flex;flex-direction:column;gap:1px;align-items:flex-end">
-            <span style="font-size:11px;font-weight:700;color:#2160a8">La Grèce {{ youEl }}</span>
-            <span style="font-size:18px;font-weight:800">{{ elScore }}</span>
-            <span style="font-size:9.5px;color:#8a857a">{{ elMath }}</span>
-            <span style="font-size:9.5px;font-weight:700;color:#a1823c">{{ elSplit }}</span>
+          <div style="display:flex;flex-direction:column;gap:1px;align-items:flex-end;text-align:right">
+            <span style="{{ themNameStyle }}">{{ themDuelName }}</span>
+            <span style="font-size:18px;font-weight:800">{{ themScore }}</span>
+            <span style="font-size:9.5px;color:#8a857a">{{ themMath }}</span>
+            <span style="font-size:9.5px;font-weight:700;color:#a1823c">{{ themSplit }}</span>
           </div>
         </div>
         <div style="position:relative;height:58px;margin-bottom:-8px;overflow:hidden">
@@ -237,18 +242,19 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
           <sc-for list="{{ frontsBreakdown }}" as="Fr" hint-placeholder-count="4">
             <span style="display:flex;align-items:center;gap:9px">
               <span style="font-size:10px;font-weight:600;color:#8a857a;width:60px;flex:none">{{ Fr.label }}</span>
-              <span style="font-size:10.5px;font-weight:800;color:#d62828;flex:none;width:28px;text-align:right">{{ Fr.fr }}</span>
+              <span style="{{ Fr.aNumStyle }}">{{ Fr.fr }}</span>
               <span style="flex:1;height:9px;border-radius:999px;overflow:hidden;display:flex;background:#efece5;position:relative">
                 <span style="{{ Fr.frStyle }}"></span>
                 <span style="{{ Fr.elStyle }}"></span>
                 <span style="position:absolute;left:50%;top:-1px;bottom:-1px;width:1.5px;background:#8a6d2f;opacity:0.5"></span>
               </span>
-              <span style="font-size:10.5px;font-weight:800;color:#2160a8;flex:none;width:28px">{{ Fr.el }}</span>
+              <span style="{{ Fr.bNumStyle }}">{{ Fr.el }}</span>
             </span>
           </sc-for>
         </div>
         <span style="font-size:10.5px;color:#a5a096;text-align:center">{{ battleNote }}</span>
         <span style="{{ syncNoteStyle }}">{{ syncNote }}</span>
+        <button style="min-height:44px;background:#f4ecda;color:#6b5a2c;border-radius:999px;font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center;gap:7px;box-shadow:inset 0 0 0 1.2px #dcc79a" onClick="{{ openMap }}">{{ mapCta }}</button>
         <div style="display:flex;flex-direction:column;gap:9px;border-top:1px solid #f0ede6;padding-top:11px">
           <span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#a1823c">Missions · earn weapons</span>
           <sc-for list="{{ missions }}" as="m" hint-placeholder-count="4">
@@ -260,6 +266,48 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
           </sc-for>
         </div>
       </div>
+
+      <sc-if value="{{ hasArena }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:13px;font-weight:700">The Battlefield</span>
+          <span style="font-size:11px;color:#8a857a">{{ arenaNote }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <sc-for list="{{ ladderRows }}" as="L" hint-placeholder-count="4">
+            <button style="{{ L.rowStyle }}" onClick="{{ L.pick }}">
+              <span style="{{ L.rankStyle }}">{{ L.rank }}</span>
+              <span style="{{ L.dotStyle }}"></span>
+              <div style="display:flex;flex-direction:column;flex:1;min-width:0">
+                <span style="font-size:13px;font-weight:800;color:#17181d">{{ L.name }}</span>
+                <span style="font-size:10px;color:#8a857a">{{ L.sub }}</span>
+              </div>
+              <span style="{{ L.chipStyle }}">{{ L.chip }}</span>
+              <span style="font-size:16px;font-weight:800;flex:none;min-width:34px;text-align:right">{{ L.score }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <span style="font-size:10.5px;color:#a5a096;text-align:center">{{ foeHint }}</span>
+        <sc-if value="{{ hasHunters }}" hint-placeholder-val="{{ false }}">
+          <span style="font-size:11px;font-weight:700;color:#2160a8;text-align:center">{{ huntNote }}</span>
+        </sc-if>
+        <div style="display:flex;flex-direction:column;gap:9px;border-top:1px solid #f0ede6;padding-top:12px">
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#a1823c">The War of Languages</span>
+          <sc-for list="{{ factionRows }}" as="F" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:9px">
+              <span style="{{ F.dot }}"></span>
+              <div style="display:flex;flex-direction:column;width:92px;flex:none">
+                <span style="font-size:11px;font-weight:700">{{ F.name }}</span>
+                <span style="font-size:9px;color:#a5a096">{{ F.sub }}</span>
+              </div>
+              <span style="flex:1;height:9px;border-radius:999px;background:#efece5;overflow:hidden;display:flex"><span style="{{ F.fill }}"></span></span>
+              <span style="font-size:11.5px;font-weight:800;flex:none;min-width:34px;text-align:right">{{ F.score }}</span>
+            </div>
+          </sc-for>
+          <span style="font-size:10.5px;color:#a5a096;text-align:center">{{ factionNote }}</span>
+        </div>
+      </div>
+      </sc-if>
 
       <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:11px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
         <div style="display:flex;justify-content:space-between;align-items:baseline">
@@ -374,6 +422,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
           </button>
         </div>
       </sc-if>
+      <button style="align-self:center;background:none;color:#a5a096;font-size:12px;text-decoration:underline;text-underline-offset:3px;min-height:44px" onClick="{{ bailOut }}">🏳 Retreat — bank your XP, finish the rest later</button>
     </div>
   </sc-if>
 
@@ -381,7 +430,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
     <div data-screen-label="Session done" style="background:#fff;border-radius:24px;padding:34px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;margin-top:14px;box-shadow:0 2px 10px rgba(23,24,29,0.07);animation:fadeUp 0.5s ease both">
       <span style="font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:#a1823c;font-weight:700">Session complete</span>
       <img src="assets/chars/olive.png" alt="" style="height:105px;display:block">
-      <div style="font-family:'Gloock',serif;font-size:40px;line-height:1.05">Μπράβο&nbsp;!</div>
+      <div style="font-family:'Gloock',serif;font-size:40px;line-height:1.05">{{ doneTitle }}</div>
       <div style="font-size:14.5px;color:#5d5a52">{{ doneSummary }}</div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
         <span style="font-size:12px;font-weight:700;background:#f3ecd9;color:#8a6d2f;border-radius:999px;padding:6px 14px">+{{ sessXp }} XP</span>
@@ -416,6 +465,43 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#a1823c">BuddyLingo Support</span>
         <span style="font-size:12px;color:#8a857a">Ticket #0001 closed. Reason: skill issue.</span>
         <button style="min-height:44px;background:#17181d;color:#fff;border-radius:999px;font-size:13px;font-weight:700;margin-top:4px" onClick="{{ closeSupport }}">Fine</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showMap }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Vocab Map" style="position:fixed;inset:0;background:rgba(23,24,29,0.5);display:flex;align-items:flex-end;justify-content:center;z-index:70" onClick="{{ closeMap }}">
+      <div style="background:#f6f4ef;border-radius:22px 22px 0 0;width:min(460px,100%);height:92dvh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -18px 50px rgba(23,24,29,0.32);animation:fadeUp 0.3s ease both" onClick="{{ eatClick }}">
+        <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#fffdf8;border-bottom:1px solid #e9e5dc;flex:none">
+          <span style="width:34px;height:4px;border-radius:999px;background:#e0dbd0;position:absolute;left:50%;transform:translateX(-50%);top:6px"></span>
+          <span style="font-family:'Gloock',serif;font-size:18px;line-height:1;margin-right:auto">Vocab Map</span>
+          <button style="min-height:36px;padding:0 15px;border-radius:999px;background:#17181d;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center" onClick="{{ closeMap }}">Close</button>
+        </div>
+        <iframe src="Vocab Map.dc.html" title="Vocab Map" style="flex:1;width:100%;border:0;display:block;background:#f6f4ef"></iframe>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showLangs }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Language switcher" style="position:fixed;inset:0;background:rgba(23,24,29,0.45);display:flex;align-items:center;justify-content:center;padding:24px;z-index:60" onClick="{{ closeLangs }}">
+      <div style="background:#fffdf8;border-radius:20px;padding:24px 22px;max-width:340px;width:100%;display:flex;flex-direction:column;gap:12px;box-shadow:0 18px 50px rgba(23,24,29,0.25)" onClick="{{ eatClick }}">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#a1823c">Your languages</span>
+          <span style="font-size:11.5px;color:#8a857a;line-height:1.45">One account, many fronts — each language keeps its own score and streak.</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <sc-for list="{{ langRows }}" as="Lg" hint-placeholder-count="5">
+            <a href="{{ Lg.href }}" style="{{ Lg.rowStyle }}">
+              <img src="{{ Lg.img }}" alt="" style="height:30px;width:30px;object-fit:contain;mix-blend-mode:multiply;flex:none">
+              <div style="display:flex;flex-direction:column;flex:1;min-width:0">
+                <span style="font-size:13.5px;font-weight:800;color:#17181d">{{ Lg.name }}</span>
+                <span style="font-size:10.5px;color:#8a857a">{{ Lg.sub }}</span>
+              </div>
+              <span style="{{ Lg.tagStyle }}">{{ Lg.tag }}</span>
+            </a>
+          </sc-for>
+        </div>
+        <button style="min-height:44px;background:#17181d;color:#fff;border-radius:999px;font-size:13px;font-weight:700" onClick="{{ closeLangs }}">Close</button>
       </div>
     </div>
   </sc-if></x-dc>
@@ -463,6 +549,10 @@ function capOf(rank) {
 }
 function rankLabel(t) { return (t + 1) < 10 ? "0" + (t + 1) : "" + (t + 1); }
 const MY_SIDE = "el", OPP_KEY = "vocab-fr-v1";
+// every language front: display name, colour, page, mascots
+const LANGS = { fr: ["La France", "#d62828"], el: ["La Grèce", "#2160a8"], de: ["L’Allemagne", "#946f00"], es: ["L’Espagne", "#c2571d"], tn: ["La Tunisie", "#2a8c46"] };
+const CASTS = { fr: ["croissant", "fromage", "baguette"], el: ["olive", "feta", "dolma"], de: ["brezel", "wurst", "kartoffel"], es: ["churro", "jamon", "paella"], tn: ["harissa", "couscous", "brik"] };
+const PAGES = { fr: "Vocab French.dc.html", el: "Vocab Greek.dc.html", de: "Vocab German.dc.html", es: "Vocab Spanish.dc.html", tn: "Vocab Tunisian.dc.html" };
 const REL = (window.BL_RELEASE && window.BL_RELEASE.el) || { kicker: "", title: "", lead: "", cta: "OK", items: [] };
 const MISSIONS = [["w_bouclier","Huile d’Olive Bouillante","12 correct answers in a day","c",12],["w_lance","Lancer de Feta","Get 6 verbs right in a day","v",6],["w_sandales","Roulade de Dolma","8 fast answers in a day","f",8],["w_feu","Citron Pressé","Learn 5 new words in a day","n",5]];
 function idOf(i) { return W[i][0]; }
@@ -470,6 +560,27 @@ function pad(n) { return n < 10 ? "0" + n : "" + n; }
 function ymd(ms) { const d = new Date(ms); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
 function today() { return ymd(Date.now()); }
 function yesterday() { return ymd(Date.now() - DAY); }
+// ONE streak per language, stored under a shared key so every page can read it.
+const STREAK_KEY = "bl-streak:el" + SUF;
+function readStreak() { try { return JSON.parse(localStorage.getItem(STREAK_KEY) || "null"); } catch (e) { return null; } }
+function writeStreak(v) { try { localStorage.setItem(STREAK_KEY, JSON.stringify(v)); } catch (e) {} }
+function sharedStreak() {
+  let st = readStreak();
+  if (st) return st;
+  // first run: seed from the existing save (standard + Cypriot already share one deck)
+  let w = {}; try { w = (JSON.parse(localStorage.getItem("vocab-el-v1" + SUF) || "null") || {}).stats || {}; } catch (e) {}
+  const alive = w.lastDay === today() || w.lastDay === yesterday();
+  st = { streak: alive ? w.streak || 0 : 0, lastDay: alive ? w.lastDay : null, best: Math.max(w.bestStreak || 0, w.streak || 0) };
+  writeStreak(st);
+  return st;
+}
+function bumpStreak() {
+  const st = sharedStreak();
+  if (st.lastDay !== today()) { st.streak = st.lastDay === yesterday() ? (st.streak || 0) + 1 : 1; st.lastDay = today(); }
+  st.best = Math.max(st.best || 0, st.streak);
+  writeStreak(st);
+  return st;
+}
 function fmtIn(ms) { if (ms < 90 * MIN) return "in " + Math.max(1, Math.round(ms / MIN)) + " min"; if (ms < 2 * DAY) return "tomorrow"; return "in " + Math.round(ms / DAY) + " days"; }
 function fmtDue(due, now) { if (due == null) return "new"; const d = due - now; return d <= 0 ? "now" : fmtIn(d); }
 function mergeCards(a, b) { const out = Object.assign({}, a || {}); for (const k in (b || {})) { const cur = out[k], inc = b[k]; if (!cur || (inc.t || 0) > (cur.t || 0)) out[k] = inc; } return out; }
@@ -521,6 +632,8 @@ class Component extends DCLogic {
     this.recent = (saved && saved.recent) || [];
     let stats = (saved && saved.stats) || { day: today(), reviewed: 0, newToday: 0, wrongToday: 0, streak: 0, lastDay: null, bestStreak: 0 };
     if (stats.day !== today()) stats = Object.assign({}, stats, { day: today(), reviewed: 0, newToday: 0, wrongToday: 0, fastToday: 0, verbsToday: 0 });
+    const sst = sharedStreak();
+    stats = Object.assign({}, stats, { streak: (sst.lastDay === today() || sst.lastDay === yesterday()) ? sst.streak || 0 : 0, bestStreak: Math.max(stats.bestStreak || 0, sst.best || 0) });
     this.setState({
       cards: (saved && saved.cards) || {}, stats: stats, days: (saved && saved.days) || {},
       badges: (saved && saved.badges) || {}, xp: (saved && saved.xp) || 0,
@@ -529,15 +642,15 @@ class Component extends DCLogic {
     idbGet().then((m) => { if (m) this.mergeIn(m, true); });
     if (!SUF) fetch("memoire-grec.csv", { cache: "no-store" }).then(function (r) { return r.ok ? r.text() : null; })
       .then((t) => { if (t) this.mergeIn(this.parseCsv(t), false); }).catch(function () {});
-    this.seedOpp();
-    this.pullOpp();
-    this._oppT = setInterval(this.pullOpp, 45000);
-    window.addEventListener("focus", this.pullOpp);
+    this.seedArena();
+    this.pullArena();
+    this._oppT = setInterval(this.pullArena, 45000);
+    window.addEventListener("focus", this.pullArena);
     document.addEventListener("visibilitychange", this.onVis);
   }
-  // last known opponent numbers paint immediately; the network only refines them
-  seedOpp = () => {
-    try { const c = JSON.parse(localStorage.getItem("bl-front-fr") || "null"); if (c) this.setState({ serverOpp: c }); } catch (e) {}
+  // last known arena numbers paint immediately; the network only refines them
+  seedArena = () => {
+    try { const c = JSON.parse(localStorage.getItem("bl-arena") || "null"); if (c) this.setState({ arena: c }); } catch (e) {}
   };
   // Fresh device: local save is empty even though this fighter has server
   // progress. Rebuild known words from their own newest snapshot. Local
@@ -575,28 +688,34 @@ class Component extends DCLogic {
       this.setState({ cards: cards }, () => this.save());
     });
   };
-  pullOpp = () => {
+  // The whole arena: EVERY fighter's published numbers plus everyone's declared
+  // nemesis. Test accounts are hidden. The duel, ladder and faction war read this.
+  pullArena = () => {
     if (!(window.BLSync && window.BLSync.enabled)) return;
     this.pullSelf();
-    Promise.all([window.BLSync.whoAmI(), window.BLSync.rosterFull()]).then(([me, rows]) => {
-      // The opponent is the fighter ON that language — never yourself. Reading
-      // "newest snapshot for the language" broke as soon as you opened the other
-      // deck: your own 0-known rows for that language became the newest.
-      const my = (rows || []).find(function (f) { return f.user_id === me; });
-      const testMe = !!(my && /^test user/i.test(my.name));
-      const foe = (rows || []).find(function (f) { return f.language_id === "fr" && f.user_id !== me && /^test user/i.test(f.name) === testMe; });
-      if (!foe) return null;
-      return window.BLSync.latestFront("fr", foe.user_id);
-    }).then((r) => {
-      if (!r) return;
-      this.setState({ serverOpp: r });
-      try { localStorage.setItem("bl-front-fr", JSON.stringify(r)); } catch (e) {}
+    Promise.all([window.BLSync.whoAmI(), window.BLSync.standings(), window.BLSync.rivals()]).then(([me, rows, rv]) => {
+      if (!rows || !rows.length) return;
+      const real = rows.filter(function (f) { return !/^test/i.test(f.name || ""); });
+      const arena = { me: me || null, rows: real, rivals: rv || [], at: Date.now() };
+      this.setState({ arena: arena });
+      // an older single-nemesis pick becomes this fighter's first declared war
+      if (window.BLArena) {
+        let legacy = null; try { legacy = localStorage.getItem("bl-rival" + SUF); } catch (e) {}
+        window.BLArena.adopt(MY_SIDE, legacy, real);
+      }
+      try { localStorage.setItem("bl-arena", JSON.stringify(arena)); } catch (e) {}
     });
   };
-  onVis = () => { if (document.visibilityState === "visible") this.pullOpp(); };
+  // declare an arch-nemesis: instant locally, published to the server when signed in
+  pickRival = (uid) => {
+    try { localStorage.setItem("bl-rival" + SUF, uid); } catch (e) {}
+    this.setState({ rivalPick: uid });
+    if (window.BLSync && window.BLSync.setRival) window.BLSync.setRival(uid);
+  };
+  onVis = () => { if (document.visibilityState === "visible") this.pullArena(); };
   componentWillUnmount() {
     clearInterval(this._oppT);
-    window.removeEventListener("focus", this.pullOpp);
+    window.removeEventListener("focus", this.pullArena);
     document.removeEventListener("visibilitychange", this.onVis);
   }
 
@@ -639,6 +758,8 @@ class Component extends DCLogic {
             days: st.days, tierFloor: st.tierFloor });
           // weapons travel with the snapshot as bonus POINTS (25 per weapon)
           const wN = Object.keys(st.badges || {}).filter(function (k) { return k.slice(0, 2) === "w_"; }).length;
+          // a known=0 push would enrol this fighter into a language they have only opened
+          if (!kn) return;
           window.BLSync.pushSnapshot("el", kn, catKnown, { mask: mask, bonus: 25 * wN }).then((r) => {
             if (r && r.ok) { const t = Date.now(); try { localStorage.setItem("bl-pub:el", String(t)); } catch (e) {} this.setState({ pubAt: t, pubErr: null }); }
             else this.setState({ pubErr: r && r.blocked ? "preview" : (r && r.error) || "offline" });
@@ -759,7 +880,14 @@ class Component extends DCLogic {
     for (let i = q.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = q[i]; q[i] = q[j]; q[j] = t; }
     if (!q.length) return;
     this.shownAt = Date.now(); this.revealAt = null;
-    this.setState({ view: "study", queue: q, revealed: false, answered: 0, total: q.length, adjustNote: "" });
+    this.setState({ view: "study", queue: q, revealed: false, answered: 0, total: q.length, adjustNote: "", bailed: false });
+  };
+
+  // Sessions grow when you miss (hot words re-queue). The white flag banks what
+  // you earned and ends the session — every answer was already saved as it happened.
+  bailOut = () => {
+    if (this.cur) { this.lastSess = this.cur; this.cur = null; }
+    this.setState({ view: "done", queue: [], revealed: false, bailed: true }, () => this.save());
   };
 
   reveal = () => { this.revealAt = Date.now(); this.setState({ revealed: true }); };
@@ -817,8 +945,9 @@ class Component extends DCLogic {
     if (fast) stats.fastToday = (stats.fastToday || 0) + 1;
     if (W[idx][3] === "V" && q > 0) stats.verbsToday = (stats.verbsToday || 0) + 1;
     stats.reviewed = (stats.reviewed || 0) + 1;
-    if (stats.lastDay !== today()) { stats.streak = stats.lastDay === yesterday() ? (stats.streak || 0) + 1 : 1; stats.lastDay = today(); }
-    stats.bestStreak = Math.max(stats.bestStreak || 0, stats.streak || 0);
+    const sst = bumpStreak(); // shared per-language counter
+    stats.streak = sst.streak; stats.lastDay = sst.lastDay;
+    stats.bestStreak = Math.max(stats.bestStreak || 0, sst.best || 0);
     const gained = q === 2 ? (fast ? 15 : 10) : q === 1 ? 6 : 2;
     const xp = (s.xp || 0) + gained;
     const days = Object.assign({}, s.days);
@@ -904,6 +1033,28 @@ class Component extends DCLogic {
     if (!hit) return { fr: w[1], tr: w[2], cy: false };
     return { fr: (art ? art + " " : "") + hit[0], tr: hit[1], cy: true };
   }
+  // the account's languages: local numbers per language, current page marked
+  readLangs() {
+    const defs = [["fr", "Le Français", "croissant"], ["el", "Ελληνικά", "olive"], ["de", "Deutsch", "brezel"], ["es", "El Español", "paella"], ["tn", "Tounsi", "harissa"]];
+    return defs.map((d) => {
+      let n = 0;
+      ["vocab-", "nani-"].forEach(function (p) {
+        try { const m = JSON.parse(localStorage.getItem(p + d[0] + "-v1" + SUF) || "null"); if (m && m.cards) for (const k in m.cards) if (!m.cards[k].lapsed) n++; } catch (e) {}
+      });
+      let st = 0; // only an ALIVE streak counts (same rule as the header pill)
+      try { const sv = JSON.parse(localStorage.getItem("bl-streak:" + d[0] + SUF) || "null"); if (sv && (sv.lastDay === today() || sv.lastDay === yesterday())) st = sv.streak || 0; } catch (e) {}
+      if (!st) { try { st = (((JSON.parse(localStorage.getItem("vocab-" + d[0] + "-v1" + SUF) || "null") || {}).stats) || {}).streak || 0; } catch (e) {} }
+      const cur = d[0] === MY_SIDE;
+      return {
+        name: d[1], img: "assets/chars/" + d[2] + ".png", href: PAGES[d[0]],
+        sub: n > 0 ? n + " words · " + st + "-day streak" : "fresh front — not started",
+        tag: cur ? "current" : "open →",
+        tagStyle: { flex: "none", fontSize: "9px", fontWeight: "800", letterSpacing: "0.05em", textTransform: "uppercase", padding: "4px 9px", borderRadius: "999px", background: cur ? "#f3ecd9" : "#f0ede6", color: cur ? "#8a6d2f" : "#8a857a" },
+        rowStyle: { display: "flex", alignItems: "center", gap: "11px", background: cur ? "#faf6ea" : "#faf8f4", border: cur ? "1px solid rgba(176,141,63,0.35)" : "1px solid transparent", borderRadius: "14px", padding: "9px 12px", textDecoration: "none", minHeight: "52px" }
+      };
+    });
+  }
+
   renderVals() {
     const s = this.state, now = Date.now();
     const stats = s.stats || {}, quiz = this.props.quiz || "DE → EL";
@@ -986,29 +1137,48 @@ class Component extends DCLogic {
     // how many KNOWN words take a Cypriot form — the total already includes them
     let cyKn = 0;
     if (window.CYP) for (let ci = 0; ci < W.length; ci++) { const c2 = s.cards[idOf(ci)]; if (!c2 || c2.lapsed) continue; const p2 = W[ci][1].split(" "); const b2 = ["ο","η","το","οι","τα"].indexOf(p2[0]) >= 0 ? p2.slice(1).join(" ") : W[ci][1]; if (window.CYP[b2]) cyKn++; }
-    let opp = null; try { opp = JSON.parse(localStorage.getItem(OPP_KEY) || "null"); } catch (e) {}
-    if (this.state.serverOpp) opp = { cards: {}, badges: (opp && opp.badges) || {}, known: this.state.serverOpp.known, catKnown: this.state.serverOpp.cat_known || {}, bonus: this.state.serverOpp.bonus };
-    let oppKnown = 0; if (opp && opp.cards) for (const ok in opp.cards) if (!opp.cards[ok].lapsed) oppKnown++;
-    if (opp && opp.known != null) oppKnown = opp.known;
+    // ---- the arena: EVERY fighter's real published numbers -------------------
+    const A = s.arena || {};
+    const rowsA = A.rows || [];
+    const scoreOf = function (f) { return Math.max(0, (f && f.known) || 0) + Math.max(0, (f && f.bonus) || 0); };
+    const meRow = (A.me ? rowsA.find(function (f) { return f.user_id === A.me; }) : null)
+      || rowsA.filter(function (f) { return f.language_id === MY_SIDE; }).sort(function (a, b) { return (a.slot || 0) - (b.slot || 0); })[0] || null;
+    const iAmMe = !!(A.me && meRow && meRow.user_id === A.me); // this device is signed in as this fighter
+    let rivalPick = s.rivalPick; if (rivalPick === undefined) { try { rivalPick = localStorage.getItem("bl-rival" + SUF) || null; } catch (e) { rivalPick = null; } }
+    const srvPick = meRow ? (A.rivals || []).find(function (r) { return r.user_id === meRow.user_id; }) : null;
+    const wantFoe = rivalPick || (srvPick && srvPick.rival_user_id) || null;
+    const notMe = function (f) { return !meRow || f.user_id !== meRow.user_id; };
+    const nemRow = (wantFoe ? rowsA.find(function (f) { return f.user_id === wantFoe && notMe(f); }) : null)
+      || rowsA.find(function (f) { return f.language_id === (MY_SIDE === "el" ? "fr" : "el") && notMe(f); })
+      || rowsA.find(notMe) || null;
     const wOf = function (b) { return Object.keys(b || {}).filter(function (k) { return k.slice(0, 2) === "w_"; }).length; };
-    // opponent weapons come from the SERVER snapshot (bonus = points); the local
-    // fallback only ever worked when both fighters shared one device
-    const myW = wOf(s.badges), opW = opp && opp.bonus != null ? Math.round(opp.bonus / 25) : wOf(opp && opp.badges);
-    const myScore = known + 25 * myW, opScore = oppKnown + 25 * opW;
+    // my numbers: live local progress when this device is signed in as this fighter,
+    // my server row otherwise — so ANY copy shows every fighter's real published data
+    const localW = wOf(s.badges);
+    const localScore = known + 25 * localW;
+    const srvMeScore = meRow ? scoreOf(meRow) : 0;
+    const srvBetter = !!meRow && (!iAmMe || srvMeScore > localScore);
+    const myWordsShown = srvBetter ? (meRow.known || 0) : known;
+    const myW = srvBetter ? Math.round((meRow.bonus || 0) / 25) : localW;
+    const myScore = myWordsShown + 25 * myW;
+    const opW = nemRow ? Math.round((nemRow.bonus || 0) / 25) : 0;
+    const oppKnown = nemRow ? (nemRow.known || 0) : 0;
+    const opScore = oppKnown + 25 * opW;
+    const myLangId = MY_SIDE, nemLangId = (nemRow && nemRow.language_id) || (MY_SIDE === "el" ? "fr" : "el");
+    const myLg = LANGS[myLangId], nemLg = LANGS[nemLangId] || [nemLangId, "#8a857a"];
     // sync health: when did MY score last reach the server, how fresh is THEIRS
     const fmtAgo = function (ms) { if (ms < 90000) return "just now"; const mm = Math.round(ms / 60000); if (mm < 60) return mm + " min ago"; const hh = Math.round(mm / 60); if (hh < 36) return hh + " h ago"; return Math.round(hh / 24) + " d ago"; };
     let pubAt = s.pubAt || 0; if (!pubAt) { try { pubAt = Number(localStorage.getItem("bl-pub:el")) || 0; } catch (e) {} }
-    const oppAt = this.state.serverOpp && this.state.serverOpp.computed_at ? Date.parse(this.state.serverOpp.computed_at) : 0;
+    const oppAt = nemRow && nemRow.computed_at ? Date.parse(nemRow.computed_at) : 0;
     const syncBad = !!(s.pubErr && s.pubErr !== "preview");
     const syncNote = !(window.BLSync && window.BLSync.enabled) ? "offline \u2014 no server configured"
       : s.pubErr === "preview" ? "preview copy \u2014 scores are not published from here"
       : syncBad ? "\u26a0 your score is not reaching the server (" + s.pubErr + ") \u2014 tap \u21c4 switch fighter below and sign in as YOUR fighter"
       : (pubAt ? "yours published " + fmtAgo(Date.now() - pubAt) : "yours not published yet") + (oppAt ? " \u00b7 theirs from " + fmtAgo(Date.now() - oppAt) : "");
     const mathOf = function (w, n) { return n > 0 ? w + " words + " + n + " weapon" + (n > 1 ? "s" : "") + " \u00d7 25" : w + " words \u00b7 no weapons"; };
-    const frS = MY_SIDE === "fr" ? myScore : opScore, elS = MY_SIDE === "fr" ? opScore : myScore;
     // dialects share one deck, so the total is already complete; the split just says so
     const mySplit = s.dialect === "cy" && cyKn > 0 ? known + " words · " + cyKn + " in Cypriot form" : "";
-    const frPct = (frS + elS) > 0 ? Math.round(100 * frS / (frS + elS)) : 50;
+    const mePct = (myScore + opScore) > 0 ? Math.round(100 * myScore / (myScore + opScore)) : 50;
     const dayC = ((s.days || {})[today()] || [0,0,0])[1];
     const mp = stats.day === today() ? { n: stats.newToday || 0, c: dayC, f: stats.fastToday || 0, v: stats.verbsToday || 0 } : { n: 0, c: dayC, f: 0, v: 0 };
     const missions = MISSIONS.map(function (md) {
@@ -1020,26 +1190,26 @@ class Component extends DCLogic {
     });
     const myCat = { B: 0, N: 0, V: 0, A: 0 };
     for (let i = 0; i < W.length; i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) myCat[W[i][3]] = (myCat[W[i][3]] || 0) + 1; }
-    const opCat = (opp && opp.catKnown) || { B: 0, N: 0, V: 0, A: 0 };
+    if (srvBetter) { myCat.B = meRow.cat_known && meRow.cat_known.B || 0; myCat.N = meRow.cat_known && meRow.cat_known.N || 0; myCat.V = meRow.cat_known && meRow.cat_known.V || 0; myCat.A = meRow.cat_known && meRow.cat_known.A || 0; }
+    const opCat = (nemRow && nemRow.cat_known) || { B: 0, N: 0, V: 0, A: 0 };
+    const numSt = function (c, right) { return { fontSize: "10.5px", fontWeight: "800", color: c, flex: "none", width: "28px", textAlign: right ? "right" : "left" }; };
     const fronts = [["Overall", myScore, opScore], ["Nouns", myCat.N, opCat.N || 0], ["Verbs", myCat.V, opCat.V || 0], ["Adjectives", myCat.A, opCat.A || 0], ["Phrases", myCat.B, opCat.B || 0]].map(function (d) {
-      const frV = MY_SIDE === "fr" ? d[1] : d[2], elV = MY_SIDE === "fr" ? d[2] : d[1];
-      const p = (frV + elV) > 0 ? Math.round(100 * frV / (frV + elV)) : 50;
-      return { label: d[0], fr: frV, el: elV,
-        frStyle: { width: p + "%", background: "#d62828", transition: "width 0.5s ease" },
-        elStyle: { flex: "1", background: "#2160a8", transition: "width 0.5s ease" } };
+      const p = (d[1] + d[2]) > 0 ? Math.round(100 * d[1] / (d[1] + d[2])) : 50;
+      return { label: d[0], fr: d[1], el: d[2],
+        aNumStyle: numSt(myLg[1], true), bNumStyle: numSt(nemLg[1], false),
+        frStyle: { width: p + "%", background: myLg[1], transition: "width 0.5s ease" },
+        elStyle: { flex: "1", background: nemLg[1], transition: "width 0.5s ease" } };
     });
-        // battling mob over the overall line (lifted from Vocab Map)
-    const frVal = frS, elVal = elS; // full score (words + weapons) — must match the verdict
-    const clash = Math.max(18, Math.min(82, (frVal + elVal) > 0 ? Math.round(100 * frVal / (frVal + elVal)) : 50));
+        // battling mob over the overall line — MY mascots left, the nemesis's right
+    const clash = Math.max(18, Math.min(82, mePct));
     const TUS = ["tussleA", "tussleB", "tussleC"], sizesM = [34, 27, 30], liftsM = [0, 4, 1];
-    const CASTM = { fr: ["croissant", "fromage", "baguette"], el: ["olive", "feta", "dolma"] };
-    const SCALEM = { baguette: 1.5, olive: 0.92, dolma: 1.08 };
-    const losing = frVal === elVal ? null : frVal < elVal ? "me" : "them";
+    const SCALEM = { baguette: 1.5, olive: 0.92, dolma: 1.08, wurst: 1.25, brezel: 1.05, churro: 1.1, harissa: 0.95 };
+    const losing = myScore === opScore ? null : myScore < opScore ? "me" : "them";
     const flingCycles = function (side) { return losing === null ? [8.5, 10.5, 12.5] : losing === side ? [4.7, 6.1, 7.3] : [11.3, 14.1, 16.7]; };
     const skirmish = [];
     const buildMob = function (lang, side, xs) {
       const cycles = flingCycles(side);
-      CASTM[lang].forEach(function (m, i) {
+      (CASTS[lang] || CASTS.el).forEach(function (m, i) {
         const size = Math.round(sizesM[i] * (SCALEM[m] || 1));
         skirmish.push({
           wrap: { position: "absolute", left: "calc(" + clash + "% + " + xs[i] + "px)", bottom: (5 + liftsM[i]) + "px", width: size + "px", height: size + "px", zIndex: String(3 - i),
@@ -1049,8 +1219,8 @@ class Component extends DCLogic {
         });
       });
     };
-    buildMob("fr", "me", [-30, -13, -22]);
-    buildMob("el", "them", [-2, 12, 4]);
+    buildMob(myLangId, "me", [-30, -13, -22]);
+    buildMob(nemLangId, "them", [-2, 12, 4]);
     const dust = [[40, 2.3, 0, 1, "dustPuff", 0], [32, 3.1, 0.7, 1, "dustPuff", 6], [52, 4.9, 0.3, 6, "smokeFront", -6], [38, 3.7, 2.1, 6, "smokeFront", 10]].map(function (a) {
       const w = a[0], anim = a[4];
       return { style: { position: "absolute", left: "calc(" + clash + "% - " + (w / 2 - a[5]) + "px)", bottom: anim === "smokeFront" ? "1px" : "0px", width: w + "px", height: Math.round(w * 0.72) + "px", zIndex: String(a[3]), backgroundImage: "url(assets/chars/dust.png)", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply", opacity: anim === "smokeFront" ? "0.4" : "0", animation: anim + " " + a[1] + "s ease-in-out " + a[2] + "s infinite", pointerEvents: "none" } };
@@ -1058,6 +1228,46 @@ class Component extends DCLogic {
     const pows = [["pow-1", 34, 4.7, 0.4, -30], ["pow-2", 28, 6.1, 2.3, 10], ["pow-3", 31, 7.9, 4.1, -8]].map(function (a) {
       return { style: { position: "absolute", left: "calc(" + clash + "% + " + a[4] + "px)", top: "0px", width: a[1] + "px", height: a[1] + "px", backgroundImage: "url(assets/chars/" + a[0] + ".png)", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center", mixBlendMode: "multiply", opacity: "0", animation: "powPop " + a[2] + "s ease-out " + a[3] + "s infinite", pointerEvents: "none" } };
     });
+    // ---- ladder + faction war: scales past two fighters ----------------------
+    const ladderL = rowsA.map((f) => ({ f: f, sc: meRow && f.user_id === meRow.user_id ? myScore : scoreOf(f) })).sort(function (a, b) { return b.sc - a.sc; });
+    const warSet = window.BLArena ? window.BLArena.wars(MY_SIDE) : {};
+    const atWar = (f) => !!warSet[f.user_id + "|" + f.language_id];
+    const ladderRows = ladderL.map((r, i) => {
+      const f = r.f, lg = LANGS[f.language_id] || [f.language_id, "#8a857a"];
+      const isMe = !!(meRow && f.user_id === meRow.user_id);
+      const isNem = !!(nemRow && f.user_id === nemRow.user_id);
+      const wN = isMe ? myW : Math.round((f.bonus || 0) / 25);
+      const words = isMe ? myWordsShown : (f.known || 0);
+      return {
+        rank: (i + 1 < 10 ? "0" : "") + (i + 1), name: f.name, score: r.sc,
+        sub: lg[0] + " · " + words + " words" + (wN > 0 ? " + " + wN + " weapon" + (wN > 1 ? "s" : "") : ""),
+        chip: isMe ? "you" : atWar(f) ? "\u2694 at war" : "declare war",
+        chipStyle: { flex: "none", fontSize: "9px", fontWeight: "800", letterSpacing: "0.05em", textTransform: "uppercase", padding: "4px 9px", borderRadius: "999px", background: isNem ? "#e2ecf7" : isMe ? "#f3ecd9" : "#f0ede6", color: isNem ? "#2160a8" : isMe ? "#8a6d2f" : "#a5a096" },
+        rankStyle: { fontSize: "13px", fontWeight: "800", color: i === 0 ? "#b08d3f" : "#c9c3b5", width: "22px", flex: "none" },
+        dotStyle: { width: "9px", height: "9px", borderRadius: "999px", background: lg[1], flex: "none" },
+        rowStyle: { display: "flex", alignItems: "center", gap: "10px", width: "100%", textAlign: "left", minHeight: "54px", background: isNem ? "#f2f7fd" : "#faf8f4", border: isNem ? "1.5px solid rgba(33,96,168,0.4)" : "1.5px solid transparent", borderRadius: "14px", padding: "8px 12px" },
+        // tapping declares war (or, when already at war, focuses that duel).
+        // One war per fighter — a second declaration on the same person cannot happen.
+        pick: isMe ? undefined : () => {
+          if (window.BLArena) {
+            const key = { id: f.user_id + "|" + f.language_id, user_id: f.user_id, name: f.name, language_id: f.language_id };
+            if (!atWar(f)) window.BLArena.declare(MY_SIDE, key, 7, { mine: myScore, theirs: r.sc });
+          }
+          this.pickRival(f.user_id);
+        }
+      };
+    });
+    const fMap = {};
+    ladderL.forEach(function (r) { const k = r.f.language_id; if (!fMap[k]) fMap[k] = { sc: 0, n: 0 }; fMap[k].sc += r.sc; fMap[k].n++; });
+    const fList = Object.keys(fMap).map(function (k) { return { k: k, sc: fMap[k].sc, n: fMap[k].n }; }).sort(function (a, b) { return b.sc - a.sc; });
+    const fMax = Math.max(1, fList.length ? fList[0].sc : 1);
+    const factionRows = fList.map(function (g) {
+      const lg = LANGS[g.k] || [g.k, "#8a857a"];
+      return { name: lg[0], score: g.sc, sub: g.n + (g.n > 1 ? " fighters" : " fighter"),
+        dot: { width: "9px", height: "9px", borderRadius: "999px", background: lg[1], flex: "none" },
+        fill: { width: Math.round(100 * g.sc / fMax) + "%", height: "100%", background: lg[1], borderRadius: "999px", transition: "width 0.5s ease" } };
+    });
+    const hunters = meRow ? (A.rivals || []).filter(function (r) { return r.rival_user_id === meRow.user_id && r.user_id !== meRow.user_id; }).map(function (r) { const f = rowsA.find(function (x) { return x.user_id === r.user_id; }); return f && f.name; }).filter(Boolean) : [];
     const ls = this.lastSess || { xp: 0, fast: 0, sure: 0, reviewed: 0 };
     return {
       isSplash: s.view === "splash", notSplash: s.view !== "splash",
@@ -1103,20 +1313,36 @@ class Component extends DCLogic {
       toggleLabel: s.showAll ? "Show less" : "Show all " + W.length + " words",
       toggleAll: () => this.setState({ showAll: !s.showAll }),
       sessionCount: (this.sessions || []).length,
-      battleVerdict: frS === elS ? "perfect tie" : frS > elS ? "France ahead by " + (frS - elS) + " pts" : "Greece ahead by " + (elS - frS) + " pts",
-      frScore: frS, elScore: elS,
-      frMath: MY_SIDE === "fr" ? mathOf(known, myW) : mathOf(oppKnown, opW),
-      elMath: MY_SIDE === "el" ? mathOf(known, myW) : mathOf(oppKnown, opW),
-      frSplit: MY_SIDE === "fr" ? mySplit : "", elSplit: MY_SIDE === "el" ? mySplit : "",
-      youFr: MY_SIDE === "fr" ? "· you" : "", youEl: MY_SIDE === "el" ? "· you" : "",
-      barFrStyle: { width: frPct + "%", background: "#d62828", transition: "width 0.5s ease" },
-      barElStyle: { flex: "1", background: "#2160a8" },
+      battleVerdict: myScore === opScore ? "perfect tie" : myScore > opScore ? ((iAmMe || !meRow) ? "you lead" : meRow.name + " leads") + " by " + (myScore - opScore) + " pts" : (nemRow ? nemRow.name : "they") + " leads by " + (opScore - myScore) + " pts",
+      hasFaceoff: (myLangId === "fr" && nemLangId === "el") || (myLangId === "el" && nemLangId === "fr"),
+      meScore: myScore, themScore: opScore,
+      meDuelName: meRow ? meRow.name + " · " + myLg[0] + (iAmMe ? " · you" : "") : myLg[0] + " · you",
+      themDuelName: nemRow ? nemRow.name + " · " + nemLg[0] : "no opponent yet",
+      meNameStyle: { fontSize: "11px", fontWeight: "700", color: myLg[1] },
+      themNameStyle: { fontSize: "11px", fontWeight: "700", color: nemLg[1] },
+      meMath: mathOf(myWordsShown, myW), themMath: nemRow ? mathOf(oppKnown, opW) : "waiting for the roster",
+      meSplit: mySplit, themSplit: oppAt ? "score from " + fmtAgo(Date.now() - oppAt) : "",
       missions: missions,
+      hasArena: rowsA.length > 0,
+      arenaNote: rowsA.length + " fighter" + (rowsA.length > 1 ? "s" : "") + " · " + fList.length + " language" + (fList.length > 1 ? "s" : ""),
+      ladderRows: ladderRows,
+      foeHint: "tap a fighter to declare them your arch-nemesis — the duel above follows your pick",
+      factionRows: factionRows,
+      factionNote: "a faction's score is all of its fighters added together",
+      hasHunters: hunters.length > 0,
+      huntNote: hunters.join(", ") + (hunters.length > 1 ? " are" : " is") + " gunning for you" + (nemRow && hunters.indexOf(nemRow.name) >= 0 ? " — it\u2019s a feud \u2694" : ""),
+      // the map folds out over the page instead of navigating away (a separate
+      // page had no way back)
+      showMap: !!s.showMap,
+      openMap: () => this.setState({ showMap: true }),
+      closeMap: () => this.setState({ showMap: false }),
+      showLangs: !!s.showLangs, openLangs: () => this.setState({ showLangs: true }), closeLangs: () => this.setState({ showLangs: false }),
+      langRows: s.showLangs ? this.readLangs() : [],
       fronts: fronts, frontsBreakdown: fronts.slice(1),
       skirmish: skirmish, dust: dust, pows: pows,
       ovFrStyle: Object.assign({}, fronts[0].frStyle, { height: "100%" }), ovElStyle: Object.assign({}, fronts[0].elStyle, { height: "100%" }),
-      lineNote: (function () { const fv = frS, ev = elS; const p = (fv + ev) > 0 ? Math.round(100 * fv / (fv + ev)) : 50; const my = MY_SIDE === "fr" ? p : 100 - p; const d = Math.abs(my - 50) * 2; return d === 0 ? "the line sits at the border" : "the line is " + d + "% into " + (my >= 50 ? "their" : "your") + " half"; })(),
-      battleNote: "1 pt per word known · 25 pts per weapon · live from both fighters' saves",
+      lineNote: (function () { const d = Math.abs(mePct - 50) * 2; return d === 0 ? "the line sits at the border" : "the line is " + d + "% into " + (mePct >= 50 ? "their" : "your") + " half"; })(),
+      battleNote: "1 pt per word known · 25 pts per weapon · live from the server for every fighter",
       syncNote: syncNote, syncNoteStyle: { fontSize: "10.5px", fontWeight: syncBad ? "700" : "400", color: syncBad ? "#b3261e" : "#b8b3a8", textAlign: "center" },
       exportLog: this.exportLog, importLog: this.importLog, resetAll: this.resetAll,
       devTools: (function () { try { return !/(^|\.)buddylingo\.de$/i.test(location.hostname); } catch (e) { return true; } })(),
@@ -1151,7 +1377,8 @@ class Component extends DCLogic {
       slowLabel: fmtIn(IV[Math.max(1, card ? card.box : 0)]) + " · +6 XP",
       nextLabel: fmtIn(IV[nextBox]) + " · +10 XP" + (this.revealAt && (this.revealAt - this.shownAt) < 6000 ? " ⚡+5" : ""),
       // done
-      doneSummary: (ls.sure + (ls.slow || 0)) + " of " + ls.reviewed + " cards correct",
+      doneTitle: s.bailed ? "Τακτική υποχώρηση\u00a0!" : "Μπράβο\u00a0!",
+      doneSummary: (ls.sure + (ls.slow || 0)) + " of " + ls.reviewed + " cards correct" + (s.bailed ? " — XP banked, the rest can wait" : ""),
       sessXp: ls.xp || 0,
       hasFast: (ls.fast || 0) > 0, fastCount: ls.fast || 0,
       hasNewBadges: (this.sessBadges || []).length > 0,

@@ -34,6 +34,13 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
 @keyframes blBob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px); } }
 </style>
 <script src="deck-es.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="bl-config.js"></script>
+<script src="bl-sync.js"></script>
+<script src="bl-front.js"></script>
+<script src="bl-langs.js"></script>
+<script src="bl-page-sync.js"></script>
+<script src="bl-arena.js"></script>
 <script>new MutationObserver(function () { document.querySelectorAll("video").forEach(function (v) { if (!v.muted || v.volume > 0) { v.muted = true; v.volume = 0; } }); }).observe(document.documentElement, { childList: true, subtree: true });</script>
 <link rel="icon" type="image/png" sizes="32x32" href="assets/brand/icon-32.png">
 <link rel="icon" type="image/png" sizes="512x512" href="assets/brand/icon-512.png">
@@ -81,6 +88,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         <span style="font-size:9px;color:#a5a096">best {{ bestStreak }}</span>
       </div>
     </div>
+    <button style="display:flex;align-items:center;gap:5px;background:#17181d;color:#fff;border-radius:999px;padding:0 12px;min-height:37px;font-size:12px;font-weight:800;letter-spacing:0.05em;box-shadow:0 1px 3px rgba(23,24,29,0.08)" onClick="{{ openLangs }}">ES<span style="font-size:7.5px;opacity:0.65">▼</span></button>
   </div>
 
   <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
@@ -229,6 +237,26 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         </div>
       </div>
 
+      <div style="background:#fff;border-radius:20px;padding:16px;box-shadow:0 1px 3px rgba(23,24,29,0.08);display:flex;flex-direction:column;gap:11px">
+        <div style="display:flex;align-items:baseline;gap:8px">
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:#a5a096">The arena</span>
+          <span style="font-size:10.5px;color:#c9c3b5;margin-left:auto">{{ arenaNote }}</span>
+        </div>
+        <sc-for list="{{ arenaRows }}" as="A" hint-placeholder-count="2">
+          <div style="display:flex;align-items:center;gap:9px">
+            <span style="{{ A.dot }}"></span>
+            <span style="font-size:13.5px;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ A.name }}</span>
+            <span style="font-size:11px;color:#a5a096;flex:none">{{ A.lang }}</span>
+            <span style="font-family:'Gloock',serif;font-size:17px;margin-left:auto;flex:none">{{ A.score }}</span>
+            <button style="{{ A.btnStyle }}" onClick="{{ A.tap }}">{{ A.btnLabel }}</button>
+          </div>
+        </sc-for>
+        <sc-if value="{{ hasWars }}" hint-placeholder-val="{{ false }}">
+          <span style="font-size:11px;color:#5d5a52;line-height:1.45;border-top:1px solid #efece5;padding-top:9px;text-wrap:pretty">{{ warsLine }}</span>
+        </sc-if>
+        <button style="min-height:42px;background:#f4ecda;color:#6b5a2c;border-radius:999px;font-size:12.5px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1.2px #dcc79a" onClick="{{ openMap }}">Open the Vocab Map</button>
+      </div>
+
       <button style="align-self:center;min-height:46px;padding:0 28px;background:#17181d;color:#fff;border-radius:999px;font-size:13.5px;font-weight:700;box-shadow:0 1px 3px rgba(23,24,29,0.18)" onClick="{{ openSupport }}">Contact support</button>
       <sc-if value="{{ devTools }}" hint-placeholder-val="{{ false }}">
         <button style="align-self:center;background:none;color:#a5a096;font-size:11px;text-decoration:underline;text-underline-offset:3px;min-height:44px" onClick="{{ resetAll }}">Reset all progress</button>
@@ -338,6 +366,43 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         <button style="min-height:44px;background:#17181d;color:#fff;border-radius:999px;font-size:13px;font-weight:700;margin-top:4px" onClick="{{ closeSupport }}">Fine</button>
       </div>
     </div>
+  </sc-if>
+
+  <sc-if value="{{ showMap }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Vocab Map" style="position:fixed;inset:0;background:rgba(23,24,29,0.5);display:flex;align-items:flex-end;justify-content:center;z-index:70" onClick="{{ closeMap }}">
+      <div style="background:#f6f4ef;border-radius:22px 22px 0 0;width:min(460px,100%);height:92dvh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 -18px 50px rgba(23,24,29,0.32);animation:fadeUp 0.3s ease both" onClick="{{ eatClick }}">
+        <div style="display:flex;align-items:center;gap:10px;padding:12px 14px;background:#fffdf8;border-bottom:1px solid #e9e5dc;flex:none">
+          <span style="width:34px;height:4px;border-radius:999px;background:#e0dbd0;position:absolute;left:50%;transform:translateX(-50%);top:6px"></span>
+          <span style="font-family:'Gloock',serif;font-size:18px;line-height:1;margin-right:auto">Vocab Map</span>
+          <button style="min-height:36px;padding:0 15px;border-radius:999px;background:#17181d;color:#fff;font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center" onClick="{{ closeMap }}">Close</button>
+        </div>
+        <iframe src="Vocab Map.dc.html" title="Vocab Map" style="flex:1;width:100%;border:0;display:block;background:#f6f4ef"></iframe>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showLangs }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Language switcher" style="position:fixed;inset:0;background:rgba(23,24,29,0.45);display:flex;align-items:center;justify-content:center;padding:24px;z-index:60" onClick="{{ closeLangs }}">
+      <div style="background:#fffdf8;border-radius:20px;padding:24px 22px;max-width:340px;width:100%;display:flex;flex-direction:column;gap:12px;box-shadow:0 18px 50px rgba(23,24,29,0.25)" onClick="{{ eatClick }}">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#a1823c">Your languages</span>
+          <span style="font-size:11.5px;color:#8a857a;line-height:1.45">One account, many fronts — each language keeps its own score and streak.</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <sc-for list="{{ langRows }}" as="Lg" hint-placeholder-count="5">
+            <a href="{{ Lg.href }}" style="{{ Lg.rowStyle }}">
+              <img src="{{ Lg.img }}" alt="" style="height:30px;width:30px;object-fit:contain;mix-blend-mode:multiply;flex:none">
+              <div style="display:flex;flex-direction:column;flex:1;min-width:0">
+                <span style="font-size:13.5px;font-weight:800;color:#17181d">{{ Lg.name }}</span>
+                <span style="font-size:10.5px;color:#8a857a">{{ Lg.sub }}</span>
+              </div>
+              <span style="{{ Lg.tagStyle }}">{{ Lg.tag }}</span>
+            </a>
+          </sc-for>
+        </div>
+        <button style="min-height:44px;background:#17181d;color:#fff;border-radius:999px;font-size:13px;font-weight:700" onClick="{{ closeLangs }}">Close</button>
+      </div>
+    </div>
   </sc-if></x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:900},&quot;dailyGoal&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:30,&quot;min&quot;:10,&quot;max&quot;:100,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Daily goal (cards)&quot;},&quot;mistakeBudget&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:20,&quot;min&quot;:5,&quot;max&quot;:50,&quot;step&quot;:5,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Misses per day before new words stop&quot;},&quot;quiz&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:&quot;EN → ES&quot;,&quot;options&quot;:[&quot;EN → ES&quot;,&quot;ES → EN&quot;,&quot;Mixed&quot;],&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Quiz direction&quot;},&quot;showConj&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Cards&quot;,&quot;label&quot;:&quot;Conjugation tables on verbs&quot;},&quot;supportLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Screw you and learn!&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Support&quot;,&quot;label&quot;:&quot;Support bubble text&quot;}}">
 
@@ -368,6 +433,27 @@ function pad(n) { return n < 10 ? "0" + n : "" + n; }
 function ymd(ms) { const d = new Date(ms); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
 function today() { return ymd(Date.now()); }
 function yesterday() { return ymd(Date.now() - DAY); }
+// ONE streak per language, stored under a shared key so every page can read it.
+const STREAK_KEY = "bl-streak:es" + SUF;
+const PAGES = { fr: "Vocab French.dc.html", el: "Vocab Greek.dc.html", de: "Vocab German.dc.html", es: "Vocab Spanish.dc.html", tn: "Vocab Tunisian.dc.html" };
+function readStreak() { try { return JSON.parse(localStorage.getItem(STREAK_KEY) || "null"); } catch (e) { return null; } }
+function writeStreak(v) { try { localStorage.setItem(STREAK_KEY, JSON.stringify(v)); } catch (e) {} }
+function sharedStreak() {
+  let st = readStreak();
+  if (st) return st;
+  let w = {}; try { w = (JSON.parse(localStorage.getItem("vocab-es-v1" + SUF) || "null") || {}).stats || {}; } catch (e) {}
+  const alive = w.lastDay === today() || w.lastDay === yesterday();
+  st = { streak: alive ? w.streak || 0 : 0, lastDay: alive ? w.lastDay : null, best: Math.max(w.bestStreak || 0, w.streak || 0) };
+  writeStreak(st);
+  return st;
+}
+function bumpStreak() {
+  const st = sharedStreak();
+  if (st.lastDay !== today()) { st.streak = st.lastDay === yesterday() ? (st.streak || 0) + 1 : 1; st.lastDay = today(); }
+  st.best = Math.max(st.best || 0, st.streak);
+  writeStreak(st);
+  return st;
+}
 function fmtIn(ms) { if (ms < 90 * MIN) return "in " + Math.max(1, Math.round(ms / MIN)) + " min"; if (ms < 2 * DAY) return "tomorrow"; return "in " + Math.round(ms / DAY) + " days"; }
 function fmtDue(due, now) { if (due == null) return "new"; const d = due - now; return d <= 0 ? "now" : fmtIn(d); }
 function mergeCards(a, b) { const out = Object.assign({}, a || {}); for (const k in (b || {})) { const cur = out[k], inc = b[k]; if (!cur || (inc.t || 0) > (cur.t || 0)) out[k] = inc; } return out; }
@@ -395,12 +481,30 @@ class Component extends DCLogic {
     this.recent = (saved && saved.recent) || [];
     let stats = (saved && saved.stats) || { day: today(), reviewed: 0, newToday: 0, wrongToday: 0, streak: 0, lastDay: null, bestStreak: 0 };
     if (stats.day !== today()) stats = Object.assign({}, stats, { day: today(), reviewed: 0, newToday: 0, wrongToday: 0, fastToday: 0, verbsToday: 0 });
+    const sst = sharedStreak();
+    stats = Object.assign({}, stats, { streak: (sst.lastDay === today() || sst.lastDay === yesterday()) ? sst.streak || 0 : 0, bestStreak: Math.max(stats.bestStreak || 0, sst.best || 0) });
     this.setState({
       cards: (saved && saved.cards) || {}, stats: stats, days: (saved && saved.days) || {},
       badges: (saved && saved.badges) || {}, xp: (saved && saved.xp) || 0,
       pace: (saved && saved.pace) || 6, tierFloor: (saved && saved.tierFloor) || 0, loaded: true
     });
     idbGet().then((m) => { if (m) this.mergeIn(m, true); });
+    // Server restore: a fresh device with an empty deck rebuilds from Supabase
+    // (master first, word-exact). Local progress always wins.
+    if (window.BLPageSync) window.BLPageSync.restore(MY_SIDE, W, (m) => {
+      if (this.knownCount(this.state.cards) > 0) return;
+      this.mergeIn(m, false);
+    });
+    if (window.BLSync && window.BLSync.enrolLanguage) window.BLSync.enrolLanguage(MY_SIDE);
+    // the arena: everyone's published numbers, refreshed on focus
+    this.pullArena();
+    this._arenaT = setInterval(this.pullArena, 45000);
+    window.addEventListener("focus", this.pullArena);
+  }
+  pullArena = () => { if (window.BLArena) window.BLArena.pull(MY_SIDE, (a) => this.setState({ arena: a })); };
+  componentWillUnmount() {
+    clearInterval(this._arenaT);
+    window.removeEventListener("focus", this.pullArena);
   }
 
   mergeIn(m, withSessions) {
@@ -428,6 +532,10 @@ class Component extends DCLogic {
       localStorage.setItem(KEY, JSON.stringify(payload));
     } catch (e) {}
     idbPut(payload);
+    // publish: master (private, word-exact) + snapshot (public counts for the
+    // ladder, the front and the map). Debounced and fail-soft inside.
+    if (window.BLPageSync) window.BLPageSync.publish(MY_SIDE, s.cards, W, { xp: s.xp, stats: s.stats,
+      badges: s.badges, days: s.days, tierFloor: s.tierFloor });
   }
 
   parseCsv(text) {
@@ -584,8 +692,9 @@ class Component extends DCLogic {
     if (fast) stats.fastToday = (stats.fastToday || 0) + 1;
     if (W[idx][3] === "V" && q > 0) stats.verbsToday = (stats.verbsToday || 0) + 1;
     stats.reviewed = (stats.reviewed || 0) + 1;
-    if (stats.lastDay !== today()) { stats.streak = stats.lastDay === yesterday() ? (stats.streak || 0) + 1 : 1; stats.lastDay = today(); }
-    stats.bestStreak = Math.max(stats.bestStreak || 0, stats.streak || 0);
+    const sst = bumpStreak(); // shared per-language counter — all modes count
+    stats.streak = sst.streak; stats.lastDay = sst.lastDay;
+    stats.bestStreak = Math.max(stats.bestStreak || 0, sst.best || 0);
     const gained = q === 2 ? (fast ? 15 : 10) : q === 1 ? 6 : 2;
     const xp = (s.xp || 0) + gained;
     const days = Object.assign({}, s.days);
@@ -654,6 +763,28 @@ class Component extends DCLogic {
     this._cc = this._cc || {};
     if (!(fr in this._cc)) this._cc[fr] = (window.FR && window.FR.conj) ? window.FR.conj(fr) : null;
     return this._cc[fr];
+  }
+
+  // the account’s languages: local numbers per language, current page marked
+  readLangs() {
+    const defs = [["fr", "Le Français", "croissant"], ["el", "Ελληνικά", "olive"], ["de", "Deutsch", "brezel"], ["es", "El Español", "paella"], ["tn", "Tounsi", "harissa"]];
+    return defs.map((d) => {
+      let n = 0;
+      ["vocab-", "nani-"].forEach(function (p) {
+        try { const m = JSON.parse(localStorage.getItem(p + d[0] + "-v1" + SUF) || "null"); if (m && m.cards) for (const k in m.cards) if (!m.cards[k].lapsed) n++; } catch (e) {}
+      });
+      let st = 0; // only an ALIVE streak counts (same rule as the header pill)
+      try { const sv = JSON.parse(localStorage.getItem("bl-streak:" + d[0] + SUF) || "null"); if (sv && (sv.lastDay === today() || sv.lastDay === yesterday())) st = sv.streak || 0; } catch (e) {}
+      if (!st) { try { st = (((JSON.parse(localStorage.getItem("vocab-" + d[0] + "-v1" + SUF) || "null") || {}).stats) || {}).streak || 0; } catch (e) {} }
+      const cur = d[0] === MY_SIDE;
+      return {
+        name: d[1], img: "assets/chars/" + d[2] + ".png", href: PAGES[d[0]],
+        sub: n > 0 ? n + " words · " + st + "-day streak" : "fresh front — not started",
+        tag: cur ? "current" : "open →",
+        tagStyle: { flex: "none", fontSize: "9px", fontWeight: "800", letterSpacing: "0.05em", textTransform: "uppercase", padding: "4px 9px", borderRadius: "999px", background: cur ? "#f3ecd9" : "#f0ede6", color: cur ? "#8a6d2f" : "#8a857a" },
+        rowStyle: { display: "flex", alignItems: "center", gap: "11px", background: cur ? "#faf6ea" : "#faf8f4", border: cur ? "1px solid rgba(176,141,63,0.35)" : "1px solid transparent", borderRadius: "14px", padding: "9px 12px", textDecoration: "none", minHeight: "52px" }
+      };
+    });
   }
 
   renderVals() {
@@ -797,6 +928,50 @@ class Component extends DCLogic {
         });
         return React.createElement("div", { style: { position: "absolute", top: "10px", left: "50%", transform: "translateX(-50%)", whiteSpace: "nowrap", fontSize: "17px", fontWeight: "800", color: "#17181d", lineHeight: "1.2" } }, letters);
       }).call(this),
+      // ---- the arena: every fighter, and the wars this fighter has declared
+      arenaRows: (function () {
+        const A = window.BLArena;
+        if (!A) return [];
+        const mineScore = known;
+        return A.fighters(MY_SIDE, s.arena).map((x) => {
+          const reg = window.BLLangs && window.BLLangs.get(x.language_id);
+          const col = (reg && reg.color) || "#a5a096";
+          return {
+            name: x.name + (x.hunting ? " · hunting you" : ""),
+            lang: (reg && reg.native) || x.language_id,
+            score: x.score,
+            dot: { width: "9px", height: "9px", borderRadius: "999px", background: col, flex: "none" },
+            btnLabel: x.mine ? "you" : x.atWar ? "at war" : "declare",
+            btnStyle: { flex: "none", minHeight: "30px", padding: "0 11px", borderRadius: "999px",
+              fontSize: "10.5px", fontWeight: "800", display: x.mine ? "none" : "flex",
+              alignItems: "center", justifyContent: "center", whiteSpace: "nowrap",
+              background: x.atWar ? col : "#f1eee6", color: x.atWar ? "#fff" : "#5d5a52" },
+            // one war per opponent: declaring again is impossible, the button withdraws
+            tap: () => {
+              if (x.mine) return;
+              if (x.atWar) window.BLArena.withdraw(MY_SIDE, x);
+              else window.BLArena.declare(MY_SIDE, x, 7, { mine: mineScore, theirs: x.score });
+              this.forceUpdate();
+            }
+          };
+        });
+      }).call(this),
+      arenaNote: (function () {
+        const n = window.BLArena ? window.BLArena.fighters(MY_SIDE, s.arena).length : 0;
+        return n ? n + (n === 1 ? " fighter" : " fighters") : "waiting for the server";
+      })(),
+      hasWars: !!(window.BLArena && window.BLArena.warCount(MY_SIDE)),
+      warsLine: (function () {
+        const w = window.BLArena ? window.BLArena.warNames(MY_SIDE) : [];
+        return w.length ? "At war with " + w.join(", ") + " · one war each, and the map keeps the score." : "";
+      })(),
+      // the map folds out over the page instead of navigating away (a separate
+      // page had no way back)
+      showMap: !!s.showMap,
+      openMap: () => this.setState({ showMap: true }),
+      closeMap: () => this.setState({ showMap: false }),
+      showLangs: !!s.showLangs, openLangs: () => this.setState({ showLangs: true }), closeLangs: () => this.setState({ showLangs: false }),
+      langRows: s.showLangs ? this.readLangs() : [],
       showSupport: !!s.showSupport, openSupport: () => this.setState({ showSupport: true }), closeSupport: () => this.setState({ showSupport: false }), eatClick: (e) => e.stopPropagation(),
       startSession: this.startSession,
       goHome: () => this.setState({ view: "home", queue: [], revealed: false }),
