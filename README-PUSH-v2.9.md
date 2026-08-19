@@ -85,6 +85,22 @@ New registry fields, both read everywhere instead of being hardcoded:
 - `unit` — what one point of `known` is: countries count **words**, skills count
   **scenarios**
 
+### The app entry could not route to Lover Language
+
+`Full App.dc.html` — what `index.html` redirects to — carried a hardcoded
+five-language route map and never loaded the registry at all. A fighter on any
+language outside that literal had no way through the front door: "Continue" fell
+back to the login page. It now reads routes from `bl-langs.js`, and the
+live/coming-soon line is generated from the same source so it cannot drift.
+
+### The login grid offered one slot too many
+
+The alpha budget was handed out by grid *position* — the first N squares — so a
+fighter who registered further down the grid left an extra square claimable
+behind them. Ameni registered into slot 4, which left slots 2 **and** 3 open on a
+four-slot alpha. It now counts the humans who exist and opens only the
+difference, wherever the gaps fall.
+
 ### Registration sets `is_primary`
 
 `register()` now passes `is_primary: true` for the language a fighter enlists
@@ -126,12 +142,11 @@ auth change in another tab.
 
 ## Still outstanding from v2.8
 
-`supabase/schema-v8.sql` is on `main` but **0 bytes** — re-upload it with its
-real content. `schema-v8.1.sql` remains optional; it quiets the
-security-definer view warnings and the app works either way.
+Nothing. `supabase/schema-v8.sql` is on `main` with its real content.
+`schema-v8.1.sql` remains optional; it quiets the security-definer view
+warnings and the app works either way.
 
 ## Known gaps
 
-The 11 Words of Affirmation scenarios are still English. Its chrome (verdicts,
-rank names, reply pools) is German, and the coverage line says so rather than
-going half-translated.
+None outstanding. Both modes are fully translated — 43 scenarios, verified to
+keep the English structure exactly, so a German round grades identically.
