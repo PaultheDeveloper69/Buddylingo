@@ -1158,7 +1158,7 @@ class Component extends DCLogic {
       langNote: s.lang === "de" ? (function () {
         const c = window.COURT && window.COURT.coverage ? window.COURT.coverage("wa") : null;
         if (!c) return "Deutsch";
-        if (c.have >= c.total) return "Alles auf Deutsch.";
+        if (c.have >= c.total) return "Alles auf Deutsch \u2014 Szenarien, Fragen und Antworten.";
         if (!c.have) return "Chrome auf Deutsch — die Szenarien folgen, bis dahin Englisch.";
         return c.have + " von " + c.total + " Szenarien auf Deutsch — der Rest bleibt vorerst englisch.";
       })() : "",

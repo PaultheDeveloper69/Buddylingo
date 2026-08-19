@@ -28,6 +28,8 @@ button, a { touch-action:manipulation; }
 <link rel="icon" type="image/png" sizes="512x512" href="assets/brand/icon-512.png">
 <link rel="apple-touch-icon" href="assets/brand/icon-180.png">
 <meta property="og:image" content="assets/brand/icon-512.png">
+<script src="bl-config.js"></script>
+<script src="bl-langs.js"></script>
 <script src="bl-sound.js"></script>
 </helmet>
 <div data-screen-label="Full App Entry" style="min-height:100dvh;background:#f6f4ef;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;padding:calc(30px + env(safe-area-inset-top)) 24px calc(30px + env(safe-area-inset-bottom));text-align:center">
@@ -58,20 +60,38 @@ button, a { touch-action:manipulation; }
     <sc-if value="{{ hasSession }}" hint-placeholder-val="{{ false }}">
       <a href="{{ contApp }}" style="min-height:48px;background:#fff;color:#17181d;border-radius:999px;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;text-decoration:none;box-shadow:0 1px 3px rgba(23,24,29,0.08)"><span>{{ contLabel }}</span></a>
     </sc-if>
-    <span style="font-size:10px;color:#c9c3b5">Français &amp; Ελληνικά live · Deutsch, Español, Tounsi coming soon</span>
+    <span style="font-size:10px;color:#c9c3b5">{{ liveLine }}</span>
   </div>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script>
-const APPS = { fr: "Vocab French.dc.html", el: "Vocab Greek.dc.html", de: "Vocab German.dc.html", es: "Vocab Spanish.dc.html", tn: "Vocab Tunisian.dc.html" };
+// Pages come from the registry (bl-langs.js), the same source the login grid and
+// the map read. This was a hardcoded five-language map, so a fighter whose language
+// was not in the literal — Lover Language, Words of Affirmation — had no route out
+// of this screen: "Continue" fell back to the login page forever.
+// The literal below is the offline fallback only.
+const APPS_FALLBACK = { fr: "Vocab French.dc.html", el: "Vocab Greek.dc.html", de: "Vocab German.dc.html", es: "Vocab Spanish.dc.html", tn: "Vocab Tunisian.dc.html" };
+function appsMap() {
+  const B = window.BLLangs;
+  if (!B) return APPS_FALLBACK;
+  const o = {};
+  B.all().forEach(function (l) { if (l.page) o[l.id] = l.page; });
+  return o;
+}
 class Component extends DCLogic {
   state = { session: null };
   componentDidMount() {
+    if (window.BLLangs && window.BLLangs.hydrate) window.BLLangs.hydrate(() => this.forceUpdate());
     try { this.setState({ session: JSON.parse(localStorage.getItem("bl-session") || "null") }); } catch (e) {}
   }
   renderVals() {
-    const se = this.state.session;
+    const se = this.state.session, APPS = appsMap();
+    const B = window.BLLangs;
+    // generated, so the live / coming-soon line can never drift from the registry
+    const live = B ? B.active().map(function (l) { return l.native || l.name; }) : ["Français", "Ελληνικά"];
+    const soon = B ? B.all().filter(function (l) { return !l.active; }).map(function (l) { return l.name; }) : [];
     return {
+      liveLine: live.join(", ") + " live" + (soon.length ? " · " + soon.join(", ") + " coming soon" : ""),
       hasSession: !!(se && se.lang && APPS[se.lang]),
       contLabel: se ? "Continue as " + se.name + " →" : "",
       contApp: se && APPS[se.lang] ? APPS[se.lang] : "BuddyLingo Login.dc.html"

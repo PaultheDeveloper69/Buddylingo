@@ -946,5 +946,402 @@ window.COURT_DE = (function () {
     }
   };
 
+
+  // ── Words of Affirmation ──────────────────────────────────────────────────
+  // Same rule as the Lover cards: keep the structure, change only the words.
+  // German praise is plainer than English praise — "schön" and "toll" are the
+  // potato here, and the whole skill is trading them for one observed detail.
+  var waScenarios = {
+
+    wa_gym: {
+      sit: "Sie geht seit zwei Monaten dreimal pro Woche morgens ins Gym.",
+      steps: [
+        { k: "notice", lvl: "123", q: "Was ist hier eigentlich bemerkenswert?", o: [
+          { t: "Sie sieht besser aus", ok: 0, v: "target", w: "Du hast das Ergebnis bewertet. Die Arbeit hat sie gemacht." },
+          { t: "Sie ist zwei Monate dabeigeblieben", ok: 1, v: "seen", w: "Das ist der unsichtbare Teil, und der schwere." },
+          { t: "Sie mag das Gym", ok: 0, v: "dead", w: "Tut sie nicht besonders. Genau das macht es beeindruckend." },
+          { t: "Sie ist von Natur aus sportlich", ok: 0, v: "target", w: "Du hast ihr gerade gesagt, es war umsonst." }
+        ] },
+        { k: "name", lvl: "123", q: "Benenne die Eigenschaft darunter.", o: [
+          { t: "VERLÄSSLICHKEIT", ok: 1, v: "seen", w: "Ja. Zwei Monate unglamouröse Morgen." },
+          { t: "DISZIPLIN", ok: 2, v: "also", w: "Naher Verwandter. Im Mund etwas kälter." },
+          { t: "AMBITION", ok: 0, v: "linkedin", w: "Du hast aus ihrem Gymbesuch einen Karriereplan gemacht." },
+          { t: "KÖNNEN", ok: 0, v: "fine", w: "Falsche Schublade. Hier prüft keiner ihre Fähigkeit." }
+        ] },
+        { k: "pick", lvl: "12", q: "Welche davon landet wirklich?", o: [
+          { t: "Du siehst fantastisch aus.", ok: 0, v: "target", w: "Freundlich. Komplett aufs Falsche gezielt." },
+          { t: "Gut gemacht, weiter so!", ok: 0, v: "potato", w: "Du hast erfolgreich Ermutigung im Allgemeinen mitgeteilt." },
+          { t: "Zwei Monate, und du tauchst immer noch auf. Das ist der Teil, den die meisten nicht schaffen.", ok: 1, v: "beautiful", w: "Konkret, wahr, und es geht um ihre Entscheidungen." },
+          { t: "Du bist jetzt offiziell ein Gym-Girl.", ok: 0, v: "fine", w: "Ein Etikett, kein Kompliment." }
+        ] },
+        { k: "impact", lvl: "23", q: "Und jetzt der Teil, den Männer überspringen: was hat es mit dir gemacht?", o: [
+          { t: "Ehrlich, es bringt mich dazu, weniger faul sein zu wollen.", ok: 1, v: "beautiful", w: "Wirkung, und es kostet dich etwas. Gut." },
+          { t: "Ich bin stolz auf dich.", ok: 2, v: "also", w: "Passt. Etwas elterlich, wenn es alles ist, was du hast." },
+          { t: "Das ist beeindruckend.", ok: 0, v: "closed", w: "Ein Urteil. Mit einem Urteil kann sie nichts machen." },
+          { t: "Deine Resilienz auf dieser Reise war wirklich—", ok: 0, v: "linkedin", w: "Hör auf." }
+        ] },
+        { k: "build", lvl: "23", q: "Sag es. Beobachtung, Eigenschaft, Wirkung.", sl: [
+          { label: "BEOBACHTUNG", o: [
+            { t: "Zwei Monate 6 Uhr morgens und du gehst immer noch", ok: 1 },
+            { t: "Du siehst zurzeit super aus", ok: 0 },
+            { t: "Gut gemacht mit dem Gym", ok: 0 }
+          ] },
+          { label: "EIGENSCHAFT", o: [
+            { t: "und das ist der Teil, den die meisten leise sein lassen", ok: 1 },
+            { t: "du bist so disziplinärt", ok: 0 },
+            { t: "du bist eben sportlich", ok: 0 }
+          ] },
+          { label: "WIRKUNG", o: [
+            { t: "und es bringt mich leise dazu, mich auch mal zu sortieren", ok: 1 },
+            { t: "weiter so!", ok: 0 },
+            { t: "Ich bin stolz auf dich.", ok: 0 }
+          ] }
+        ] }
+      ],
+      reveal: { line: "Zwei Monate 6 Uhr morgens und du gehst immer noch — und das ist der Teil, den die meisten leise sein lassen. Es bringt mich leise dazu, mich auch mal zu sortieren.",
+        why: "Du hast die Verlässlichkeit benannt, nicht den Körper, und ihr gesagt, was es mit dir gemacht hat. Diese zweite Hälfte ist der Grund, warum es ankommt." }
+    },
+
+    wa_meeting: {
+      sit: "Sie hat dir um 8 Uhr geschrieben und dir Glück für das Meeting gewünscht, das du letzte Woche erwähnt hast.",
+      steps: [
+        { k: "notice", lvl: "123", q: "Was ist bemerkenswert?", o: [
+          { t: "Sie hat ein gutes Gedächtnis", ok: 0, v: "fine", w: "Fast. Gedächtnis ist nicht der Punkt — es zu benutzen schon." },
+          { t: "Sie hat sich eine Kleinigkeit gemerkt, die dir wichtig war", ok: 1, v: "seen", w: "Genau. Klein, absichtlich, leicht zu übergehen." },
+          { t: "Sie hat früh geschrieben", ok: 0, v: "dead", w: "Zeitmanagement." },
+          { t: "Sie mag dich", ok: 0, v: "fine", w: "Wahr und völlig unkonkret." }
+        ] },
+        { k: "name", lvl: "123", q: "Die Eigenschaft?", o: [
+          { t: "ACHTSAMKEIT", ok: 1, v: "seen", w: "Ja. Aufmerksamkeit, absichtlich ausgegeben." },
+          { t: "FREUNDLICHKEIT", ok: 2, v: "also", w: "Auch wahr. Etwas breiter." },
+          { t: "VERLÄSSLICHKEIT", ok: 0, v: "fine", w: "Anderes Wort. Sie hat keine Pflicht erfüllt." },
+          { t: "GROßZÜGIGKEIT", ok: 0, v: "fine", w: "Hier wurde nichts verschenkt außer Aufmerksamkeit." }
+        ] },
+        { k: "pick", lvl: "12", q: "Welche Version fühlt sie?", o: [
+          { t: "Danke! 🙏", ok: 0, v: "potato", w: "Du hast den Eingang bestätigt." },
+          { t: "Das ist so süß von dir.", ok: 0, v: "fine", w: "Nichts falsch. Auch das, was du einem Kollegen sagst." },
+          { t: "Ich habe das einmal erwähnt, letzte Woche. Du hast es dir gemerkt. Das hat meinen Morgen gemacht.", ok: 1, v: "beautiful", w: "Konkret, und es benennt die Wirkung." },
+          { t: "Deine emotionale Aufmerksamkeit ist wirklich bemerkenswert.", ok: 0, v: "hallmark", w: "So hat noch nie jemand gesprochen, der nicht bedruckt war." }
+        ] },
+        { k: "impact", lvl: "23", q: "Was hat es gemacht?", o: [
+          { t: "Ich habe mich richtig versorgt gefühlt.", ok: 1, v: "beautiful", w: "Einfache Worte, echtes Gefühl. Das ist das Ziel." },
+          { t: "Das war nett.", ok: 0, v: "potato", w: "Nett. Das vergesslichste Wort der Sprache." },
+          { t: "Es hat mich runtergebracht, bevor ich reingegangen bin.", ok: 2, v: "also", w: "Auch ausgezeichnet — konkret, was sogar besser ist." },
+          { t: "Du bist die Beste.", ok: 0, v: "fine", w: "Eine Trophäe, kein Satz." }
+        ] },
+        { k: "build", lvl: "23", sl: [
+          { label: "BEOBACHTUNG", o: [
+            { t: "Ich habe das Meeting einmal im Vorbeigehen erwähnt", ok: 1 },
+            { t: "Danke für die Nachricht", ok: 0 },
+            { t: "Du bist so lieb", ok: 0 }
+          ] },
+          { label: "EIGENSCHAFT", o: [
+            { t: "und du warst die Einzige, die sich daran erinnert hat", ok: 1 },
+            { t: "du bist sehr aufmerksam", ok: 0 },
+            { t: "du hast ein super Gedächtnis", ok: 0 }
+          ] },
+          { label: "WIRKUNG", o: [
+            { t: "Ich habe mich heute Morgen richtig versorgt gefühlt.", ok: 1 },
+            { t: "Also danke!", ok: 0 },
+            { t: "Du bist die Beste 😊", ok: 0 }
+          ] }
+        ] }
+      ],
+      reveal: { line: "Ich habe das Meeting einmal im Vorbeigehen erwähnt, und du warst die Einzige, die sich daran erinnert hat. Ich habe mich heute Morgen richtig versorgt gefühlt.",
+        why: "Kleine Sache, genau benannt, plus was sie mit dir gemacht hat. Sie merkt, dass du auch aufgepasst hast." }
+    },
+
+    wa_potato: {
+      sit: "RETTE DIE KARTOFFEL. Sie hat dir gerade gezeigt, woran sie drei Wochen gearbeitet hat. Du hast gesagt: „schön“.",
+      steps: [
+        { k: "potato", lvl: "123", q: "Die Kartoffel hat gesprochen. Verbessere sie.", o: [
+          { t: "Schön, gut gemacht!", ok: 0, v: "potato", w: "Du hast ein Adverb hinzugefügt. Die Kartoffel bleibt eine Kartoffel." },
+          { t: "Drei Wochen Abende, und es funktioniert wirklich. Ich hätte in Woche eins aufgegeben.", ok: 1, v: "beautiful", w: "Konkret, bewundernd, leicht selbstironisch. Gut." },
+          { t: "Das ist unglaublich, du bist so talentiert!!", ok: 0, v: "much", w: "Lautstärke ist keine Genauigkeit." },
+          { t: "Ich bin wirklich stolz auf dich dafür.", ok: 2, v: "also", w: "Wärmer als schön. Immer noch kein Detail drin." }
+        ] },
+        { k: "notice", lvl: "12", q: "Was hättest du daran tatsächlich sehen können?", o: [
+          { t: "Dass es gut aussieht", ok: 0, v: "potato", w: "Zurück zur Kartoffel." },
+          { t: "Den konkreten schweren Teil, den sie gelöst hat", ok: 1, v: "seen", w: "Ja. Finde die schwierige Stelle und benenne sie." },
+          { t: "Dass sie talentiert ist", ok: 0, v: "hallmark", w: "Du hast ihr ein Etikett gegeben statt eines Spiegels." },
+          { t: "Dass sie hart gearbeitet hat", ok: 0, v: "fine", w: "Näher, immer noch vage. Welcher Teil war schwer?" }
+        ] },
+        { k: "build", lvl: "23", sl: [
+          { label: "BEOBACHTUNG", o: [
+            { t: "Du sitzt seit drei Wochen daran", ok: 1 },
+            { t: "Das ist echt schön", ok: 0 },
+            { t: "Wow!", ok: 0 }
+          ] },
+          { label: "EIGENSCHAFT", o: [
+            { t: "und die fummelige Stelle in der Mitte ist die, bei der du nicht getrickst hast", ok: 1 },
+            { t: "du bist so talentiert", ok: 0 },
+            { t: "du bist unglaublich gut darin", ok: 0 }
+          ] },
+          { label: "WIRKUNG", o: [
+            { t: "Ich hätte am zweiten Tag die Abkürzung genommen.", ok: 1 },
+            { t: "Gut gemacht!!", ok: 0 },
+            { t: "So stolz 🥰", ok: 0 }
+          ] }
+        ] }
+      ],
+      reveal: { line: "Du sitzt seit drei Wochen daran, und die fummelige Stelle in der Mitte ist die, bei der du nicht getrickst hast. Ich hätte am zweiten Tag die Abkürzung genommen.",
+        why: "Ein Detail schlägt drei Adjektive. Den schweren Teil zu benennen beweist, dass du hingeschaut hast." }
+    },
+
+    wa_promo: {
+      sit: "FALSCHES ZIEL. Sie wurde befördert. Sie erzählt es dir beim Abendessen, noch in Arbeitskleidung.",
+      steps: [
+        { k: "target", lvl: "123", q: "Vier Dinge, die du loben könntest. Nur eins ist der Punkt.", o: [
+          { t: "Wie gut sie beim Feiern aussieht", ok: 0, v: "target", w: "Sie wurde befördert. Du hast ihr Outfit gelobt." },
+          { t: "Die Ausdauer, die es gebraucht hat", ok: 1, v: "beautiful", w: "Das, was sie tatsächlich getan hat. Lobe das." },
+          { t: "Das neue Gehalt", ok: 0, v: "fine", w: "Du hast dem Budget ihres Arbeitgebers gratuliert." },
+          { t: "Dass sie es endlich gemerkt haben", ok: 0, v: "target", w: "Du hast es zu deren Urteil gemacht, nicht zu ihrer Arbeit." }
+        ] },
+        { k: "name", lvl: "123", q: "Welches Wort passt zu dem, was sie getan hat?", o: [
+          { t: "AUSDAUER", ok: 1, v: "seen", w: "Achtzehn Monate davon, das meiste unsichtbar." },
+          { t: "KÖNNEN", ok: 2, v: "also", w: "Auch wahr. Etwas kühler, kommt trotzdem an." },
+          { t: "GLÜCK", ok: 0, v: "target", w: "Erstaunliche Wahl." },
+          { t: "AMBITION", ok: 0, v: "linkedin", w: "Jetzt ist sie eine Wachstumsgeschichte." }
+        ] },
+        { k: "impact", lvl: "23", q: "Und du?", o: [
+          { t: "Ich habe dir anderthalb Jahre zugesehen, wie du nicht aufgegeben hast.", ok: 1, v: "beautiful", w: "Zeugenaussage. Die kann ihr niemand sonst geben." },
+          { t: "Gratulation!", ok: 0, v: "potato", w: "Korrekt. Auch das, was ihr Zahnarzt sagen wird." },
+          { t: "Wir sollten feiern.", ok: 2, v: "also", w: "Guter Instinkt. Sag zuerst das andere." },
+          { t: "Ich wusste immer, dass du es kriegst.", ok: 0, v: "fine", w: "Macht deine Prognose zur Schlagzeile und löscht die Schwierigkeit." }
+        ] },
+        { k: "build", lvl: "23", sl: [
+          { label: "BEOBACHTUNG", o: [
+            { t: "Ich habe dir achtzehn Monate zugesehen, wie du wieder rangegangen bist", ok: 1 },
+            { t: "Gratulation!", ok: 0 },
+            { t: "Du siehst heute Abend super aus", ok: 0 }
+          ] },
+          { label: "EIGENSCHAFT", o: [
+            { t: "einschließlich der zwei Male, wo es klar nicht passieren würde", ok: 1 },
+            { t: "du bist so ambitioniert", ok: 0 },
+            { t: "du hast es verdient", ok: 0 }
+          ] },
+          { label: "WIRKUNG", o: [
+            { t: "Du hast so hart dafür gearbeitet. Ich bin stolz auf dich.", ok: 1 },
+            { t: "Jetzt großes Gehalt! 😄", ok: 0 },
+            { t: "Ich wusste es immer.", ok: 0 }
+          ] }
+        ] }
+      ],
+      reveal: { line: "Ich habe dir achtzehn Monate zugesehen, wie du wieder rangegangen bist, einschließlich der zwei Male, wo es klar nicht passieren würde. Du hast so hart dafür gearbeitet. Ich bin stolz auf dich.",
+        why: "Am Ende absichtlich einfache Sprache. Sie braucht keine Eloquenz, sie braucht einen Zeugen." }
+    },
+
+    wa_dinner: {
+      sit: "Sie hat gekocht, nach einem Tag, der sie sichtbar zerlegt hat.",
+      steps: [
+        { k: "notice", lvl: "123", q: "Was ist bemerkenswert?", o: [
+          { t: "Das Essen ist gut", ok: 0, v: "potato", w: "Du hast eine Mahlzeit bewertet." },
+          { t: "Sie hat es gemacht, obwohl sie komplett leer war", ok: 1, v: "seen", w: "Der Preis ist der Punkt. Benenne den Preis." },
+          { t: "Sie kocht gerne", ok: 0, v: "dead", w: "Heute Abend nicht." },
+          { t: "Sie hat auch aufgeräumt", ok: 0, v: "fine", w: "Auch wahr. Kleiner." }
+        ] },
+        { k: "pick", lvl: "12", q: "Welche fühlt sie wirklich?", o: [
+          { t: "Danke, war lecker.", ok: 0, v: "potato", w: "Morgen weiß sie das nicht mehr." },
+          { t: "Das hättest du nicht machen müssen.", ok: 0, v: "fine", w: "Du hast ihre Freundlichkeit in einen Fehler verwandelt." },
+          { t: "Danke fürs Kochen — ich weiß, du warst komplett durch und hast es trotzdem gemacht.", ok: 1, v: "beautiful", w: "Benennt, was sie getan hat und was es gekostet hat. Diese zweite Hälfte ist der ganze Trick." },
+          { t: "Du bist echt der fürsorglichste Mensch, den ich kenne.", ok: 0, v: "hallmark", w: "Grüßkarte. Und klingt leicht nach Stellenbeschreibung." }
+        ] },
+        { k: "impact", lvl: "23", q: "Füge die Wirkung hinzu. Nicht übertreiben.", o: [
+          { t: "Nach meinem eigenen Tag nach Hause zu kommen und das zu sehen war das Beste daran.", ok: 1, v: "beautiful", w: "Angemessen und konkret." },
+          { t: "Ich weiß nicht, was ich ohne dich machen würde.", ok: 0, v: "much", w: "Sie hat Pasta gemacht. Keine Niere gespendet." },
+          { t: "Weiß ich wirklich zu schätzen.", ok: 2, v: "also", w: "Klein und ehrlich. Passt für eine kleine Sache." },
+          { t: "Du bist zu gut zu mir.", ok: 0, v: "fine", w: "Jetzt muss sie dich beruhigen. Wieder." }
+        ] }
+      ],
+      reveal: { line: "Danke fürs Kochen — ich weiß, du warst komplett durch und hast es trotzdem gemacht. Nach Hause zu kommen und das zu sehen war das Beste an meinem Tag.",
+        why: "Mühe plus Preis plus Wirkung, in normalen Worten. Nichts hier braucht ein Wörterbuch." }
+    },
+
+    wa_boss: {
+      sit: "Sie erzählt dir, dass sie ihrer Chefin endlich das Schwierige gesagt hat. Ihre Hände zittern noch etwas.",
+      steps: [
+        { k: "notice", lvl: "123", q: "Was ist hier passiert?", o: [
+          { t: "Sie hat einen Streit gewonnen", ok: 0, v: "fine", w: "Nicht der Punkt, und möglicherweise nicht wahr." },
+          { t: "Sie hat etwas getan, das ihr Angst gemacht hat", ok: 1, v: "seen", w: "Ja. Die zitternden Hände sind die Geschichte." },
+          { t: "Ihre Chefin ist schwierig", ok: 0, v: "dead", w: "Du hast es zu ihrer Chefin gemacht." },
+          { t: "Sie ist durchsetzungsstark", ok: 0, v: "linkedin", w: "Sprache aus der Leistungsbeurteilung." }
+        ] },
+        { k: "name", lvl: "123", q: "Das Wort.", o: [
+          { t: "MUT", ok: 1, v: "seen", w: "Richtig, und Erwachsenen sagt man das selten laut." },
+          { t: "SELBSTBEWUSSTSEIN", ok: 0, v: "fine", w: "Falsches Wort. Selbstbewusstsein hätte nicht gezittert." },
+          { t: "RESILIENZ", ok: 0, v: "linkedin", w: "Du hast in die LinkedIn-Schublade gegriffen." },
+          { t: "EHRLICHKEIT", ok: 2, v: "also", w: "Auch vertretbar. Verfehlt die Angst leicht." }
+        ] },
+        { k: "impact", lvl: "23", q: "Und dann?", o: [
+          { t: "Du hattest Angst und hast es trotzdem gemacht. Das ist die ganze Definition.", ok: 1, v: "beautiful", w: "Du hast die Angst benannt statt sie wegzuwischen." },
+          { t: "Siehst du, war doch nicht so schlimm!", ok: 0, v: "fine", w: "Du hast für sie entschieden, wie schlimm es war." },
+          { t: "Gut für dich!", ok: 0, v: "potato", w: "Die Kartoffel spricht." },
+          { t: "Ich hätte das vor Wochen gesagt.", ok: 0, v: "target", w: "Gratulation zu deiner eigenen eingebildeten Tapferkeit." }
+        ] },
+        { k: "build", lvl: "23", sl: [
+          { label: "BEOBACHTUNG", o: [
+            { t: "Deine Hände haben noch gezittert, als du es mir erzählt hast", ok: 1 },
+            { t: "Gut, dass du was gesagt hast", ok: 0 },
+            { t: "Das sind super Neuigkeiten", ok: 0 }
+          ] },
+          { label: "EIGENSCHAFT", o: [
+            { t: "was heißt, du hattest Angst und hast es trotzdem gemacht", ok: 1 },
+            { t: "du bist so resilient", ok: 0 },
+            { t: "du bist mutiger als ich", ok: 0 }
+          ] },
+          { label: "WIRKUNG", o: [
+            { t: "Ich schiebe seit einem Monat etwas Kleineres vor mir her.", ok: 1 },
+            { t: "So stolz auf dich!", ok: 0 },
+            { t: "Siehst du? War nicht so schlimm.", ok: 0 }
+          ] }
+        ] }
+      ],
+      reveal: { line: "Deine Hände haben noch gezittert, als du es mir erzählt hast, was heißt, du hattest Angst und hast es trotzdem gemacht. Ich schiebe seit einem Monat etwas Kleineres vor mir her.",
+        why: "Bei Mut muss die Angst drin bleiben. Nimmt man die Angst raus, nimmt man das Kompliment raus." }
+    },
+
+    wa_piano: {
+      sit: "Sie übt seit sechs Wochen fast jeden Abend Klavier. Sie ist noch schlecht.",
+      steps: [
+        { k: "notice", lvl: "123", q: "Vorsicht. Was verdient Anerkennung?", o: [
+          { t: "Sie wird schnell besser", ok: 0, v: "fine", w: "Wird sie nicht, und sie weiß es. Lüg nicht herzlich." },
+          { t: "Sechs Wochen Abende mit fast nichts vorzuweisen", ok: 1, v: "seen", w: "Das ist schwerer als Talent und dafür lobt sie keiner." },
+          { t: "Sie ist musikalisch", ok: 0, v: "target", w: "Schmeichelei aufs Falsche gerichtet." },
+          { t: "Schönes Hobby", ok: 0, v: "potato", w: "Schön. Da ist es wieder." }
+        ] },
+        { k: "name", lvl: "123", q: "Dasselbe Wort wie bei der Gym-Karte, falls du aufgepasst hast.", o: [
+          { t: "VERLÄSSLICHKEIT", ok: 1, v: "seen", w: "Ja. Andere Situation, gleiches Konzept. Das ist der Übertrag." },
+          { t: "TALENT", ok: 0, v: "target", w: "Das Gegenteil von dem, was passiert." },
+          { t: "GEDULD", ok: 2, v: "also", w: "Auch richtig, und hier vermutlich freundlicher." },
+          { t: "KREATIVITÄT", ok: 0, v: "fine", w: "Nach ihrer eigenen Aussage ist noch nichts Kreatives passiert." }
+        ] },
+        { k: "build", lvl: "23", sl: [
+          { label: "BEOBACHTUNG", o: [
+            { t: "Sechs Wochen fast jeden Abend üben", ok: 1 },
+            { t: "Du wirst richtig gut", ok: 0 },
+            { t: "Du bist so musikalisch", ok: 0 }
+          ] },
+          { label: "EIGENSCHAFT", o: [
+            { t: "mit fast nichts vorzuweisen, und genau da hören alle auf", ok: 1 },
+            { t: "du hast echtes Talent", ok: 0 },
+            { t: "es klingt schön", ok: 0 }
+          ] },
+          { label: "WIRKUNG", o: [
+            { t: "Ich mag, dass du etwas machst, worin du nicht sofort gut bist.", ok: 1 },
+            { t: "Weiter so!", ok: 0 },
+            { t: "Gut gemacht.", ok: 0 }
+          ] }
+        ] }
+      ],
+      reveal: { line: "Sechs Wochen fast jeden Abend üben, mit fast nichts vorzuweisen — genau da hören alle auf. Ich mag, dass du etwas machst, worin du nicht sofort gut bist.",
+        why: "Gleiches Konzept wie die Gym-Karte in komplett anderer Haut. Wenn du es erkannt hast, wird es zum Reflex." }
+    },
+
+    wa_sayless: {
+      sit: "SAG WENIGER. Sie hat gerade etwas abgeschlossen, das ein Jahr gedauert hat. Du hast eine Rede vorbereitet.",
+      steps: [
+        { k: "pick", lvl: "123", q: "Vier Versuche. Einer ist ein Mensch.", o: [
+          { t: "Deine bewiesene Resilienz auf dieser gesamten Reise war wirklich inspirierend zu beobachten.", ok: 0, v: "linkedin", w: "Du hast sie für einen Preis nominiert, den keiner ausgeschrieben hat." },
+          { t: "Du hast so hart dafür gearbeitet. Ich bin stolz auf dich.", ok: 1, v: "beautiful", w: "Kurz. Wahr. Nichts steht im Weg." },
+          { t: "Worte können nicht ausdrücken, wie stolz ich auf die Frau bin, die du geworden bist.", ok: 0, v: "hallmark", w: "So hat noch nie jemand gesprochen, der nicht bedruckt war." },
+          { t: "Nice!", ok: 0, v: "potato", w: "Ein Jahr Arbeit, vier Buchstaben." }
+        ] },
+        { k: "notice", lvl: "12", q: "Warum gewinnt die einfache Version?", o: [
+          { t: "Sie ist kürzer", ok: 0, v: "fine", w: "Länge ist nicht der Mechanismus." },
+          { t: "Nichts darin führt sich auf", ok: 1, v: "seen", w: "Richtig. Schmuck liest sich als Distanz." },
+          { t: "Sie ist männlicher", ok: 0, v: "dead", w: "Nein." },
+          { t: "Sie ist leichter zu sagen", ok: 0, v: "fine", w: "Ist sie eigentlich nicht. Das ist ziemlich genau der Punkt." }
+        ] }
+      ],
+      reveal: { line: "Du hast so hart dafür gearbeitet. Ich bin stolz auf dich.",
+        why: "Emotionales Vokabular ist dafür, das Richtige zu finden, nicht um es zu verzieren. Wenn das Gefühl groß ist, werden die Worte kleiner." }
+    },
+
+    wa_tea: {
+      sit: "MASS HALTEN. Sie hat dir einen Tee gebracht, während du gearbeitet hast.",
+      steps: [
+        { k: "pick", lvl: "123", q: "Es ist ein Tee. Dosiere.", o: [
+          { t: "Ehrlich, du kümmerst dich so gut um mich. Ich verdiene dich nicht.", ok: 0, v: "much", w: "Sie hat dir Tee gemacht. Keine Niere gespendet." },
+          { t: "Du bist die Beste. Und perfektes Timing.", ok: 1, v: "beautiful", w: "Kleine warme Antwort auf eine kleine warme Sache. Maß zählt." },
+          { t: "Danke.", ok: 0, v: "potato", w: "Passt. Auch das, was du einem Barista sagst." },
+          { t: "Danke — du merkst immer, wann ich feststecke.", ok: 2, v: "also", w: "Auch schön, und es bemerkt ein Muster. Funktioniert." }
+        ] },
+        { k: "notice", lvl: "12", q: "Was ist hier die Lektion?", o: [
+          { t: "Immer konkret sein", ok: 0, v: "fine", w: "Meistens. Auf dieser Karte nicht die Lektion." },
+          { t: "Die Größe der Antwort an die Größe der Sache anpassen", ok: 1, v: "seen", w: "Ja. Kleine Dinge zu überhöhen entwertet die Währung." },
+          { t: "Öfter danke sagen", ok: 0, v: "potato", w: "Wieder Lautstärke." },
+          { t: "Den Menschen loben, nicht die Handlung", ok: 0, v: "fine", w: "Nicht hier. Hier sagst du etwas Warmes und arbeitest weiter." }
+        ] }
+      ],
+      reveal: { line: "Du bist die Beste. Und perfektes Timing.",
+        why: "Wenn jede Freundlichkeit einen Monolog bekommt, bedeutet keine mehr etwas. Spar die großen Worte für die großen Dinge." }
+    },
+
+    wa_haircut: {
+      sit: "Sie war beim Friseur und prüft ständig ihr Spiegelbild in Schaufenstern.",
+      steps: [
+        { k: "notice", lvl: "123", q: "Lies erst den Raum. Was läuft hier?", o: [
+          { t: "Sie will ein Kompliment", ok: 0, v: "fine", w: "Fast, aber faul. Jeder will ein Kompliment." },
+          { t: "Sie ist unsicher und sucht eine ehrliche Einschätzung", ok: 1, v: "seen", w: "Richtig. Vages Lob erreicht das nicht." },
+          { t: "Sie mag ihren neuen Schnitt", ok: 0, v: "dead", w: "Dann warum das Schaufenster." },
+          { t: "Sie fischt nach Aufmerksamkeit", ok: 0, v: "fine", w: "Unfreundlich, und es sickert in deine Stimme." }
+        ] },
+        { k: "pick", lvl: "123", q: "Welche klärt es?", o: [
+          { t: "Ja, sieht schön aus.", ok: 0, v: "potato", w: "Sie hört den Punkt." },
+          { t: "Kürzer als erwartet.", ok: 0, v: "fine", w: "Wahr, und ihr gerade komplett nutzlos." },
+          { t: "Das steht dir wirklich — du siehst damit noch mehr nach dir aus.", ok: 1, v: "beautiful", w: "Konkret genug, um geglaubt zu werden, warm genug, um zu helfen." },
+          { t: "Du siehst absolut atemberaubend aus, echt unglaublich.", ok: 0, v: "much", w: "Lautstärke, wo sie Genauigkeit brauchte. Sie glaubt es nicht." }
+        ] }
+      ],
+      reveal: { line: "Das steht dir wirklich — du siehst damit noch mehr nach dir aus.",
+        why: "Beruhigung funktioniert nur, wenn sie wie eine Beobachtung klingt. Lautstärke runter, Genauigkeit rauf." }
+    },
+
+    wa_reliable: {
+      sit: "Sie hat diesen Monat dreimal für dich eingesprungen, ohne es ein einziges Mal zu erwähnen.",
+      steps: [
+        { k: "notice", lvl: "123", q: "Das übersieht man leicht komplett. Was ist es?", o: [
+          { t: "Sie ist hilfsbereit", ok: 0, v: "potato", w: "Ein Wort aus dem Zeugnis." },
+          { t: "Dreimal, und nie hat sie sich dafür etwas abgeholt", ok: 1, v: "seen", w: "Das Nicht-Erwähnen ist das Kompliment. Benenne das." },
+          { t: "Sie ist organisiert", ok: 0, v: "fine", w: "Komplett falsche Eigenschaft." },
+          { t: "Sie ist nett zu dir", ok: 0, v: "dead", w: "Enorme Unschärfe." }
+        ] },
+        { k: "name", lvl: "123", q: "Wort?", o: [
+          { t: "VERLÄSSLICHKEIT", ok: 1, v: "seen", w: "Unglamourös, selten gelobt, tief gefühlt." },
+          { t: "GROßZÜGIGKEIT", ok: 2, v: "also", w: "Auch fair. Etwas größer als die Sache." },
+          { t: "FREUNDLICHKEIT", ok: 2, v: "also", w: "Vertretbar. Etwas weich für das, was sie getan hat." },
+          { t: "LOYALITÄT", ok: 0, v: "much", w: "Du hast aus einem Dienstplan einen Blutschwur gemacht." }
+        ] },
+        { k: "impact", lvl: "123", q: "Bring es an.", o: [
+          { t: "Ich habe alle drei gemerkt, und ich habe gemerkt, dass du keins davon erwähnt hast.", ok: 1, v: "beautiful", w: "Unaufgefordert gesehen zu werden ist das Seltenste auf dieser Liste." },
+          { t: "Danke für alles, was du machst.", ok: 0, v: "hallmark", w: "Eine Karte aus der Abschiedssammlung." },
+          { t: "Du bist so ein guter Mensch.", ok: 0, v: "fine", w: "Ein Etikett. Ein Etikett kann sie nicht fühlen." },
+          { t: "Sag Bescheid, wenn du mal was brauchst.", ok: 2, v: "also", w: "Anständig. Gegenleistung, keine Anerkennung. Mach beides." }
+        ] },
+        { k: "build", lvl: "23", sl: [
+          { label: "BEOBACHTUNG", o: [
+            { t: "Du bist diesen Monat dreimal für mich eingesprungen", ok: 1 },
+            { t: "Danke für deine Hilfe", ok: 0 },
+            { t: "Du bist so lieb", ok: 0 }
+          ] },
+          { label: "EIGENSCHAFT", o: [
+            { t: "und du hast keins davon ein einziges Mal erwähnt", ok: 1 },
+            { t: "du bist so verlässlich", ok: 0 },
+            { t: "du bist ein guter Mensch", ok: 0 }
+          ] },
+          { label: "WIRKUNG", o: [
+            { t: "Ich hab's gemerkt. Alle drei.", ok: 1 },
+            { t: "Nochmal danke!", ok: 0 },
+            { t: "Du bist die Beste 🥰", ok: 0 }
+          ] }
+        ] }
+      ],
+      reveal: { line: "Du bist diesen Monat dreimal für mich eingesprungen und hast keins davon ein einziges Mal erwähnt. Ich hab's gemerkt. Alle drei.",
+        why: "Die ganze Anerkennung steckt in den letzten drei Worten. Leise Mühe will einen Zeugen, keine Rede." }
+    }
+  };
+  // one flat table — court-deck.js looks scenarios up by id regardless of mode
+  Object.keys(waScenarios).forEach(function (k) { scenarios[k] = waScenarios[k]; });
+
   return { concepts: concepts, verdicts: verdicts, replies: replies, tiers: tiers, scenarios: scenarios };
 })();
