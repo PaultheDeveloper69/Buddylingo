@@ -235,14 +235,18 @@ class Component extends DCLogic {
     const s = this.state;
     const teamCount = {};
     s.roster.forEach(function (r) { if (r) teamCount[r.lang] = (teamCount[r.lang] || 0) + 1; });
-    // The alpha budget counts HUMAN slots only. Bot slots (server-side
-    // simulations) used to eat it, so the grid could show a full roster with
-    // nothing claimable — the wall sat exactly on the last occupied slot.
+    // The alpha budget counts HUMAN slots only. Two ways this used to go wrong:
+    // bot slots ate the budget (fixed earlier), and the budget was handed out by
+    // POSITION — the first N grid squares — so a fighter who landed further down
+    // the grid left an extra square open behind them. Ameni registered into slot 4,
+    // which left slots 2 AND 3 claimable on a 4-slot alpha. Count the humans who
+    // actually exist, then open only the difference, wherever the gaps happen to be.
     const isBotRow = function (r) { return !!(r && (r.is_bot === true || /^test user/i.test(r.name || ""))); };
+    const taken = s.roster.filter(function (r) { return r && !isBotRow(r); }).length;
     const openSlot = {};
-    let budget = ALPHA_SLOTS;
+    let budget = Math.max(0, ALPHA_SLOTS - taken);
     s.roster.forEach(function (r, i) {
-      if (isBotRow(r)) return;
+      if (r || isBotRow(r)) return;          // occupied squares are not "open"
       if (budget > 0) { openSlot[i] = true; budget--; }
     });
     const slots = s.roster.map((r, i) => {
