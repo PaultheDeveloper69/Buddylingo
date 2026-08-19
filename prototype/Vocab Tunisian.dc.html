@@ -451,7 +451,15 @@ function today() { return ymd(Date.now()); }
 function yesterday() { return ymd(Date.now() - DAY); }
 // ONE streak per language, stored under a shared key so every page can read it.
 const STREAK_KEY = "bl-streak:tn" + SUF;
-const PAGES = { fr: "Vocab French.dc.html", el: "Vocab Greek.dc.html", de: "Vocab German.dc.html", es: "Vocab Spanish.dc.html", tn: "Vocab Tunisian.dc.html" };
+// Page routes come from the registry; the literal is the offline fallback. Without
+// this the two skill rows in the switcher rendered but linked nowhere.
+const PAGES_FALLBACK = { fr: "Vocab French.dc.html", el: "Vocab Greek.dc.html", de: "Vocab German.dc.html", es: "Vocab Spanish.dc.html", tn: "Vocab Tunisian.dc.html", ll: "Vocab Lover.dc.html", wa: "Vocab Affirmation.dc.html" };
+function pageFor(id) {
+  const B = window.BLLangs;
+  if (B && B.pageOf) { const p = B.pageOf(id); if (p && p !== id) return p; }
+  return PAGES_FALLBACK[id] || PAGES_FALLBACK.fr;
+}
+const PAGES = PAGES_FALLBACK;
 function readStreak() { try { return JSON.parse(localStorage.getItem(STREAK_KEY) || "null"); } catch (e) { return null; } }
 function writeStreak(v) { try { localStorage.setItem(STREAK_KEY, JSON.stringify(v)); } catch (e) {} }
 function sharedStreak() {
@@ -806,7 +814,19 @@ class Component extends DCLogic {
 
   // the account’s languages: local numbers per language, current page marked
   readLangs() {
-    const defs = [["fr", "Le Français", "croissant"], ["el", "Ελληνικά", "olive"], ["de", "Deutsch", "brezel"], ["es", "El Español", "paella"], ["tn", "Tounsi", "harissa"]];
+    // Languages come from the registry (bl-langs.js). This used to be a hardcoded
+    // five-language table, so Lover Language and Words of Affirmation could never
+    // appear in the top-right switcher no matter what the registry or the server
+    // said. The literal below is the offline fallback only.
+    // Each row: [id, display name, hero art path, unit]
+    const B = window.BLLangs;
+    const defs = B ? B.all().map(function (l) { return [l.id, l.native || l.name, l.hero, l.unit || "words"]; }) : [
+      ["fr", "Le Français", "assets/chars/croissant.png", "words"],
+      ["el", "Ελληνικά", "assets/chars/olive.png", "words"],
+      ["de", "Deutsch", "assets/chars/brezel.png", "words"],
+      ["es", "El Español", "assets/chars/paella.png", "words"],
+      ["tn", "Tounsi", "assets/chars/harissa.png", "words"]
+    ];
     return defs.map((d) => {
       let n = 0;
       ["vocab-", "nani-"].forEach(function (p) {
@@ -817,11 +837,11 @@ class Component extends DCLogic {
       if (!st) { try { st = (((JSON.parse(localStorage.getItem("vocab-" + d[0] + "-v1" + SUF) || "null") || {}).stats) || {}).streak || 0; } catch (e) {} }
       const cur = d[0] === MY_SIDE;
       return {
-        name: d[1], href: PAGES[d[0]],
+        name: d[1], href: pageFor(d[0]),
         imgStyle: { width: "30px", height: "30px", flex: "none", display: "block",
-          backgroundImage: "url(assets/chars/" + d[2] + ".png)", backgroundSize: "contain",
+          backgroundImage: "url(" + d[2] + ")", backgroundSize: "contain",
           backgroundRepeat: "no-repeat", backgroundPosition: "center", mixBlendMode: "multiply" },
-        sub: n > 0 ? n + " words · " + st + "-day streak" : "fresh front — not started",
+        sub: n > 0 ? n + " " + d[3] + " · " + st + "-day streak" : "fresh front — not started",
         tag: cur ? "current" : "open →",
         tagStyle: { flex: "none", fontSize: "9px", fontWeight: "800", letterSpacing: "0.05em", textTransform: "uppercase", padding: "4px 9px", borderRadius: "999px", background: cur ? "#f3ecd9" : "#f0ede6", color: cur ? "#8a6d2f" : "#8a857a" },
         rowStyle: { display: "flex", alignItems: "center", gap: "11px", background: cur ? "#faf6ea" : "#faf8f4", border: cur ? "1px solid rgba(176,141,63,0.35)" : "1px solid transparent", borderRadius: "14px", padding: "9px 12px", textDecoration: "none", minHeight: "52px" }

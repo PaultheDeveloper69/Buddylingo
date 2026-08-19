@@ -43,6 +43,7 @@ textarea { font-family:inherit; }
 <script src="court-de.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="bl-config.js"></script>
+<script src="bl-langs.js"></script>
 <script src="bl-sync.js"></script>
 <script src="bl-front.js"></script>
 <script src="bl-release.js"></script>
@@ -919,7 +920,19 @@ class Component extends DCLogic {
   };
 
   readLangs() {
-    const defs = [["fr", "Le Français", "croissant"], ["el", "Ελληνικά", "olive"], ["de", "Deutsch", "brezel"], ["es", "El Español", "paella"], ["tn", "Tounsi", "harissa"], ["wa", "Words of Affirmation", "heart-band"], ["ll", "Lover Language", "heart-shades"]];
+    // Languages come from the registry (bl-langs.js), so the switcher can never
+    // fall behind it or the server again. The literal is the offline fallback only.
+    // Each row: [id, display name, hero art path, unit]
+    const B = window.BLLangs;
+    const defs = B ? B.all().map(function (l) { return [l.id, l.native || l.name, l.hero, l.unit || "words"]; }) : [
+      ["fr", "Le Français", "assets/chars/croissant.png", "words"],
+      ["el", "Ελληνικά", "assets/chars/olive.png", "words"],
+      ["de", "Deutsch", "assets/chars/brezel.png", "words"],
+      ["es", "El Español", "assets/chars/paella.png", "words"],
+      ["tn", "Tounsi", "assets/chars/harissa.png", "words"],
+      ["ll", "Lover Language", "assets/chars/heart-shades.png", "scenarios"],
+      ["wa", "Words of Affirmation", "assets/chars/heart-band.png", "scenarios"]
+    ];
     return defs.map((d) => {
       let n = 0;
       ["vocab-", "nani-"].forEach(function (p) {
@@ -928,11 +941,11 @@ class Component extends DCLogic {
       let st = 0;
       try { const sv = JSON.parse(localStorage.getItem("bl-streak:" + d[0] + SUF) || "null"); if (sv && (sv.lastDay === today() || sv.lastDay === yesterday())) st = sv.streak || 0; } catch (e) {}
       const cur = d[0] === MY_SIDE;
-      const unit = (d[0] === "wa" || d[0] === "ll") ? " scenarios" : " words";
+      const unit = " " + d[3];
       return {
         name: d[1], href: PAGES[d[0]],
         imgStyle: { width: "30px", height: "30px", flex: "none", display: "block",
-          backgroundImage: "url(assets/chars/" + d[2] + ".png)", backgroundSize: "contain",
+          backgroundImage: "url(" + d[2] + ")", backgroundSize: "contain",
           backgroundRepeat: "no-repeat", backgroundPosition: "center", mixBlendMode: "multiply" },
         sub: n > 0 ? n + unit + " · " + st + "-day streak" : "fresh front — not started",
         tag: cur ? "current" : "open →",

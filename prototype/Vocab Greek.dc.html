@@ -552,7 +552,15 @@ const MY_SIDE = "el", OPP_KEY = "vocab-fr-v1";
 // every language front: display name, colour, page, mascots
 const LANGS = { fr: ["La France", "#d62828"], el: ["La Grèce", "#2160a8"], de: ["L’Allemagne", "#946f00"], es: ["L’Espagne", "#c2571d"], tn: ["La Tunisie", "#2a8c46"] };
 const CASTS = { fr: ["croissant", "fromage", "baguette"], el: ["olive", "feta", "dolma"], de: ["brezel", "wurst", "kartoffel"], es: ["churro", "jamon", "paella"], tn: ["harissa", "couscous", "brik"] };
-const PAGES = { fr: "Vocab French.dc.html", el: "Vocab Greek.dc.html", de: "Vocab German.dc.html", es: "Vocab Spanish.dc.html", tn: "Vocab Tunisian.dc.html" };
+// Page routes come from the registry; the literal is the offline fallback. Without
+// this the two skill rows in the switcher rendered but linked nowhere.
+const PAGES_FALLBACK = { fr: "Vocab French.dc.html", el: "Vocab Greek.dc.html", de: "Vocab German.dc.html", es: "Vocab Spanish.dc.html", tn: "Vocab Tunisian.dc.html", ll: "Vocab Lover.dc.html", wa: "Vocab Affirmation.dc.html" };
+function pageFor(id) {
+  const B = window.BLLangs;
+  if (B && B.pageOf) { const p = B.pageOf(id); if (p && p !== id) return p; }
+  return PAGES_FALLBACK[id] || PAGES_FALLBACK.fr;
+}
+const PAGES = PAGES_FALLBACK;
 const REL = (window.BL_RELEASE && window.BL_RELEASE.el) || { kicker: "", title: "", lead: "", cta: "OK", items: [] };
 const MISSIONS = [["w_bouclier","Huile d’Olive Bouillante","12 correct answers in a day","c",12],["w_lance","Lancer de Feta","Get 6 verbs right in a day","v",6],["w_sandales","Roulade de Dolma","8 fast answers in a day","f",8],["w_feu","Citron Pressé","Learn 5 new words in a day","n",5]];
 function idOf(i) { return W[i][0]; }
@@ -1056,7 +1064,19 @@ class Component extends DCLogic {
   }
   // the account's languages: local numbers per language, current page marked
   readLangs() {
-    const defs = [["fr", "Le Français", "croissant"], ["el", "Ελληνικά", "olive"], ["de", "Deutsch", "brezel"], ["es", "El Español", "paella"], ["tn", "Tounsi", "harissa"]];
+    // Languages come from the registry (bl-langs.js). This used to be a hardcoded
+    // five-language table, so Lover Language and Words of Affirmation could never
+    // appear in the top-right switcher no matter what the registry or the server
+    // said. The literal below is the offline fallback only.
+    // Each row: [id, display name, hero art path, unit]
+    const B = window.BLLangs;
+    const defs = B ? B.all().map(function (l) { return [l.id, l.native || l.name, l.hero, l.unit || "words"]; }) : [
+      ["fr", "Le Français", "assets/chars/croissant.png", "words"],
+      ["el", "Ελληνικά", "assets/chars/olive.png", "words"],
+      ["de", "Deutsch", "assets/chars/brezel.png", "words"],
+      ["es", "El Español", "assets/chars/paella.png", "words"],
+      ["tn", "Tounsi", "assets/chars/harissa.png", "words"]
+    ];
     return defs.map((d) => {
       let n = 0;
       ["vocab-", "nani-"].forEach(function (p) {
@@ -1067,11 +1087,11 @@ class Component extends DCLogic {
       if (!st) { try { st = (((JSON.parse(localStorage.getItem("vocab-" + d[0] + "-v1" + SUF) || "null") || {}).stats) || {}).streak || 0; } catch (e) {} }
       const cur = d[0] === MY_SIDE;
       return {
-        name: d[1], href: PAGES[d[0]],
+        name: d[1], href: pageFor(d[0]),
         imgStyle: { width: "30px", height: "30px", flex: "none", display: "block",
-          backgroundImage: "url(assets/chars/" + d[2] + ".png)", backgroundSize: "contain",
+          backgroundImage: "url(" + d[2] + ")", backgroundSize: "contain",
           backgroundRepeat: "no-repeat", backgroundPosition: "center", mixBlendMode: "multiply" },
-        sub: n > 0 ? n + " words · " + st + "-day streak" : "fresh front — not started",
+        sub: n > 0 ? n + " " + d[3] + " · " + st + "-day streak" : "fresh front — not started",
         tag: cur ? "current" : "open →",
         tagStyle: { flex: "none", fontSize: "9px", fontWeight: "800", letterSpacing: "0.05em", textTransform: "uppercase", padding: "4px 9px", borderRadius: "999px", background: cur ? "#f3ecd9" : "#f0ede6", color: cur ? "#8a6d2f" : "#8a857a" },
         rowStyle: { display: "flex", alignItems: "center", gap: "11px", background: cur ? "#faf6ea" : "#faf8f4", border: cur ? "1px solid rgba(176,141,63,0.35)" : "1px solid transparent", borderRadius: "14px", padding: "9px 12px", textDecoration: "none", minHeight: "52px" }
