@@ -392,7 +392,7 @@ button:disabled { opacity:0.45; cursor:not-allowed; }
         <div style="display:flex;flex-direction:column;gap:7px">
           <sc-for list="{{ langRows }}" as="Lg" hint-placeholder-count="5">
             <a href="{{ Lg.href }}" style="{{ Lg.rowStyle }}">
-              <img src="{{ Lg.img }}" alt="" style="height:30px;width:30px;object-fit:contain;mix-blend-mode:multiply;flex:none">
+              <span style="{{ Lg.imgStyle }}" role="img" aria-hidden="true"></span>
               <div style="display:flex;flex-direction:column;flex:1;min-width:0">
                 <span style="font-size:13.5px;font-weight:800;color:#17181d">{{ Lg.name }}</span>
                 <span style="font-size:10.5px;color:#8a857a">{{ Lg.sub }}</span>
@@ -514,11 +514,20 @@ class Component extends DCLogic {
     this.pullArena();
     this._arenaT = setInterval(this.pullArena, 45000);
     window.addEventListener("focus", this.pullArena);
+    window.addEventListener("focus", this.retrySync);
+    window.addEventListener("storage", this.onAuthChanged);
   }
   pullArena = () => { if (window.BLArena) window.BLArena.pull(MY_SIDE, (a) => this.setState({ arena: a })); };
+  // A push that failed once (expired session, or a second tab signed in as another
+  // fighter) used to sit there until the next answer. Retry when the tab comes back
+  // and when another tab changes the shared auth session.
+  retrySync = () => { if (window.BLPageSync && window.BLPageSync.retry) window.BLPageSync.retry(MY_SIDE); };
+  onAuthChanged = (e) => { if (e && e.key && e.key.indexOf("supabase.auth") >= 0) this.retrySync(); };
   componentWillUnmount() {
     clearInterval(this._arenaT);
     window.removeEventListener("focus", this.pullArena);
+    window.removeEventListener("focus", this.retrySync);
+    window.removeEventListener("storage", this.onAuthChanged);
   }
 
   mergeIn(m, withSessions) {
@@ -792,7 +801,10 @@ class Component extends DCLogic {
       if (!st) { try { st = (((JSON.parse(localStorage.getItem("vocab-" + d[0] + "-v1" + SUF) || "null") || {}).stats) || {}).streak || 0; } catch (e) {} }
       const cur = d[0] === MY_SIDE;
       return {
-        name: d[1], img: "assets/chars/" + d[2] + ".png", href: PAGES[d[0]],
+        name: d[1], href: PAGES[d[0]],
+        imgStyle: { width: "30px", height: "30px", flex: "none", display: "block",
+          backgroundImage: "url(assets/chars/" + d[2] + ".png)", backgroundSize: "contain",
+          backgroundRepeat: "no-repeat", backgroundPosition: "center", mixBlendMode: "multiply" },
         sub: n > 0 ? n + " words · " + st + "-day streak" : "fresh front — not started",
         tag: cur ? "current" : "open →",
         tagStyle: { flex: "none", fontSize: "9px", fontWeight: "800", letterSpacing: "0.05em", textTransform: "uppercase", padding: "4px 9px", borderRadius: "999px", background: cur ? "#f3ecd9" : "#f0ede6", color: cur ? "#8a6d2f" : "#8a857a" },
@@ -881,7 +893,10 @@ class Component extends DCLogic {
     let oppKnown = 0; if (opp && opp.cards) for (const ok in opp.cards) if (!opp.cards[ok].lapsed) oppKnown++;
     const wOf = function (b) { return Object.keys(b || {}).filter(function (k) { return k.slice(0, 2) === "w_"; }).length; };
     const myW = wOf(s.badges), opW = wOf(opp && opp.badges);
-    const myScore = known + 25 * myW, opScore = oppKnown + 25 * opW;
+    // One rule everywhere: a score IS words known. Mission points (25 per weapon
+    // badge) are reported alongside, never added — four badges are worth 100, which
+    // on a fighter's first day would be twice their word count.
+    const myScore = known, opScore = oppKnown;
     const frS = myScore, elS = opScore;
     const frPct = (frS + elS) > 0 ? Math.round(100 * frS / (frS + elS)) : 50;
     const dayC = ((s.days || {})[today()] || [0,0,0])[1];

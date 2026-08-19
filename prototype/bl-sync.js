@@ -104,7 +104,10 @@ window.BLSync = (function () {
       const uid = r.data && r.data.user ? r.data.user.id : null;
       if (uid) {
         cacheUid(slot, name, uid);
-        enrolLanguage(lang, uid);
+        // the language they enlist with IS their primary one — without this the
+        // column keeps its default (false) and the new fighter reads as a
+        // secondary side of themselves everywhere downstream
+        enrolLanguage(lang, uid, true);
         const ins = await client.from("fighters").insert({ user_id: uid, slot: slot, name: name, language_id: lang });
         if (ins.error) { // lost a simultaneous race: DB unique index protected the slot
           const fresh = (await roster()) || [];
@@ -138,10 +141,13 @@ window.BLSync = (function () {
       // phone published to Test User 1 for a whole afternoon).
       const cached = cachedUid();
       if (cached && u.data.user.id !== cached) {
-        // foreign session (e.g. a test account): sign it out so it can never
-        // push again, then ask the user to log in as their fighter.
-        try { await client.auth.signOut(); } catch (e) {}
-        return { error: "wrong account was signed in — now signed out" };
+        // Refuse the push — that alone protects the other fighter's row. We used to
+        // sign the session out as well, which made this unrecoverable: the Supabase
+        // session lives in localStorage and is SHARED by every tab, so a second tab
+        // signed in as somebody else made both tabs sign each other out in a loop
+        // and the "not reaching the server" warning never cleared. Report the real
+        // cause instead and let the page retry once the right session is back.
+        return { foreign: true, error: "another tab or device is signed in as a different fighter" };
       }
       const row = { user_id: u.data.user.id, language_id: lang, known: known, cat_known: catKnown || {} };
       // v4 columns — sent only when the caller has them, so a pre-v4 database
@@ -160,14 +166,18 @@ window.BLSync = (function () {
   // A fighter row per language they actually study (v8 fighter_languages). Only
   // needed by clients that want to know before a snapshot exists; standings
   // already carries it. Fire-and-forget.
-  async function enrolLanguage(lang, uid) {
+  async function enrolLanguage(lang, uid, primary) {
     try {
       if (!canPush) return { blocked: true };
       if (!(await ready())) return { offline: true };
       let id = uid;
       if (!id) { const u = await client.auth.getUser(); id = u && u.data && u.data.user ? u.data.user.id : null; }
       if (!id) return { error: "not signed in" };
-      const r = await client.from("fighter_languages").upsert({ user_id: id, language_id: lang }, { onConflict: "user_id,language_id" });
+      const row = { user_id: id, language_id: lang };
+      // sent only when the caller means it, so opening a second language never
+      // demotes the first one
+      if (primary) row.is_primary = true;
+      const r = await client.from("fighter_languages").upsert(row, { onConflict: "user_id,language_id" });
       return r && r.error ? { error: r.error.message } : { ok: true };
     } catch (e) { return { offline: true }; }
   }

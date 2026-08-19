@@ -14,6 +14,11 @@ window.BLLangs = (function () {
   //   cast: the three singles its page lines up under the hero; they fight at
   //   the front line on the map, in that order.
   //   facesRight: front-on art is never mirrored; kept for art that ever is.
+  //   kind: "country" (a real language, holds ground on the map) or "skill" (a
+  //     trainer that publishes real counts and ranks alongside them, but does not
+  //     hold territory — there is no country to colour in).
+  //   unit: what one point of `known` IS. Countries count words; the skills count
+  //     scenarios. Every surface reads this instead of hardcoding "words".
   const LANGS = [
     { id: "fr", code: "FR", country: "France", name: "Français", native: "Le Français", article: "La France",
       color: "#d62828", page: "Vocab French.dc.html", deck: "deck.js", save: "vocab-fr-v1",
@@ -34,10 +39,24 @@ window.BLLangs = (function () {
     { id: "tn", code: "TN", country: "Tunisia", name: "Tounsi", native: "Tounsi", article: "La Tunisie",
       color: "#2a8c46", page: "Vocab Tunisian.dc.html", deck: "deck-tn.js", save: "vocab-tn-v1",
       hero: A + "harissa.png", duo: null, cheer: null, facesRight: false,
-      cast: ["couscous", "brik", "harissa"], deckSize: 1000, active: false, sort: 50 }
+      cast: ["couscous", "brik", "harissa"], deckSize: 1000, active: false, sort: 50 },
+    // Lover Language is a selectable language in its own right: it has a deck, a
+    // page, a save key, real published counts and a place in the switcher. It is
+    // kind:"skill", so it ranks with the others without claiming a country.
+    { id: "ll", code: "LL", country: null, name: "Lover Language", native: "Lover Language", article: "Lover Language",
+      color: "#6d4aa8", page: "Vocab Lover.dc.html", deck: "court-deck.js", save: "vocab-ll-v1",
+      hero: A + "heart-shades.png", duo: null, cheer: A + "cheer-ll.png", facesRight: false,
+      cast: ["heart-specs", "heart-bow", "heart-cap"], deckSize: 32, active: true, sort: 60,
+      kind: "skill", unit: "scenarios" },
+    { id: "wa", code: "WA", country: null, name: "Words of Affirmation", native: "Words of Affirmation", article: "Words of Affirmation",
+      color: "#9c6d3f", page: "Vocab Affirmation.dc.html", deck: "court-deck.js", save: "vocab-wa-v1",
+      hero: A + "heart-band.png", duo: null, cheer: A + "cheer-wa.png", facesRight: false,
+      cast: ["heart-mini", "heart-bow", "heart-cap"], deckSize: 11, active: true, sort: 70,
+      kind: "skill", unit: "scenarios" }
   ];
   // art that is much thinner or fatter than the rest, so the scrum reads evenly
-  const SCALE = { baguette: 1.5, wurst: 1.32, olive: 0.92, brezel: 1.1, kartoffel: 1.05,
+  const SCALE = { "heart-specs": 1, "heart-bow": 1, "heart-cap": 1, "heart-mini": 0.9,
+    baguette: 1.5, wurst: 1.32, olive: 0.92, brezel: 1.1, kartoffel: 1.05,
     dolma: 1.08, churro: 1.15, paella: 0.95, harissa: 0.95, couscous: 1, brik: 1.05,
     brie: 0.88, citron: 0.95, tzatziki: 0.95, jamon: 1.05, fromage: 1, croissant: 1, feta: 1 };
 
@@ -45,6 +64,12 @@ window.BLLangs = (function () {
   function index() { LANGS.forEach(function (l) { byId[l.id] = l; }); }
   index();
   function get(id) { return byId[id] || null; }
+  // Countries hold ground on the map; skills rank beside them without territory.
+  function kindOf(id) { const l = get(id); return (l && l.kind) || "country"; }
+  function isSkill(id) { return kindOf(id) === "skill"; }
+  function unitOf(id) { const l = get(id); return (l && l.unit) || "words"; }
+  function countries() { return active().filter(function (l) { return kindOf(l.id) === "country"; }); }
+  function skills() { return active().filter(function (l) { return kindOf(l.id) === "skill"; }); }
   function all() { return LANGS.slice().sort(function (a, b) { return a.sort - b.sort; }); }
   function active() { return all().filter(function (l) { return l.active; }); }
   function ids() { return all().map(function (l) { return l.id; }); }
@@ -97,5 +122,6 @@ window.BLLangs = (function () {
   }
   return { all: all, active: active, ids: ids, get: get, map: map, label: label,
     art: art, cast: cast, scale: scale, pageOf: pageOf, saveKey: saveKey,
+    kindOf: kindOf, isSkill: isSkill, unitOf: unitOf, countries: countries, skills: skills,
     hydrate: hydrate, SCALE: SCALE };
 })();

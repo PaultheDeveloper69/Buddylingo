@@ -111,19 +111,31 @@ a { color: #d62828; } a:hover { color: #b21f1f; }
     <span style="font-size:11px;color:#8a857a;text-align:right;line-height:1.35">{{ rosterLine }}</span>
   </div>
 
-  <div style="display:flex;background:#e9e5dc;border-radius:999px;padding:3px;gap:3px">
-    <button style="{{ mDuel }}" onClick="{{ setDuel }}">Duel</button>
-    <button style="{{ mFaction }}" onClick="{{ setFaction }}">Front</button>
-    <button style="{{ mLadder }}" onClick="{{ setLadder }}">Ladder</button>
-    <button style="{{ mCoop }}" onClick="{{ setCoop }}">Co-op</button>
-  </div>
+  <sc-if value="{{ hasRoster }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;background:#e9e5dc;border-radius:999px;padding:3px;gap:3px">
+      <button style="{{ mDuel }}" onClick="{{ setDuel }}">Duel</button>
+      <button style="{{ mFaction }}" onClick="{{ setFaction }}">Front</button>
+      <button style="{{ mLadder }}" onClick="{{ setLadder }}">Ladder</button>
+      <button style="{{ mCoop }}" onClick="{{ setCoop }}">Co-op</button>
+    </div>
+  </sc-if>
 
-  <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-    <span style="font-size:9.5px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#c9c3b5;flex:none">Viewing as</span>
-    <sc-for list="{{ viewChips }}" as="V" hint-placeholder-count="4">
-      <button style="{{ V.style }}" onClick="{{ V.pick }}"><span style="{{ V.dot }}"></span>{{ V.label }}</button>
-    </sc-for>
-  </div>
+  <sc-if value="{{ hasChips }}" hint-placeholder-val="{{ true }}">
+    <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+      <span style="font-size:9.5px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#c9c3b5;flex:none">Viewing as</span>
+      <sc-for list="{{ viewChips }}" as="V" hint-placeholder-count="4">
+        <button style="{{ V.style }}" onClick="{{ V.pick }}"><span style="{{ V.dot }}"></span>{{ V.label }}</button>
+      </sc-for>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#fff;border-radius:22px;padding:22px 18px;box-shadow:0 1px 3px rgba(23,24,29,0.08);display:flex;flex-direction:column;gap:12px">
+      <span style="font-family:Gloock,serif;font-size:24px;line-height:1.12">{{ emptyTitle }}</span>
+      <span style="font-size:12.5px;color:#8a857a;line-height:1.5;text-wrap:pretty">{{ emptyLine }}</span>
+      <button style="{{ emptyBtn }}" onClick="{{ retry }}">Check again</button>
+    </div>
+  </sc-if>
 
   <sc-if value="{{ isDuel }}" hint-placeholder-val="{{ true }}">
     <div data-screen-label="Duel" style="display:flex;flex-direction:column;gap:12px;animation:fadeUp 0.3s ease both">
@@ -199,15 +211,11 @@ a { color: #d62828; } a:hover { color: #b21f1f; }
             </div>
 
             <sc-if value="{{ hasFaceoff }}" hint-placeholder-val="{{ false }}">
-              <video src="https://d8j0ntlcm91z4.cloudfront.net/user_32PgHXDjHlFXmhgKyUnBM4DN7Qi/hf_20260817_072947_e60247ef-65b3-49e4-be48-057b5f4f9fb3.mp4" poster="assets/chars/bataille-v2.png" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" preload="auto" disablepictureinpicture="{{ true }}" controlslist="nodownload nofullscreen noplaybackrate" aria-label="{{ faceoffAria }}" style="width:100%;display:block;border-radius:12px;pointer-events:none"></video>
+              <video src="{{ faceoffSrc }}" poster="{{ faceoffPoster }}" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" preload="auto" disablepictureinpicture="{{ true }}" controlslist="nodownload nofullscreen noplaybackrate" aria-label="{{ faceoffAria }}" style="width:100%;display:block;border-radius:12px;pointer-events:none"></video>
             </sc-if>
             <sc-if value="{{ hasBattleStill }}" hint-placeholder-val="{{ true }}">
-              <div style="{{ faceoffBand }}" role="img" aria-label="{{ faceoffAria }}">
-                <div style="{{ faceoffGround }}"></div>
-                <div style="{{ faceoffLeft }}"></div>
-                <div style="{{ faceoffRight }}"></div>
-                <div style="{{ faceoffSmoke }}"></div>
-                <div style="{{ faceoffPow }}"></div>
+              <div style="width:100%;aspect-ratio:396/223;position:relative">
+                <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ clipSlotId }}" placeholder="{{ clipSlotHint }}" shape="rounded" radius="12" hint-size="100%,100%" style="width:100%;height:100%"></x-import>
               </div>
             </sc-if>
             <div style="display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:start">
@@ -215,12 +223,14 @@ a { color: #d62828; } a:hover { color: #b21f1f; }
                 <span style="font-size:15.5px;font-weight:800;letter-spacing:-0.01em">{{ meName }}</span>
                 <span style="font-size:11px;color:#8a857a">{{ meLang }}</span>
                 <span style="font-family:Gloock,serif;font-size:34px;line-height:1.05">{{ meScore }}</span>
+                <span style="font-size:10px;color:#a5a096;line-height:1.35">{{ meBreak }}</span>
               </div>
               <span style="width:1px;background:#efece5;align-self:stretch"></span>
               <div style="display:flex;flex-direction:column;gap:1px;text-align:right">
                 <span style="font-size:15.5px;font-weight:800;letter-spacing:-0.01em">{{ foeName }}</span>
                 <span style="font-size:11px;color:#8a857a">{{ foeLang }}</span>
                 <span style="font-family:Gloock,serif;font-size:34px;line-height:1.05">{{ foeScore }}</span>
+                <span style="font-size:10px;color:#a5a096;line-height:1.35">{{ foeBreak }}</span>
               </div>
             </div>
 
@@ -315,7 +325,7 @@ a { color: #d62828; } a:hover { color: #b21f1f; }
             <span style="font-size:9.5px;font-weight:800;letter-spacing:0.2em;text-transform:uppercase;color:#a5a096">{{ rumbleEyebrow }}</span>
             <span style="font-family:Gloock,serif;font-size:25px;line-height:1.08">{{ leaderLine }}</span>
           </div>
-          <button style="{{ demoBtnStyle }}" onClick="{{ toggleDemo }}">{{ demoLabel }}</button>
+
         </div>
 
         <div style="display:flex;flex-direction:column;gap:6px">
@@ -328,6 +338,9 @@ a { color: #d62828; } a:hover { color: #b21f1f; }
             <sc-for list="{{ laneRows }}" as="R" hint-placeholder-count="4">
               <button style="{{ R.rowStyle }}" onClick="{{ R.tap }}" aria-label="{{ R.aria }}">
                 <span style="{{ R.rankStyle }}">{{ R.rank }}</span>
+                <sc-if value="{{ R.isSkill }}" hint-placeholder-val="{{ false }}">
+                  <span style="{{ R.skillTag }}">skill</span>
+                </sc-if>
                 <span style="{{ R.codeStyle }}">{{ R.code }}</span>
                 <span style="{{ R.road }}">
                   <span style="{{ R.track }}"></span>
@@ -481,11 +494,15 @@ a { color: #d62828; } a:hover { color: #b21f1f; }
     </div>
   </sc-if>
 </x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:460,&quot;height&quot;:940},&quot;cousinJoined&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Who has joined&quot;},&quot;wifeJoined&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Who has joined&quot;},&quot;spainJoined&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Who has joined&quot;},&quot;tunisJoined&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Who has joined&quot;},&quot;paulWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:163,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:1059,&quot;section&quot;:&quot;Fighters&quot;},&quot;cousinWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:60,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:1059,&quot;section&quot;:&quot;Fighters&quot;},&quot;nancopWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:213,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:967,&quot;section&quot;:&quot;Fighters&quot;},&quot;wifeWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:34,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:1000,&quot;section&quot;:&quot;Fighters&quot;},&quot;spainWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:118,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:1000,&quot;section&quot;:&quot;Fighters&quot;},&quot;tunisWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:66,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:1000,&quot;section&quot;:&quot;Fighters&quot;},&quot;cousinName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Manon&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Fighters&quot;},&quot;wifeName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Lena&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Fighters&quot;},&quot;spainName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Carlos&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Fighters&quot;},&quot;tunisName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Omar&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Fighters&quot;},&quot;nancopTargetsMe&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Rivalry&quot;},&quot;oathDays&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:7,&quot;min&quot;:1,&quot;max&quot;:30,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Rivalry&quot;,&quot;label&quot;:&quot;Nemesis oath (days)&quot;},&quot;clashGap&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:15,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:1,&quot;max&quot;:100,&quot;section&quot;:&quot;Map&quot;},&quot;laneStep&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:250,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:50,&quot;max&quot;:500,&quot;section&quot;:&quot;Map&quot;}}">
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:460,&quot;height&quot;:940},&quot;paulWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:310,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:1059,&quot;unit&quot;:&quot;words&quot;,&quot;section&quot;:&quot;Design copy only&quot;,&quot;description&quot;:&quot;Stand-in count for Paul while no server data has arrived. Live rows always win.&quot;},&quot;nancopWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:335,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:967,&quot;unit&quot;:&quot;words&quot;,&quot;section&quot;:&quot;Design copy only&quot;},&quot;ameniWords&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:53,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:1000,&quot;unit&quot;:&quot;words&quot;,&quot;section&quot;:&quot;Design copy only&quot;},&quot;laneStep&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:250,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:50,&quot;max&quot;:500,&quot;section&quot;:&quot;The road&quot;},&quot;clashGap&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:15,&quot;tsType&quot;:&quot;number&quot;,&quot;min&quot;:0,&quot;max&quot;:60,&quot;section&quot;:&quot;The road&quot;},&quot;oathDays&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;default&quot;:7,&quot;options&quot;:[3,7],&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Challenges&quot;}}">
 // Every language fact now comes from the registry (bl-langs.js), which mirrors
 // the `languages` table. Adding a language touches that file, not this one.
 // Lazy lookups: the registry script mounts with the helmet, after this evaluates.
 function reg() { return window.BLLangs || null; }
+// Preview data (invented fighters, filler languages, a seeded archive) exists in
+// the design copy ONLY. bl-config.js sets previewData:true there and false in the
+// published prototype, so the shipped app can never show a person who is not real.
+function preview() { return !!(window.BL_CONFIG && window.BL_CONFIG.previewData); }
 function langOf(id) { const B = reg(); return (B && B.get(id)) || null; }
 function colorOf(id) { const l = langOf(id); return (l && l.color) || "#a5a096"; }
 function codeOf(id) { const l = langOf(id); return (l && l.code) || String(id || "").toUpperCase(); }
@@ -495,6 +512,13 @@ function facesRight(id) { const l = langOf(id); return !!(l && l.facesRight); }
 function castOf(id) { const l = langOf(id); return (l && l.cast) || ["croissant", "fromage", "baguette"]; }
 // duo / cheer art, falling back to the language's first single when it has none
 function artOf(id, kind) { const B = reg(); return B ? B.art(id, kind) : "assets/chars/croissant.png"; }
+// the language's own character — the drawing shown in the portrait above the clip
+// band, and the one the generated loops are built from
+function heroNameOf(id) {
+  const l = langOf(id);
+  const h = ((l && l.hero) || "").split("/").pop().replace(".png", "");
+  return h || castOf(id)[0] || "croissant";
+}
 // the language's second character — never the same drawing as its hero
 function secondOf(id) {
   const l = langOf(id);
@@ -514,13 +538,12 @@ function shade(hex, amount) {
 }
 
 class Component extends DCLogic {
-  state = { mode: "duel", rival: "u-nancop", me: "u-paul", declare: null, declaredAt: null,
+  state = { mode: "duel", rival: null, me: null, declare: null, declaredAt: null,
     term: 7, pendingTerm: 7, dayOverride: null, arena: null, selA: null, selB: null, demo: null, warsBy: {},
-    // the archive holds won challenges only, per viewer — seeded with Paul's record
-    scrollsBy: { "u-paul": [
-      { n: "nancop", lang: "el", at: Date.now() - 25 * 86400000, term: 7, by: 18 },
-      { n: "Manon", lang: "fr", at: Date.now() - 12 * 86400000, term: 3, by: 6 }
-    ] } };
+    // Won challenges only, per viewer. Empty on a real device: a scroll is written
+    // by a settled server challenge and nothing else. The design copy seeds a
+    // sample archive in componentDidMount so the card can still be judged.
+    scrollsBy: {} };
 
   // every war this viewer has declared: one per fighter, never two on the same
   // person. Keyed by viewer so switching "viewing as" shows that fighter's wars.
@@ -550,7 +573,13 @@ class Component extends DCLogic {
     if (!a || !a.rows || !a.rows.length) return null;
     const real = a.rows.filter((f) => !(f.is_bot === true || (f.is_bot == null && /^test/i.test(f.name || ""))))
       // opening another language once published a known=0 row; those are not sides
-      .filter((f) => ((f.known || 0) + (f.bonus || 0)) > 0 || f.is_primary !== false);
+      .filter((f) => (f.known || 0) > 0 || f.is_primary !== false)
+      // Only a REGISTERED, ACTIVE language appears. Everything else would render as
+      // a grey unnamed lane carrying borrowed mascots. Lover Language and Words of
+      // Affirmation are now registered (kind:"skill"), so they rank here properly
+      // named and coloured — they simply don't claim a country. (No filter at all
+      // until the registry has loaded, so a slow script cannot empty the map.)
+      .filter((f) => { const l = langOf(f.language_id); return reg() ? !!(l && l.active !== false) : true; });
     if (!real.length) return null;
     const vel = a.vel || null;
     return real.map((f) => ({
@@ -612,6 +641,10 @@ class Component extends DCLogic {
       if (v && v.tagName === "VIDEO") { v.loop = true; v.muted = true; v.currentTime = 0; const p = v.play(); if (p && p.catch) p.catch(function () {}); }
     }, true);
     if (reg() && reg().hydrate) reg().hydrate(() => this.forceUpdate());
+    // design copy only: open on a fighter and a nemesis so the duel has two sides
+    // to draw. No invented history — the archive stays empty until a real
+    // challenge settles, here as on a phone.
+    if (preview()) this.setState({ me: "u-paul", rival: "u-nancop" });
     this.seedArena();
     this.pullArena();
     this._t = setInterval(this.pullArena, 45000);
@@ -634,10 +667,17 @@ class Component extends DCLogic {
       .sort((x, y) => Date.parse(y.started_at) - Date.parse(x.started_at))[0];
     if (!row) return null;
     const mineIsChallenger = row.challenger === me.fighter_id;
+    const baseMine = mineIsChallenger ? row.base_challenger : row.base_target;
+    const baseTheirs = mineIsChallenger ? row.base_target : row.base_challenger;
+    // A base banked under the retired unit (words + mission points) is larger than
+    // the score it was taken from. Subtracting it clamps a real count to zero and
+    // the card then asserts a lead that does not exist — so ignore the row and let
+    // a fresh declaration bank in the current unit.
+    const F = window.BLFront;
+    if ((baseMine || 0) > F.score(me) || (baseTheirs || 0) > F.score(foe)) return null;
     return { id: row.id, term_days: row.term_days || 7,
       day: Math.max(0, Math.floor((Date.now() - Date.parse(row.started_at)) / 86400000)),
-      baseMine: mineIsChallenger ? row.base_challenger : row.base_target,
-      baseTheirs: mineIsChallenger ? row.base_target : row.base_challenger };
+      baseMine: baseMine, baseTheirs: baseTheirs };
   }
   // the archive, from settled challenges this fighter won
   liveScrolls(me) {
@@ -658,42 +698,32 @@ class Component extends DCLogic {
   // Only fighters that exist are listed, so only languages actually in use ever
   // appear. Nothing anywhere hardcodes a language or a count.
   syntheticStandings() {
+    if (!preview()) return [];
     const p = this.props;
-    const pw = p.paulWords ?? 163, cw = p.cousinWords ?? 60;
-    const paul = []; for (let i = 0; i < pw; i++) paul.push(i);
-    // she starts further down the deck and skips every third word, so both hold
-    // words the other does not
-    const cousin = []; for (let i = 0; cousin.length < cw && i < 900; i++) if (i % 3 !== 0) cousin.push(i + 120);
-    const all = [
-      { on: true, user_id: "u-paul", slot: 0, name: "Paul", language_id: "fr", known: pw, per_week: 40, known_mask: this.mask(paul) },
-      { on: p.cousinJoined !== false, user_id: "u-cousin", slot: 2, name: p.cousinName || "Manon", language_id: "fr", known: cw, per_week: 62, known_mask: this.mask(cousin) },
-      { on: true, user_id: "u-nancop", slot: 1, name: "nancop", language_id: "el", known: p.nancopWords ?? 213, per_week: 25 },
-      { on: p.wifeJoined !== false, user_id: "u-wife", slot: 3, name: p.wifeName || "Lena", language_id: "de", known: p.wifeWords ?? 34, per_week: 34 },
-      { on: p.spainJoined !== false, user_id: "u-carlos", slot: 4, name: p.spainName || "Carlos", language_id: "es", known: p.spainWords ?? 118, per_week: 28 },
-      { on: p.tunisJoined !== false, user_id: "u-omar", slot: 5, name: p.tunisName || "Omar", language_id: "tn", known: p.tunisWords ?? 66, per_week: 19 }
+    // The design copy has no server behind it, so these three lines stand in for
+    // the three fighters who actually exist — and for nobody else. No invented
+    // teammate, no dormant language: Spanish and Tunisian are not unlocked, so
+    // they hold no ground here. Numbers are the live ones read on 19 August.
+    const pw = p.paulWords ?? 310, nw = p.nancopWords ?? 335, aw = p.ameniWords ?? 53;
+    const seq = (n) => { const a = []; for (let i = 0; i < n; i++) a.push(i); return a; };
+    return [
+      { user_id: "u-paul", slot: 0, name: "Paul", language_id: "fr", known: pw, bonus: 100, per_week: 40, known_mask: this.mask(seq(pw)) },
+      { user_id: "u-nancop", slot: 1, name: "Nancop", language_id: "el", known: nw, bonus: 100, per_week: 25 },
+      { user_id: "u-ameni", slot: 2, name: "Ameni", language_id: "de", known: aw, bonus: 100, per_week: aw }
     ];
-    return all.filter((x) => x.on).map((x) => { const y = Object.assign({}, x); delete y.on; return y; });
   }
   // Two extra languages, scaled off the current leader, for judging the ring
   // with a fuller board. Clearly labelled and off by default; they never touch
   // the server and disappear the moment the switch goes off.
-  demoRows(lead) {
-    const base = Math.max(60, lead);
-    return [["de", "Lena", 0.64], ["es", "Carlos", 0.6]].map((d, i) => ({
-      user_id: "demo-" + d[0], fighter_id: null, slot: 90 + i, name: d[1] + " (demo)",
-      language_id: d[0], known: Math.round(base * d[2]), bonus: 0, per_week: null,
-      known_mask: null, computed_at: null, primary: true, demo: true
-    }));
-  }
+  // Retired. The Front tab used to pad the board out to four languages with two
+  // invented lanes (a German and a Spanish stand-in) so the road looked fuller.
+  // A locked language holding ground was worse than a short board: the road now
+  // only ever shows languages someone is actually studying.
+  demoRows() { return []; }
   // On by default while fewer than four languages have real data: the ring is
   // about comparing many sides, so it should never open as a barbell. Off the
   // moment the switch is touched, and always off once four languages are live.
-  demoOn() {
-    if (this.state.demo != null) return this.state.demo;
-    const rows = this.liveRows() || this.syntheticStandings();
-    const seen = {}; rows.forEach((r) => { seen[r.language_id] = 1; });
-    return Object.keys(seen).length < 4;
-  }
+  demoOn() { return false; }
   // Live data when the server has any, the synthetic set otherwise — so the
   // page is a real screen on a phone and still judgeable in a design preview.
   standings() {
@@ -732,10 +762,8 @@ class Component extends DCLogic {
     const declared = Object.keys(this.wars());
     if (this.state.rival && declared.indexOf(this.state.rival) < 0) declared.unshift(this.state.rival);
     const mine = declared.map((t) => ({ user_id: this.state.me, rival_user_id: t }));
-    const others = [
-      { user_id: "u-nancop", rival_user_id: this.props.nancopTargetsMe === false ? "u-cousin" : "u-paul" },
-      { user_id: "u-cousin", rival_user_id: "u-paul" }
-    ];
+    // no invented feuds: a rival chain only ever shows wars somebody declared
+    const others = [];
     // a declared rival who is not on the roster is simply dropped
     return mine.concat(others).filter((r) => live[r.user_id] && live[r.rival_user_id]);
   }
@@ -772,9 +800,33 @@ class Component extends DCLogic {
       animation: animate ? "cheer 3.4s ease-in-out infinite" : "none", transformOrigin: "50% 100%" };
   }
 
+  // Nothing invented, nothing to show: the published app renders an honest empty
+  // card until the server has a count for somebody.
+  emptyVals() {
+    const signedIn = !!(window.BLSync && window.BLSync.enabled);
+    return {
+      rosterLine: "live · waiting for counts",
+      isEmpty: true, hasRoster: false, hasChips: false, isSandbox: false,
+      isDuel: false, isFaction: false, isLadder: false, isCoop: false,
+      showDeclare: false, hasScrolls: false,
+      mDuel: this.tab(true), mFaction: this.tab(false), mLadder: this.tab(false), mCoop: this.tab(false),
+      setDuel: () => {}, setFaction: () => {}, setLadder: () => {}, setCoop: () => {},
+      viewChips: [],
+      emptyTitle: signedIn ? "Waiting for counts" : "Not signed in",
+      emptyLine: signedIn
+        ? "No published numbers have reached this device yet. Answer a few words in your language and your own count lands here; everyone else appears the moment they publish theirs."
+        : "This device has not claimed a slot, so there is nothing to read. Sign in on the login screen first.",
+      emptyBtn: { minHeight: "44px", padding: "0 18px", borderRadius: "999px", background: "#17181d",
+        color: "#fff", fontSize: "13px", fontWeight: "800", display: "flex", alignItems: "center",
+        justifyContent: "center", alignSelf: "flex-start" },
+      retry: this.pullArena
+    };
+  }
+
   renderVals() {
     const s = this.state, f = window.BLFront;
     const S = this.standings(), R = this.rivals();
+    if (!S.length) return this.emptyVals();
     const byId = {}; S.forEach((x) => { byId[x.user_id] = x; });
     const me = byId[s.me] || S[0];
     const rv = f.rivalView(S, R, s.me);
@@ -790,6 +842,22 @@ class Component extends DCLogic {
 
     // where the two sides meet, and the cast that fights over it
     const clash = Math.max(18, Math.min(82, d ? d.minePct : 50));
+    // The faceoff clip registry: one generated loop per matchup, keyed unordered so
+    // fr-de and de-fr are one pairing. A pairing that is not listed shows the drop
+    // slot instead, so a half-finished set never leaves a hole in the card.
+    // All three still stream from the Higgsfield CDN — see docs/FACEOFF-PROMPT-PACK.md
+    // for the standing task to bake them into assets/chars/.
+    const HF = "https://d8j0ntlcm91z4.cloudfront.net/user_32PgHXDjHlFXmhgKyUnBM4DN7Qi/";
+    const CLIPS = {
+      "el|fr": { src: HF + "hf_20260817_072947_e60247ef-65b3-49e4-be48-057b5f4f9fb3.mp4",
+        poster: "assets/chars/bataille-v2.png" },
+      "de|fr": { src: HF + "hf_20260819_201414_a211444f-fc4b-4493-a3cb-fa3c58a17087.mp4",
+        poster: HF + "hf_20260819_201302_650468c0-2051-43af-a079-3307b0e22a56.png" },
+      "de|el": { src: HF + "hf_20260819_201406_aa2077c5-45df-4579-b1c9-5cca75404727.mp4",
+        poster: HF + "hf_20260819_201302_43eff5f6-ffb3-4bac-8884-b9fc0f84c058.png" }
+    };
+    const clashPair = foe ? [me.language_id, foe.language_id].sort().join("|") : "";
+    const clip = CLIPS[clashPair] || null;
     const sameLang = !!(foe && foe.language_id === me.language_id);
     const foeTone = foe ? (sameLang ? shade(colorOf(foe.language_id), 0.42) : colorOf(foe.language_id)) : "#c9c3b5";
     // Everyone stays in the pile. Two layers per fighter: a short tussle loop that
@@ -873,9 +941,17 @@ class Component extends DCLogic {
       const adv = Math.max(0.05, l.score / leadScore);
       const at = 4 + 88 * adv;                       // front line, % of the road
       const size = first ? 34 : 29;
+      const skill = !!(reg() && reg().isSkill && reg().isSkill(l.language_id));
+      const unit = (reg() && reg().unitOf) ? reg().unitOf(l.language_id) : "words";
       return {
         rank: i + 1, code: codeOf(l.language_id), score: l.score,
-        aria: nameOf(l.language_id) + ", rank " + (i + 1) + ", " + l.score + " points",
+        aria: nameOf(l.language_id) + ", rank " + (i + 1) + ", " + l.score + " " + unit,
+        // A skill ranks on the same road but claims no country, so its lane is
+        // marked and its finish line is dashed lighter — the crown is for languages.
+        isSkill: skill,
+        skillTag: { fontSize: "8px", fontWeight: "800", letterSpacing: "0.1em",
+          textTransform: "uppercase", color: c, background: c + "18", borderRadius: "999px",
+          padding: "2px 5px", flex: "none" },
         rowStyle: { display: "flex", alignItems: "center", gap: "8px", width: "100%",
           padding: "5px 6px", borderRadius: "13px", background: picked(l.language_id) ? "#f8f6f1" : "transparent",
           opacity: dim ? "0.4" : "1", transition: "opacity 0.2s ease, background 0.2s ease" },
@@ -910,12 +986,12 @@ class Component extends DCLogic {
     const aboveMe = myRank > 1 ? sorted[myRank - 2] : null;
     const callouts = [];
     if (hotPair && N > 1) callouts.push({ label: "Tightest", value: nameOf(hotPair.a.language_id) + " vs " + nameOf(hotPair.b.language_id) + " · " + hotPair.gap + " apart" });
-    if (fastest) callouts.push({ label: "Fastest week", value: nameOf(fastest) + " · +" + velBy[fastest] + " points in seven days" });
+    if (fastest) callouts.push({ label: "Fastest week", value: nameOf(fastest) + " · +" + velBy[fastest] + " words in seven days" });
     if (myRank) callouts.push({ label: "Your side", value: nameOf(me.language_id) + " · #" + myRank + (aboveMe ? " · " + (aboveMe.score - rowOf(me.language_id).score) + " to #" + (myRank - 1) : " · out in front") });
     const selRow = selA ? rowOf(selA) : null;
     const selLine = !selRow ? "" : (function () {
       const ra = rankOf(selA), ab = ra > 1 ? sorted[ra - 2] : null;
-      const base = nativeOf(selA) + " · #" + ra + " · " + selRow.score + " points";
+      const base = nativeOf(selA) + " · #" + ra + " · " + selRow.score + " words";
       if (selB) { const b = rowOf(selB); return base + " vs " + nativeOf(selB) + " · " + Math.abs(selRow.score - (b ? b.score : 0)) + " apart"; }
       return base + (ab ? " · " + (ab.score - selRow.score) + " behind " + nameOf(ab.language_id) : " · out in front");
     })();
@@ -957,6 +1033,10 @@ class Component extends DCLogic {
         winner: chDiff > 0 ? me.fighter_id : chDiff < 0 && foe ? foe.fighter_id : null,
         margin: Math.abs(chDiff) });
     };
+    // "Viewing as" is a design affordance: on a real device you only ever look
+    // through your own eyes, so the row collapses to nothing there.
+    const meFighter = (s.arena && s.arena.me) || null;
+    const chipRows = preview() ? S : S.filter((x) => x.fighter_id && meFighter && x.fighter_id === meFighter);
     const fileWin = () => {
       const sb = Object.assign({}, this.state.scrollsBy);
       if (liveWin.length) sb[s.me] = (sb[s.me] || []).concat(liveWin);
@@ -972,7 +1052,8 @@ class Component extends DCLogic {
         return (this.isLive() ? "live · " : "sandbox · ") + real.length + " fighters · "
           + Object.keys(rl).length + " languages" + (fake ? " · +" + fake + " preview" : "");
       }).call(this),
-      isSandbox: !this.isLive(),
+      isSandbox: !this.isLive() && preview(),
+      isEmpty: false, hasRoster: true, hasChips: chipRows.length > 1,
       isDuel: s.mode === "duel", isFaction: s.mode === "faction", isLadder: s.mode === "ladder", isCoop: s.mode === "coop",
       mDuel: this.tab(s.mode === "duel"), mFaction: this.tab(s.mode === "faction"),
       mLadder: this.tab(s.mode === "ladder"), mCoop: this.tab(s.mode === "coop"),
@@ -980,7 +1061,7 @@ class Component extends DCLogic {
       setLadder: () => this.setState({ mode: "ladder" }), setCoop: () => this.setState({ mode: "coop" }),
 
       // ---- viewing as (sandbox: see the map through any fighter's eyes)
-      viewChips: S.map((x) => ({
+      viewChips: chipRows.map((x) => ({
         label: x.name,
         dot: { width: "7px", height: "7px", borderRadius: "999px", background: colorOf(x.language_id), flex: "none", marginRight: "5px" },
         pick: () => { if (x.user_id !== s.me) this.setState({ me: x.user_id, rival: null, declare: null, declaredAt: null }); },
@@ -1010,8 +1091,14 @@ class Component extends DCLogic {
         wb[this.state.me][target.user_id] = { term: term, at: Date.now() };
         this.setState({ warsBy: wb, rival: target.user_id, declare: null, declaredAt: Date.now(),
           term: term, dayOverride: 0, scrollsBy: fileWin() });
-        // publish: the nemesis pick (per language) and the challenge itself
-        if (target && target.fighter_id && window.BLSync && window.BLSync.enabled) {
+        // Publish ONLY when the fighter on screen is the fighter this device is
+        // signed in as. Looking through someone else's eyes must never write:
+        // the row would land on the signed-in account carrying the viewed
+        // fighter's language, which is how a rivals row for a language nobody
+        // studies got created.
+        const signedIn = (this.state.arena && this.state.arena.me) || null;
+        const isMine = !!(me.fighter_id && signedIn && me.fighter_id === signedIn);
+        if (target && target.fighter_id && isMine && window.BLSync && window.BLSync.enabled) {
           if (window.BLSync.setRival) window.BLSync.setRival(target.fighter_id, me.language_id);
           if (window.BLSync.startChallenge) window.BLSync.startChallenge({
             target: target.fighter_id, language_id: me.language_id, term_days: term,
@@ -1091,43 +1178,34 @@ class Component extends DCLogic {
 
       // ---- duel
       noRival: !foe, hasRival: !!foe,
-      suggestLine: rv.suggest ? "Closest to your count right now: " + rv.suggest.name + " on " + f.score(rv.suggest) + " words." : "",
+      suggestLine: rv.suggest
+        ? "Closest to your count right now: " + rv.suggest.name + " on " + f.score(rv.suggest) + " words."
+        : "No other fighter has published a count yet. They appear here the moment they do, and then you can declare.",
       meName: me.name, meLang: nativeOf(me.language_id),
       foeName: foe ? foe.name : "", foeLang: foe ? nativeOf(foe.language_id) : "",
       meScore: d ? d.mine : f.score(me), foeScore: d ? d.theirs : 0,
+      // the number above is words known; mission points are named, not added
+      meBreak: "words known" + (f.bonus(me) ? " · " + f.bonus(me) + " mission pts apart" : ""),
+      foeBreak: !foe ? "" : "words known" + (f.bonus(foe) ? " · " + f.bonus(foe) + " mission pts apart" : ""),
       meTeamSrc: artOf(me.language_id, "duo"), foeTeamSrc: foe ? artOf(foe.language_id, "duo") : artOf("el", "duo"),
       meTeamStyle: this.teamStyle(me.language_id, "left"),
       foeTeamStyle: this.teamStyle(foe ? foe.language_id : "el", "right", sameLang),
-      // the battle art the language pages already use: the France-vs-Greece clip
-      // for that pair, the bataille still for every other matchup
-      hasFaceoff: !!(foe && ((me.language_id === "fr" && foe.language_id === "el") || (me.language_id === "el" && foe.language_id === "fr"))),
-      hasBattleStill: !!(foe && !((me.language_id === "fr" && foe.language_id === "el") || (me.language_id === "el" && foe.language_id === "fr"))),
+      // one generated loop per matchup from the registry above; a pairing with no
+      // loop yet shows the labelled drop slot instead
+      hasFaceoff: !!clip, hasBattleStill: !!(foe && !clip),
+      faceoffSrc: clip ? clip.src : "", faceoffPoster: clip ? clip.poster : "",
       faceoffAria: foe ? nameOf(me.language_id) + " against " + nameOf(foe.language_id) : "",
-      // bataille-v2.png IS the croissant-versus-olive scene, so it only fits that
-      // pair. Every other matchup gets the same kind of faceoff built from the two
-      // languages' own characters — which means a new language needs no new art.
-      faceoffBand: { position: "relative", width: "100%", height: "104px", borderRadius: "12px",
-        background: "#faf8f3", overflow: "hidden" },
-      faceoffGround: { position: "absolute", left: "9%", right: "9%", bottom: "15px", height: "1.5px",
-        background: "#e6e2d7" },
-      faceoffLeft: { position: "absolute", left: "13%", bottom: "15px",
-        width: Math.round(66 * scaleOf(secondOf(me.language_id))) + "px", height: "70px",
-        backgroundImage: "url(assets/chars/" + secondOf(me.language_id) + ".png)", backgroundSize: "contain",
-        backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply",
-        transformOrigin: "50% 100%", transform: "rotate(6deg)", animation: "tipShove 1.9s ease-in-out infinite" },
-      faceoffRight: { position: "absolute", right: "13%", bottom: "15px",
-        width: Math.round(66 * scaleOf(secondOf(foe ? foe.language_id : "el"))) + "px", height: "70px",
-        backgroundImage: "url(assets/chars/" + secondOf(foe ? foe.language_id : "el") + ".png)", backgroundSize: "contain",
-        backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply",
-        transformOrigin: "50% 100%", transform: "rotate(-6deg)", animation: "tipShove 2.3s ease-in-out 0.4s infinite" },
-      faceoffSmoke: { position: "absolute", left: "50%", bottom: "12px", width: "58px", height: "42px",
-        transform: "translateX(-50%)", backgroundImage: "url(assets/chars/dust.png)", backgroundSize: "contain",
-        backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply",
-        opacity: "0.4", animation: "smokeFront 4.6s ease-in-out infinite" },
-      faceoffPow: { position: "absolute", left: "50%", top: "14px", width: "34px", height: "34px",
-        transform: "translateX(-50%)", backgroundImage: "url(assets/chars/pow-2.png)", backgroundSize: "contain",
-        backgroundRepeat: "no-repeat", backgroundPosition: "center", mixBlendMode: "multiply", opacity: "0",
-        animation: "powPop 5.4s ease-out 1.2s infinite" },
+
+      // The middle band is a CLIP band, not a hand-animated scene: two portraits
+      // above, the generated loop here, the little scrum below. Until a pairing's
+      // loop exists this is a labelled drop slot — the drop is remembered per
+      // pairing, so filling one matchup never disturbs another.
+      clipSlotId: "faceoff-" + (clashPair || "unknown").replace("|", "-"),
+      // the two HEROES — the same drawings as the portraits above, and the pair the
+      // existing France-vs-Greece loop uses, so a generated clip always matches
+      clipSlotHint: !foe ? "Faceoff loop" :
+        "Drop the " + heroNameOf(me.language_id) + " vs " + heroNameOf(foe.language_id)
+        + " loop here (" + codeOf(me.language_id) + " vs " + codeOf(foe.language_id) + ")",
       gapBadge: !d ? "" : d.tie ? "level" : d.gap + "",
       gapBadgeStyle: { fontSize: "11px", fontWeight: "800", padding: "3px 9px", borderRadius: "999px",
         background: !d || d.tie ? "#efece5" : ahead ? "#eaf3ec" : "#fbeeec",
@@ -1183,15 +1261,9 @@ class Component extends DCLogic {
 
       // ---- front: the road to the crown
       landTotal: totalPts,
-      rumbleEyebrow: (this.demoOn() ? "The rumble · preview · " : "The rumble · ") + N + " languages · " + totalPts + " points",
+      rumbleEyebrow: "The rumble · " + N + (N === 1 ? " language · " : " languages · ") + totalPts + " words",
       leaderLine: second ? nameOf(leader.language_id) + " leads by " + (leader.score - second.score)
         : nameOf(leader.language_id) + " has the board to itself",
-      demoLabel: this.demoOn() ? "Live only" : "+2 languages",
-      demoBtnStyle: { flex: "none", minHeight: "30px", padding: "0 11px", borderRadius: "999px", fontSize: "10.5px",
-        fontWeight: "800", letterSpacing: "0.02em", display: "flex", alignItems: "center", justifyContent: "center",
-        background: this.demoOn() ? "#f4ecda" : "#f1eee6", color: this.demoOn() ? "#6b5a2c" : "#8a857a",
-        boxShadow: this.demoOn() ? "inset 0 0 0 1.2px #dcc79a" : "none" },
-      toggleDemo: () => this.setState({ demo: !this.demoOn(), selA: null, selB: null }),
       laneRows: laneRows,
       readMe: [
         ["Every language runs the same road: same start, same crown. The furthest character is winning.", "#d9a63f"],
@@ -1209,7 +1281,7 @@ class Component extends DCLogic {
           declaredAt: null, dayOverride: null, selA: null, selB: null });
       },
       hasCallouts: callouts.length > 0, callouts: callouts,
-      factionNote: this.demoOn() ? "Two preview languages (marked demo) are standing in so the road can be judged with a fuller field. They exist only on this device." : "Tap one language to isolate it, two to drop into their duel.",
+      factionNote: "Only languages someone is actually studying hold ground here. Tap one to isolate it, two to drop into their duel.",
 
       // ---- ladder
       topMascotStyle: this.mascotStyle(topRow.language_id, 96, true), topName: topRow.name,

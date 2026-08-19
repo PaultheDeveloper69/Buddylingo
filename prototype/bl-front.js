@@ -5,7 +5,10 @@
 // Plus: ladder (everyone ranked), co-op (your language's fighters added together),
 // and the rival system (nemesis, feuds, who is gunning for you).
 //
-// Score = force (raw words known) + bonus (nuance points, 0 until we define sources).
+// Score = words known. Mission points (25 per weapon badge) are carried alongside
+// as `bonus` and reported separately: four badges are worth 100, which on a
+// fighter's first day would be twice their word count and would read as score
+// nobody earned. The map ranks on words; the badges stay visible on their own.
 // Deck sizes deliberately do NOT normalise anything: what matters is how many words
 // you know, not how many exist.
 window.BLFront = (function () {
@@ -57,7 +60,7 @@ window.BLFront = (function () {
   // ---- scoring ------------------------------------------------------------
   function force(f) { return Math.max(0, (f && f.known) || 0); }
   function bonus(f) { return Math.max(0, (f && f.bonus) || 0); }
-  function score(f) { return force(f) + bonus(f); }
+  function score(f) { return force(f); }
   function velocity(f) { return Math.max(0, (f && f.per_week) || 0); } // words in the last 7 days
 
   // ---- individual frame ---------------------------------------------------
@@ -89,7 +92,7 @@ window.BLFront = (function () {
     const list = Object.keys(by).map(function (k) {
       const g = by[k];
       return {
-        language_id: k, words: g.words, bonus: g.bonus, score: g.words + g.bonus,
+        language_id: k, words: g.words, bonus: g.bonus, score: g.words,
         count: g.fighters.length, fighters: g.fighters,
         distinct: g.mask.length ? unionCount(g.mask) : null,   // words the faction holds at least once
         overlap: g.mask.length > 1 ? sharedCount(g.mask) : null // words every member knows

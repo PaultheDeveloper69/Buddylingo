@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Figtree:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+@keyframes rfIn { from { opacity:0; transform:translateY(9px); } to { opacity:1; transform:none; } }
+@keyframes rfHer { from { opacity:0; transform:translateX(-8px) scale(0.98); } to { opacity:1; transform:none; } }
+@keyframes rfHit { 0% { transform:scale(1); } 40% { transform:scale(1.04); } 100% { transform:scale(1); } }
+@keyframes rfShake { 0%,100% { transform:translateX(0); } 20% { transform:translateX(-5px); } 40% { transform:translateX(5px); } 60% { transform:translateX(-3px); } 80% { transform:translateX(3px); } }
+@keyframes rfPulse { 0%,100% { opacity:0.5; } 50% { opacity:1; } }
+</style>
+<script src="rapid-deck.js"></script>
+</helmet>
+<div style="display:flex;flex-direction:column;gap:12px">
+
+  <sc-if value="{{ isReady }}" hint-placeholder-val="{{ true }}">
+    <div style="background:#17181d;border-radius:24px;padding:26px 22px;display:flex;flex-direction:column;gap:16px;animation:rfIn 0.3s ease both">
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <span style="font-size:9.5px;font-weight:800;letter-spacing:0.22em;text-transform:uppercase;color:{{ accent }}">Rapid fire</span>
+        <span style="font-family:Gloock,serif;font-size:33px;line-height:1.06;color:#fff">Six seconds a line</span>
+      </div>
+      <span style="font-size:14px;color:rgba(255,255,255,0.72);line-height:1.55;text-wrap:pretty">She says something. You fire back before the bar empties. Take too long and she loses interest — that ends the run, no second chances. Three flat replies and she goes cold.</span>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <sc-for list="{{ rules }}" as="R" hint-placeholder-count="3">
+          <div style="display:flex;align-items:baseline;gap:10px">
+            <span style="{{ R.dot }}"></span>
+            <span style="font-size:12.5px;color:rgba(255,255,255,0.6);line-height:1.45;text-wrap:pretty">{{ R.line }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <button style="{{ goStyle }}" onClick="{{ begin }}">{{ goLabel }}</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isLive }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;gap:11px;animation:rfIn 0.25s ease both">
+
+      <div style="display:flex;align-items:center;gap:9px;padding:0 3px">
+        <span style="{{ lvlStyle }}">{{ lvlLabel }}</span>
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#c9c3b5">{{ posLabel }}</span>
+        <div style="display:flex;gap:4px;margin-left:auto;align-items:center">
+          <sc-for list="{{ heatPips }}" as="H" hint-placeholder-count="3">
+            <span style="{{ H.style }}"></span>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="height:6px;border-radius:999px;background:#eae5d9;overflow:hidden">
+        <div style="{{ clockFill }}"></div>
+      </div>
+
+      <div style="background:#fff;border-radius:20px;padding:16px 17px;box-shadow:0 2px 10px rgba(23,24,29,0.07);display:flex;flex-direction:column;gap:13px">
+        <div style="display:flex;gap:10px;align-items:flex-start">
+          <span style="{{ herAvatar }}"></span>
+          <span style="{{ herBubble }}">{{ herLine }}</span>
+        </div>
+
+        <sc-if value="{{ isPick }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:7px">
+            <sc-for list="{{ opts }}" as="O" hint-placeholder-count="4">
+              <button style="{{ O.style }}" onClick="{{ O.tap }}">{{ O.t }}</button>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isFill }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:9px">
+            <div style="background:#f8f6f1;border-radius:14px;padding:13px 14px;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px">
+              <span style="font-size:15px;font-weight:600;line-height:1.5">{{ fillBefore }}</span>
+              <span style="{{ fillSlot }}">{{ fillShown }}</span>
+              <span style="font-size:15px;font-weight:600;line-height:1.5">{{ fillAfter }}</span>
+            </div>
+            <input type="text" value="{{ typed }}" onInput="{{ onType }}" onKeyDown="{{ onKey }}" placeholder="{{ fillHint }}" autocomplete="off" autocapitalize="off" spellcheck="false" style="min-height:52px;border-radius:14px;background:#fff;box-shadow:inset 0 0 0 1.5px #e2ddd2;padding:0 15px;font-family:'IBM Plex Mono',monospace;font-size:15.5px;font-weight:500;color:#17181d;width:100%">
+            <button style="{{ sendStyle }}" onClick="{{ sendFill }}">Fire</button>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isVerdict }}" hint-placeholder-val="{{ false }}">
+    <div style="display:flex;flex-direction:column;gap:11px;animation:rfIn 0.22s ease both">
+      <div style="{{ verdictCard }}">
+        <div style="display:flex;align-items:baseline;gap:9px">
+          <span style="{{ verdictTag }}">{{ verdictWord }}</span>
+          <span style="font-size:11px;font-weight:700;color:#a5a096;margin-left:auto">{{ verdictClock }}</span>
+        </div>
+        <span style="font-size:15.5px;font-weight:700;line-height:1.4;text-wrap:pretty">{{ yourLine }}</span>
+        <span style="font-size:13.5px;color:#5d5a52;line-height:1.55;text-wrap:pretty">{{ verdictNote }}</span>
+        <sc-if value="{{ hasSharp }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;gap:9px;background:rgba(255,255,255,0.7);border-radius:12px;padding:11px 12px">
+            <span style="width:3px;background:#2e7d4f;border-radius:3px;flex:none"></span>
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <span style="font-size:9.5px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase;color:#2e7d4f">The sharp one</span>
+              <span style="font-size:13.5px;font-weight:600;line-height:1.45;text-wrap:pretty">{{ sharpLine }}</span>
+            </div>
+          </div>
+        </sc-if>
+        <button style="{{ nextStyle }}" onClick="{{ next }}">{{ nextLabel }}</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isOver }}" hint-placeholder-val="{{ false }}">
+    <div style="background:#17181d;border-radius:24px;padding:26px 22px;display:flex;flex-direction:column;gap:15px;animation:rfIn 0.3s ease both">
+      <span style="font-size:9.5px;font-weight:800;letter-spacing:0.22em;text-transform:uppercase;color:{{ accent }}">{{ overTag }}</span>
+      <span style="font-family:Gloock,serif;font-size:30px;line-height:1.1;color:#fff;text-wrap:pretty">{{ overTitle }}</span>
+      <span style="font-size:14px;color:rgba(255,255,255,0.7);line-height:1.55;text-wrap:pretty">{{ overLine }}</span>
+      <div style="display:flex;gap:10px;border-top:1px solid rgba(255,255,255,0.14);padding-top:14px">
+        <sc-for list="{{ overStats }}" as="S" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;gap:2px;flex:1">
+            <span style="font-family:Gloock,serif;font-size:27px;line-height:1;color:#fff">{{ S.v }}</span>
+            <span style="font-size:10px;color:rgba(255,255,255,0.5);line-height:1.35">{{ S.k }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <sc-if value="{{ hasWeak }}" hint-placeholder-val="{{ false }}">
+        <span style="font-size:12.5px;color:rgba(255,255,255,0.55);line-height:1.5;text-wrap:pretty">{{ weakLine }}</span>
+      </sc-if>
+      <div style="display:flex;gap:9px">
+        <button style="{{ againStyle }}" onClick="{{ again }}">Again</button>
+        <button style="{{ doneStyle }}" onClick="{{ finish }}">Bank it</button>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:800},&quot;accent&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;options&quot;:[&quot;#6d4aa8&quot;,&quot;#c2426e&quot;,&quot;#17181d&quot;],&quot;default&quot;:&quot;#6d4aa8&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;seconds&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:6,&quot;min&quot;:3,&quot;max&quot;:12,&quot;unit&quot;:&quot;s&quot;,&quot;tsType&quot;:&quot;number&quot;,&quot;label&quot;:&quot;Seconds per line&quot;},&quot;runLength&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:9,&quot;min&quot;:4,&quot;max&quot;:12,&quot;tsType&quot;:&quot;number&quot;,&quot;label&quot;:&quot;Exchanges per run&quot;},&quot;onDone&quot;:{&quot;editor&quot;:null,&quot;tsType&quot;:&quot;(r: any) =&gt; void&quot;}}">
+class Component extends DCLogic {
+  state = { phase: "ready", i: 0, run: [], picked: null, typed: "", heat: 0, hits: 0, sharp: 0,
+    startedAt: 0, left: 1, endKind: "", mastery: {}, sent: "" };
+
+  get accent() { return this.props.accent || "#6d4aa8"; }
+  get seconds() { return Math.max(3, Math.min(12, this.props.seconds || 6)); }
+  get length() { return Math.max(4, Math.min(12, this.props.runLength || 9)); }
+  // level 2 tightens the clock, level 3 is typing — the run escalates inside itself
+  clockFor(lvl) { return this.seconds * (lvl === 2 ? 0.85 : lvl === 3 ? 1.15 : 1) * 1000; }
+
+  componentWillUnmount() { this.stop(); }
+  stop() { if (this._raf) cancelAnimationFrame(this._raf); this._raf = null; }
+
+  // One rAF loop drives the bar and the timeout. setState carries only the
+  // fraction left, so a frame costs one style write and nothing else.
+  tick = () => {
+    if (this.state.phase !== "live") return;
+    const span = this.clockFor(this.levelNow());
+    const gone = Date.now() - this.state.startedAt;
+    const left = Math.max(0, 1 - gone / span);
+    if (left <= 0) { this.stop(); return this.timeUp(); }
+    this.setState({ left: left });
+    this._raf = requestAnimationFrame(this.tick);
+  };
+  levelNow() { return window.RAPID ? window.RAPID.levelAt(this.state.i) : 1; }
+  cur() { return this.state.run[this.state.i] || null; }
+
+  begin = () => {
+    if (!window.RAPID) return;
+    const run = window.RAPID.run(this.length);
+    this.setState({ phase: "live", run: run, i: 0, picked: null, typed: "", heat: 0, hits: 0,
+      sharp: 0, mastery: {}, endKind: "", startedAt: Date.now(), left: 1 }, () => {
+        this.stop(); this._raf = requestAnimationFrame(this.tick);
+      });
+  };
+  again = () => this.begin();
+
+  credit(ok) {
+    const c = this.cur(), m = Object.assign({}, this.state.mastery);
+    if (c && c.concept) { const v = (m[c.concept] || [0, 0]).slice(); v[0]++; if (ok === 2) v[1]++; m[c.concept] = v; }
+    return m;
+  }
+  // Timing out is the hard stop the brief asked for: she is gone, run over.
+  timeUp = () => {
+    this.setState({ phase: "over", endKind: "slow", mastery: this.credit(0) });
+  };
+  land(ok, sentText) {
+    this.stop();
+    const heat = ok === 0 ? this.state.heat + 1 : this.state.heat;
+    this.setState({
+      phase: heat >= 3 ? "over" : "verdict",
+      endKind: heat >= 3 ? "cold" : "",
+      heat: heat, picked: ok, sent: sentText,
+      hits: this.state.hits + (ok > 0 ? 1 : 0),
+      sharp: this.state.sharp + (ok === 2 ? 1 : 0),
+      mastery: this.credit(ok)
+    });
+  }
+  tapOpt = (ok, text) => () => { if (this.state.phase !== "live") return; this.land(ok, text); };
+  onType = (e) => this.setState({ typed: e.target.value });
+  onKey = (e) => { if (e.key === "Enter") { e.preventDefault(); this.sendFill(); } };
+  sendFill = () => {
+    if (this.state.phase !== "live") return;
+    const c = this.cur();
+    if (!c || !c.fill) return;
+    const ok = window.RAPID && window.RAPID.accepts(c.fill, this.state.typed) ? 2 : 0;
+    this.land(ok, this.state.typed);
+  };
+  next = () => {
+    const i = this.state.i + 1;
+    if (i >= this.state.run.length) return this.setState({ phase: "over", endKind: "end" });
+    this.setState({ phase: "live", i: i, picked: null, typed: "", sent: "", startedAt: Date.now(), left: 1 },
+      () => { this.stop(); this._raf = requestAnimationFrame(this.tick); });
+  };
+  finish = () => {
+    const s = this.state;
+    if (this.props.onDone) {
+      this.props.onDone({ hits: s.hits, sharp: s.sharp, played: s.i + (s.phase === "over" ? 1 : 0),
+        reached: s.i, ended: s.endKind, mastery: s.mastery });
+    }
+    this.setState({ phase: "ready", i: 0, run: [] });
+  };
+
+  renderVals() {
+    const s = this.state, A = this.accent, R = window.RAPID;
+    const c = this.cur();
+    const lvl = this.levelNow();
+    const isFill = !!(c && c.fill);
+    const pill = (bg, fg) => ({ fontSize: "9px", fontWeight: "800", letterSpacing: "0.12em",
+      textTransform: "uppercase", color: fg, background: bg, borderRadius: "999px",
+      padding: "4px 9px", flex: "none", whiteSpace: "nowrap" });
+    // options are rotated per exchange so the sharp one is never in the same slot
+    const rot = c && c.opts ? (s.i * 2 + 1) % c.opts.length : 0;
+    const opts = c && c.opts ? c.opts.slice(rot).concat(c.opts.slice(0, rot)) : [];
+    const sharpOf = c && c.opts ? (c.opts.filter((o) => o[1] === 2)[0] || null) : null;
+    const wordFor = (ok) => ok === 2 ? "Sharp" : ok === 1 ? "Survived" : "Flat";
+    const toneFor = (ok) => ok === 2 ? ["#e6f0e8", "#2e7d4f"] : ok === 1 ? ["#f4ecda", "#8a6d2f"] : ["#fbeeec", "#c2402f"];
+    const picked = c && c.opts && s.picked != null ? c.opts.filter((o) => o[1] === s.picked)[0] : null;
+    const noteFor = isFill && c ? (s.picked === 2 ? c.fill.note : "Not it. The line only works with one word in that gap.") : (picked ? picked[2] : "");
+
+    return {
+      accent: A,
+      isReady: s.phase === "ready", isLive: s.phase === "live",
+      isVerdict: s.phase === "verdict", isOver: s.phase === "over",
+
+      rules: [
+        [A, "Picks for the first few. After that you write the punch word yourself."],
+        ["#8a6d2f", "The clock tightens as you go. It does not restart when you stall."],
+        ["#c2402f", "Flat replies cool her. Three and she's gone."]
+      ].map((r) => ({ line: r[1], dot: { width: "11px", height: "2px", borderRadius: "2px",
+        background: r[0], flex: "none", marginTop: "7px" } })),
+      goLabel: R ? "Start the run" : "Content still loading\u2026",
+      goStyle: { minHeight: "56px", width: "100%", borderRadius: "999px", background: R ? A : "#3a3742",
+        color: "#fff", fontSize: "16px", fontWeight: "800", display: "flex", alignItems: "center",
+        justifyContent: "center", boxShadow: R ? "0 10px 24px rgba(0,0,0,0.35)" : "none" },
+      begin: this.begin,
+
+      lvlLabel: lvl === 1 ? "warm-up" : lvl === 2 ? "faster" : "no options",
+      lvlStyle: pill(lvl === 3 ? "#17181d" : "rgba(0,0,0,0.05)", lvl === 3 ? "#fff" : A),
+      posLabel: (s.i + 1) + " of " + (s.run.length || this.length),
+      heatPips: [0, 1, 2].map((n) => ({
+        style: { width: "8px", height: "8px", borderRadius: "999px", flex: "none",
+          background: n < s.heat ? "#c2402f" : "#e2ddd2" }
+      })),
+      clockFill: { width: Math.round(s.left * 100) + "%", height: "100%", borderRadius: "999px",
+        background: s.left > 0.5 ? A : s.left > 0.25 ? "#b08d3f" : "#c2402f",
+        animation: s.left < 0.25 ? "rfPulse 0.5s ease-in-out infinite" : "none" },
+
+      herLine: c ? c.her : "",
+      herAvatar: { width: "30px", height: "30px", borderRadius: "999px", flex: "none",
+        background: "url(assets/chars/heart-shades.png) center bottom / contain no-repeat",
+        mixBlendMode: "multiply" },
+      herBubble: { fontSize: "16px", fontWeight: "600", lineHeight: "1.42", letterSpacing: "-0.01em",
+        background: "#f4f1ea", borderRadius: "4px 16px 16px 16px", padding: "12px 14px",
+        textWrap: "pretty", animation: "rfHer 0.26s ease both" },
+
+      isPick: !isFill, isFill: isFill,
+      opts: opts.map((o) => ({
+        t: o[0], tap: this.tapOpt(o[1], o[0]),
+        style: { minHeight: "52px", width: "100%", textAlign: "left", borderRadius: "14px",
+          padding: "11px 14px", fontSize: "14.5px", fontWeight: "600", lineHeight: "1.4",
+          background: "#f8f6f1", color: "#17181d", boxShadow: "inset 0 0 0 1px #ece8de",
+          textWrap: "pretty" },
+        styleHover: { background: "#f2eee5" }
+      })),
+
+      fillBefore: isFill ? c.fill.before : "",
+      fillAfter: isFill ? c.fill.after : "",
+      fillShown: s.typed ? s.typed : "\u2026",
+      fillSlot: { fontFamily: "'IBM Plex Mono', monospace", fontSize: "15px", fontWeight: "500",
+        color: s.typed ? A : "#c9c3b5", borderBottom: "2px solid " + (s.typed ? A : "#d8d3c6"),
+        padding: "0 6px", minWidth: "62px", textAlign: "center" },
+      fillHint: isFill ? c.fill.hint : "",
+      typed: s.typed, onType: this.onType, onKey: this.onKey,
+      sendStyle: { minHeight: "50px", width: "100%", borderRadius: "999px", background: "#17181d",
+        color: "#fff", fontSize: "15px", fontWeight: "800", display: "flex", alignItems: "center",
+        justifyContent: "center" },
+      sendFill: this.sendFill,
+
+      verdictWord: wordFor(s.picked),
+      verdictTag: pill(toneFor(s.picked)[0], toneFor(s.picked)[1]),
+      verdictClock: Math.max(0.1, (this.clockFor(lvl) / 1000) * (1 - s.left)).toFixed(1) + "s",
+      verdictCard: { background: s.picked === 2 ? "#f4f8f5" : s.picked === 1 ? "#faf6ec" : "#fdf3f1",
+        borderRadius: "20px", padding: "17px 18px", display: "flex", flexDirection: "column", gap: "10px",
+        animation: (s.picked === 0 ? "rfShake 0.34s ease both" : "rfHit 0.3s ease both") },
+      yourLine: isFill && s.sent ? "\u201c" + c.fill.before + " " + s.sent + c.fill.after + "\u201d" : "\u201c" + (s.sent || "") + "\u201d",
+      verdictNote: noteFor,
+      hasSharp: s.picked !== 2 && !!(sharpOf || isFill),
+      sharpLine: isFill && c ? c.fill.before + " " + c.fill.ideal + c.fill.after : (sharpOf ? sharpOf[0] : ""),
+      nextLabel: s.i + 1 >= s.run.length ? "See how it went" : "Her turn",
+      nextStyle: { minHeight: "50px", width: "100%", borderRadius: "999px", background: "#17181d",
+        color: "#fff", fontSize: "15px", fontWeight: "800", display: "flex", alignItems: "center",
+        justifyContent: "center", marginTop: "2px" },
+      next: this.next,
+
+      overTag: s.endKind === "slow" ? "Too slow" : s.endKind === "cold" ? "She's gone" : "Run complete",
+      overTitle: s.endKind === "slow" ? "You froze."
+        : s.endKind === "cold" ? "Three flat replies."
+        : s.sharp >= Math.max(3, Math.ceil(s.run.length * 0.6)) ? "That was ruthless." : "You held it together.",
+      overLine: R ? R.gone(s.endKind || "end") : "",
+      overStats: [
+        { v: String(s.sharp), k: "sharp replies" },
+        { v: String(s.hits), k: "survived" },
+        { v: (s.endKind === "end" ? s.run.length : s.i) + "/" + (s.run.length || this.length), k: "exchanges reached" }
+      ],
+      hasWeak: Object.keys(s.mastery).length > 0,
+      weakLine: (function (m) {
+        const CN = window.COURT ? window.COURT.concepts("ll") : {};
+        const rows = Object.keys(m).map((k) => ({ k: k, pct: m[k][0] ? m[k][1] / m[k][0] : 0 }))
+          .sort((a, b) => a.pct - b.pct);
+        if (!rows.length) return "";
+        const w = rows[0];
+        return w.pct >= 1 ? "Nothing to correct. Every reflex you met, you hit."
+          : "Weakest tonight: " + String(CN[w.k] || w.k).toLowerCase() + ". It'll come back sooner, in a worse moment.";
+      })(s.mastery),
+      againStyle: { flex: "1", minHeight: "52px", borderRadius: "999px", background: A, color: "#fff",
+        fontSize: "15px", fontWeight: "800", display: "flex", alignItems: "center", justifyContent: "center" },
+      again: this.again,
+      doneStyle: { flex: "1", minHeight: "52px", borderRadius: "999px", background: "rgba(255,255,255,0.1)",
+        color: "#fff", fontSize: "15px", fontWeight: "700", display: "flex", alignItems: "center",
+        justifyContent: "center" },
+      finish: this.finish
+    };
+  }
+}
+
+</script>
+</body>
+</html>

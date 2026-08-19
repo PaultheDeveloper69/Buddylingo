@@ -12,6 +12,7 @@
 window.BLPageSync = (function () {
   const DAY = 86400000;
   const timers = {};
+  const lastRun = {};
   function on() { return !!(window.BLSync && window.BLSync.enabled); }
 
   // words known per category, over the deck's own index order
@@ -32,8 +33,7 @@ window.BLPageSync = (function () {
   function publish(lang, cards, deck, extra, done) {
     if (!on()) return;
     const e = extra || {};
-    clearTimeout(timers[lang]);
-    timers[lang] = setTimeout(function () {
+    const run = function () {
       const cat = catCount(cards, deck);
       // nothing learned yet: publishing a known=0 row would enrol this fighter
       // into a language they have only opened
@@ -51,7 +51,20 @@ window.BLPageSync = (function () {
         if (r && r.ok) { try { localStorage.setItem("bl-pub:" + lang, String(Date.now())); } catch (x) {} }
         if (done) done(r);
       });
-    }, 1500);
+    };
+    // kept so a failed push can be retried without waiting for the next answer
+    lastRun[lang] = run;
+    clearTimeout(timers[lang]);
+    timers[lang] = setTimeout(run, 1500);
+  }
+
+  // Re-run the last publish for a language. The pages call this when the tab comes
+  // back to the front or another tab changes the shared auth session, so a push
+  // that failed once (expired session, a second tab signed in as someone else)
+  // recovers on its own instead of leaving the warning up until the next answer.
+  function retry(lang) {
+    if (!on()) return;
+    if (lastRun[lang]) lastRun[lang]();
   }
 
   // Fresh device with an empty deck: rebuild from the server. Master first
@@ -94,5 +107,5 @@ window.BLPageSync = (function () {
   function publishedAt(lang) {
     try { return Number(localStorage.getItem("bl-pub:" + lang)) || 0; } catch (e) { return 0; }
   }
-  return { publish: publish, restore: restore, catCount: catCount, weapons: weapons, publishedAt: publishedAt };
+  return { publish: publish, retry: retry, restore: restore, catCount: catCount, weapons: weapons, publishedAt: publishedAt };
 })();

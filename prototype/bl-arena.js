@@ -27,7 +27,7 @@ window.BLArena = (function () {
       const real = rows.filter(function (x) {
         if (x.is_bot === true || (x.is_bot == null && /^test/i.test(x.name || ""))) return false;
         // a language opened but never studied published known=0: not a fighter here
-        return ((x.known || 0) + (x.bonus || 0)) > 0 || x.is_primary !== false;
+        return (x.known || 0) > 0 || x.is_primary !== false;
       });
       const a = { me: r[0] || null, rows: real, rivals: r[2] || [], at: Date.now() };
       try { localStorage.setItem("bl-arena", JSON.stringify(a)); } catch (e) {}
@@ -45,7 +45,7 @@ window.BLArena = (function () {
       const id = x.user_id + "|" + x.language_id;
       return {
         id: id, user_id: x.user_id, name: x.name, language_id: x.language_id,
-        score: (x.known || 0) + (x.bonus || 0),
+        score: x.known || 0, missionPts: x.bonus || 0,
         mine: !!(a.me && x.user_id === a.me),
         atWar: !!w[id],
         hunting: (a.rivals || []).some(function (r) { return a.me && r.rival_user_id === a.me && r.user_id === x.user_id; })

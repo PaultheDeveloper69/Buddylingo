@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<script>if (location.hostname === "www.buddylingo.de") location.replace(location.href.replace("//www.", "//"));</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f6f4ef">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BuddyLingo WA">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&amp;family=Figtree:wght@400;500;600;700;800&amp;display=swap">
+<style>
+@keyframes idleSway { 0%,100% { rotate: -2.2deg; } 50% { rotate: 2.2deg; } }
+@keyframes heartBeat { 0%,100% { transform: scale(1); } 14% { transform: scale(1.07); } 28% { transform: scale(1); } 42% { transform: scale(1.05); } }
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust:100%; }
+body { margin:0; background:#f6f4ef; color:#17181d; font-family:'Figtree',system-ui,sans-serif; -webkit-tap-highlight-color:transparent; overscroll-behavior-y:none; }
+button, a { touch-action:manipulation; }
+img { -webkit-user-drag:none; user-select:none; -webkit-user-select:none; }
+a { color:#c2426e; text-underline-offset:3px; } a:hover { color:#a3335a; }
+button { font-family:inherit; cursor:pointer; border:none; text-align:left; }
+button:focus-visible { outline:2px solid #c2426e; outline-offset:2px; }
+button:disabled { opacity:0.45; cursor:not-allowed; }
+textarea { font-family:inherit; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:none; } }
+@keyframes blBob { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-3px); } }
+@keyframes tussleA { 0% { transform: translate(0,0) rotate(-3deg); } 25% { transform: translate(3px,-1px) rotate(4deg); } 50% { transform: translate(-2px,1px) rotate(-5deg); } 75% { transform: translate(2px,-2px) rotate(3deg); } 100% { transform: translate(0,0) rotate(-3deg); } }
+@keyframes tussleB { 0% { transform: translate(1px,0) rotate(4deg); } 30% { transform: translate(-3px,-2px) rotate(-6deg); } 60% { transform: translate(3px,1px) rotate(5deg); } 100% { transform: translate(1px,0) rotate(4deg); } }
+@keyframes tussleC { 0% { transform: translate(-1px,1px) rotate(2deg); } 35% { transform: translate(3px,0) rotate(-4deg); } 70% { transform: translate(-3px,-1px) rotate(5deg); } 100% { transform: translate(-1px,1px) rotate(2deg); } }
+@keyframes flingL { 0%, 62% { transform: translate(0,0) rotate(0deg); } 67% { transform: translate(-22px,-13px) rotate(-38deg); } 72% { transform: translate(-30px,-2px) rotate(-74deg); } 78% { transform: translate(-26px,0) rotate(-30deg); } 86% { transform: translate(-10px,-4px) rotate(-8deg); } 100% { transform: translate(0,0) rotate(0deg); } }
+@keyframes flingR { 0%, 62% { transform: translate(0,0) rotate(0deg); } 67% { transform: translate(22px,-13px) rotate(38deg); } 72% { transform: translate(30px,-2px) rotate(74deg); } 78% { transform: translate(26px,0) rotate(30deg); } 86% { transform: translate(10px,-4px) rotate(8deg); } 100% { transform: translate(0,0) rotate(0deg); } }
+@keyframes dustPuff { 0% { opacity: 0; transform: scale(0.45) translateY(2px); } 35% { opacity: 0.5; transform: scale(0.95) translateY(0); } 100% { opacity: 0; transform: scale(1.5) translateY(-6px); } }
+@keyframes powPop { 0%, 78% { opacity: 0; transform: scale(0.55) rotate(-8deg); } 84% { opacity: 1; transform: scale(1.04) rotate(4deg); } 92% { opacity: 0.9; transform: scale(0.98) rotate(-3deg); } 100% { opacity: 0; transform: scale(1.16) rotate(6deg); } }
+</style>
+<link rel="prefetch" href="Court Round.dc.html">
+<script src="court-deck.js"></script>
+<script src="court-de.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="bl-config.js"></script>
+<script src="bl-sync.js"></script>
+<script src="bl-front.js"></script>
+<script src="bl-release.js"></script>
+<link rel="icon" type="image/png" sizes="32x32" href="assets/brand/icon-32.png">
+<link rel="apple-touch-icon" href="assets/brand/icon-180.png">
+<meta property="og:image" content="assets/brand/icon-512.png">
+</helmet>
+<div style="min-height:100dvh;background:#f6f4ef" data-screen-label="Words of Affirmation">
+
+<sc-if value="{{ showRelease }}" hint-placeholder-val="{{ false }}">
+  <div data-screen-label="Release note" style="position:fixed;inset:0;z-index:80;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(23,24,29,0.45)">
+    <div style="width:min(400px,100%);background:#fff;border-radius:26px;padding:26px 24px 22px;box-shadow:0 24px 60px rgba(23,24,29,0.32);display:flex;flex-direction:column;gap:16px;animation:fadeUp 0.32s ease both">
+      <div style="display:flex;flex-direction:column;gap:5px">
+        <span style="font-size:9.5px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:#c2426e">{{ relKicker }}</span>
+        <span style="font-family:Gloock,serif;font-size:29px;line-height:1.06;color:#17181d">{{ relTitle }}</span>
+        <span style="font-size:13px;line-height:1.5;color:#8a857a;text-wrap:pretty">{{ relLead }}</span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:11px;border-top:1px solid #efece5;padding-top:15px">
+        <sc-for list="{{ relItems }}" as="R" hint-placeholder-count="3">
+          <div style="display:flex;gap:10px;align-items:flex-start">
+            <span style="width:6px;height:6px;border-radius:999px;background:#c2426e;margin-top:7px;flex:none"></span>
+            <span style="font-size:13.5px;line-height:1.45;color:#3d3a34;text-wrap:pretty">{{ R.text }}</span>
+          </div>
+        </sc-for>
+      </div>
+      <button style="min-height:52px;background:#c2426e;color:#fff;border-radius:999px;font-size:15.5px;font-weight:700;text-align:center" onClick="{{ closeRelease }}">{{ relCta }}</button>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ isSplash }}" hint-placeholder-val="{{ true }}">
+  <div data-screen-label="Splash" style="min-height:100dvh;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:20px;padding:calc(24px + env(safe-area-inset-top)) 24px calc(28px + env(safe-area-inset-bottom));overflow:hidden">
+    <span style="font-size:11px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;color:#a5a096">BuddyLingo · conversation 1v1</span>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:22px;animation:fadeUp 0.7s ease both">
+      <video src="https://d8j0ntlcm91z4.cloudfront.net/user_32PgHXDjHlFXmhgKyUnBM4DN7Qi/hf_20260819_122118_544d415a-b0cd-4112-8331-236b13681f59.mp4" poster="assets/chars/hero-band.png" autoplay="{{ true }}" loop="{{ true }}" muted="{{ true }}" playsinline="{{ true }}" preload="auto" disablepictureinpicture="{{ true }}" controlslist="nodownload nofullscreen noplaybackrate" aria-label="Words of Affirmation mascot" style="height:190px;width:190px;display:block;object-fit:contain;pointer-events:none"></video>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">
+        <span style="font-size:37px;font-weight:800;letter-spacing:-0.03em;line-height:1.05;text-wrap:balance">Words of<br>Affirmation<span style="color:#c2426e">.</span></span>
+        <span style="font-size:14px;color:#8a857a;text-wrap:balance">You already have the feelings. Let's work on the words.</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:18px;width:min(380px,100%)">
+      <div style="display:flex;align-items:flex-end;gap:26px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><img src="assets/chars/heart-specs.png" alt="" style="height:44px;display:block;transform-origin:50% 100%;animation:idleSway 5.3s ease-in-out -2.1s infinite"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center">The Noticer</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><img src="assets/chars/heart-band.png" alt="" style="height:56px;display:block;transform-origin:50% 100%;animation:idleSway 6.7s ease-in-out -0.9s infinite"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center">Coach</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><img src="assets/chars/heart-mini.png" alt="" style="height:40px;display:block;transform-origin:50% 100%;animation:idleSway 4.6s ease-in-out -3.3s infinite"><span style="font-size:9px;font-weight:600;color:#a5a096;text-align:center">Rookie</span></div>
+      </div>
+      <button style="width:100%;min-height:58px;background:#c2426e;color:#fff;border-radius:999px;font-size:16.5px;font-weight:700;letter-spacing:0.02em;text-align:center;box-shadow:0 10px 24px rgba(148,44,80,0.35)" onClick="{{ enter }}">Let's go, player</button>
+      <span style="font-size:11.5px;letter-spacing:0.04em;color:#a5a096">{{ splashStats }}</span>
+    </div>
+  </div>
+</sc-if>
+
+<sc-if value="{{ notSplash }}" hint-placeholder-val="{{ false }}">
+<div style="width:min(440px,100%);margin:0 auto;padding:0 16px calc(56px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:14px">
+
+  <div style="display:flex;align-items:center;gap:11px;padding:calc(14px + env(safe-area-inset-top)) 2px 4px">
+    <img src="assets/chars/heart-band.png" alt="" style="height:34px;flex:none">
+    <div style="display:flex;flex-direction:column;margin-right:auto;min-width:0">
+      <span style="font-size:18px;font-weight:800;letter-spacing:-0.02em;line-height:1.1">BuddyLingo</span>
+      <span style="font-size:11px;color:#8a857a">{{ headerSub }}</span>
+    </div>
+    <div style="display:flex;align-items:center;gap:6px;background:#fff;border-radius:999px;padding:7px 12px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+      <span style="font-size:17px;font-weight:800;color:#b08d3f">{{ streak }}</span>
+      <div style="display:flex;flex-direction:column;line-height:1.15">
+        <span style="font-size:9.5px;font-weight:600;color:#5d5a52">day streak</span>
+        <span style="font-size:9px;color:#a5a096">best {{ bestStreak }}</span>
+      </div>
+    </div>
+    <button style="display:flex;align-items:center;gap:5px;background:#17181d;color:#fff;border-radius:999px;padding:0 11px;min-height:37px;font-size:12px;font-weight:800;letter-spacing:0.05em;flex:none" onClick="{{ openLangs }}">WA<span style="font-size:7.5px;opacity:0.65">▼</span></button>
+  </div>
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <div data-screen-label="Home" style="display:flex;flex-direction:column;gap:14px">
+
+      <div style="display:flex;align-items:center;gap:18px;background:#fff;border-radius:20px;padding:16px 18px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+        <svg width="86" height="86" viewBox="0 0 86 86" style="flex:none">
+          <circle cx="43" cy="43" r="35" fill="none" stroke="#efece5" stroke-width="8"></circle>
+          <circle cx="43" cy="43" r="35" fill="none" stroke="#c2426e" stroke-width="8" stroke-linecap="round" transform="rotate(-90 43 43)" style="{{ ringStyle }}"></circle>
+          <text x="43" y="41" text-anchor="middle" style="font-family:'Figtree';font-weight:800;font-size:18px;fill:#17181d">{{ goalDone }}</text>
+        </svg>
+        <div style="display:flex;flex-direction:column;gap:3px;min-width:0;flex:1">
+          <span style="font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:#a1823c;font-weight:700">Standing</span>
+          <span style="font-size:19px;font-weight:800;line-height:1.1;letter-spacing:-0.01em">{{ rankName }}</span>
+          <span style="font-size:11.5px;color:#8a857a">{{ xpLabel }}</span>
+          <div style="height:6px;background:#efece5;border-radius:999px;margin-top:4px;overflow:hidden"><div style="{{ xpBarStyle }}"></div></div>
+          <span style="font-size:10.5px;color:#a5a096">{{ rankNext }}</span>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+        <div style="background:#fff;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:1px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+          <span style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#a5a096;font-weight:600">Due</span>
+          <span style="font-size:26px;font-weight:800;line-height:1.15">{{ dueCount }}</span>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:1px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+          <span style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#a5a096;font-weight:600">Known</span>
+          <span style="font-size:26px;font-weight:800;line-height:1.15;color:#c2426e">{{ knownCount }}</span>
+        </div>
+        <div style="background:#fff;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:1px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+          <span style="font-size:9px;letter-spacing:0.12em;text-transform:uppercase;color:#a5a096;font-weight:600">Shaky</span>
+          <span style="font-size:26px;font-weight:800;line-height:1.15">{{ hotLabel }}</span>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:6px">
+        <div style="display:flex;background:#fff;border-radius:999px;padding:4px;gap:4px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+          <button style="{{ lEn }}" onClick="{{ setEn }}">English</button>
+          <button style="{{ lDe }}" onClick="{{ setDe }}">Deutsch</button>
+        </div>
+        <span style="font-size:10.5px;color:#a5a096;text-align:center">{{ langNote }}</span>
+      </div>
+
+      <button style="min-height:58px;width:100%;background:#c2426e;color:#fff;border-radius:999px;font-size:16.5px;font-weight:700;text-align:center;box-shadow:0 10px 24px rgba(148,44,80,0.35)" onClick="{{ startSession }}" disabled="{{ nothingToDo }}">{{ startLabel }}</button>
+      <div style="font-size:11px;color:#8a857a;text-align:center;margin-top:-6px">{{ paceLine }}</div>
+
+      <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:13px;font-weight:700">Training camp</span>
+          <span style="font-size:11px;color:#8a857a">{{ tierNote }}</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:11px">
+          <span style="font-size:19px;font-weight:800;background:#fbeaf0;color:#c2426e;border-radius:12px;padding:6px 12px;flex:none">{{ campLevel }}</span>
+          <div style="display:flex;flex-direction:column;gap:1px;min-width:0">
+            <span style="font-size:13px;font-weight:700">{{ campRank }}</span>
+            <span style="font-size:10.5px;color:#8a857a">{{ campSub }}</span>
+          </div>
+        </div>
+        <div style="{{ tiersGridStyle }}">
+          <sc-for list="{{ tiers }}" as="T" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:5px;align-items:center">
+              <span style="{{ T.cefrStyle }}">{{ T.cefr }}</span>
+              <div style="{{ T.trackStyle }}"><div style="{{ T.fillStyle }}"></div></div>
+              <span style="{{ T.nameStyle }}">{{ T.name }}</span>
+              <span style="font-size:9px;color:#a5a096">{{ T.count }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:13px;font-weight:700">The Duel</span>
+          <span style="font-size:11px;color:#8a857a">{{ battleVerdict }}</span>
+        </div>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+          <div style="display:flex;flex-direction:column;gap:1px">
+            <span style="{{ meNameStyle }}">{{ meDuelName }}</span>
+            <span style="font-size:18px;font-weight:800">{{ meScore }}</span>
+            <span style="font-size:9.5px;color:#8a857a">{{ meMath }}</span>
+          </div>
+          <span style="font-size:12px;font-weight:800;color:#a5a096">VS</span>
+          <div style="display:flex;flex-direction:column;gap:1px;align-items:flex-end;text-align:right">
+            <span style="{{ themNameStyle }}">{{ themDuelName }}</span>
+            <span style="font-size:18px;font-weight:800">{{ themScore }}</span>
+            <span style="font-size:9.5px;color:#8a857a">{{ themMath }}</span>
+          </div>
+        </div>
+        <div style="position:relative;height:58px;margin-bottom:-8px;overflow:hidden">
+          <sc-for list="{{ dust }}" as="D" hint-placeholder-count="3">
+            <div style="{{ D.style }}"></div>
+          </sc-for>
+          <sc-for list="{{ skirmish }}" as="S" hint-placeholder-count="6">
+            <div style="{{ S.wrap }}"><div style="{{ S.mid }}"><div style="{{ S.body }}"></div></div></div>
+          </sc-for>
+          <sc-for list="{{ pows }}" as="P" hint-placeholder-count="3">
+            <div style="{{ P.style }}"></div>
+          </sc-for>
+        </div>
+        <div style="height:14px;border-radius:999px;overflow:hidden;display:flex;background:#efece5;position:relative">
+          <div style="{{ ovFrStyle }}"></div>
+          <div style="{{ ovElStyle }}"></div>
+          <span style="position:absolute;left:50%;top:-1px;bottom:-1px;width:1.5px;background:#8a6d2f;opacity:0.5"></span>
+        </div>
+        <span style="font-size:10.5px;color:#a5a096;text-align:center">{{ lineNote }}</span>
+        <div style="display:flex;flex-direction:column;gap:8px;border-top:1px solid #f0ede6;padding-top:11px">
+          <sc-for list="{{ frontsBreakdown }}" as="Fr" hint-placeholder-count="4">
+            <span style="display:flex;align-items:center;gap:9px">
+              <span style="font-size:10px;font-weight:600;color:#8a857a;width:66px;flex:none">{{ Fr.label }}</span>
+              <span style="{{ Fr.aNumStyle }}">{{ Fr.fr }}</span>
+              <span style="flex:1;height:9px;border-radius:999px;overflow:hidden;display:flex;background:#efece5;position:relative">
+                <span style="{{ Fr.frStyle }}"></span>
+                <span style="{{ Fr.elStyle }}"></span>
+              </span>
+              <span style="{{ Fr.bNumStyle }}">{{ Fr.el }}</span>
+            </span>
+          </sc-for>
+        </div>
+        <span style="font-size:10.5px;color:#a5a096;text-align:center">{{ battleNote }}</span>
+        <span style="{{ syncNoteStyle }}">{{ syncNote }}</span>
+        <div style="display:flex;flex-direction:column;gap:9px;border-top:1px solid #f0ede6;padding-top:11px">
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#a1823c">Missions · earn weapons</span>
+          <sc-for list="{{ missions }}" as="m" hint-placeholder-count="4">
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <div style="display:flex;justify-content:space-between;gap:8px"><span style="font-size:12.5px;font-weight:700">{{ m.name }}</span><span style="{{ m.stateStyle }}">{{ m.state }}</span></div>
+              <span style="font-size:10.5px;color:#8a857a">{{ m.desc }}</span>
+              <div style="height:4px;background:#efece5;border-radius:999px;overflow:hidden"><div style="{{ m.fill }}"></div></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <sc-if value="{{ hasArena }}" hint-placeholder-val="{{ false }}">
+      <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:12px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:13px;font-weight:700">The Battlefield</span>
+          <span style="font-size:11px;color:#8a857a">{{ arenaNote }}</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <sc-for list="{{ ladderRows }}" as="L" hint-placeholder-count="4">
+            <button style="{{ L.rowStyle }}" onClick="{{ L.pick }}">
+              <span style="{{ L.rankStyle }}">{{ L.rank }}</span>
+              <span style="{{ L.dotStyle }}"></span>
+              <div style="display:flex;flex-direction:column;flex:1;min-width:0">
+                <span style="font-size:13px;font-weight:800;color:#17181d">{{ L.name }}</span>
+                <span style="font-size:10px;color:#8a857a">{{ L.sub }}</span>
+              </div>
+              <span style="{{ L.chipStyle }}">{{ L.chip }}</span>
+              <span style="font-size:16px;font-weight:800;flex:none;min-width:34px;text-align:right">{{ L.score }}</span>
+            </button>
+          </sc-for>
+        </div>
+        <span style="font-size:10.5px;color:#a5a096;text-align:center">{{ foeHint }}</span>
+        <div style="display:flex;flex-direction:column;gap:9px;border-top:1px solid #f0ede6;padding-top:12px">
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#a1823c">The War of Languages</span>
+          <sc-for list="{{ factionRows }}" as="F" hint-placeholder-count="3">
+            <div style="display:flex;align-items:center;gap:9px">
+              <span style="{{ F.dot }}"></span>
+              <div style="display:flex;flex-direction:column;width:92px;flex:none">
+                <span style="font-size:11px;font-weight:700">{{ F.name }}</span>
+                <span style="font-size:9px;color:#a5a096">{{ F.sub }}</span>
+              </div>
+              <span style="flex:1;height:9px;border-radius:999px;background:#efece5;overflow:hidden;display:flex"><span style="{{ F.fill }}"></span></span>
+              <span style="font-size:11.5px;font-weight:800;flex:none;min-width:34px;text-align:right">{{ F.score }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+      </sc-if>
+
+      <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:11px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:13px;font-weight:700">Last 4 weeks</span>
+          <span style="font-size:11px;color:#8a857a">{{ heatNote }}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:repeat(14,1fr);gap:5px">
+          <sc-for list="{{ heatCells }}" as="h" hint-placeholder-count="28">
+            <div style="{{ h.style }}"></div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:11px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:13px;font-weight:700">Reflexes</span>
+          <span style="font-size:11px;color:#8a857a">{{ reflexNote }}</span>
+        </div>
+        <sc-for list="{{ reflexes }}" as="RX" hint-placeholder-count="6">
+          <div style="display:flex;align-items:center;gap:10px">
+            <span style="font-size:11px;font-weight:600;color:#5d5a52;width:104px;flex:none">{{ RX.name }}</span>
+            <span style="flex:1;height:8px;border-radius:999px;background:#efece5;overflow:hidden;display:flex"><span style="{{ RX.fill }}"></span></span>
+            <span style="{{ RX.pctStyle }}">{{ RX.pct }}</span>
+          </div>
+        </sc-for>
+        <span style="font-size:10.5px;color:#a5a096;text-wrap:pretty">{{ reflexHint }}</span>
+      </div>
+
+      <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:13px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline">
+          <span style="font-size:13px;font-weight:700">Merit badges</span>
+          <span style="font-size:11px;color:#8a857a">{{ badgeCount }}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px 14px">
+          <sc-for list="{{ badges }}" as="b" hint-placeholder-count="10">
+            <div style="display:flex;align-items:center;gap:10px;min-width:0">
+              <svg viewBox="0 0 64 64" style="{{ b.medalStyle }}"><path d="M32 56 C6 36 6 18 18 12 C25 9 30 14 32 19 C34 14 39 9 46 12 C58 18 58 36 32 56 Z" fill="currentColor" stroke="{{ b.medalStroke }}" stroke-width="4" stroke-linejoin="round"></path></svg>
+              <div style="display:flex;flex-direction:column;min-width:0">
+                <span style="{{ b.nameStyle }}">{{ b.name }}</span>
+                <span style="font-size:9.5px;color:#a5a096;line-height:1.3">{{ b.desc }}</span>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <div style="background:#fff;border-radius:20px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:4px">
+          <span style="font-size:13px;font-weight:700">The Playbook</span>
+          <span style="font-size:11px;color:#8a857a">{{ vocabNote }}</span>
+        </div>
+        <sc-for list="{{ rows }}" as="r" hint-placeholder-count="10">
+          <div style="display:flex;align-items:center;gap:10px;padding:9px 0;border-top:1px solid #f0ede6">
+            <div style="display:flex;flex-direction:column;flex:1;min-width:0;gap:2px">
+              <span style="font-size:11.5px;color:#8a857a;line-height:1.35">{{ r.en }}</span>
+              <span style="font-size:13px;color:#c2426e;font-weight:600;line-height:1.35">{{ r.fr }}</span>
+            </div>
+            <span style="{{ r.tagStyle }}">{{ r.status }}</span>
+          </div>
+        </sc-for>
+        <button style="min-height:44px;background:#f0ede6;border-radius:999px;color:#17181d;font-size:13px;font-weight:600;margin-top:4px;text-align:center" onClick="{{ toggleAll }}">{{ toggleLabel }}</button>
+      </div>
+
+      <button style="align-self:center;min-height:46px;padding:0 28px;background:#17181d;color:#fff;border-radius:999px;font-size:13.5px;font-weight:700;text-align:center" onClick="{{ openSupport }}">Contact support</button>
+      <sc-if value="{{ devTools }}" hint-placeholder-val="{{ false }}">
+        <button style="align-self:center;background:none;color:#a5a096;font-size:11px;text-decoration:underline;text-underline-offset:3px;min-height:44px;text-align:center" onClick="{{ resetAll }}">Reset all progress</button>
+      </sc-if>
+      <a href="BuddyLingo Login.dc.html" style="align-self:center;font-size:12px;color:#a5a096;text-decoration:underline;text-underline-offset:3px;padding:10px 0">⇄ switch fighter</a>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isStudy }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Session" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button style="min-height:44px;min-width:44px;background:#fff;border-radius:999px;font-size:16px;text-align:center;box-shadow:0 1px 3px rgba(23,24,29,0.08)" onClick="{{ goHome }}">←</button>
+        <div style="flex:1;height:6px;background:#e9e5dc;border-radius:999px;overflow:hidden"><div style="{{ barStyle }}"></div></div>
+        <span style="font-size:14px;font-weight:700;min-width:50px;text-align:right">{{ progressLabel }}</span>
+      </div>
+
+      <sc-if value="{{ hasCombo }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;align-items:center;gap:8px;align-self:flex-start;background:#fff;border-radius:999px;padding:7px 14px;box-shadow:0 1px 3px rgba(23,24,29,0.08)">
+          <span style="font-size:13px">{{ comboIcon }}</span>
+          <span style="font-size:11.5px;font-weight:800;letter-spacing:0.06em;color:#8a6d2f">{{ comboLabel }}</span>
+        </div>
+      </sc-if>
+
+      <dc-import name="Court Round" mode="wa" accent="#c2426e" scenario="{{ scenario }}" depth="{{ depth }}" on-done="{{ roundDone }}" hint-size="100%,640px"></dc-import>
+
+      <button style="align-self:center;background:none;color:#a5a096;font-size:12px;text-decoration:underline;text-underline-offset:3px;min-height:44px;text-align:center" onClick="{{ bailOut }}">🏳 Retreat — bank your XP, finish later</button>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ isDone }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Session done" style="background:#fff;border-radius:24px;padding:34px 22px;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center;margin-top:14px;box-shadow:0 2px 10px rgba(23,24,29,0.07);animation:fadeUp 0.5s ease both">
+      <span style="font-size:9.5px;letter-spacing:0.18em;text-transform:uppercase;color:#a1823c;font-weight:700">Session complete</span>
+      <img src="assets/chars/heart-band.png" alt="" style="height:104px;display:block">
+      <div style="font-family:'Gloock',serif;font-size:34px;line-height:1.08;text-wrap:balance">{{ doneTitle }}</div>
+      <div style="font-size:14.5px;color:#5d5a52">{{ doneSummary }}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center">
+        <span style="font-size:12px;font-weight:700;background:#f3ecd9;color:#8a6d2f;border-radius:999px;padding:6px 14px">+{{ sessXp }} XP</span>
+        <sc-if value="{{ hasFast }}" hint-placeholder-val="{{ false }}">
+          <span style="font-size:12px;font-weight:700;background:#fbeaf0;color:#c2426e;border-radius:999px;padding:6px 14px">⚡ {{ fastCount }} fast</span>
+        </sc-if>
+      </div>
+      <sc-if value="{{ hasNewBadges }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:12.5px;color:#8a6d2f;background:#faf6ea;border:1px solid rgba(176,141,63,0.35);border-radius:14px;padding:9px 14px">New badge: <strong>{{ newBadgeNames }}</strong></div>
+      </sc-if>
+      <sc-if value="{{ hasAdjust }}" hint-placeholder-val="{{ false }}">
+        <div style="font-size:12px;color:#c2426e;background:#fdf0f4;border-radius:14px;padding:9px 14px;line-height:1.45">{{ adjustNote }}</div>
+      </sc-if>
+      <div style="font-size:12.5px;color:#a5a096;text-wrap:pretty">{{ doneNext }}</div>
+      <div style="font-size:12px;color:#8a6d2f;background:#faf6ea;border-radius:14px;padding:10px 14px;line-height:1.45;text-wrap:pretty">{{ homework }}</div>
+      <button style="min-height:52px;width:100%;background:#c2426e;color:#fff;border-radius:999px;font-size:15px;font-weight:700;margin-top:4px;text-align:center" onClick="{{ goHome }}">Back to camp</button>
+    </div>
+  </sc-if>
+
+</div>
+</sc-if>
+</div>
+
+  <sc-if value="{{ showSupport }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;background:rgba(23,24,29,0.45);display:flex;align-items:center;justify-content:center;padding:24px;z-index:50" onClick="{{ closeSupport }}">
+      <div style="background:#fffdf8;border-radius:20px;padding:26px 24px;max-width:340px;width:100%;display:flex;flex-direction:column;gap:12px;text-align:center;box-shadow:0 18px 50px rgba(23,24,29,0.25)" onClick="{{ eatClick }}">
+        <div style="position:relative">
+          <img src="assets/chars/heart-specs.png" alt="" style="width:100%;max-width:180px;display:block;margin:0 auto">
+          {{ supportBubble }}
+        </div>
+        <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#a1823c">BuddyLingo Support</span>
+        <span style="font-size:12px;color:#8a857a">Ticket #0002 closed. Reason: you already know what to say.</span>
+        <button style="min-height:44px;background:#17181d;color:#fff;border-radius:999px;font-size:13px;font-weight:700;margin-top:4px;text-align:center" onClick="{{ closeSupport }}">Fine</button>
+      </div>
+    </div>
+  </sc-if>
+
+  <sc-if value="{{ showLangs }}" hint-placeholder-val="{{ false }}">
+    <div data-screen-label="Language switcher" style="position:fixed;inset:0;background:rgba(23,24,29,0.45);display:flex;align-items:center;justify-content:center;padding:24px;z-index:60" onClick="{{ closeLangs }}">
+      <div style="background:#fffdf8;border-radius:20px;padding:24px 22px;max-width:340px;width:100%;display:flex;flex-direction:column;gap:12px;box-shadow:0 18px 50px rgba(23,24,29,0.25)" onClick="{{ eatClick }}">
+        <div style="display:flex;flex-direction:column;gap:4px">
+          <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#a1823c">Your languages</span>
+          <span style="font-size:11.5px;color:#8a857a;line-height:1.45">One account, many fronts — each language keeps its own score and streak.</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:7px">
+          <sc-for list="{{ langRows }}" as="Lg" hint-placeholder-count="7">
+            <a href="{{ Lg.href }}" style="{{ Lg.rowStyle }}">
+              <span style="{{ Lg.imgStyle }}" role="img" aria-hidden="true"></span>
+              <div style="display:flex;flex-direction:column;flex:1;min-width:0">
+                <span style="font-size:13.5px;font-weight:800;color:#17181d">{{ Lg.name }}</span>
+                <span style="font-size:10.5px;color:#8a857a">{{ Lg.sub }}</span>
+              </div>
+              <span style="{{ Lg.tagStyle }}">{{ Lg.tag }}</span>
+            </a>
+          </sc-for>
+        </div>
+        <button style="min-height:44px;background:#17181d;color:#fff;border-radius:999px;font-size:13px;font-weight:700;text-align:center" onClick="{{ closeLangs }}">Close</button>
+      </div>
+    </div>
+  </sc-if>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:430,&quot;height&quot;:900},&quot;dailyGoal&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:12,&quot;min&quot;:4,&quot;max&quot;:40,&quot;step&quot;:2,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Learning&quot;,&quot;label&quot;:&quot;Daily goal (cards)&quot;},&quot;supportLine&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;You got this, lover boy.&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Support&quot;,&quot;label&quot;:&quot;Support bubble text&quot;}}">
+const MY_SIDE = "wa", ACCENT = "#c2426e";
+const W = (window.COURT ? window.COURT.legacy("wa") : []);
+let SCN = (window.COURT ? window.COURT.byId("wa") : {});
+let TIER_NAMES = (window.COURT ? window.COURT.tiers("wa") : []);
+// Switching language re-reads the content through the overlay; nothing else in the
+// page holds a translated string, so this is the whole switch.
+function applyLang(code) {
+  if (window.COURT && window.COURT.setLang) window.COURT.setLang(code);
+  if (window.COURT) { SCN = window.COURT.byId("wa"); TIER_NAMES = window.COURT.tiers("wa"); }
+}
+const DE = window.LOVE_DE || {};
+const TS = 8, NT = Math.max(1, Math.ceil(W.length / TS));
+// Category letters reuse the server's cat_known keys; the labels are ours.
+const CAT = { N: "Praise", V: "Support", A: "Gratitude", B: "Character" };
+const LANGS = { fr: ["La France", "#d62828"], el: ["La Grèce", "#2160a8"], de: ["L’Allemagne", "#946f00"], es: ["L’Espagne", "#c2571d"], tn: ["La Tunisie", "#2a8c46"], wa: ["Affirmation", "#c2426e"], ll: ["Lover Language", "#6d4aa8"] };
+const CASTS = { fr: ["croissant", "fromage", "baguette"], el: ["olive", "feta", "dolma"], de: ["brezel", "wurst", "kartoffel"], es: ["churro", "jamon", "paella"], tn: ["harissa", "couscous", "brik"], wa: ["heart-band", "heart-specs", "heart-mini"], ll: ["heart-shades", "heart-cap", "heart-bow"] };
+const PAGES = { fr: "Vocab French.dc.html", el: "Vocab Greek.dc.html", de: "Vocab German.dc.html", es: "Vocab Spanish.dc.html", tn: "Vocab Tunisian.dc.html", wa: "Vocab Affirmation.dc.html", ll: "Vocab Lover.dc.html" };
+const MIN = 60000, DAY = 86400000;
+const IV = [10 * MIN, DAY, 3 * DAY, 7 * DAY, 16 * DAY, 35 * DAY, 90 * DAY];
+const HOT_GAPS = [3, 8, 16], HOT_LADDER = [10 * MIN, DAY, 3 * DAY], HOT_DAYS = 3;
+const ACC = (function () { try { return JSON.parse(localStorage.getItem("bl-session") || "null"); } catch (e) { return null; } })();
+const SUF = ACC && ACC.slot != null ? ":" + ACC.slot : "";
+const KEY = "vocab-wa-v1" + SUF;
+const RANKS = [["Emotionally Available (Beta)", 0], ["Learner Driver", 100], ["Says The Nice Thing", 250], ["Reliable", 500], ["Actually Good At This", 900], ["Quietly Devastating", 1400], ["Grand Master Of Feelings", 2000]];
+const BADGE_DEFS = [
+  ["premiere", "First Words", "Finish your first session"],
+  ["connu50", "Sincere Beginner", "A third of the deck handled"],
+  ["connu100", "Almost Ready For The Real Deal", "Over half the deck handled"],
+  ["connu250", "Certified Noticer", "Most of the deck handled"],
+  ["connu500", "Full Marks, Lover Boy", "Every scenario known"],
+  ["serie7", "One Good Week", "7-day streak"],
+  ["serie30", "Reformed Character", "30-day streak"],
+  ["parfait", "Flawless Run", "10+ cards, zero misses"],
+  ["eclair", "Quick On Your Feet", "6 fast answers in one session"],
+  ["grimpeur", "Level Up, Player", "Jump a rank"]
+];
+const MISSIONS = [
+  ["w_notice", "Eyes Open", "Answer 8 scenarios correctly in a day", "c", 8],
+  ["w_new", "New Material", "Learn 4 new scenarios in a day", "n", 4],
+  ["w_support", "Hold The Line", "Get 4 Support scenarios right in a day", "v", 4],
+  ["w_fast", "No Hesitation", "6 fast answers in a day", "f", 6]
+];
+// Homework: the research asks for a small real-world action after practice.
+const HOMEWORK = [
+  "Homework, player: say one of these out loud today. Out loud. Not in your head.",
+  "Before bed, text her one specific thing you noticed today. Specific. Not \u201chope you had a good day\u201d.",
+  "Next time she tells you something good, lead with what it cost her. You know how now.",
+  "Today's mission: receive a compliment without deflecting it. Harder than it sounds.",
+  "Find one thing she did that nobody thanked her for. Thank her for it."
+];
+function idOf(i) { return W[i][0]; }
+const IDS = (function () { const m = {}; W.forEach(function (w) { m[w[0]] = 1; }); return m; })();
+function comboName(n) { return n >= 5 ? "ON A RUN ×" + n : n >= 3 ? "THREAD ×" + n : "SAW IT ×" + n; }
+function pad(n) { return n < 10 ? "0" + n : "" + n; }
+function ymd(ms) { const d = new Date(ms); return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()); }
+function today() { return ymd(Date.now()); }
+function yesterday() { return ymd(Date.now() - DAY); }
+const STREAK_KEY = "bl-streak:wa" + SUF;
+function readStreak() { try { return JSON.parse(localStorage.getItem(STREAK_KEY) || "null"); } catch (e) { return null; } }
+function writeStreak(v) { try { localStorage.setItem(STREAK_KEY, JSON.stringify(v)); } catch (e) {} }
+function sharedStreak() {
+  let st = readStreak();
+  if (st) return st;
+  let w = {}; try { w = (JSON.parse(localStorage.getItem(KEY) || "null") || {}).stats || {}; } catch (e) {}
+  const alive = w.lastDay === today() || w.lastDay === yesterday();
+  st = { streak: alive ? w.streak || 0 : 0, lastDay: alive ? w.lastDay : null, best: Math.max(w.bestStreak || 0, w.streak || 0) };
+  writeStreak(st);
+  return st;
+}
+function bumpStreak() {
+  const st = sharedStreak();
+  if (st.lastDay !== today()) { st.streak = st.lastDay === yesterday() ? (st.streak || 0) + 1 : 1; st.lastDay = today(); }
+  st.best = Math.max(st.best || 0, st.streak);
+  writeStreak(st);
+  return st;
+}
+function fmtIn(ms) { if (ms < 90 * MIN) return "in " + Math.max(1, Math.round(ms / MIN)) + " min"; if (ms < 2 * DAY) return "tomorrow"; return "in " + Math.round(ms / DAY) + " days"; }
+function mergeCards(a, b) { const out = Object.assign({}, a || {}); for (const k in (b || {})) { const cur = out[k], inc = b[k]; if (!cur || (inc.t || 0) > (cur.t || 0)) out[k] = inc; } return out; }
+function mergeDays(a, b) { const out = Object.assign({}, a || {}); for (const k in (b || {})) { if (!out[k] || (b[k][0] || 0) > (out[k][0] || 0)) out[k] = b[k]; } return out; }
+function idbOpen() {
+  return new Promise(function (res, rej) {
+    if (!window.indexedDB) return rej();
+    const r = indexedDB.open("vocab-wa" + SUF, 1);
+    r.onupgradeneeded = function () { r.result.createObjectStore("s"); };
+    r.onsuccess = function () { res(r.result); };
+    r.onerror = function () { rej(); };
+  });
+}
+function idbGet() { return idbOpen().then(function (db) { return new Promise(function (res) { const q = db.transaction("s", "readonly").objectStore("s").get("state"); q.onsuccess = function () { res(q.result || null); }; q.onerror = function () { res(null); }; }); }).catch(function () { return null; }); }
+function idbPut(v) { return idbOpen().then(function (db) { db.transaction("s", "readwrite").objectStore("s").put(v, "state"); }).catch(function () {}); }
+
+class Component extends DCLogic {
+  state = { view: "splash", lang: "en", cards: {}, stats: {}, days: {}, badges: {}, xp: 0, pace: 4, tierFloor: 0, queue: [], showAll: false, adjustNote: "", mastery: {}, combo: 0, loaded: false, picked: null, typed: "", modelShown: false };
+
+  // A scenario is presented at one of three depths, driven by the SAME box the
+  // spaced-repetition engine already tracks. Learning ladder, no new schema.
+  stageOf(card) {
+    if (!card) return "read";
+    if (card.hot || card.lapsed) return "choose";
+    return card.box >= 4 ? "say" : card.box >= 2 ? "choose" : "read";
+  }
+  // Localised fields: German where it exists, English otherwise (tagged in the UI).
+  txt(i) {
+    const w = W[i];
+    if (this.state.lang === "de" && DE[w[0]]) {
+      const d = DE[w[0]];
+      return { sit: d[0], best: d[1], why: d[2], alts: [[d[3], d[4]], [d[5], d[6]]], translated: true };
+    }
+    return { sit: w[1], best: w[2], why: w[4], alts: [[w[5], w[6]], [w[7], w[8]]], translated: this.state.lang !== "de" };
+  }
+
+  closeRelease = () => {
+    if (window.BL_RELEASE && window.BL_RELEASE.markSeen) window.BL_RELEASE.markSeen(ACC && ACC.slot);
+    this.setState({ showRelease: false });
+  };
+  componentDidMount() {
+    // The restored language has to reach COURT before anything reads SCN, or a
+    // returning German user gets an English session until they re-tap the toggle.
+    applyLang(this.state.lang || "en");
+    // iOS Safari refuses inline autoplay without real playsinline/muted ATTRIBUTES
+    // and paints its native chrome over the clip; enforce from the document.
+    document.addEventListener("loadeddata", function (e) {
+      const v = e.target;
+      if (v && v.tagName === "VIDEO") {
+        v.setAttribute("playsinline", ""); v.setAttribute("webkit-playsinline", "");
+        v.setAttribute("muted", ""); v.playsInline = true; v.muted = true;
+        v.controls = false; v.loop = true; v.disablePictureInPicture = true;
+        v.style.pointerEvents = "none";
+        const p = v.play(); if (p && p.catch) p.catch(function () {});
+      }
+    }, true);
+    document.addEventListener("ended", function (e) {
+      const v = e.target;
+      if (v && v.tagName === "VIDEO") { v.loop = true; v.muted = true; v.currentTime = 0; const p = v.play(); if (p && p.catch) p.catch(function () {}); }
+    }, true);
+    if (window.BL_RELEASE && window.BL_RELEASE.unseen && window.BL_RELEASE.unseen(ACC && ACC.slot)) this.setState({ showRelease: true });
+    try { if (navigator.storage && navigator.storage.persist) navigator.storage.persist(); } catch (e) {}
+    this.load();
+    this.seedArena();
+    this.pullArena();
+    this._t = setInterval(this.pullArena, 45000);
+    window.addEventListener("focus", this.pullArena);
+    window.addEventListener("focus", this.retrySync);
+    window.addEventListener("storage", this.onAuthChanged);
+    document.addEventListener("visibilitychange", this.onVis);
+  }
+  onVis = () => {
+    if (document.visibilityState === "visible") { this.pullArena(); this.retrySync(); }
+  };
+  // A push that failed once (expired session, or a second tab signed in as another
+  // fighter) used to sit there until the next answer, so the warning never cleared.
+  retrySync = () => {
+    if (!this.state.pubErr || this.state.pubErr === "preview") return;
+    if (this._republish) this._republish();
+  };
+  onAuthChanged = (e) => { if (e && e.key && e.key.indexOf("supabase.auth") >= 0) this.retrySync(); };
+  componentWillUnmount() {
+    clearInterval(this._t);
+    window.removeEventListener("focus", this.pullArena);
+    window.removeEventListener("focus", this.retrySync);
+    window.removeEventListener("storage", this.onAuthChanged);
+    document.removeEventListener("visibilitychange", this.onVis);
+  }
+  seedArena = () => {
+    try { const c = JSON.parse(localStorage.getItem("bl-arena") || "null"); if (c) this.setState({ arena: c }); } catch (e) {}
+  };
+  pullArena = () => {
+    if (!(window.BLSync && window.BLSync.enabled)) return;
+    this.pullSelf();
+    Promise.all([window.BLSync.whoAmI(), window.BLSync.standings(), window.BLSync.rivals()]).then(([me, rows, rv]) => {
+      if (!rows || !rows.length) return;
+      const real = rows.filter(function (f) { return !/^test/i.test(f.name || ""); });
+      const arena = { me: me || null, rows: real, rivals: rv || [], at: Date.now() };
+      this.setState({ arena: arena });
+      try { localStorage.setItem("bl-arena", JSON.stringify(arena)); } catch (e) {}
+    });
+  };
+  pickRival = (uid) => {
+    try { localStorage.setItem("bl-rival" + SUF, uid); } catch (e) {}
+    this.setState({ rivalPick: uid });
+    if (window.BLSync && window.BLSync.setRival) window.BLSync.setRival(uid);
+  };
+  pullSelf = () => {
+    if (!(window.BLSync && window.BLSync.enabled && window.BLSync.pullState)) return;
+    if (this.knownCount(this.state.cards) > 0) return;
+    window.BLSync.pullState("wa").then((m) => {
+      if (!m || !m.cards || !Object.keys(m.cards).length) return;
+      if (this.knownCount(this.state.cards) > 0) return;
+      this.mergeIn({ cards: m.cards, stats: m.stats, days: m.days, badges: m.badges, xp: m.xp, tierFloor: m.tier_floor });
+    });
+  };
+
+  load() {
+    let saved = null;
+    try { saved = JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) {}
+    this.recent = (saved && saved.recent) || [];
+    let stats = (saved && saved.stats) || { day: today(), reviewed: 0, newToday: 0, wrongToday: 0, streak: 0, lastDay: null, bestStreak: 0 };
+    if (stats.day !== today()) stats = Object.assign({}, stats, { day: today(), reviewed: 0, newToday: 0, wrongToday: 0, fastToday: 0, verbsToday: 0 });
+    const sst = sharedStreak();
+    stats = Object.assign({}, stats, { streak: (sst.lastDay === today() || sst.lastDay === yesterday()) ? sst.streak || 0 : 0, bestStreak: Math.max(stats.bestStreak || 0, sst.best || 0) });
+    this.setState({
+      cards: (saved && saved.cards) || {}, stats: stats, days: (saved && saved.days) || {},
+      badges: (saved && saved.badges) || {}, xp: (saved && saved.xp) || 0,
+      mastery: (saved && saved.mastery) || {},
+      lang: (saved && saved.lang) || "en",
+      pace: (saved && saved.pace) || 4,
+      tierFloor: Math.min((NT - 1) * TS, Math.max(0, Math.floor((saved && saved.tierFloor) || 0))),
+      queue: [], loaded: true
+    });
+    idbGet().then((m) => { if (m) this.mergeIn(m); });
+  }
+  mergeIn(m) {
+    if (!m) return;
+    const s = this.state;
+    const badges = Object.assign({}, m.badges || {}, s.badges);
+    const stats = Object.assign({}, s.stats, { bestStreak: Math.max((s.stats.bestStreak || 0), (m.stats && m.stats.bestStreak) || 0) });
+    this.setState({
+      cards: mergeCards(s.cards, m.cards), days: mergeDays(s.days, m.days || {}),
+      xp: Math.max(s.xp || 0, m.xp || 0), badges: badges, stats: stats
+    }, () => this.save());
+  }
+  save() {
+    const s = this.state;
+    const catKnown = { B: 0, N: 0, V: 0, A: 0, total: 0 };
+    for (let i = 0; i < W.length; i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) { catKnown[W[i][3]] = (catKnown[W[i][3]] || 0) + 1; catKnown.total++; } }
+    const payload = { cards: s.cards, stats: s.stats, days: s.days, badges: s.badges, xp: s.xp, lang: s.lang, pace: s.pace, tierFloor: s.tierFloor, mastery: s.mastery || {}, catKnown: catKnown, recent: this.recent || [], updated: Date.now() };
+    try {
+      if (!Object.keys(s.cards).length && !this.wipe) {
+        const cur = JSON.parse(localStorage.getItem(KEY) || "null");
+        if (cur && cur.cards && Object.keys(cur.cards).length) return;
+      }
+      localStorage.setItem(KEY, JSON.stringify(payload));
+    } catch (e) {}
+    idbPut(payload);
+    try {
+      if (window.BLSync && window.BLSync.enabled) {
+        const doPublish = () => {
+          const st = this.state;
+          const kn = this.knownCount(st.cards);
+          const mask = window.BLFront ? window.BLFront.maskFromCards(st.cards, W) : null;
+          if (window.BLSync.pushState) window.BLSync.pushState("wa", { cards: st.cards, known: kn, mask: mask, catKnown: catKnown, xp: st.xp, stats: st.stats, badges: st.badges, days: st.days, tierFloor: st.tierFloor });
+          const wN = Object.keys(st.badges || {}).filter(function (k) { return k.slice(0, 2) === "w_"; }).length;
+          window.BLSync.pushSnapshot("wa", kn, catKnown, { mask: mask, bonus: 25 * wN }).then((r) => {
+            if (r && r.ok) { const t = Date.now(); try { localStorage.setItem("bl-pub:wa", String(t)); } catch (e) {} this.setState({ pubAt: t, pubErr: null }); }
+            else this.setState({ pubErr: r && r.blocked ? "preview" : (r && r.error) || "offline" });
+          });
+        };
+        this._republish = doPublish;
+        clearTimeout(this._syncT);
+        this._syncT = setTimeout(doPublish, 1500);
+      }
+    } catch (e) {}
+  }
+
+  goal() { const n = parseInt(this.props.dailyGoal, 10); return isNaN(n) ? 12 : n; }
+  hotCount(cards) { let n = 0; for (const k in cards) if (IDS[k] && cards[k].hot) n++; return n; }
+  knownCount(cards) { let n = 0; for (const k in cards) if (IDS[k] && !cards[k].lapsed) n++; return n; }
+  refill(cards, queue, commit) {
+    const q = queue.slice();
+    let sn = this.sessNew || 0;
+    const cap = this.state.pace || 4;
+    const inQ = {}; q.forEach(function (i) { inQ[i] = 1; });
+    const starts = this.state.tierFloor > 0 ? [this.state.tierFloor, 0] : [0];
+    const cand = [], seen = {};
+    for (let p = 0; p < starts.length; p++) {
+      for (let i = starts[p]; i < W.length; i++) if (!cards[idOf(i)] && !inQ[i] && !seen[i]) { seen[i] = 1; cand.push(i); }
+    }
+    // Weakest reflex first: a concept you keep missing comes back in a different skin.
+    const mst = this.state.mastery || {};
+    const wOf = function (i) { const sc = SCN[idOf(i)]; const v = sc ? mst[sc.concept] : null; return v && v[0] ? v[1] / v[0] : 0.55; };
+    cand.sort(function (a, b) { return wOf(a) - wOf(b); });
+    for (let i = 0; i < cand.length && q.length < 10 && sn < cap; i++) { q.push(cand[i]); inQ[cand[i]] = 1; sn++; }
+    if (commit) this.sessNew = sn;
+    return q;
+  }
+  dueList() {
+    const now = Date.now(), c = this.state.cards, hot = [], cold = [];
+    for (let i = 0; i < W.length; i++) { const k = c[idOf(i)]; if (k && k.due <= now) (k.hot ? hot : cold).push(i); }
+    return hot.concat(cold);
+  }
+  aheadList() {
+    const c = this.state.cards, out = [];
+    for (let i = 0; i < W.length; i++) { const k = c[idOf(i)]; if (k) out.push({ i: i, due: k.due }); }
+    out.sort(function (a, b) { return a.due - b.due; });
+    return out.slice(0, 10).map(function (o) { return o.i; });
+  }
+  startSession = () => {
+    this.hotSeen = {};
+    this.cur = null; this.sessNew = 0; this.sessBadges = []; this.lastSess = null;
+    let q = this.refill(this.state.cards, this.dueList(), true);
+    if (!q.length) q = this.aheadList();
+    for (let i = q.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = q[i]; q[i] = q[j]; q[j] = t; }
+    if (!q.length) return;
+    this.shownAt = Date.now();
+    this.setState({ view: "study", queue: q, answered: 0, total: q.length, adjustNote: "", picked: null, typed: "", modelShown: false, bailed: false });
+  };
+  // Sessions grow when you miss. The white flag banks what you earned and stops.
+  bailOut = () => {
+    if (this.cur) { this.lastSess = this.cur; this.cur = null; }
+    this.setState({ view: "done", queue: [], bailed: true }, () => this.save());
+  };
+  // In CHOOSE the answer is graded by the pick; the reason is shown before advancing.
+  pickChoice = (i, correct) => {
+    if (this.state.picked != null) return;
+    this.pendingQ = correct ? 2 : 0;
+    this.setState({ picked: i });
+  };
+  contNext = () => { const q = this.pendingQ; this.pendingQ = null; this.grade(q == null ? 2 : q); };
+  showModel = () => this.setState({ modelShown: true });
+  onType = (e) => this.setState({ typed: e.target.value });
+
+  checkBadges(badges, known, stats, extra) {
+    const earn = (id) => {
+      if (badges[id]) return;
+      badges[id] = today();
+      const def = BADGE_DEFS.find(function (d) { return d[0] === id; });
+      this.sessBadges = (this.sessBadges || []).concat([def ? def[1] : id]);
+    };
+    const N = W.length;
+    if (known >= Math.ceil(N * 0.3)) earn("connu50");
+    if (known >= Math.ceil(N * 0.55)) earn("connu100");
+    if (known >= Math.ceil(N * 0.8)) earn("connu250");
+    if (known >= N) earn("connu500");
+    if ((stats.streak || 0) >= 7) earn("serie7");
+    if ((stats.streak || 0) >= 30) earn("serie30");
+    if (extra.sessionEnd) {
+      earn("premiere");
+      if (this.cur && this.cur.reviewed >= 10 && this.cur.miss === 0) earn("parfait");
+      if (this.cur && this.cur.fast >= 6) earn("eclair");
+      if (extra.jumped) earn("grimpeur");
+    }
+  }
+
+  // Card box selects how much scaffolding the round gets. Same engine, new depth.
+  depthOf(card) {
+    if (!card) return 1;
+    if (card.hot || card.lapsed) return card.box >= 2 ? 2 : 1;
+    return card.box >= 4 ? 3 : card.box >= 2 ? 2 : 1;
+  }
+  // One round = one graded card + one mastery entry for the concept it trains.
+  roundDone = (r) => {
+    const s = this.state, key = r && r.concept;
+    const mastery = Object.assign({}, s.mastery || {});
+    if (key) { const m = (mastery[key] || [0, 0]).slice(); m[0]++; if (r.q === 2) m[1]++; mastery[key] = m; }
+    const combo = r.q === 2 ? (s.combo || 0) + 1 : 0;
+    // The round reports how long the DECISION took; timing from when the round
+    // mounted was measuring reading speed plus animation.
+    this.lastMs = r && r.ms != null ? r.ms : null;
+    this.setState({ mastery: mastery, combo: combo }, () => this.grade(r.q));
+  };
+  reflex() {
+    const CN = window.COURT ? window.COURT.concepts(MY_SIDE) : {};
+    const m = this.state.mastery || {};
+    const rows = Object.keys(CN).map(function (k) {
+      const v = m[k] || [0, 0];
+      return { name: CN[k], seen: v[0], pct: v[0] ? Math.round((v[1] / v[0]) * 100) : null };
+    }).sort(function (a, b) { return (b.seen - a.seen) || (a.name > b.name ? 1 : -1); });
+    const seen = rows.filter(function (r) { return r.seen; });
+    const weak = seen.slice().sort(function (a, b) { return a.pct - b.pct; })[0];
+    const show = (seen.length ? seen : rows).slice(0, 6);
+    const col = function (p) { return p == null ? "#c9c3b5" : p >= 80 ? "#2e7d4f" : p >= 55 ? "#8a6d2f" : "#c2402f"; };
+    return {
+      rows: show.map(function (r) {
+        return {
+          name: r.name, pct: r.pct == null ? "\u2014" : r.pct + "%",
+          pctStyle: { fontSize: "11.5px", fontWeight: "800", flex: "none", minWidth: "34px", textAlign: "right", color: col(r.pct) },
+          fill: { width: (r.pct == null ? 0 : Math.max(4, r.pct)) + "%", background: r.pct == null ? "#e2ddd2" : r.pct >= 80 ? "#2e7d4f" : r.pct >= 55 ? "#b08d3f" : "#c2402f", borderRadius: "999px" }
+        };
+      }),
+      note: seen.length ? seen.length + " of " + rows.length + " met" : "nothing measured yet",
+      hint: weak ? "Weakest reflex: " + weak.name.toLowerCase() + ". Those come back sooner, in a different situation." : "Play a session and this fills in. Every card trains one named reflex."
+    };
+  }
+
+  grade(q) {
+    const s = this.state, idx = s.queue[0];
+    if (idx == null) return;
+    const now = Date.now(), key = idOf(idx);
+    const fast = q === 2 && (this.lastMs != null
+      ? this.lastMs < 4500
+      : !!(this.shownAt && (now - this.shownAt) < 9000));
+    this.lastMs = null;
+    const cards = Object.assign({}, s.cards);
+    const prev = cards[key], pb = prev ? prev.box : 0;
+    const wasHot = !!(prev && prev.hot);
+    let hotDays = q === 0 ? [] : (wasHot ? (prev.hotDays || []).slice() : []);
+    if (q > 0 && wasHot && hotDays.indexOf(today()) === -1) hotDays.push(today());
+    const hot = q === 0 ? true : wasHot ? hotDays.length < HOT_DAYS : false;
+    const box = hot ? 0 : q === 2 ? Math.min(pb + 1, IV.length - 1) : q === 1 ? Math.max(1, pb) : 0;
+    const dueAt = q === 0 ? now + HOT_LADDER[0]
+      : hot ? now + HOT_LADDER[Math.min(hotDays.length, HOT_LADDER.length - 1)]
+      : now + IV[hotDays.length ? Math.max(box, 2) : box];
+    cards[key] = {
+      box: box, due: dueAt, lapsed: q === 0, hot: hot, hotDays: hotDays,
+      reps: ((prev && prev.reps) || 0) + 1,
+      hits: ((prev && prev.hits) || 0) + (q === 2 ? 1 : 0),
+      slow: ((prev && prev.slow) || 0) + (q === 1 ? 1 : 0),
+      misses: ((prev && prev.misses) || 0) + (q === 0 ? 1 : 0),
+      q: q, t: now
+    };
+    const stats = Object.assign({}, s.stats);
+    if (stats.day !== today()) { stats.day = today(); stats.reviewed = 0; stats.newToday = 0; stats.wrongToday = 0; stats.fastToday = 0; stats.verbsToday = 0; }
+    if (!prev) stats.newToday = (stats.newToday || 0) + 1;
+    if (q === 0) stats.wrongToday = (stats.wrongToday || 0) + 1;
+    if (fast) stats.fastToday = (stats.fastToday || 0) + 1;
+    if (W[idx][3] === "V" && q > 0) stats.verbsToday = (stats.verbsToday || 0) + 1;
+    stats.reviewed = (stats.reviewed || 0) + 1;
+    const sst = bumpStreak();
+    stats.streak = sst.streak; stats.lastDay = sst.lastDay;
+    stats.bestStreak = Math.max(stats.bestStreak || 0, sst.best || 0);
+    const gained = q === 2 ? (fast ? 15 : 10) : q === 1 ? 6 : 2;
+    const xp = (s.xp || 0) + gained;
+    const days = Object.assign({}, s.days);
+    const dv = days[today()] || [0, 0, 0];
+    days[today()] = [dv[0] + 1, dv[1] + (q > 0 ? 1 : 0), dv[2] + gained];
+    this.recent = (this.recent || []).concat([q]).slice(-30);
+    if (!this.cur) { this.cur = { ts: now, date: today(), reviewed: 0, sure: 0, slow: 0, miss: 0, neu: 0, fast: 0, xp: 0 }; }
+    this.cur.reviewed++;
+    if (q === 2) this.cur.sure++; else if (q === 1) this.cur.slow++; else this.cur.miss++;
+    if (!prev) this.cur.neu++;
+    if (fast) this.cur.fast++;
+    this.cur.xp += gained;
+
+    let queue = s.queue.slice(1);
+    if (q === 0) {
+      const seen = (this.hotSeen = this.hotSeen || {});
+      const n = seen[key] = (seen[key] || 0) + 1;
+      queue.splice(Math.min(HOT_GAPS[Math.min(n - 1, HOT_GAPS.length - 1)], queue.length), 0, idx);
+    }
+    queue = this.refill(cards, queue, true);
+
+    const badges = Object.assign({}, s.badges);
+    const mpA = { n: stats.newToday || 0, c: (days[today()] || [0, 0, 0])[1], f: stats.fastToday || 0, v: stats.verbsToday || 0 };
+    MISSIONS.forEach((md) => { if (!badges[md[0]] && mpA[md[3]] >= md[4]) { badges[md[0]] = today(); this.sessBadges = (this.sessBadges || []).concat([md[1]]); } });
+    let pace = s.pace, tierFloor = s.tierFloor, note = "";
+    const known = this.knownCount(cards);
+    if (!queue.length) {
+      const r = this.recent, acc = r.length ? r.filter(function (x) { return x > 0; }).length / r.length : 0;
+      const pct = Math.round(acc * 100);
+      let jumped = false;
+      if (r.length >= 20 && acc >= 0.92 && tierFloor < (NT - 1) * TS) {
+        tierFloor = (Math.floor(tierFloor / TS) + 1) * TS;
+        pace = Math.min(12, pace + 2);
+        note = pct + "% right — too easy for you. Moved you up to \u00ab " + (TIER_NAMES[tierFloor / TS] || "Rank " + (tierFloor / TS + 1)) + " \u00bb. Just like the simulations.";
+        this.recent = []; jumped = true;
+      } else if (r.length >= 12 && acc >= 0.9 && pace < 12) {
+        pace = Math.min(12, pace + 2);
+        note = pct + "% right — intake raised to " + pace + " new scenarios per session.";
+      } else if (r.length >= 12 && acc < 0.6) {
+        pace = Math.max(2, pace - 1);
+        note = pct + "% right — easing off to " + pace + " new scenarios per session. No shame, lover boy.";
+        this.recent = r.slice(-10);
+      }
+      this.checkBadges(badges, known, stats, { sessionEnd: true, jumped: jumped });
+      this.lastSess = this.cur; this.cur = null;
+    } else {
+      this.checkBadges(badges, known, stats, {});
+    }
+    this.shownAt = Date.now();
+    this.setState({
+      cards: cards, stats: stats, days: days, xp: xp, badges: badges, pace: pace, tierFloor: tierFloor,
+      queue: queue, picked: null, typed: "", modelShown: false,
+      answered: (s.answered || 0) + 1,
+      // Denominator holds at the opening length: re-queued misses ride inside it,
+      // so the bar advances as you work instead of retreating.
+      total: Math.max(s.total || 0, (s.answered || 0) + 1),
+      adjustNote: note || s.adjustNote,
+      view: queue.length ? "study" : "done"
+    }, () => this.save());
+  }
+
+  resetAll = () => {
+    if (!confirm("Really erase all progress in this mode?")) return;
+    this.wipe = true;
+    this.recent = [];
+    this.setState({ cards: {}, stats: { day: today(), reviewed: 0, newToday: 0, wrongToday: 0, streak: 0, lastDay: null, bestStreak: 0 }, days: {}, badges: {}, xp: 0, pace: 4, tierFloor: 0, view: "home", queue: [] }, () => { this.save(); this.wipe = false; });
+  };
+
+  readLangs() {
+    const defs = [["fr", "Le Français", "croissant"], ["el", "Ελληνικά", "olive"], ["de", "Deutsch", "brezel"], ["es", "El Español", "paella"], ["tn", "Tounsi", "harissa"], ["wa", "Words of Affirmation", "heart-band"], ["ll", "Lover Language", "heart-shades"]];
+    return defs.map((d) => {
+      let n = 0;
+      ["vocab-", "nani-"].forEach(function (p) {
+        try { const m = JSON.parse(localStorage.getItem(p + d[0] + "-v1" + SUF) || "null"); if (m && m.cards) for (const k in m.cards) if (!m.cards[k].lapsed) n++; } catch (e) {}
+      });
+      let st = 0;
+      try { const sv = JSON.parse(localStorage.getItem("bl-streak:" + d[0] + SUF) || "null"); if (sv && (sv.lastDay === today() || sv.lastDay === yesterday())) st = sv.streak || 0; } catch (e) {}
+      const cur = d[0] === MY_SIDE;
+      const unit = (d[0] === "wa" || d[0] === "ll") ? " scenarios" : " words";
+      return {
+        name: d[1], href: PAGES[d[0]],
+        imgStyle: { width: "30px", height: "30px", flex: "none", display: "block",
+          backgroundImage: "url(assets/chars/" + d[2] + ".png)", backgroundSize: "contain",
+          backgroundRepeat: "no-repeat", backgroundPosition: "center", mixBlendMode: "multiply" },
+        sub: n > 0 ? n + unit + " · " + st + "-day streak" : "fresh front — not started",
+        tag: cur ? "current" : "open →",
+        tagStyle: { flex: "none", fontSize: "9px", fontWeight: "800", letterSpacing: "0.05em", textTransform: "uppercase", padding: "4px 9px", borderRadius: "999px", background: cur ? "#f3ecd9" : "#f0ede6", color: cur ? "#8a6d2f" : "#8a857a" },
+        rowStyle: { display: "flex", alignItems: "center", gap: "11px", background: cur ? "#faf6ea" : "#faf8f4", border: cur ? "1px solid rgba(176,141,63,0.35)" : "1px solid transparent", borderRadius: "14px", padding: "9px 12px", textDecoration: "none", minHeight: "52px" }
+      };
+    });
+  }
+
+  renderVals() {
+    const s = this.state, now = Date.now();
+    const stats = s.stats || {};
+    const reviewedToday = stats.day === today() ? (stats.reviewed || 0) : 0;
+    const goal = this.goal();
+    const known = this.knownCount(s.cards);
+    const due = this.dueList().length;
+    this.sessNew = s.view === "study" ? this.sessNew : 0;
+    const queued = s.view === "study" ? s.queue.length : this.refill(s.cards, this.dueList(), false).length;
+    let ri = 0; for (let i = 0; i < RANKS.length; i++) if ((s.xp || 0) >= RANKS[i][1]) ri = i;
+    const nextRank = RANKS[ri + 1];
+    const rankPct = nextRank ? (s.xp - RANKS[ri][1]) / (nextRank[1] - RANKS[ri][1]) : 1;
+    const cells = [];
+    for (let i = 27; i >= 0; i--) {
+      const d = ymd(now - i * DAY), v = (s.days || {})[d];
+      const n = v ? v[0] : 0;
+      const c = n === 0 ? "#efece5" : n < 5 ? "#f1cfda" : n < goal ? "#dd8fa9" : ACCENT;
+      cells.push({ style: { aspectRatio: "1", borderRadius: "5px", background: c } });
+    }
+    const activeTier = Math.min(NT - 1, Math.floor((s.tierFloor || 0) / TS));
+    const tiers = [], tierKn = [], tierSize = [];
+    for (let t = 0; t < NT; t++) {
+      let kn = 0;
+      const size = Math.max(1, Math.min(W.length, (t + 1) * TS) - t * TS);
+      for (let i = t * TS; i < Math.min(W.length, (t + 1) * TS); i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) kn++; }
+      const act = t === activeTier, full = kn >= size;
+      tierKn.push(kn); tierSize.push(size);
+      tiers.push({
+        name: TIER_NAMES[t] || ("Rank " + (t + 1)), count: kn + "/" + size,
+        cefr: "0" + (t + 1),
+        cefrStyle: { fontSize: "11px", fontWeight: "800", color: full ? "#b08d3f" : act ? ACCENT : "#c9c3b5" },
+        trackStyle: { width: "100%", height: act ? "9px" : "6px", background: "#efece5", borderRadius: "999px", overflow: "hidden", boxShadow: act ? "0 0 0 1.5px " + ACCENT : "none" },
+        fillStyle: { height: "100%", width: Math.round(100 * kn / size) + "%", background: full ? "#b08d3f" : ACCENT, borderRadius: "999px", transition: "width 0.4s ease" },
+        nameStyle: { fontSize: "9.5px", fontWeight: "700", color: full ? "#b08d3f" : act ? "#17181d" : "#a5a096" }
+      });
+    }
+    const badgeItems = BADGE_DEFS.map(function (d) {
+      const got = !!(s.badges || {})[d[0]];
+      return {
+        name: d[1], desc: d[2],
+        medalStyle: { width: "24px", height: "24px", flex: "none", color: got ? "#e9a3b8" : "#eae6dc", filter: got ? "drop-shadow(0 1px 2px rgba(148,44,80,0.35))" : "none" },
+        medalStroke: got ? "#8a2b4c" : "#c9c3b5",
+        nameStyle: { fontSize: "11.5px", fontWeight: "700", color: got ? "#17181d" : "#a5a096", lineHeight: "1.25" }
+      };
+    });
+    const badgeCount = Object.keys(s.badges || {}).filter(function (k) { return k.slice(0, 2) !== "w_"; }).length;
+    // playbook rows
+    const all = [];
+    for (let i = 0; i < W.length; i++) {
+      const c = s.cards[idOf(i)];
+      const t = this.txt(i);
+      const tag = c ? (c.hot ? "Shaky" : c.lapsed ? "Again" : c.box >= 4 ? "Solid" : "Known") : CAT[W[i][3]];
+      const tc = c ? (c.hot ? ["#f9e8e5", "#c2402f"] : c.lapsed ? ["#f0ede6", "#5d5a52"] : ["#fbeaf0", ACCENT]) : ["transparent", "#a5a096"];
+      all.push({
+        en: t.sit, fr: t.best, sort: c ? c.due : Infinity, status: tag,
+        tagStyle: { flex: "none", fontSize: "10px", fontWeight: "700", padding: "4px 10px", borderRadius: "999px", background: tc[0], color: tc[1], border: c ? "none" : "1px solid #e2ddd2" }
+      });
+    }
+    const seen = all.filter(function (r) { return r.sort !== Infinity; }).sort(function (a, b) { return a.sort - b.sort; });
+    const ordered = seen.concat(all.filter(function (r) { return r.sort === Infinity; }));
+    // the live card
+    const idx = s.queue[0];
+    const card = idx != null ? s.cards[idOf(idx)] : null;
+    const stage = idx != null ? this.stageOf(card) : "read";
+    const T = idx != null ? this.txt(idx) : { sit: "", best: "", why: "", alts: [["", ""], ["", ""]], translated: true };
+    // options are rotated per card so the strong one isn't always first
+    const rot = idx != null ? (idx % 3) : 0;
+    const raw = [[T.best, T.why, true], [T.alts[0][0], T.alts[0][1], false], [T.alts[1][0], T.alts[1][1], false]];
+    const opts = [raw[rot % 3], raw[(rot + 1) % 3], raw[(rot + 2) % 3]];
+    const picked = s.picked;
+    const choices = opts.map((o, i) => {
+      const isPicked = picked === i;
+      const revealed = picked != null;
+      const good = o[2];
+      const bg = !revealed ? "#faf8f4" : good ? "#eef6f0" : isPicked ? "#fdefed" : "#faf8f4";
+      const bd = !revealed ? "1.5px solid #e9e5dc" : good ? "1.5px solid rgba(46,125,79,0.55)" : isPicked ? "1.5px solid rgba(179,38,30,0.5)" : "1.5px solid #efece5";
+      return {
+        text: o[0], why: revealed ? o[1] : "",
+        locked: revealed,
+        style: { display: "flex", flexDirection: "column", gap: revealed ? "6px" : "0", width: "100%", background: bg, border: bd, borderRadius: "16px", padding: "13px 14px", minHeight: "52px", opacity: revealed && !good && !isPicked ? "0.6" : "1", transition: "background 0.2s ease" },
+        whyStyle: { fontSize: "11.5px", lineHeight: "1.45", color: good ? "#2e7d4f" : "#a1493c", display: revealed ? "block" : "none" },
+        pick: () => this.pickChoice(i, good)
+      };
+    });
+    const stageMeta = { read: ["Learn it", "#8a6d2f", "#faf6ea"], choose: ["Your move", ACCENT, "#fbeaf0"], say: ["Say it yourself", "#6d4aa8", "#f2edfa"] }[stage];
+    // ---- arena
+    const A = s.arena || {};
+    const rowsA = A.rows || [];
+    const scoreOf = function (f) { return Math.max(0, (f && f.known) || 0); }; // words only — bonus is mission points, reported apart
+    const meRow = (A.me ? rowsA.find(function (f) { return f.user_id === A.me; }) : null)
+      || rowsA.filter(function (f) { return f.language_id === MY_SIDE; })[0] || null;
+    const iAmMe = !!(A.me && meRow && meRow.user_id === A.me);
+    let rivalPick = s.rivalPick; if (rivalPick === undefined) { try { rivalPick = localStorage.getItem("bl-rival" + SUF) || null; } catch (e) { rivalPick = null; } }
+    const srvPick = meRow ? (A.rivals || []).find(function (r) { return r.user_id === meRow.user_id; }) : null;
+    const wantFoe = rivalPick || (srvPick && srvPick.rival_user_id) || null;
+    const notMe = function (f) { return !meRow || f.user_id !== meRow.user_id; };
+    const nemRow = (wantFoe ? rowsA.find(function (f) { return f.user_id === wantFoe && notMe(f); }) : null)
+      || rowsA.find(function (f) { return f.language_id === "ll" && notMe(f); })
+      || rowsA.find(notMe) || null;
+    const wOf = function (b) { return Object.keys(b || {}).filter(function (k) { return k.slice(0, 2) === "w_"; }).length; };
+    const localW = wOf(s.badges), localScore = known;
+    const srvMeScore = meRow ? scoreOf(meRow) : 0;
+    const srvBetter = !!meRow && (!iAmMe || srvMeScore > localScore);
+    const myWordsShown = srvBetter ? (meRow.known || 0) : known;
+    const myW = srvBetter ? Math.round((meRow.bonus || 0) / 25) : localW;
+    // One rule everywhere: a score IS words known. Mission points (25 per weapon
+    // badge) are reported alongside, never added — four badges are worth 100, which
+    // on a fighter's first day would be twice their word count.
+    const myScore = myWordsShown;
+    const opW = nemRow ? Math.round((nemRow.bonus || 0) / 25) : 0;
+    const oppKnown = nemRow ? (nemRow.known || 0) : 0;
+    const opScore = oppKnown;
+    const myLangId = MY_SIDE, nemLangId = (nemRow && nemRow.language_id) || "ll";
+    const myLg = LANGS[myLangId], nemLg = LANGS[nemLangId] || [nemLangId, "#8a857a"];
+    const fmtAgo = function (ms) { if (ms < 90000) return "just now"; const mm = Math.round(ms / 60000); if (mm < 60) return mm + " min ago"; const hh = Math.round(mm / 60); if (hh < 36) return hh + " h ago"; return Math.round(hh / 24) + " d ago"; };
+    let pubAt = s.pubAt || 0; if (!pubAt) { try { pubAt = Number(localStorage.getItem("bl-pub:wa")) || 0; } catch (e) {} }
+    const oppAt = nemRow && nemRow.computed_at ? Date.parse(nemRow.computed_at) : 0;
+    const syncBad = !!(s.pubErr && s.pubErr !== "preview");
+    const syncNote = !(window.BLSync && window.BLSync.enabled) ? "offline — no server configured"
+      : s.pubErr === "preview" ? "preview copy — scores are not published from here"
+      : syncBad ? "\u26a0 your score is not reaching the server (" + s.pubErr + ") — tap \u21c4 switch fighter below and sign in as YOUR fighter"
+      : (pubAt ? "yours published " + fmtAgo(Date.now() - pubAt) : "yours not published yet") + (oppAt ? " · theirs from " + fmtAgo(Date.now() - oppAt) : "");
+    const mathOf = function (w, n) { return n > 0 ? w + " scenarios · " + (n * 25) + " mission pts apart" : w + " scenarios known"; };
+    const mePct = (myScore + opScore) > 0 ? Math.round(100 * myScore / (myScore + opScore)) : 50;
+    const myCat = { B: 0, N: 0, V: 0, A: 0 };
+    for (let i = 0; i < W.length; i++) { const c = s.cards[idOf(i)]; if (c && !c.lapsed) myCat[W[i][3]] = (myCat[W[i][3]] || 0) + 1; }
+    if (srvBetter && meRow.cat_known) { myCat.B = meRow.cat_known.B || 0; myCat.N = meRow.cat_known.N || 0; myCat.V = meRow.cat_known.V || 0; myCat.A = meRow.cat_known.A || 0; }
+    const opCat = (nemRow && nemRow.cat_known) || { B: 0, N: 0, V: 0, A: 0 };
+    const numSt = function (c, right) { return { fontSize: "10.5px", fontWeight: "800", color: c, flex: "none", width: "26px", textAlign: right ? "right" : "left" }; };
+    const fronts = [["Overall", myScore, opScore], ["Praise", myCat.N, opCat.N || 0], ["Support", myCat.V, opCat.V || 0], ["Gratitude", myCat.A, opCat.A || 0], ["Character", myCat.B, opCat.B || 0]].map(function (d) {
+      const p = (d[1] + d[2]) > 0 ? Math.round(100 * d[1] / (d[1] + d[2])) : 50;
+      return { label: d[0], fr: d[1], el: d[2],
+        aNumStyle: numSt(myLg[1], true), bNumStyle: numSt(nemLg[1], false),
+        frStyle: { width: p + "%", background: myLg[1], transition: "width 0.5s ease" },
+        elStyle: { flex: "1", background: nemLg[1], transition: "width 0.5s ease" } };
+    });
+    const clash = Math.max(18, Math.min(82, mePct));
+    const TUS = ["tussleA", "tussleB", "tussleC"], sizesM = [34, 27, 30], liftsM = [0, 4, 1];
+    const SCALEM = { baguette: 1.5, olive: 0.92, dolma: 1.08, wurst: 1.25, "heart-mini": 0.85, "heart-bow": 0.9 };
+    const losing = myScore === opScore ? null : myScore < opScore ? "me" : "them";
+    const flingCycles = function (side) { return losing === null ? [8.5, 10.5, 12.5] : losing === side ? [4.7, 6.1, 7.3] : [11.3, 14.1, 16.7]; };
+    const skirmish = [];
+    const buildMob = function (lang, side, xs) {
+      const cycles = flingCycles(side);
+      (CASTS[lang] || CASTS.wa).forEach(function (m, i) {
+        const size = Math.round(sizesM[i] * (SCALEM[m] || 1));
+        skirmish.push({
+          wrap: { position: "absolute", left: "calc(" + clash + "% + " + xs[i] + "px)", bottom: (5 + liftsM[i]) + "px", width: size + "px", height: size + "px", zIndex: String(3 - i),
+            animation: (side === "me" ? "flingL " : "flingR ") + cycles[i] + "s cubic-bezier(0.3,0.05,0.2,1) " + (i * 1.7 + (side === "me" ? 0 : 0.9)).toFixed(2) + "s infinite", pointerEvents: "none" },
+          mid: { width: "100%", height: "100%", animation: TUS[i % 3] + " " + (0.72 + i * 0.19).toFixed(2) + "s ease-in-out " + (i * 0.11).toFixed(2) + "s infinite" },
+          body: { width: "100%", height: "100%", backgroundImage: "url(assets/chars/" + m + ".png)", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply", transformOrigin: "50% 100%", transform: side === "me" ? "rotate(7deg)" : "rotate(-7deg)" }
+        });
+      });
+    };
+    buildMob(myLangId, "me", [-30, -13, -22]);
+    buildMob(nemLangId, "them", [-2, 12, 4]);
+    const dust = [[40, 2.3, 0, 1, "dustPuff", 0], [32, 3.1, 0.7, 1, "dustPuff", 6]].map(function (a) {
+      const w = a[0], anim = a[4];
+      return { style: { position: "absolute", left: "calc(" + clash + "% - " + (w / 2 - a[5]) + "px)", bottom: "0px", width: w + "px", height: Math.round(w * 0.72) + "px", zIndex: String(a[3]), backgroundImage: "url(assets/chars/dust.png)", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center bottom", mixBlendMode: "multiply", opacity: "0", animation: anim + " " + a[1] + "s ease-in-out " + a[2] + "s infinite", pointerEvents: "none" } };
+    });
+    const pows = [["pow-1", 34, 4.7, 0.4, -30], ["pow-2", 28, 6.1, 2.3, 10], ["pow-3", 31, 7.9, 4.1, -8]].map(function (a) {
+      return { style: { position: "absolute", left: "calc(" + clash + "% + " + a[4] + "px)", top: "0px", width: a[1] + "px", height: a[1] + "px", backgroundImage: "url(assets/chars/" + a[0] + ".png)", backgroundSize: "contain", backgroundRepeat: "no-repeat", backgroundPosition: "center", mixBlendMode: "multiply", opacity: "0", animation: "powPop " + a[2] + "s ease-out " + a[3] + "s infinite", pointerEvents: "none" } };
+    });
+    const ladderL = rowsA.map((f) => ({ f: f, sc: meRow && f.user_id === meRow.user_id ? myScore : scoreOf(f) })).sort(function (a, b) { return b.sc - a.sc; });
+    const ladderRows = ladderL.map((r, i) => {
+      const f = r.f, lg = LANGS[f.language_id] || [f.language_id, "#8a857a"];
+      const isMe = !!(meRow && f.user_id === meRow.user_id);
+      const isNem = !!(nemRow && f.user_id === nemRow.user_id);
+      const wN = isMe ? myW : Math.round((f.bonus || 0) / 25);
+      const unit = (f.language_id === "wa" || f.language_id === "ll") ? " scenarios" : " words";
+      return {
+        rank: (i + 1 < 10 ? "0" : "") + (i + 1), name: f.name, score: r.sc,
+        sub: lg[0] + " · " + (isMe ? myWordsShown : (f.known || 0)) + unit + (wN > 0 ? " · " + (wN * 25) + " mission pts apart" : ""),
+        chip: isMe ? "you" : isNem ? "\u2694 nemesis" : "make nemesis",
+        chipStyle: { flex: "none", fontSize: "9px", fontWeight: "800", letterSpacing: "0.05em", textTransform: "uppercase", padding: "4px 9px", borderRadius: "999px", background: isNem ? "#fbeaf0" : isMe ? "#f3ecd9" : "#f0ede6", color: isNem ? ACCENT : isMe ? "#8a6d2f" : "#a5a096" },
+        rankStyle: { fontSize: "13px", fontWeight: "800", color: i === 0 ? "#b08d3f" : "#c9c3b5", width: "22px", flex: "none" },
+        dotStyle: { width: "9px", height: "9px", borderRadius: "999px", background: lg[1], flex: "none" },
+        rowStyle: { display: "flex", alignItems: "center", gap: "10px", width: "100%", minHeight: "54px", background: isNem ? "#fdf3f6" : "#faf8f4", border: isNem ? "1.5px solid rgba(194,66,110,0.4)" : "1.5px solid transparent", borderRadius: "14px", padding: "8px 12px" },
+        pick: isMe ? undefined : () => this.pickRival(f.user_id)
+      };
+    });
+    const fMap = {};
+    ladderL.forEach(function (r) { const k = r.f.language_id; if (!fMap[k]) fMap[k] = { sc: 0, n: 0 }; fMap[k].sc += r.sc; fMap[k].n++; });
+    const fList = Object.keys(fMap).map(function (k) { return { k: k, sc: fMap[k].sc, n: fMap[k].n }; }).sort(function (a, b) { return b.sc - a.sc; });
+    const fMax = Math.max(1, fList.length ? fList[0].sc : 1);
+    const factionRows = fList.map(function (g) {
+      const lg = LANGS[g.k] || [g.k, "#8a857a"];
+      return { name: lg[0], score: g.sc, sub: g.n + (g.n > 1 ? " fighters" : " fighter"),
+        dot: { width: "9px", height: "9px", borderRadius: "999px", background: lg[1], flex: "none" },
+        fill: { width: Math.round(100 * g.sc / fMax) + "%", height: "100%", background: lg[1], borderRadius: "999px", transition: "width 0.5s ease" } };
+    });
+    const ls = this.lastSess || { xp: 0, fast: 0, sure: 0, slow: 0, reviewed: 0 };
+    const REL = (window.BL_RELEASE && window.BL_RELEASE.wa) || { kicker: "", title: "", lead: "", cta: "OK", items: [] };
+    const segStyle = function (on) { return { flex: "1", textAlign: "center", minHeight: "38px", borderRadius: "999px", fontSize: "12.5px", fontWeight: on ? "700" : "600", background: on ? ACCENT : "transparent", color: on ? "#fff" : "#5d5a52" }; };
+    return {
+      isSplash: s.view === "splash", notSplash: s.view !== "splash",
+      isHome: s.view === "home", isStudy: s.view === "study", isDone: s.view === "done",
+      enter: () => this.setState({ view: "home" }),
+      headerSub: "words of affirmation · gently coached",
+      splashStats: !s.loaded ? "" : known > 0 ? known + " scenarios known · " + (stats.streak || 0) + "-day streak" : "Fresh recruit — " + W.length + " scenarios, no judgement",
+      showRelease: !!s.showRelease, closeRelease: this.closeRelease,
+      relKicker: REL.kicker, relTitle: REL.title, relLead: REL.lead, relCta: REL.cta,
+      relItems: (REL.items || []).map(function (x, i) { return { text: x, key: i }; }),
+      streak: stats.streak || 0, bestStreak: stats.bestStreak || 0,
+      goalDone: reviewedToday,
+      ringStyle: { strokeDasharray: (Math.min(1, reviewedToday / goal) * 219.9) + " 219.9", transition: "stroke-dasharray 0.6s ease" },
+      rankName: RANKS[ri][0], xpLabel: (s.xp || 0) + " XP",
+      xpBarStyle: { height: "100%", width: Math.round(rankPct * 100) + "%", background: "#b08d3f", borderRadius: "999px", transition: "width 0.4s ease" },
+      rankNext: nextRank ? (nextRank[1] - s.xp) + " XP to \u201c" + nextRank[0] + "\u201d" : "Top of the ladder. Genuinely.",
+      dueCount: due, knownCount: known, hotLabel: String(this.hotCount(s.cards)),
+      lEn: segStyle(s.lang !== "de"), lDe: segStyle(s.lang === "de"),
+      setEn: () => { applyLang("en"); this.setState({ lang: "en" }, () => this.save()); },
+      setDe: () => { applyLang("de"); this.setState({ lang: "de" }, () => this.save()); },
+      langNote: s.lang === "de" ? (function () {
+        const c = window.COURT && window.COURT.coverage ? window.COURT.coverage("wa") : null;
+        if (!c) return "Deutsch";
+        if (c.have >= c.total) return "Alles auf Deutsch.";
+        if (!c.have) return "Chrome auf Deutsch — die Szenarien folgen, bis dahin Englisch.";
+        return c.have + " von " + c.total + " Szenarien auf Deutsch — der Rest bleibt vorerst englisch.";
+      })() : "",
+      nothingToDo: queued === 0 && Object.keys(s.cards).length === 0,
+      startLabel: queued ? "Start session" : "Practise ahead",
+      paceLine: (s.pace || 4) + " new scenarios per session · rank \u00ab " + (TIER_NAMES[activeTier] || "") + " \u00bb · adapts to you",
+      tierNote: known + " of " + W.length + " handled",
+      campLevel: "R0" + (activeTier + 1),
+      campRank: "Your rank · " + (TIER_NAMES[activeTier] || ""),
+      campSub: tierKn[activeTier] + " of " + tierSize[activeTier] + " at this rank · 8 scenarios per rank",
+      tiersGridStyle: { display: "grid", gridTemplateColumns: "repeat(" + Math.min(4, NT) + ",1fr)", gap: "8px", rowGap: "12px" },
+      tiers: tiers,
+      heatNote: reviewedToday ? reviewedToday + " cards today" : "nothing yet today",
+      heatCells: cells,
+      badges: badgeItems, badgeCount: badgeCount + " of " + BADGE_DEFS.length,
+      rows: s.showAll ? ordered : ordered.slice(0, 8),
+      vocabNote: known + " known · " + due + " due",
+      toggleLabel: s.showAll ? "Show less" : "Show all " + W.length + " scenarios",
+      toggleAll: () => this.setState({ showAll: !s.showAll }),
+      // duel
+      battleVerdict: myScore === opScore ? "perfect tie" : myScore > opScore ? ((iAmMe || !meRow) ? "you lead" : meRow.name + " leads") + " by " + (myScore - opScore) + " pts" : (nemRow ? nemRow.name : "they") + " leads by " + (opScore - myScore) + " pts",
+      meScore: myScore, themScore: opScore,
+      meDuelName: meRow ? meRow.name + " · " + myLg[0] + (iAmMe ? " · you" : "") : myLg[0] + " · you",
+      themDuelName: nemRow ? nemRow.name + " · " + nemLg[0] : "no opponent yet",
+      meNameStyle: { fontSize: "11px", fontWeight: "700", color: myLg[1] },
+      themNameStyle: { fontSize: "11px", fontWeight: "700", color: nemLg[1] },
+      meMath: mathOf(myWordsShown, myW), themMath: nemRow ? mathOf(oppKnown, opW) : "waiting for the roster",
+      frontsBreakdown: fronts.slice(1),
+      ovFrStyle: Object.assign({}, fronts[0].frStyle, { height: "100%" }), ovElStyle: Object.assign({}, fronts[0].elStyle, { height: "100%" }),
+      lineNote: (function () { const d = Math.abs(mePct - 50) * 2; return d === 0 ? "the line sits at the border" : "the line is " + d + "% into " + (mePct >= 50 ? "their" : "your") + " half"; })(),
+      battleNote: "1 pt per scenario known · 25 pts per weapon · live from the server",
+      syncNote: syncNote, syncNoteStyle: { fontSize: "10.5px", fontWeight: syncBad ? "700" : "400", color: syncBad ? "#b3261e" : "#b8b3a8", textAlign: "center" },
+      skirmish: skirmish, dust: dust, pows: pows,
+      missions: MISSIONS.map(function (md) {
+        const got = !!(s.badges || {})[md[0]];
+        const dayC = ((s.days || {})[today()] || [0, 0, 0])[1];
+        const mp = stats.day === today() ? { n: stats.newToday || 0, c: dayC, f: stats.fastToday || 0, v: stats.verbsToday || 0 } : { n: 0, c: dayC, f: 0, v: 0 };
+        const p = Math.min(md[4], mp[md[3]] || 0);
+        return { name: md[1], desc: md[2] + " · +25 pts for your side", state: got ? "\u2713 armed" : p + "/" + md[4],
+          stateStyle: { fontSize: "10.5px", fontWeight: "700", color: got ? "#2e7d4f" : "#a5a096", flex: "none" },
+          fill: { height: "100%", width: (got ? 100 : Math.round(100 * p / md[4])) + "%", background: got ? "#2e7d4f" : "#b08d3f", borderRadius: "999px", transition: "width 0.3s ease" } };
+      }),
+      hasArena: rowsA.length > 0,
+      arenaNote: rowsA.length + " fighter" + (rowsA.length > 1 ? "s" : "") + " · " + fList.length + " language" + (fList.length > 1 ? "s" : ""),
+      ladderRows: ladderRows, factionRows: factionRows,
+      foeHint: "tap a fighter to declare them your arch-nemesis — the duel above follows your pick",
+      showLangs: !!s.showLangs, openLangs: () => this.setState({ showLangs: true }), closeLangs: () => this.setState({ showLangs: false }),
+      langRows: s.showLangs ? this.readLangs() : [],
+      showSupport: !!s.showSupport, openSupport: () => this.setState({ showSupport: true }), closeSupport: () => this.setState({ showSupport: false }), eatClick: (e) => e.stopPropagation(),
+      supportBubble: (function () {
+        const line = String(this.props.supportLine ?? "You got this, lover boy.");
+        const letters = Array.from(line).map(function (ch, i) {
+          return React.createElement("span", { key: i, style: { display: "inline-block", whiteSpace: "pre", animation: "blBob 1.15s ease-in-out " + ((i * 0.06).toFixed(2)) + "s infinite" } }, ch);
+        });
+        return React.createElement("div", { style: { position: "absolute", top: "2px", left: "50%", transform: "translateX(-50%)", whiteSpace: "nowrap", fontSize: "15px", fontWeight: "800", color: "#17181d" } }, letters);
+      }).call(this),
+      devTools: (function () { try { return !/(^|\.)buddylingo\.de$/i.test(location.hostname); } catch (e) { return true; } })(),
+      resetAll: this.resetAll,
+      startSession: this.startSession, bailOut: this.bailOut,
+      scenario: idx != null ? SCN[idOf(idx)] : null,
+      depth: idx != null ? this.depthOf(s.cards[idOf(idx)]) : 1,
+      roundDone: this.roundDone,
+      hasCombo: (s.combo || 0) >= 2,
+      comboLabel: comboName(s.combo || 0),
+      comboIcon: (s.combo || 0) >= 5 ? "\ud83d\udd25" : (s.combo || 0) >= 3 ? "\ud83e\uddf5" : "\ud83d\udc41",
+      reflexes: this.reflex().rows, reflexNote: this.reflex().note, reflexHint: this.reflex().hint,
+      goHome: () => this.setState({ view: "home", queue: [], picked: null, typed: "", modelShown: false }),
+      // study
+      barStyle: { height: "100%", width: Math.round(((s.answered || 0) / Math.max(s.total || 1, (s.answered || 0) + s.queue.length)) * 100) + "%", background: ACCENT, borderRadius: "999px", transition: "width 0.3s ease" },
+      progressLabel: (s.answered || 0) + "/" + Math.max(s.total || 1, (s.answered || 0) + s.queue.length),
+      stageLabel: stageMeta[0],
+      stageStyle: { fontSize: "9.5px", fontWeight: "800", letterSpacing: "0.14em", textTransform: "uppercase", color: stageMeta[1], background: stageMeta[2], borderRadius: "999px", padding: "4px 10px" },
+      cardCat: idx != null ? CAT[W[idx][3]] : "",
+      situation: T.sit, bestReply: T.best, bestWhy: T.why,
+      stageRead: stage === "read", stageChoose: stage === "choose", stageSay: stage === "say",
+      chooseHint: "Pick what you'd actually say",
+      choices: choices,
+      typed: s.typed, onType: this.onType,
+      modelShown: !!s.modelShown, showModel: this.showModel,
+      showModelBtn: stage === "say" && !s.modelShown,
+      showSayGrade: stage === "say" && !!s.modelShown,
+      showGotIt: stage === "read",
+      showContinue: stage === "choose" && picked != null,
+      continueLabel: this.pendingQ === 2 ? "Nice. Next \u2192" : "Noted. Next \u2192",
+      contNext: this.contNext,
+      gSure: () => this.grade(2), gSlow: () => this.grade(1), gAgain: () => this.grade(0),
+      slowLabel: fmtIn(IV[Math.max(1, card ? card.box : 0)]) + " · +6 XP",
+      nextLabel: fmtIn(IV[Math.min((card ? card.box : 0) + 1, IV.length - 1)]) + " · +10 XP",
+      // done
+      doneTitle: s.bailed ? "Tactical retreat" : (ls.miss === 0 && ls.reviewed >= 5) ? "Just like the simulations" : "Session complete",
+      doneSummary: (ls.sure + (ls.slow || 0)) + " of " + ls.reviewed + " right" + (s.bailed ? " — XP banked, the rest can wait" : ""),
+      sessXp: ls.xp || 0,
+      hasFast: (ls.fast || 0) > 0, fastCount: ls.fast || 0,
+      hasNewBadges: (this.sessBadges || []).length > 0,
+      newBadgeNames: (this.sessBadges || []).join(", "),
+      hasAdjust: !!s.adjustNote, adjustNote: s.adjustNote,
+      doneNext: known + " scenarios known · streak " + (stats.streak || 0) + " days" + (this.hotCount(s.cards) ? " · " + this.hotCount(s.cards) + " still shaky" : ""),
+      homework: HOMEWORK[(ls.reviewed || 0) % HOMEWORK.length]
+    };
+  }
+}
+</script>
+</body>
+</html>
